@@ -1,0 +1,95 @@
+//
+//  MineIconTableViewCell.m
+//  Laike
+//
+//  Created by xiaobu on 2020/6/22.
+//  Copyright © 2020 xiaobu. All rights reserved.
+//
+
+#import "MineIconTableViewCell.h"
+#import "QHWBannerModel.h"
+#import "CTMediator+ViewController.h"
+
+@interface MineIconTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
+
+@property (nonatomic, strong, readwrite) UICollectionView *collectionView;
+
+@end
+
+@implementation MineIconTableViewCell
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+- (void)configCellData:(id)data {
+    self.btnArray = (NSArray *)data;
+    [self.collectionView reloadData];
+}
+
+#pragma mark ------------UICollectionViewDataSource-------------
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 8;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item < self.btnArray.count) {
+        BtnViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(BtnViewCell.class) forIndexPath:indexPath];
+        QHWBannerModel *model = self.btnArray[indexPath.row];
+        if ([model.icon containsString:@"http"]) {
+            [cell.btnImgView sd_setImageWithURL:[NSURL URLWithString:model.icon] placeholderImage:kPlaceHolderImage_Banner];
+        } else {
+            cell.btnImgView.image = kImageMake(model.icon);
+        }
+        cell.btnTitleLabel.text = model.name;
+        return cell;
+    }
+    return UICollectionViewCell.new;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item < self.btnArray.count) {
+//        QHWBannerModel *model = self.btnArray[indexPath.row];
+        
+    }
+}
+
+#pragma mark ------------UI-------------
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.minimumLineSpacing = 10;
+        layout.minimumInteritemSpacing = CGFLOAT_MIN;
+        layout.sectionInset = UIEdgeInsetsZero;
+        layout.itemSize = CGSizeMake((kScreenW-30)/4, 65);
+        
+        _collectionView = [UICreateView initWithFrame:self.bounds Layout:layout Object:self];
+        _collectionView.scrollEnabled = NO;
+        [_collectionView registerClass:BtnViewCell.class forCellWithReuseIdentifier:NSStringFromClass(BtnViewCell.class)];
+    }
+    return _collectionView;
+}
+
+@end
+
+@implementation BtnViewCell
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self == [super initWithFrame:frame]) {
+        self.btnImgView = UIImageView.ivFrame(CGRectMake(((kScreenW-30)/4-30)/2, 0, 30, 30));
+        [self.contentView addSubview:self.btnImgView];
+        
+        self.btnTitleLabel = UILabel.labelFrame(CGRectMake(0, self.btnImgView.bottom+8, self.width, 17)).labelFont(kFontTheme14).labelTitleColor(kColorTheme000).labelTextAlignment(NSTextAlignmentCenter);
+        [self.contentView addSubview:self.btnTitleLabel];
+    }
+    return self;
+}
+
+@end

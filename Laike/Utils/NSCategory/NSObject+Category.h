@@ -1,0 +1,23 @@
+//
+//  NSObject+Category.h
+//  GoOverSeas
+//
+//  Created by xiaobu on 2019/3/13.
+//  Copyright © 2019年 xiaobu. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSObject (Category) <NSMutableCopying>
+
+- (NSDictionary *)convertToDictionary;
+//获取当前屏幕显示的viewcontroller
+- (UIViewController *)getCurrentMethodCallerVC;
+///判断当前类是否包含某个字段
+- (BOOL)containsProperty:(NSString *)identifier;
+
+@end
+
+NS_ASSUME_NONNULL_END
