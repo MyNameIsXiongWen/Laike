@@ -32,22 +32,22 @@
 - (void)initWindow {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = kColorThemefff;
-//    IQKeyboardManager.sharedManager.enable = YES;
-//    IQKeyboardManager.sharedManager.shouldResignOnTouchOutside = YES;
-//    [kUserDefault removeObjectForKey:kConstConsultantId];
+    IQKeyboardManager.sharedManager.enable = YES;
+    IQKeyboardManager.sharedManager.shouldResignOnTouchOutside = YES;
+    [kUserDefault removeObjectForKey:kConstConsultantId];
 
-//    if (![[NSUserDefaults standardUserDefaults] boolForKey:kConstFirstIn]) {
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kConstFirstIn];
-//        AppGuideViewController *guideController = [[AppGuideViewController alloc] init];
-//        self.window.rootViewController = guideController;
-//    } else {
-//        if (kTOKEN) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kConstFirstIn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kConstFirstIn];
+        AppGuideViewController *guideController = [[AppGuideViewController alloc] init];
+        self.window.rootViewController = guideController;
+    } else {
+        if (kTOKEN) {
             self.tabBarVC = [[QHWTabBarViewController alloc] init];
             self.window.rootViewController = self.tabBarVC;
-//        } else {
-//            self.window.rootViewController = [CTMediator.sharedInstance CTMediator_viewControllerForLogin];
-//        }
-//    }
+        } else {
+            self.window.rootViewController = [CTMediator.sharedInstance CTMediator_viewControllerForLogin];
+        }
+    }
     [self.window makeKeyAndVisible];
 }
 
