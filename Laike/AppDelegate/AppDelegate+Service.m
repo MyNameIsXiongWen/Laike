@@ -30,25 +30,25 @@
 @implementation AppDelegate (Service)
 
 - (void)initWindow {
-    self.window.backgroundColor = [UIColor blackColor];
-    [self.window makeKeyAndVisible];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    IQKeyboardManager.sharedManager.enable = YES;
-    IQKeyboardManager.sharedManager.shouldResignOnTouchOutside = YES;
-    [kUserDefault removeObjectForKey:kConstConsultantId];
+    self.window.backgroundColor = kColorThemefff;
+//    IQKeyboardManager.sharedManager.enable = YES;
+//    IQKeyboardManager.sharedManager.shouldResignOnTouchOutside = YES;
+//    [kUserDefault removeObjectForKey:kConstConsultantId];
 
 //    if (![[NSUserDefaults standardUserDefaults] boolForKey:kConstFirstIn]) {
 //        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kConstFirstIn];
 //        AppGuideViewController *guideController = [[AppGuideViewController alloc] init];
 //        self.window.rootViewController = guideController;
 //    } else {
-        if (kTOKEN) {
+//        if (kTOKEN) {
             self.tabBarVC = [[QHWTabBarViewController alloc] init];
             self.window.rootViewController = self.tabBarVC;
-        } else {
-            self.window.rootViewController = [CTMediator.sharedInstance CTMediator_viewControllerForLogin];
-        }
+//        } else {
+//            self.window.rootViewController = [CTMediator.sharedInstance CTMediator_viewControllerForLogin];
+//        }
 //    }
+    [self.window makeKeyAndVisible];
 }
 
 - (void)initTableView {

@@ -48,6 +48,7 @@ typedef enum : NSUInteger {
 未选中item背景颜色，可不传，默认和选中颜色一样
 */
 @property (nonatomic, strong) UIColor *itemUnselectedBackgroundColor;
+@property (nonatomic, strong) UIColor *tagIndicatorColor;
 /**
  是否隐藏小红条 默认YES
  */

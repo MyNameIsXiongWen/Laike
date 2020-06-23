@@ -18,14 +18,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [self initHXIMWithApplication:application Options:launchOptions];
+//    [self initHXIMWithApplication:application Options:launchOptions];
     [self initWindow];
     [self initTableView];
     [self initSVProgress];
-    [self initAvoidCrash];
-    [self initUM];
-    [self initWX];
-    [self initShanYan];
+//    [self initAvoidCrash];
+//    [self initUM];
+//    [self initWX];
+//    [self initShanYan];
     return YES;
 }
 

@@ -30,7 +30,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.canScroll = YES;
-    [self getHomeDataRequest];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatusNotification) name:@"HomeSwipeLeaveTop" object:nil];
 }
 
@@ -40,8 +39,10 @@
     self.kNavigationView.hidden = YES;
 }
 
-- (void)getHomeDataRequest {
-    
+- (void)getMainData {
+    [self.homeService getHomeDataWithComplete:^(BOOL status, id  _Nonnull responseObject) {
+        
+    }];
 }
 
 #pragma mark ------------UIScrollView-------------
@@ -159,7 +160,7 @@
         [_tableView registerClass:QHWBaseSubContentTableViewCell.class forCellReuseIdentifier:NSStringFromClass(QHWBaseSubContentTableViewCell.class)];
         [_tableView registerClass:HomeCommunityTypeHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(HomeCommunityTypeHeaderView.class)];
         [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
-            [self getHomeDataRequest];
+            [self getMainData];
         }];
         [self.view addSubview:_tableView];
         [self.view sendSubviewToBack:_tableView];

@@ -7,7 +7,7 @@
 //
 
 #import "HomeTableHeaderView.h"
-
+#import "CTMediator+ViewController.h"
 
 @interface HomeTableHeaderView () <UITableViewDelegate, UITableViewDataSource>
 
@@ -31,13 +31,51 @@
     if (self == [super initWithFrame:frame]) {
         self.backgroundColor = UIColor.whiteColor;
         [self addSubview:self.bkgView];
-//        [self addSubview:self.searchView];
+        [self addSubview:self.tableView];
     }
     return self;
 }
 
 - (void)clickUserInfoView {
     
+}
+
+#pragma mark ------------UITableViewDelegate-------------
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.service.tableViewDataArray.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHWBaseModel *model = self.service.tableViewDataArray[indexPath.section];
+    return model.height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHWBaseModel *model = self.service.tableViewDataArray[indexPath.section];
+    UITableViewCell <QHWBaseCellProtocol>*cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
+    [cell configCellData:model.data];
+    return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return UIView.new;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHWBaseModel *model = self.service.tableViewDataArray[indexPath.section];
+    [CTMediator.sharedInstance performTarget:self action:kFormat(@"click%@", model.identifier) params:nil];
+}
+
+- (void)clickCRM {
+    [CTMediator.sharedInstance CTMediator_viewControllerForCRM];
 }
 
 #pragma mark ------------UI-------------
@@ -59,11 +97,11 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-//        _tableView = [UICreateView initWithFrame:CGRectMake(0, self.buttonView.bottom, kScreenW, 0) Style:UITableViewStylePlain Object:self];
-//        _tableView.sectionFooterHeight = 0;
-//        for (NSString *cellString in self.homeService.tableViewCellArray) {
-//            [_tableView registerClass:NSClassFromString(cellString) forCellReuseIdentifier:cellString];
-//        }
+        _tableView = [UICreateView initWithFrame:CGRectMake(0, self.userInfoView.bottom-20, kScreenW, 0) Style:UITableViewStylePlain Object:self];
+        _tableView.sectionFooterHeight = 0;
+        for (NSString *cellString in self.service.tableViewCellArray) {
+            [_tableView registerClass:NSClassFromString(cellString) forCellReuseIdentifier:cellString];
+        }
 //        [_tableView registerClass:HomeTableHeaderViewSubHeader.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(HomeTableHeaderViewSubHeader.class)];
         _tableView.scrollEnabled = NO;
         [self addSubview:_tableView];

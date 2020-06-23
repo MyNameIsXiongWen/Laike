@@ -42,6 +42,11 @@
     return self;
 }
 
+- (void)setTagIndicatorColor:(UIColor *)tagIndicatorColor {
+    _tagIndicatorColor = tagIndicatorColor;
+    self.tagIndicatorView.backgroundColor = tagIndicatorColor;
+}
+
 - (void)setDataArray:(NSArray *)dataArray {
     if (dataArray.count > 0) {
         [self addSubview:self.tagIndicatorView];

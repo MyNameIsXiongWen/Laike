@@ -9,8 +9,8 @@
 #ifndef QHWHttpAddress_h
 #define QHWHttpAddress_h
 
-static NSString *const kMainUrl = @"https://api.qhiwi.com/";
-//static NSString *const kMainUrl = @"https://api.qhiwi.com/test/";
+//static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1/ ";
+static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1test/";
 
 #pragma mark ------------协议相关-------------
 static NSString *const kServiceProtocol = @"http://file.qhiwi.com/agreement/service.html";
@@ -48,7 +48,7 @@ static NSString *const kSystemSearchContentData = @"hot/industry/getList";//获�
 static NSString *const kSystemCustomize = @"custom/user/myCustom";//获取我的定制
 static NSString *const kSystemGetMiniCode = @"product/getQrcode";//获取分享的小程序码
 
-static NSString *const kHomePage = @"push/homePage";//首页
+static NSString *const kHomePage = @"report/getHome";//首页
 static NSString *const kHomeBanner = @"advert/home/getInfo";//首页广告位
 static NSString *const kHomeWindowBanner = @"advert/window/getInfo";//首页弹框广告位
 

@@ -23,5 +23,6 @@
 
 ///vc传递参数
 @property (nonatomic, strong) NSDictionary *params;
+- (void)getMainData;
 
 @end

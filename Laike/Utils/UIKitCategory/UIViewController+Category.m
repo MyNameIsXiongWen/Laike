@@ -23,6 +23,7 @@
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    [self getMainData];
 }
 
 #pragma mark ------------自定义导航条-------------
@@ -41,6 +42,10 @@
 
 - (void)setParams:(NSDictionary *)params {
     objc_setAssociatedObject(self, @"Params", params, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)getMainData {
+    
 }
 
 #pragma mark ------------事件-------------

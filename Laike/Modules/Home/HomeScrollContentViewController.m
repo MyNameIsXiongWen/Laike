@@ -25,9 +25,8 @@
 
 - (void)addTableView {
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kBottomBarHeight-kStatusBarHeight-32) Style:UITableViewStylePlain Object:self];
-    for (NSDictionary *cellDic in self.service.tableViewCellArray) {
-        NSString *cell = cellDic[@"cell"];
-        [self.tableView registerClass:NSClassFromString(cell) forCellReuseIdentifier:cell];
+    for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
+        [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
     }
     [self.view addSubview:self.tableView];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
@@ -38,13 +37,13 @@
 }
 
 - (void)getProductListRequest {
-//    [self.service getHomePageProductListRequestWithIdentifier:self.identifier Complete:^{
+    [self.service getHomePageProductListRequestWithIdentifier:self.identifier Complete:^{
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [self.tableView reloadData];
-        [self.tableView showNodataView:self.service.tableViewDataArray.count == 0 offsetY:-(self.tableView.height-200)/2 button:nil];
+        [self.tableView showNodataView:self.service.tableViewDataArray.count == 0 offsetY:0 button:nil];
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.service.itemPageModel];
-//    }];
+    }];
 }
 
 #pragma mark ------------UIScrollView-------------

@@ -64,6 +64,8 @@
 #define kColorTheme8a90a6 kColorFromHexString(@"8a90a6")
 #define kColorTheme3cb584 kColorFromHexString(@"3cb584")
 #define kColorThemef2a12f kColorFromHexString(@"f2a12f")
+#define kColorTheme21a8ff kColorFromHexString(@"21a8ff")
+#define kColorThemeff7919 kColorFromHexString(@"ff7919")
 
 
 #define kTOKEN [[NSUserDefaults standardUserDefaults] objectForKey:@"ConstToken"]
