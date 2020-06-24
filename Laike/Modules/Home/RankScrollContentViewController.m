@@ -7,8 +7,11 @@
 //
 
 #import "RankScrollContentViewController.h"
+#import "QHWSystemService.h"
 
 @interface RankScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) QHWSystemService *systemService;
 
 @end
 
@@ -20,25 +23,54 @@
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-180-48) Style:UITableViewStylePlain Object:self];
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-180-48) Style:UITableViewStylePlain Object:self];
     self.tableView.rowHeight = 70;
     [self.tableView registerClass:RankTableViewCell.class forCellReuseIdentifier:NSStringFromClass(RankTableViewCell.class)];
     [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
-        
+        self.systemService.itemPageModel.pagination.currentPage = 1;
+        [self getMainData];
     }];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
-        
+        self.systemService.itemPageModel.pagination.currentPage++;
+        [self getMainData];
     }];
     [self.view addSubview:self.tableView];
 }
 
+- (void)getMainData {
+    [self.systemService getLikeRankRequestWithSubjectType:self.rankType Complete: ^{
+        [self.tableView reloadData];
+        if ([self.tableView.mj_header isRefreshing]) {
+            [self.tableView.mj_header endRefreshing];
+        }
+        if ([self.tableView.mj_footer isRefreshing]) {
+            [self.tableView.mj_footer endRefreshing];
+        }
+        [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.systemService.itemPageModel];
+        [self.tableView showNodataView:self.systemService.consultantArray.count == 0 offsetY:228 button:nil];
+    }];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.systemService.consultantArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RankTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(RankTableViewCell.class)];
+    QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row];
+    cell.rankImgView.image = [UIImage imageWithColor:kColorThemea4abb3 size:CGSizeMake(20, 30) text:kFormat(@"%ld", indexPath.row+1) textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+    [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+    cell.nameLabel.text = model.name;
+    cell.sloganLabel.text = model.slogan;
+    cell.rankLabel.text = kFormat(@"%ld", model.likeCount);
     return cell;
+}
+
+- (QHWSystemService *)systemService {
+    if (!_systemService) {
+        _systemService = QHWSystemService.new;
+    }
+    return _systemService;
 }
 
 /*
@@ -82,8 +114,8 @@
         }];
         [self.sloganLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.nameLabel.mas_left);
-            make.top.equalTo(self.nameLabel.mas_top).offset(2);
-            make.right.equalTo(self.rankLabel.mas_left).offset(5);
+            make.top.equalTo(self.nameLabel.mas_bottom).offset(2);
+            make.right.equalTo(self.rankLabel.mas_left).offset(-5);
         }];
     }
     return self;
@@ -100,7 +132,7 @@
 
 - (UIImageView *)avatarImgView {
     if (!_avatarImgView) {
-        _avatarImgView = UIImageView.ivInit().ivCornerRadius(25);
+        _avatarImgView = UIImageView.ivInit().ivCornerRadius(25).ivBorderColor(kColorThemeeee);
         [self.contentView addSubview:_avatarImgView];
     }
     return _avatarImgView;
@@ -125,6 +157,7 @@
 - (UILabel *)rankNameLabel {
     if (!_rankNameLabel) {
         _rankNameLabel = UILabel.labelInit().labelFont(kFontTheme12).labelText(@"人气").labelTitleColor(kColorThemea4abb3);
+        [_rankNameLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [self.contentView addSubview:_rankNameLabel];
     }
     return _rankNameLabel;

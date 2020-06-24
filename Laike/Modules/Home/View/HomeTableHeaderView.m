@@ -78,14 +78,22 @@
     [CTMediator.sharedInstance performTarget:self action:kFormat(@"click%@", model.identifier) params:nil];
 }
 
-- (void)clickCRM {
+- (void)clickMinePopularityInfoTableViewCell {
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"RankViewController").new animated:YES];
+}
+
+- (void)clickMineCardTableViewCell {
+    [CTMediator.sharedInstance CTMediator_viewControllerForCard];
+}
+
+- (void)clickMineCustomerTableViewCell {
     [CTMediator.sharedInstance CTMediator_viewControllerForCRM];
 }
 
 #pragma mark ------------UI-------------
 - (UIView *)bkgView {
     if (!_bkgView) {
-        _bkgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 190)).ivImage(kImageMake(@"mine_bkg"));
+        _bkgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 190)).ivBkgColor(kColorFromHexString(@"bdb5b5"));
     }
     return _bkgView;
 }

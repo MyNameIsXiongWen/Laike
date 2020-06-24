@@ -11,6 +11,7 @@
 #import "QHWBaseSubContentTableViewCell.h"
 #import "HomeScrollContentViewController.h"
 #import "HomeService.h"
+#import "QHWSystemService.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QHWPageContentViewDelegate, HomeTableHeaderViewDelegate>
 
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) QHWBaseSubContentTableViewCell *contentCell;
 @property (nonatomic, assign) BOOL canScroll;
 @property (nonatomic, strong) HomeService *homeService;
+@property (nonatomic, strong) QHWSystemService *systemService;
 @property (nonatomic, strong) dispatch_group_t group;
 
 @end
@@ -41,9 +43,12 @@
 }
 
 - (void)getMainData {
-    [self getMainRequest];
+    [self getConsultantRequest];
+    [self getReportRequest];
+    [self getPopularityRequest];
     [self getHomeSchoolRequest];
     dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+        self.homeService.consultantArray = self.systemService.consultantArray;
         [self.homeService handleHomeData];
         self.homeTableHeaderView.height = self.homeService.headerViewTableHeight;
         self.homeTableHeaderView.service = self.homeService;
@@ -52,9 +57,23 @@
     });
 }
 
-- (void)getMainRequest {
+- (void)getConsultantRequest {
     dispatch_group_enter(self.group);
-    [self.homeService getHomeDataWithComplete:^(BOOL status, id  _Nonnull responseObject) {
+    [self.homeService getHomeConsultantDataWithComplete:^{
+        dispatch_group_leave(self.group);
+    }];
+}
+
+- (void)getReportRequest {
+    dispatch_group_enter(self.group);
+    [self.homeService getHomeReportDataWithComplete:^{
+        dispatch_group_leave(self.group);
+    }];
+}
+
+- (void)getPopularityRequest {
+    dispatch_group_enter(self.group);
+    [self.systemService getLikeRankRequestWithSubjectType:1 Complete: ^{
         dispatch_group_leave(self.group);
     }];
 }
@@ -173,7 +192,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, kStatusBarHeight, kScreenW, kScreenH-kBottomBarHeight-kStatusBarHeight) Style:UITableViewStylePlain Object:self];
+        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, 0, kScreenW, kScreenH-kBottomBarHeight) Style:UITableViewStylePlain Object:self];
         _tableView.scrollsToTop = NO;
         _tableView.tableHeaderView = self.homeTableHeaderView;
         _tableView.rowHeight = kScreenH-kBottomBarHeight-kStatusBarHeight-32;
@@ -202,6 +221,13 @@
         _homeService = HomeService.new;
     }
     return _homeService;
+}
+
+- (QHWSystemService *)systemService {
+    if (!_systemService) {
+        _systemService = QHWSystemService.new;
+    }
+    return _systemService;
 }
 
 - (dispatch_group_t)group {

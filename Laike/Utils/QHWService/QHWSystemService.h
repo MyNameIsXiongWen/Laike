@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QHWSystemService : QHWBaseService
 
 @property (nonatomic, strong) NSArray <QHWBannerModel *>*bannerArray;
-@property (nonatomic, strong) NSArray <QHWConsultantModel *>*consultantArray;
+@property (nonatomic, strong) NSMutableArray <QHWConsultantModel *>*consultantArray;
 @property (nonatomic, strong) NSMutableArray <QHWActivityModel *>*activityArray;
 @property (nonatomic, strong) NSArray <SearchContentModel *>*hotSearchArray;
 @property (nonatomic, strong) NSArray <SearchContentModel *>*searchResultArray;
@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat activityDetailHeaderHeight;
 
 + (void)showLabelAlertViewWithTitle:(NSString *)title Img:(NSString *)img MerchantId:(NSString *)merchantId IndustryId:(NSInteger)industryId BusinessId:(NSString *)businessId DescribeCode:(NSInteger)describeCode PositionCode:(NSInteger)positionCode;
+
+- (void)getLikeRankRequestWithSubjectType:(NSInteger)subjectType Complete:(void (^)(void))complete;
 
 /*
  advertPage:

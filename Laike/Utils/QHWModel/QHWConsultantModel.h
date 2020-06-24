@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *overallScore;
 ///咨询量
 @property (nonatomic, assign) NSInteger consultCount;
+@property (nonatomic, assign) NSInteger likeCount;
 
 @property (nonatomic, copy) NSString *merchantId;
 @property (nonatomic, copy) NSString *businessId;

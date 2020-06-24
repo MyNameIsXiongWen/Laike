@@ -8,6 +8,7 @@
 
 #import "MineSchoolTableViewCell.h"
 #import "QHWTableSectionHeaderView.h"
+#import "QHWSchoolModel.h"
 
 @interface MineSchoolTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
 
@@ -50,8 +51,9 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.dataArray.count) {
         HomeSchoolSubCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomeSchoolSubCollectionViewCell.class) forIndexPath:indexPath];
-        [cell.bkgImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(@"")]];
-        cell.titleLabel.text = @"视频的标题，最多显量示两行就可以";
+        QHWSchoolModel *model = self.dataArray[indexPath.row];
+        [cell.bkgImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.coverPath)]];
+        cell.titleLabel.text = model.title;
         return cell;
     }
     return UICollectionViewCell.new;

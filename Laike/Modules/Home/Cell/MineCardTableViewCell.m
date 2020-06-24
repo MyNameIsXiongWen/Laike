@@ -42,10 +42,16 @@
 }
 
 - (void)configCellData:(id)data {
-    self.dataArray = (NSArray *)data;
-    self.userDataView.dataArray = self.dataArray[self.tabScrollView.currentIndex];
-    if ([self.dataArray.lastObject length] > 0) {
-        [self.headerView.moreBtn setTitle:self.dataArray.lastObject forState:0];
+    NSArray *array = (NSArray *)data;
+    self.dataArray = array.firstObject;
+    NSMutableArray *tempArray = NSMutableArray.array;
+    for (NSDictionary *dic in self.dataArray) {
+        [tempArray addObject:dic[@"groupName"]];
+    }
+    self.tabScrollView.dataArray = tempArray;
+    self.userDataView.dataArray = self.dataArray[self.tabScrollView.currentIndex][@"groupList"];
+    if ([array.lastObject length] > 0) {
+        [self.headerView.moreBtn setTitle:array.lastObject forState:0];
     }
 }
 
@@ -79,10 +85,9 @@
         _tabScrollView.itemSelectedBackgroundColor = kColorTheme707070;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemeeee;
         _tabScrollView.textFont = kFontTheme12;
-        _tabScrollView.dataArray = @[@"7日", @"30日", @"累计"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
-            weakSelf.userDataView.dataArray = weakSelf.dataArray[index];
+            weakSelf.userDataView.dataArray = weakSelf.dataArray[index][@"groupList"];
         };
     }
     return _tabScrollView;

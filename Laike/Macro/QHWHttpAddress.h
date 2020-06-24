@@ -48,12 +48,21 @@ static NSString *const kSystemSearchContentData = @"hot/industry/getList";//获�
 static NSString *const kSystemCustomize = @"custom/user/myCustom";//获取我的定制
 static NSString *const kSystemGetMiniCode = @"product/getQrcode";//获取分享的小程序码
 
-static NSString *const kHomeReport = @"report/getHome";//首页
-static NSString *const kHomeConsultant = @"merchant/user/getHome";//首页
+
+
+
+static NSString *const kHomeReport = @"report/getHome";//主页报表
+static NSString *const kHomeConsultant = @"merchant/user/getHome";//主页顾问
+static NSString *const kSystemLike = @"/action/like/top";//点赞排行榜
 static NSString *const kProductList = @"product/getList";//产品列表
 static NSString *const kSchoolList = @"learn/getList";//大学列表
 
 static NSString *const kMerchantBind = @"merchant/user/bindMerchant";//绑定公司
+
+#pragma mark ------------CRM-------------
+static NSString *const kCRMFilter = @"client/getVariable";//crm筛选条件
+static NSString *const kCRMList = @"client/getList";//crm列表
+
 
 
 static NSString *const kHomeBanner = @"advert/home/getInfo";//首页广告位

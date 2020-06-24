@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 客户类型 
 @property (nonatomic, assign) NSInteger crmType;
+@property (nonatomic, strong) NSDictionary *conditionDic;
 
 @end
 

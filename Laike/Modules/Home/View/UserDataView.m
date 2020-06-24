@@ -52,8 +52,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UserDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(UserDataCell.class) forIndexPath:indexPath];
     NSDictionary *dic = self.dataArray[indexPath.row];
-    cell.countLabel.text = kFormat(@"%@", dic[@"count"]);
-    cell.nameLabel.text = dic[@"name"];
+    cell.countLabel.text = kFormat(@"%@", dic[@"value"]);
+    cell.nameLabel.text = dic[@"title"];
     if (self.countColor) {
         cell.countLabel.textColor = self.countColor;
     }

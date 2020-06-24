@@ -19,25 +19,32 @@
 
 @implementation HomeService
 
-- (void)getHomeDataWithComplete:(void (^)(BOOL, id _Nonnull))complete {
+- (void)getHomeConsultantDataWithComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kHomeConsultant parameters:@{} success:^(id responseObject) {
         self.homeModel = [HomeModel yy_modelWithJSON:responseObject[@"data"]];
-        if (complete) {
-            complete(YES, responseObject);
-        }
+        complete();
     } failure:^(NSError *error) {
-        if (complete) {
-            complete(NO, error);
-        }
+        complete();
+    }];
+}
+
+- (void)getHomeReportDataWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kHomeReport parameters:@{} success:^(id responseObject) {
+        self.reportArray = responseObject[@"data"][@"report1"][@"reportList"];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
     }];
 }
 
 - (void)getSchoolDataWithComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
-    [QHWHttpManager.sharedInstance QHW_POST:kHomeConsultant parameters:@{@"learnType": @(1),
-                                                                         @"currentPage": @(1),
-                                                                         @"pageSize": @(2)} success:^(id responseObject) {
+//    学习类型：1-专业课堂；2-产品学习
+    [QHWHttpManager.sharedInstance QHW_POST:kSchoolList parameters:@{@"learnType": @(1),
+                                                                     @"currentPage": @(1),
+                                                                     @"pageSize": @(2)} success:^(id responseObject) {
         self.schoolArray = [NSArray yy_modelArrayWithClass:QHWSchoolModel.class json:responseObject[@"data"][@"list"]];
         complete();
     } failure:^(NSError *error) {
@@ -55,6 +62,7 @@
 //        }
 //    }];
 //    NSString *modelStr = dic[@"model"];
+    [QHWHttpLoading showWithMaskTypeBlack];
     NSDictionary *params = @{@"businessType": @(businessType),
                              @"currentPage": @(self.itemPageModel.pagination.currentPage),
                              @"pageSize": @(self.itemPageModel.pagination.pageSize)};
@@ -121,28 +129,23 @@
 
 - (void)handleHomeData {
     [self.tableViewDataArray removeAllObjects];
-    QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MinePopularityInfoTableViewCell" Height:165 Data:@[@"",@"",@""]];
-    [self.tableViewDataArray addObject:userDataModel];
+    if (self.consultantArray.count > 0) {
+        QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MinePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];
+        [self.tableViewDataArray addObject:userDataModel];
+    }
     
-    QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCardTableViewCell"
-                                                                       Height:175
-                                                                         Data:@[@[@{@"count": @(0), @"name": @"访问"},
-                                                                                  @{@"count": @(0), @"name": @"点赞"},
-                                                                                  @{@"count": @(0), @"name": @"粉丝"}],
-                                                                                @[@{@"count": @(2), @"name": @"访问"},
-                                                                                  @{@"count": @(3), @"name": @"点赞"},
-                                                                                  @{@"count": @(0), @"name": @"粉丝"}],
-                                                                                @[@{@"count": @(4), @"name": @"访问"},
-                                                                                  @{@"count": @(17), @"name": @"点赞"},
-                                                                                  @{@"count": @(6), @"name": @"粉丝"}],
-                                                                                self.homeModel.visitTip ?: @""]];
-    [self.tableViewDataArray addObject:cardDataModel];
+    if (self.reportArray.count > 0) {
+        QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCardTableViewCell"
+                                                                           Height:175
+                                                                             Data:@[self.reportArray, self.homeModel.visitTip]];
+        [self.tableViewDataArray addObject:cardDataModel];
+    }
     
     QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCustomerTableViewCell"
                                                                       Height:140
-                                                                        Data:@[@{@"count": @(0), @"name": @"CRM"},
-                                                                               @{@"count": @(0), @"name": @"获客"},
-                                                                               @{@"count": @(0), @"name": @"公客"}]];
+                                                                        Data:@[@{@"value": @(self.homeModel.userCount), @"title": @"CRM"},
+                                                                               @{@"value": @(self.homeModel.userDays), @"title": @"获客"},
+                                                                               @{@"value": @(self.homeModel.clueCount), @"title": @"公客"}]];
     [self.tableViewDataArray addObject:crmDataModel];
     
     QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineIconTableViewCell" Height:160 Data:self.iconArray];

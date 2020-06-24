@@ -46,7 +46,7 @@
 #pragma mark ------------UI-------------
 - (UIImageView *)avatarImgView {
     if (!_avatarImgView) {
-        _avatarImgView = UIImageView.ivInit().ivCornerRadius(25);
+        _avatarImgView = UIImageView.ivInit().ivCornerRadius(25).ivBorderColor(kColorTheme21a8ff);
         [self.contentView addSubview:_avatarImgView];
     }
     return _avatarImgView;

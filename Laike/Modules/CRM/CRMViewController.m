@@ -11,7 +11,9 @@
 #import "CRMTopOperationView.h"
 #import "QHWTabScrollView.h"
 #import "MainBusinessFilterBtnView.h"
+#import "QHWCountryFilterView.h"
 #import "QHWPageContentView.h"
+#import "CRMService.h"
 
 @interface CRMViewController () <QHWPageContentViewDelegate>
 
@@ -19,6 +21,7 @@
 @property (nonatomic, strong) QHWTabScrollView *tabScrollView;
 @property (nonatomic, strong) MainBusinessFilterBtnView *filterBtnView;
 @property (nonatomic, strong) QHWPageContentView *pageContentView;
+@property (nonatomic, strong) CRMService *crmService;
 
 @end
 
@@ -27,10 +30,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.kNavigationView.title = @"客户管理";
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.filterBtnView];
     [self.view addSubview:self.pageContentView];
+    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
+    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.tabScrollView.bottom+39.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
+}
+
+- (void)getMainData {
+    [self.crmService getCRMFilterDataRequestWithComplete:^{
+        self.filterBtnView.dataArray = self.crmService.filterDataArray;
+    }];
 }
 
 #pragma mark ------------QHWPageContentViewDelegate-------------
@@ -54,11 +66,11 @@
 - (CRMTopOperationView *)topOperationView {
     if (!_topOperationView) {
         _topOperationView = [[CRMTopOperationView alloc] initWithFrame:CGRectMake(10, kTopBarHeight+10, kScreenW-20, 70)];
-        _topOperationView.dataArray = @[@{@"logo": @"",
+        _topOperationView.dataArray = @[@{@"logo": @"home_live",
                                           @"title": @"分享获客",
                                           @"subTitle": @"发布海外圈 免费获客",
                                           @"identifier": @"shareArticle"},
-                                        @{@"logo": @"",
+                                        @{@"logo": @"home_live",
                                           @"title": @"公海抢客",
                                           @"subTitle": @"意向客户 抢单成交",
                                           @"identifier": @"grabGuest"}
@@ -82,8 +94,6 @@
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;
         };
-        [self.view addSubview:_tabScrollView];
-        [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
     }
     return _tabScrollView;
 }
@@ -91,7 +101,35 @@
 - (MainBusinessFilterBtnView *)filterBtnView {
     if (!_filterBtnView) {
         _filterBtnView = [[MainBusinessFilterBtnView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, 40)];
-        [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.tabScrollView.bottom+39.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
+        WEAKSELF
+        _filterBtnView.didSelectItemBlock = ^(FilterBtnViewCellModel * _Nonnull model) {
+            QHWCountryFilterView *filterView = [[QHWCountryFilterView alloc] initWithFrame:CGRectMake(0, weakSelf.filterBtnView.bottom, kScreenW, MIN(model.dataArray.firstObject.content.count*40, 200))];
+            filterView.isTreatment = YES;
+            filterView.dataArray = model.dataArray.firstObject.content;
+            filterView.didSelectedBlock = ^(FilterCellModel * _Nonnull countryCellModel, FilterCellModel * _Nonnull cityCellModel) {
+//                wModel.color = kColorThemefb4d56;
+//                if (cityCellModel.code.length == 0) {
+//                    wModel.name = countryCellModel.name;
+//                    if ([weakSelf.service.conditionDic.allKeys containsObject:cityCellModel.valueStr]) {
+//                        [weakSelf.service.conditionDic removeObjectForKey:cityCellModel.valueStr];
+//                    }
+//                    if (countryCellModel.code.length == 0) {
+//                        if ([weakSelf.service.conditionDic.allKeys containsObject:countryCellModel.valueStr]) {
+//                            [weakSelf.service.conditionDic removeObjectForKey:countryCellModel.valueStr];
+//                        }
+//                    } else {
+//                        weakSelf.service.conditionDic[countryCellModel.valueStr] = countryCellModel.code;
+//                    }
+//                } else {
+//                    wModel.name = cityCellModel.name;
+//                    weakSelf.service.conditionDic[cityCellModel.valueStr] = cityCellModel.code;
+//                    weakSelf.service.conditionDic[countryCellModel.valueStr] = countryCellModel.code;
+//                }
+//                weakSelf.mainBusinessTypeHeaderView.filterBtnView.dataArray = weakSelf.service.filterArray;
+//                [weakSelf getListDataWithFirstPage];
+            };
+            [filterView show];
+        };
     }
     return _filterBtnView;
 }
@@ -105,10 +143,16 @@
             vc.crmType = [statusArray[i] integerValue];
             [contentVCs addObject:vc];
         }
-        _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];
-        [self.view addSubview:_pageContentView];
+        _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.filterBtnView.bottom, kScreenW, kScreenH-self.filterBtnView.bottom) childVCs:contentVCs parentVC:self delegate:self];
     }
     return _pageContentView;
+}
+
+- (CRMService *)crmService {
+    if (!_crmService) {
+        _crmService = CRMService.new;
+    }
+    return _crmService;
 }
 
 @end

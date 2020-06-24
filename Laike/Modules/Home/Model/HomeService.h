@@ -19,9 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
 @property (nonatomic, strong) NSMutableArray *iconArray;
 @property (nonatomic, assign) CGFloat headerViewTableHeight;
+@property (nonatomic, strong) NSArray *consultantArray;
+@property (nonatomic, strong) NSArray *reportArray;
 
 - (void)handleHomeData;
-- (void)getHomeDataWithComplete:(void (^)(BOOL status, id responseObject))complete;
+- (void)getHomeReportDataWithComplete:(void (^)(void))complete;
+- (void)getHomeConsultantDataWithComplete:(void (^)(void))complete;
 
 - (void)getSchoolDataWithComplete:(void (^)(void))complete;
 

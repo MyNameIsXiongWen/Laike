@@ -27,15 +27,16 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.leftOperationView = [[OperationCollectionSubView alloc] initWithFrame:CGRectMake(0, 0, (self.width-20)/2, 70)];
+        self.leftOperationView = [[OperationCollectionSubView alloc] initWithFrame:CGRectMake(0, 0, self.width/2, 70)];
         [self addSubview:self.leftOperationView];
         
-        self.rightOperationView = [[OperationCollectionSubView alloc] initWithFrame:CGRectMake(self.leftOperationView.right, 0, (self.width-20)/2, 70)];
+        self.rightOperationView = [[OperationCollectionSubView alloc] initWithFrame:CGRectMake(self.leftOperationView.right, 0, self.leftOperationView.width, 70)];
         [self addSubview:self.rightOperationView];
         
         [self addSubview:UIView.viewFrame(CGRectMake(self.leftOperationView.right, 10, 0.5, 50)).bkgColor(kColorThemeeee)];
         
-        [self addShadowColor:kColorTheme2a303c offset:5 opacity:0.3];
+        self.cornerRadius(10).bkgColor(kColorThemef5f5f5);
+//        [self addShadowWithRadius:10 Opacity:0.2];
     }
     return self;
 }
@@ -60,6 +61,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
+//        self.backgroundColor = kColorThemefff;
         self.logoImgView = UIImageView.ivFrame(CGRectMake(15, 15, 40, 40)).ivCornerRadius(20);
         [self addSubview:self.logoImgView];
         

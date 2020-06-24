@@ -8,6 +8,7 @@
 
 #import "MinePopularityInfoTableViewCell.h"
 #import "QHWTableSectionHeaderView.h"
+#import "QHWConsultantModel.h"
 
 @interface MinePopularityInfoTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
 
@@ -45,26 +46,19 @@
 
 #pragma mark ------------UICollectionViewDataSource-------------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return MIN(3, self.dataArray.count);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HomePopularitySubCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomePopularitySubCollectionViewCell.class) forIndexPath:indexPath];
-    [cell.consultantImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(kImageLogo)]];
-    cell.consultantNameLabel.text = @"戴维数";
-    cell.consultantCountLabel.text = @"223";
-//    QHWConsultantModel *model = self.dataArray[indexPath.row];
-//    [cell.consultantImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)] placeholderImage:kPlaceHolderImage_Avatar];
-//    cell.consultantNameLabel.text = model.name;
-//    WEAKSELF
-//    cell.clickConsultBlock = ^{
-//        [QHWSystemService showLabelAlertViewWithTitle:@"预约咨询" Img:@"" MerchantId:weakSelf.merchantId IndustryId:14 BusinessId:weakSelf.merchantId DescribeCode:6 PositionCode:8];
-//    };
+    QHWConsultantModel *model = self.dataArray[indexPath.row];
+    [cell.consultantImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+    cell.consultantNameLabel.text = model.name;
+    cell.consultantCountLabel.text = kFormat(@"%ld人", model.likeCount);
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    QHWConsultantModel *model = self.dataArray[indexPath.row];
 //    [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:model.id UserType:2 BusinessType:self.businessType];
 }
 
@@ -106,11 +100,11 @@
             make.centerX.equalTo(self.contentView);
         }];
         [self.consultantNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.consultantImgView.mas_bottom).offset(3);
+            make.top.equalTo(self.consultantImgView.mas_bottom).offset(5);
             make.left.right.mas_offset(0);
         }];
         [self.consultantCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.consultantNameLabel.mas_bottom).offset(2);
+            make.top.equalTo(self.consultantNameLabel.mas_bottom).offset(5);
             make.left.right.mas_offset(0);
         }];
     }

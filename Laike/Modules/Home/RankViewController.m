@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.kNavigationView.title = @"排行榜";
+    self.kNavigationView.backgroundColor = UIColor.clearColor;
     [self.view addSubview:self.topImgView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
@@ -50,7 +52,7 @@
 
 - (UIImageView *)topImgView {
     if (!_topImgView) {
-        _topImgView = UIImageView.ivFrame(CGRectMake(0, kTopBarHeight, kScreenW, 180)).ivImage(kImageMake(@"rank_bkg"));
+        _topImgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 180)).ivBkgColor(kColorFromHexString(@"bdb5b5")).ivImage(kImageMake(@"rank_bkg"));
     }
     return _topImgView;
 }
@@ -78,7 +80,7 @@
 - (QHWPageContentView *)pageContentView {
     if (!_pageContentView) {
         NSMutableArray *contentVCs = [NSMutableArray array];
-        NSArray *statusArray = @[@(1), @(2)];
+        NSArray *statusArray = @[@(2), @(1)];
         for (int i=0; i<statusArray.count; i++) {
             RankScrollContentViewController *vc = [[RankScrollContentViewController alloc] init];
             vc.rankType = [statusArray[i] integerValue];

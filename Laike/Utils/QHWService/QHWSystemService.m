@@ -10,7 +10,6 @@
 #import "QHWLabelAlertView.h"
 #import "UserModel.h"
 #import <QiniuSDK.h>
-//#import "MyCustomizeViewController.h"
 #import "CTMediator+ViewController.h"
 
 @implementation QHWSystemService
@@ -47,6 +46,22 @@
         [SVProgressHUD showInfoWithStatus:@"提交成功"];
     } failure:^(NSError *error) {
         
+    }];
+}
+
+- (void)getLikeRankRequestWithSubjectType:(NSInteger)subjectType Complete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kSystemLike parameters:@{@"subjectType": @(subjectType),
+                                                                     @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                                                                     @"pageSize": @(self.itemPageModel.pagination.pageSize)} success:^(id responseObject) {
+        self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
+        if (self.itemPageModel.pagination.currentPage == 1) {
+            [self.consultantArray removeAllObjects];
+        }
+        [self.consultantArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:QHWConsultantModel.class json:responseObject[@"data"][@"list"]]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
     }];
 }
 
@@ -252,6 +267,13 @@
         _activityArray = NSMutableArray.array;
     }
     return _activityArray;
+}
+
+- (NSMutableArray<QHWConsultantModel *> *)consultantArray {
+    if (!_consultantArray) {
+        _consultantArray = NSMutableArray.array;
+    }
+    return _consultantArray;
 }
 
 @end
