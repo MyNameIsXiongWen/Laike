@@ -21,6 +21,7 @@
 @property (nonatomic, strong) QHWBaseSubContentTableViewCell *contentCell;
 @property (nonatomic, assign) BOOL canScroll;
 @property (nonatomic, strong) HomeService *homeService;
+@property (nonatomic, strong) dispatch_group_t group;
 
 @end
 
@@ -40,8 +41,28 @@
 }
 
 - (void)getMainData {
+    [self getMainRequest];
+    [self getHomeSchoolRequest];
+    dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+        [self.homeService handleHomeData];
+        self.homeTableHeaderView.height = self.homeService.headerViewTableHeight;
+        self.homeTableHeaderView.service = self.homeService;
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+    });
+}
+
+- (void)getMainRequest {
+    dispatch_group_enter(self.group);
     [self.homeService getHomeDataWithComplete:^(BOOL status, id  _Nonnull responseObject) {
-        
+        dispatch_group_leave(self.group);
+    }];
+}
+
+- (void)getHomeSchoolRequest {
+    dispatch_group_enter(self.group);
+    [self.homeService getSchoolDataWithComplete:^{
+        dispatch_group_leave(self.group);
     }];
 }
 
@@ -181,6 +202,13 @@
         _homeService = HomeService.new;
     }
     return _homeService;
+}
+
+- (dispatch_group_t)group {
+    if (!_group) {
+        _group = dispatch_group_create();
+    }
+    return _group;
 }
 
 @end

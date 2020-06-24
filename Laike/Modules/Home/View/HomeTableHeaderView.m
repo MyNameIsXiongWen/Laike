@@ -36,8 +36,20 @@
     return self;
 }
 
+- (void)setService:(HomeService *)service {
+    _service = service;
+    for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
+        [_tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
+    }
+    self.userInfoView.nameLabel.text = service.homeModel.realName;
+    self.userInfoView.companyLabel.text = service.homeModel.companyName;
+    [self.userInfoView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(service.homeModel.headPath)]];
+    self.tableView.height = service.headerViewTableHeight-165;
+    [self.tableView reloadData];
+}
+
 - (void)clickUserInfoView {
-    
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"MineInfoViewController").new animated:YES];
 }
 
 #pragma mark ------------UITableViewDelegate-------------
@@ -54,19 +66,11 @@
     return model.height;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHWBaseModel *model = self.service.tableViewDataArray[indexPath.section];
     UITableViewCell <QHWBaseCellProtocol>*cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
     [cell configCellData:model.data];
     return cell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return UIView.new;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -81,7 +85,7 @@
 #pragma mark ------------UI-------------
 - (UIView *)bkgView {
     if (!_bkgView) {
-        _bkgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 240)).ivImage(kImageMake(@"mine_bkg"));
+        _bkgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 190)).ivImage(kImageMake(@"mine_bkg"));
     }
     return _bkgView;
 }
@@ -91,18 +95,15 @@
         _userInfoView = [[UserInfoView alloc] initWithFrame:CGRectMake(0, 60, kScreenW, 70)];
         _userInfoView.userInteractionEnabled = YES;
         [_userInfoView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickUserInfoView)]];
+        [self addSubview:_userInfoView];
     }
     return _userInfoView;
 }
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [UICreateView initWithFrame:CGRectMake(0, self.userInfoView.bottom-20, kScreenW, 0) Style:UITableViewStylePlain Object:self];
-        _tableView.sectionFooterHeight = 0;
-        for (NSString *cellString in self.service.tableViewCellArray) {
-            [_tableView registerClass:NSClassFromString(cellString) forCellReuseIdentifier:cellString];
-        }
-//        [_tableView registerClass:HomeTableHeaderViewSubHeader.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(HomeTableHeaderViewSubHeader.class)];
+        _tableView = [UICreateView initWithFrame:CGRectMake(0, 165, kScreenW, 0) Style:UITableViewStylePlain Object:self];
+        _tableView.backgroundColor = UIColor.clearColor;
         _tableView.scrollEnabled = NO;
         [self addSubview:_tableView];
     }
@@ -118,7 +119,7 @@
         self.avatarImgView = UIImageView.ivFrame(CGRectMake(15, 0, self.height, self.height)).ivCornerRadius(self.height/2);
         [self addSubview:self.avatarImgView];
         
-        self.nameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+10, 5, kScreenW-2000, 33)).labelTitleColor(kColorThemefff).labelFont(kMediumFontTheme24);
+        self.nameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+10, 5, kScreenW-200, 33)).labelTitleColor(kColorThemefff).labelFont(kMediumFontTheme24);
         [self addSubview:self.nameLabel];
         
         self.companyLabel = UILabel.labelFrame(CGRectMake(self.nameLabel.left, self.nameLabel.bottom, self.nameLabel.width, 17)).labelTitleColor(kColorThemefff).labelFont(kFontTheme14);

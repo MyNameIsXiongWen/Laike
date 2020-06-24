@@ -37,7 +37,7 @@
 }
 
 - (void)getProductListRequest {
-    [self.service getHomePageProductListRequestWithIdentifier:self.identifier Complete:^{
+    [self.service getHomePageProductListRequestWithBusinessType:self.businessType Complete:^{
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [self.tableView reloadData];

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeScrollContentViewController : QHWBaseScrollContentViewController
 
+@property (nonatomic, assign) NSInteger businessType;
+
 @end
 
 NS_ASSUME_NONNULL_END

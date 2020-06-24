@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) QHWTableSectionHeaderView *headerView;
 @property (nonatomic, strong) QHWTabScrollView *tabScrollView;
+@property (nonatomic, strong) NSArray *dataArray;
 
 @end
 
@@ -32,6 +33,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.contentView.backgroundColor = self.backgroundColor = UIColor.clearColor;
         [self.shadowView addSubview:self.headerView];
         [self.shadowView addSubview:self.userDataView];
         [self.shadowView addSubview:self.tabScrollView];
@@ -40,8 +42,11 @@
 }
 
 - (void)configCellData:(id)data {
-    NSArray *array = (NSArray *)data;
-    self.userDataView.dataArray = array[self.tabScrollView.currentIndex];
+    self.dataArray = (NSArray *)data;
+    self.userDataView.dataArray = self.dataArray[self.tabScrollView.currentIndex];
+    if ([self.dataArray.lastObject length] > 0) {
+        [self.headerView.moreBtn setTitle:self.dataArray.lastObject forState:0];
+    }
 }
 
 #pragma mark ------------UI-------------
@@ -49,13 +54,14 @@
     if (!_headerView) {
         _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
         _headerView.titleLabel.text = @"名片数据";
+        _headerView.moreBtn.hidden = NO;
     }
     return _headerView;
 }
 
 - (UserDataView *)userDataView {
     if (!_userDataView) {
-        _userDataView = [[UserDataView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW, 65)];
+        _userDataView = [[UserDataView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-30, 45)];
         WEAKSELF
         _userDataView.didSelectedItemBlock = ^(NSInteger index) {
             
@@ -74,6 +80,10 @@
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemeeee;
         _tabScrollView.textFont = kFontTheme12;
         _tabScrollView.dataArray = @[@"7日", @"30日", @"累计"];
+        WEAKSELF
+        _tabScrollView.clickTagBlock = ^(NSInteger index) {
+            weakSelf.userDataView.dataArray = weakSelf.dataArray[index];
+        };
     }
     return _tabScrollView;
 }

@@ -9,6 +9,7 @@
 #import "QHWBaseService.h"
 #import "QHWItemPageModel.h"
 #import "HomeModel.h"
+#import "QHWMainBusinessDetailBaseModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,10 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) HomeModel *homeModel;
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
+@property (nonatomic, strong) NSMutableArray *iconArray;
 @property (nonatomic, assign) CGFloat headerViewTableHeight;
 
+- (void)handleHomeData;
 - (void)getHomeDataWithComplete:(void (^)(BOOL status, id responseObject))complete;
-- (void)getHomePageProductListRequestWithIdentifier:(NSString *)identifier Complete:(void (^)(void))complete;
+
+- (void)getSchoolDataWithComplete:(void (^)(void))complete;
+
+- (void)getHomePageProductListRequestWithBusinessType:(NSInteger)businessType Complete:(void (^)(void))complete;
 
 @end
 

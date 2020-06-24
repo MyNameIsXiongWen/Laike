@@ -43,7 +43,7 @@
         return;
     }
     self.phone = phone;
-    NSMutableDictionary *params = @{@"mobileNumber": phone, @"type": @"301", @"verifyType": self.verifyType ?: @""}.mutableCopy;
+    NSMutableDictionary *params = @{@"mobileNumber": phone, @"type": @"401", @"verifyType": self.verifyType ?: @""}.mutableCopy;
     if (self.ticket.length > 0 && self.randstr.length > 0) {
         params[@"ticket"] = self.ticket;
         params[@"randstr"] = self.randstr;
@@ -136,7 +136,8 @@
     /*accountType 账号类型：1-手机号；2-邮箱；3-账号；4-微信登录；5-微信登录绑定手机号；6-闪验*/
     NSDictionary *parameters = @{@"account": phone,
                                  @"code": code,
-                                 @"accountType": @(1)};
+                                 @"accountType": @(1)
+    };
     [self loginWithParams:parameters];
 }
 

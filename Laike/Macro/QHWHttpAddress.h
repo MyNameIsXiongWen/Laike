@@ -9,8 +9,8 @@
 #ifndef QHWHttpAddress_h
 #define QHWHttpAddress_h
 
-//static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1/ ";
-static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1test/";
+static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1/";
+//static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1test/";
 
 #pragma mark ------------协议相关-------------
 static NSString *const kServiceProtocol = @"http://file.qhiwi.com/agreement/service.html";
@@ -21,7 +21,7 @@ static NSString *const kAgencyCertification = @"http://file.qhiwi.com/merchant_i
 static NSString *const kMyCustomizeUrl = @"https://m.qhiwi.com/site/custom/#/?channel=1&pass=4";
 
 #pragma mark ------------用户模块-------------
-static NSString *const kUserLogin = @"user/loginOrRegist";//登录注册
+static NSString *const kUserLogin = @"merchant/login/login";//登录注册
 static NSString *const kMineMainPage = @"user/getTaInfo";//我的主页
 static NSString *const kMineInfo = @"user/getInfo";//我的信息
 static NSString *const kMineEdit = @"user/edit";//编辑信息
@@ -48,7 +48,14 @@ static NSString *const kSystemSearchContentData = @"hot/industry/getList";//获�
 static NSString *const kSystemCustomize = @"custom/user/myCustom";//获取我的定制
 static NSString *const kSystemGetMiniCode = @"product/getQrcode";//获取分享的小程序码
 
-static NSString *const kHomePage = @"report/getHome";//首页
+static NSString *const kHomeReport = @"report/getHome";//首页
+static NSString *const kHomeConsultant = @"merchant/user/getHome";//首页
+static NSString *const kProductList = @"product/getList";//产品列表
+static NSString *const kSchoolList = @"learn/getList";//大学列表
+
+static NSString *const kMerchantBind = @"merchant/user/bindMerchant";//绑定公司
+
+
 static NSString *const kHomeBanner = @"advert/home/getInfo";//首页广告位
 static NSString *const kHomeWindowBanner = @"advert/window/getInfo";//首页弹框广告位
 

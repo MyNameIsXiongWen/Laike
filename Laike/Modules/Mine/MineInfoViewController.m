@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) UIButton *logoutBtn;
 @property (nonatomic, strong) MineService *service;
 
 @end
@@ -31,6 +32,7 @@
     self.kNavigationView.title = @"个人信息";
     [self initialData];
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.logoutBtn];
 }
 
 - (void)initialData {
@@ -204,6 +206,10 @@
     }];
 }
 
+- (void)clickLogoutBtn {
+    [UserModel logout];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -221,6 +227,13 @@
         [_tableView registerClass:QHWGeneralTableViewCell.class forCellReuseIdentifier:NSStringFromClass(QHWGeneralTableViewCell.class)];
     }
     return _tableView;
+}
+
+- (UIButton *)logoutBtn {
+    if (!_logoutBtn) {
+        _logoutBtn = UIButton.btnFrame(CGRectMake(15, kTopBarHeight + 53*8 + 20, kScreenW-30, 45)).btnTitle(@"退出登录").btnTitleColor(kColorThemefff).btnFont(kFontTheme20).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(8).btnAction(self, @selector(clickLogoutBtn));
+    }
+    return _logoutBtn;
 }
 
 - (MineService *)service {

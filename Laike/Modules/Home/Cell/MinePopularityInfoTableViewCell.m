@@ -32,6 +32,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.contentView.backgroundColor = self.backgroundColor = UIColor.clearColor;
         [self.shadowView addSubview:self.headerView];
     }
     return self;
@@ -49,6 +50,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HomePopularitySubCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomePopularitySubCollectionViewCell.class) forIndexPath:indexPath];
+    [cell.consultantImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(kImageLogo)]];
+    cell.consultantNameLabel.text = @"戴维数";
+    cell.consultantCountLabel.text = @"223";
 //    QHWConsultantModel *model = self.dataArray[indexPath.row];
 //    [cell.consultantImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)] placeholderImage:kPlaceHolderImage_Avatar];
 //    cell.consultantNameLabel.text = model.name;
@@ -69,6 +73,7 @@
     if (!_headerView) {
         _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
         _headerView.titleLabel.text = @"人气王";
+        _headerView.moreBtn.hidden = NO;
     }
     return _headerView;
 }
@@ -76,15 +81,15 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.minimumLineSpacing = 30;
+        layout.minimumLineSpacing = CGFLOAT_MIN;
         layout.minimumInteritemSpacing = CGFLOAT_MIN;
-        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
-        layout.itemSize = CGSizeMake(60, 80);
+        layout.sectionInset = UIEdgeInsetsZero;
+        layout.itemSize = CGSizeMake((kScreenW-30)/3, 80);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _collectionView = [UICreateView initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-30, 80) Layout:layout Object:self];
         [_collectionView registerClass:HomePopularitySubCollectionViewCell.class forCellWithReuseIdentifier:NSStringFromClass(HomePopularitySubCollectionViewCell.class)];
-        [self addSubview:_collectionView];
+        [self.shadowView addSubview:_collectionView];
     }
     return _collectionView;
 }

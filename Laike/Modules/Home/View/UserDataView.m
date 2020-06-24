@@ -28,7 +28,7 @@
     if (self == [super initWithFrame:frame]) {
         UICollectionViewFlowLayout *layout = UICollectionViewFlowLayout.new;
         layout.minimumInteritemSpacing = CGFLOAT_MIN;
-        self.collectionView = [UICreateView initWithFrame:CGRectMake(15, 0, kScreenW-30, self.height) Layout:layout Object:self];
+        self.collectionView = [UICreateView initWithFrame:self.bounds Layout:layout Object:self];
         self.collectionView.backgroundColor = UIColor.clearColor;
         [self.collectionView registerClass:UserDataCell.class forCellWithReuseIdentifier:NSStringFromClass(UserDataCell.class)];
         [self addSubview:self.collectionView];
@@ -42,7 +42,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(floor((kScreenW-30)/self.dataArray.count), self.height);
+    return CGSizeMake(floor(self.width/self.dataArray.count), self.height);
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -52,7 +52,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UserDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(UserDataCell.class) forIndexPath:indexPath];
     NSDictionary *dic = self.dataArray[indexPath.row];
-    cell.countLabel.text = dic[@"count"];
+    cell.countLabel.text = kFormat(@"%@", dic[@"count"]);
     cell.nameLabel.text = dic[@"name"];
     if (self.countColor) {
         cell.countLabel.textColor = self.countColor;
@@ -75,19 +75,17 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.countLabel = UILabel.labelInit().labelTitleColor(kColorThemefff).labelFont(kFontTheme14).labelTextAlignment(NSTextAlignmentCenter);
+        self.countLabel = UILabel.labelInit().labelTitleColor(kColorTheme2a303c).labelFont(kMediumFontTheme14).labelTextAlignment(NSTextAlignmentCenter);
         [self.contentView addSubview:self.countLabel];
         
-        self.nameLabel = UILabel.labelInit().labelTitleColor(kColorThemefff).labelFont(kFontTheme14).labelTextAlignment(NSTextAlignmentCenter);
+        self.nameLabel = UILabel.labelInit().labelTitleColor(kColorTheme9399a5).labelFont(kFontTheme12).labelTextAlignment(NSTextAlignmentCenter);
         [self.contentView addSubview:self.nameLabel];
         
         [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(10);
+            make.top.left.right.mas_equalTo(0);
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.bottom.mas_equalTo(-10);
+            make.left.right.bottom.mas_equalTo(0);
         }];
     }
     return self;

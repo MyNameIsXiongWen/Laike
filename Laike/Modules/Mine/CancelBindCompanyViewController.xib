@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CancelBindCompanyViewController">
+            <connections>
+                <outlet property="cancelBtn" destination="vsH-PR-Y8X" id="fcY-fo-hir"/>
+                <outlet property="nameLabel" destination="dyb-R0-vee" id="muh-km-d27"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公司名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyb-R0-vee">
+                    <rect key="frame" x="25" y="64" width="325" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="O5y-ar-8AJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsH-PR-Y8X">
+                    <rect key="frame" x="15" y="144" width="345" height="45"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="xVt-hj-CMz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="解除绑定">
+                        <color key="titleColor" red="0.12941176469999999" green="0.6588235294" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="clickCancelBtn:" destination="-1" eventType="touchUpInside" id="jch-BL-jgW"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="vsH-PR-Y8X" secondAttribute="trailing" constant="15" id="8vc-mF-F3M"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="dyb-R0-vee" secondAttribute="trailing" constant="25" id="K8M-sp-d0Q"/>
+                <constraint firstItem="dyb-R0-vee" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="25" id="OzW-x8-LDG"/>
+                <constraint firstItem="vsH-PR-Y8X" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="btQ-Pu-dbI"/>
+                <constraint firstItem="vsH-PR-Y8X" firstAttribute="top" secondItem="dyb-R0-vee" secondAttribute="bottom" constant="20" id="phz-Is-cuQ"/>
+                <constraint firstItem="dyb-R0-vee" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="64" id="wQL-Q5-1V4"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="138.40000000000001" y="132.68365817091455"/>
+        </view>
+    </objects>
+</document>

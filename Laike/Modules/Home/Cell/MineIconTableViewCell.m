@@ -29,6 +29,15 @@
     // Configure the view for the selected state
 }
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.contentView);
+        }];
+    }
+    return self;
+}
+
 - (void)configCellData:(id)data {
     self.btnArray = (NSArray *)data;
     [self.collectionView reloadData];
@@ -56,9 +65,41 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.btnArray.count) {
-//        QHWBannerModel *model = self.btnArray[indexPath.row];
-        
+        QHWBannerModel *model = self.btnArray[indexPath.row];
+        [CTMediator.sharedInstance performTarget:self action:kFormat(@"click_%@", model.icon) params:nil];
     }
+}
+
+- (void)click_home_news {
+    
+}
+
+- (void)click_home_activity {
+    
+}
+
+- (void)click_home_live {
+    
+}
+
+- (void)click_home_screen {
+    
+}
+
+- (void)click_home_article {
+    
+}
+
+- (void)click_home_card {
+    
+}
+
+- (void)click_home_rate {
+    
+}
+
+- (void)click_home_school {
+    
 }
 
 #pragma mark ------------UI-------------
@@ -67,12 +108,13 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = 10;
         layout.minimumInteritemSpacing = CGFLOAT_MIN;
-        layout.sectionInset = UIEdgeInsetsZero;
-        layout.itemSize = CGSizeMake((kScreenW-30)/4, 65);
+        layout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
+        layout.itemSize = CGSizeMake((kScreenW-30)/4, 55);
         
-        _collectionView = [UICreateView initWithFrame:self.bounds Layout:layout Object:self];
+        _collectionView = [UICreateView initWithFrame:CGRectZero Layout:layout Object:self];
         _collectionView.scrollEnabled = NO;
         [_collectionView registerClass:BtnViewCell.class forCellWithReuseIdentifier:NSStringFromClass(BtnViewCell.class)];
+        [self.contentView addSubview:_collectionView];
     }
     return _collectionView;
 }

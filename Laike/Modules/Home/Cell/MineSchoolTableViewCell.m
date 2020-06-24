@@ -30,6 +30,13 @@
     // Configure the view for the selected state
 }
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self addSubview:self.headerView];
+    }
+    return self;
+}
+
 - (void)configCellData:(id)data {
     self.dataArray = (NSArray *)data;
     [self.collectionView reloadData];
@@ -43,6 +50,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.dataArray.count) {
         HomeSchoolSubCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(HomeSchoolSubCollectionViewCell.class) forIndexPath:indexPath];
+        [cell.bkgImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(@"")]];
+        cell.titleLabel.text = @"视频的标题，最多显量示两行就可以";
         return cell;
     }
     return UICollectionViewCell.new;
@@ -58,9 +67,10 @@
 #pragma mark ------------UI-------------
 - (QHWTableSectionHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
+        _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 55)];
         _headerView.titleLabel.text = @"Q大学";
         [_headerView.moreBtn setTitle:@"全部课程" forState:0];
+        _headerView.moreBtn.hidden = NO;
     }
     return _headerView;
 }
@@ -68,14 +78,15 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.minimumLineSpacing = 10;
-        layout.minimumInteritemSpacing = CGFLOAT_MIN;
+        layout.minimumLineSpacing = CGFLOAT_MIN;
+        layout.minimumInteritemSpacing = 10;
         layout.sectionInset = UIEdgeInsetsZero;
-        layout.itemSize = CGSizeMake((kScreenW-30)/4, 65);
+        layout.itemSize = CGSizeMake((kScreenW-40)/2, 160);
         
-        _collectionView = [UICreateView initWithFrame:self.bounds Layout:layout Object:self];
+        _collectionView = [UICreateView initWithFrame:CGRectMake(15, self.headerView.bottom, kScreenW-30, 160) Layout:layout Object:self];
         _collectionView.scrollEnabled = NO;
         [_collectionView registerClass:HomeSchoolSubCollectionViewCell.class forCellWithReuseIdentifier:NSStringFromClass(HomeSchoolSubCollectionViewCell.class)];
+        [self.contentView addSubview:_collectionView];
     }
     return _collectionView;
 }

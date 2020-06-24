@@ -157,6 +157,10 @@
 		1863950D24A1D7E1007DC26D /* MainBusinessFilterBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863950C24A1D7E1007DC26D /* MainBusinessFilterBtnView.m */; };
 		1863952724A1DC22007DC26D /* CardScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863952424A1DC22007DC26D /* CardScrollContentViewController.m */; };
 		1863952824A1DC22007DC26D /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863952624A1DC22007DC26D /* CardViewController.m */; };
+		1863953124A32A0A007DC26D /* CancelBindCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863952F24A32A0A007DC26D /* CancelBindCompanyViewController.m */; };
+		1863953224A32A0A007DC26D /* CancelBindCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1863953024A32A0A007DC26D /* CancelBindCompanyViewController.xib */; };
+		1863953624A32A27007DC26D /* BindCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863953424A32A27007DC26D /* BindCompanyViewController.m */; };
+		1863953724A32A27007DC26D /* BindCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1863953524A32A27007DC26D /* BindCompanyViewController.xib */; };
 		A0C3E6E2448D5DA157C22A78 /* libPods-Laike.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F6E7A9DF59133ED574A4FC3 /* libPods-Laike.a */; };
 /* End PBXBuildFile section */
 
@@ -483,6 +487,12 @@
 		1863952424A1DC22007DC26D /* CardScrollContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardScrollContentViewController.m; sourceTree = "<group>"; };
 		1863952524A1DC22007DC26D /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
 		1863952624A1DC22007DC26D /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
+		1863952E24A32A0A007DC26D /* CancelBindCompanyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CancelBindCompanyViewController.h; sourceTree = "<group>"; };
+		1863952F24A32A0A007DC26D /* CancelBindCompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CancelBindCompanyViewController.m; sourceTree = "<group>"; };
+		1863953024A32A0A007DC26D /* CancelBindCompanyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CancelBindCompanyViewController.xib; sourceTree = "<group>"; };
+		1863953324A32A27007DC26D /* BindCompanyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BindCompanyViewController.h; sourceTree = "<group>"; };
+		1863953424A32A27007DC26D /* BindCompanyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BindCompanyViewController.m; sourceTree = "<group>"; };
+		1863953524A32A27007DC26D /* BindCompanyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BindCompanyViewController.xib; sourceTree = "<group>"; };
 		53005641986DE0440E436C60 /* Pods-Laike.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laike.debug.xcconfig"; path = "Target Support Files/Pods-Laike/Pods-Laike.debug.xcconfig"; sourceTree = "<group>"; };
 		6F6E7A9DF59133ED574A4FC3 /* libPods-Laike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Laike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84EEBC2926E775366657C66 /* Pods-Laike.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laike.release.xcconfig"; path = "Target Support Files/Pods-Laike/Pods-Laike.release.xcconfig"; sourceTree = "<group>"; };
@@ -746,6 +756,12 @@
 				186394F124A1AF19007DC26D /* MineInfoViewController.m */,
 				186394F424A1AF9D007DC26D /* MineUpdateNameViewController.h */,
 				186394F524A1AF9D007DC26D /* MineUpdateNameViewController.m */,
+				1863953324A32A27007DC26D /* BindCompanyViewController.h */,
+				1863953424A32A27007DC26D /* BindCompanyViewController.m */,
+				1863953524A32A27007DC26D /* BindCompanyViewController.xib */,
+				1863952E24A32A0A007DC26D /* CancelBindCompanyViewController.h */,
+				1863952F24A32A0A007DC26D /* CancelBindCompanyViewController.m */,
+				1863953024A32A0A007DC26D /* CancelBindCompanyViewController.xib */,
 				186394F724A1AFD0007DC26D /* Model */,
 			);
 			path = Mine;
@@ -754,14 +770,14 @@
 		185EC87624A091BC00DCAB2C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				185EC87724A091BC00DCAB2C /* LoginImageCodeView.h */,
-				185EC87824A091BC00DCAB2C /* LoginViewController.m */,
-				185EC87924A091BC00DCAB2C /* UserModel.m */,
-				185EC87A24A091BC00DCAB2C /* LoginService.m */,
-				185EC87B24A091BC00DCAB2C /* LoginImageCodeView.m */,
 				185EC87C24A091BC00DCAB2C /* LoginViewController.h */,
+				185EC87824A091BC00DCAB2C /* LoginViewController.m */,
+				185EC87724A091BC00DCAB2C /* LoginImageCodeView.h */,
+				185EC87B24A091BC00DCAB2C /* LoginImageCodeView.m */,
 				185EC87D24A091BC00DCAB2C /* LoginService.h */,
+				185EC87A24A091BC00DCAB2C /* LoginService.m */,
 				185EC87E24A091BC00DCAB2C /* UserModel.h */,
+				185EC87924A091BC00DCAB2C /* UserModel.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -816,7 +832,6 @@
 				185EC89624A091BD00DCAB2C /* QHWTreatmentModel.h */,
 				185EC89724A091BD00DCAB2C /* QHWBannerModel.h */,
 				185EC89824A091BD00DCAB2C /* QHWShareModel.m */,
-				185EC89924A091BD00DCAB2C /* QHWSchoolModel.m */,
 				185EC89A24A091BD00DCAB2C /* QHWCommunityContentModel.h */,
 				185EC89B24A091BD00DCAB2C /* QHWItemPageModel.m */,
 				185EC89C24A091BD00DCAB2C /* QHWStudyModel.h */,
@@ -831,6 +846,7 @@
 				185EC8A524A091BD00DCAB2C /* QHWMainBusinessDetailBaseModel.h */,
 				185EC8A624A091BD00DCAB2C /* QHWImageModel.h */,
 				185EC8A724A091BD00DCAB2C /* QHWSchoolModel.h */,
+				185EC89924A091BD00DCAB2C /* QHWSchoolModel.m */,
 				185EC8A824A091BD00DCAB2C /* QHWShareModel.h */,
 				185EC8A924A091BD00DCAB2C /* QHWBannerModel.m */,
 				185EC8AA24A091BD00DCAB2C /* QHWTreatmentModel.m */,
@@ -1319,9 +1335,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1863953724A32A27007DC26D /* BindCompanyViewController.xib in Resources */,
 				185EC82524A08FD800DCAB2C /* LaunchScreen.storyboard in Resources */,
 				185EC82224A08FD800DCAB2C /* Assets.xcassets in Resources */,
 				185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */,
+				1863953224A32A0A007DC26D /* CancelBindCompanyViewController.xib in Resources */,
 				185EC97024A091BE00DCAB2C /* QHWPhotoBrowserCollectionViewCell.xib in Resources */,
 				185EC97524A091BE00DCAB2C /* QHWFiltViewLabelCell.xib in Resources */,
 			);
@@ -1453,6 +1471,7 @@
 				185EC98024A091BE00DCAB2C /* QHWLabelAlertView.m in Sources */,
 				185EC9D624A09AC900DCAB2C /* HomeTableHeaderView.m in Sources */,
 				185EC95224A091BE00DCAB2C /* NSString+Category.m in Sources */,
+				1863953124A32A0A007DC26D /* CancelBindCompanyViewController.m in Sources */,
 				185EC9E324A0A7D300DCAB2C /* MineCardTableViewCell.m in Sources */,
 				185EC98624A091BE00DCAB2C /* QHWNavgationView.m in Sources */,
 				185EC99D24A091BE00DCAB2C /* QHWBaseService.m in Sources */,
@@ -1543,6 +1562,7 @@
 				185EC95324A091BE00DCAB2C /* NSDictionary+Category.m in Sources */,
 				185EC95D24A091BE00DCAB2C /* QHWShareModel.m in Sources */,
 				185EC95024A091BE00DCAB2C /* LoginImageCodeView.m in Sources */,
+				1863953624A32A27007DC26D /* BindCompanyViewController.m in Sources */,
 				185EC98824A091BE00DCAB2C /* QHWAlertView.m in Sources */,
 				185EC98724A091BE00DCAB2C /* QHWStarRateView.m in Sources */,
 				185EC97424A091BE00DCAB2C /* QHWFilterModel.m in Sources */,
