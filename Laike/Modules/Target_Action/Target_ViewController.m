@@ -20,6 +20,8 @@
 #import "CRMViewController.h"
 #import "CardViewController.h"
 #import "QSchoolViewController.h"
+#import "LiveListViewController.h"
+#import "GalleryViewController.h"
 
 @implementation Target_ViewController
 
@@ -99,6 +101,16 @@
 
 - (void)Action_nativeQSchoolViewController:(NSDictionary *)params {
     QSchoolViewController *vc = QSchoolViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeLiveViewController:(NSDictionary *)params {
+    LiveListViewController *vc = LiveListViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeGalleryViewController:(NSDictionary *)params {
+    GalleryViewController *vc = GalleryViewController.new;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

@@ -79,11 +79,11 @@
 }
 
 - (void)click_home_live {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForLive];
 }
 
 - (void)click_home_screen {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForGallery];
 }
 
 - (void)click_home_article {

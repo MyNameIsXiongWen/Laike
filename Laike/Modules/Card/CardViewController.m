@@ -29,6 +29,7 @@
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
+    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
 }
 
 #pragma mark ------------QHWPageContentViewDelegate-------------
@@ -80,8 +81,6 @@
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;
         };
-        [self.view addSubview:_tabScrollView];
-        [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
     }
     return _tabScrollView;
 }
@@ -96,7 +95,6 @@
             [contentVCs addObject:vc];
         }
         _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];
-        [self.view addSubview:_pageContentView];
     }
     return _pageContentView;
 }

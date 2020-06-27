@@ -175,6 +175,15 @@
 		185FDF3424A73ECE0043FF36 /* QHWCommentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF2924A73ECD0043FF36 /* QHWCommentService.m */; };
 		185FDF3524A73ECE0043FF36 /* MyCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF2A24A73ECE0043FF36 /* MyCommentTableViewCell.m */; };
 		185FDF3824A73F5A0043FF36 /* MainBusinessDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF3724A73F5A0043FF36 /* MainBusinessDetailBottomView.m */; };
+		185FDF6724A749FA0043FF36 /* LiveDetailOrganizerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF5624A749F80043FF36 /* LiveDetailOrganizerTableViewCell.m */; };
+		185FDF6824A749FA0043FF36 /* LiveCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF5924A749F80043FF36 /* LiveCommentViewController.m */; };
+		185FDF6924A749FA0043FF36 /* LiveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF5C24A749F90043FF36 /* LiveService.m */; };
+		185FDF6A24A749FA0043FF36 /* LiveOrganizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF5D24A749F90043FF36 /* LiveOrganizerViewController.m */; };
+		185FDF6D24A749FA0043FF36 /* LiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF6324A749F90043FF36 /* LiveModel.m */; };
+		185FDF6E24A749FA0043FF36 /* LiveListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF6424A749FA0043FF36 /* LiveListViewController.m */; };
+		185FDF6F24A749FA0043FF36 /* LiveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF6624A749FA0043FF36 /* LiveDetailViewController.m */; };
+		185FDF7324A750850043FF36 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7224A750850043FF36 /* GalleryViewController.m */; };
+		185FDF7624A750930043FF36 /* GalleryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7524A750930043FF36 /* GalleryService.m */; };
 		186394E724A1964F007DC26D /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394E624A1964F007DC26D /* HomeModel.m */; };
 		186394EA24A1A0D5007DC26D /* QHWCellBottomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394E924A1A0D5007DC26D /* QHWCellBottomShareView.m */; };
 		186394ED24A1A60E007DC26D /* RankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394EC24A1A60E007DC26D /* RankViewController.m */; };
@@ -556,6 +565,24 @@
 		185FDF2B24A73ECE0043FF36 /* CommentReplyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentReplyListViewController.h; sourceTree = "<group>"; };
 		185FDF3624A73F5A0043FF36 /* MainBusinessDetailBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainBusinessDetailBottomView.h; sourceTree = "<group>"; };
 		185FDF3724A73F5A0043FF36 /* MainBusinessDetailBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessDetailBottomView.m; sourceTree = "<group>"; };
+		185FDF5624A749F80043FF36 /* LiveDetailOrganizerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveDetailOrganizerTableViewCell.m; sourceTree = "<group>"; };
+		185FDF5724A749F80043FF36 /* LiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveModel.h; sourceTree = "<group>"; };
+		185FDF5824A749F80043FF36 /* LiveDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveDetailViewController.h; sourceTree = "<group>"; };
+		185FDF5924A749F80043FF36 /* LiveCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveCommentViewController.m; sourceTree = "<group>"; };
+		185FDF5A24A749F90043FF36 /* LiveListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveListViewController.h; sourceTree = "<group>"; };
+		185FDF5B24A749F90043FF36 /* LiveDetailOrganizerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveDetailOrganizerTableViewCell.h; sourceTree = "<group>"; };
+		185FDF5C24A749F90043FF36 /* LiveService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveService.m; sourceTree = "<group>"; };
+		185FDF5D24A749F90043FF36 /* LiveOrganizerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveOrganizerViewController.m; sourceTree = "<group>"; };
+		185FDF5E24A749F90043FF36 /* LiveOrganizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveOrganizerViewController.h; sourceTree = "<group>"; };
+		185FDF5F24A749F90043FF36 /* LiveService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveService.h; sourceTree = "<group>"; };
+		185FDF6124A749F90043FF36 /* LiveCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveCommentViewController.h; sourceTree = "<group>"; };
+		185FDF6324A749F90043FF36 /* LiveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveModel.m; sourceTree = "<group>"; };
+		185FDF6424A749FA0043FF36 /* LiveListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveListViewController.m; sourceTree = "<group>"; };
+		185FDF6624A749FA0043FF36 /* LiveDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveDetailViewController.m; sourceTree = "<group>"; };
+		185FDF7124A750850043FF36 /* GalleryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
+		185FDF7224A750850043FF36 /* GalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
+		185FDF7424A750920043FF36 /* GalleryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GalleryService.h; sourceTree = "<group>"; };
+		185FDF7524A750930043FF36 /* GalleryService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryService.m; sourceTree = "<group>"; };
 		186394E524A1964F007DC26D /* HomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
 		186394E624A1964F007DC26D /* HomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
 		186394E824A1A0D5007DC26D /* QHWCellBottomShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWCellBottomShareView.h; sourceTree = "<group>"; };
@@ -769,10 +796,12 @@
 		185EC86224A091BC00DCAB2C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				185FDF7024A750730043FF36 /* Gallery */,
 				185FDF1724A73EC10043FF36 /* Comment */,
 				185EC86E24A091BC00DCAB2C /* CTMediatorCategories */,
 				185EC86424A091BC00DCAB2C /* Target_Action */,
 				185FDEEE24A733120043FF36 /* Community */,
+				185FDF3924A749C60043FF36 /* Live */,
 				185FDED824A7305D0043FF36 /* Activity */,
 				185FDECD24A71C910043FF36 /* QSchool */,
 				1863951C24A1DBD1007DC26D /* Card */,
@@ -1401,6 +1430,38 @@
 			path = Comment;
 			sourceTree = "<group>";
 		};
+		185FDF3924A749C60043FF36 /* Live */ = {
+			isa = PBXGroup;
+			children = (
+				185FDF5A24A749F90043FF36 /* LiveListViewController.h */,
+				185FDF6424A749FA0043FF36 /* LiveListViewController.m */,
+				185FDF5824A749F80043FF36 /* LiveDetailViewController.h */,
+				185FDF6624A749FA0043FF36 /* LiveDetailViewController.m */,
+				185FDF5E24A749F90043FF36 /* LiveOrganizerViewController.h */,
+				185FDF5D24A749F90043FF36 /* LiveOrganizerViewController.m */,
+				185FDF6124A749F90043FF36 /* LiveCommentViewController.h */,
+				185FDF5924A749F80043FF36 /* LiveCommentViewController.m */,
+				185FDF5B24A749F90043FF36 /* LiveDetailOrganizerTableViewCell.h */,
+				185FDF5624A749F80043FF36 /* LiveDetailOrganizerTableViewCell.m */,
+				185FDF5724A749F80043FF36 /* LiveModel.h */,
+				185FDF6324A749F90043FF36 /* LiveModel.m */,
+				185FDF5F24A749F90043FF36 /* LiveService.h */,
+				185FDF5C24A749F90043FF36 /* LiveService.m */,
+			);
+			path = Live;
+			sourceTree = "<group>";
+		};
+		185FDF7024A750730043FF36 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				185FDF7124A750850043FF36 /* GalleryViewController.h */,
+				185FDF7224A750850043FF36 /* GalleryViewController.m */,
+				185FDF7424A750920043FF36 /* GalleryService.h */,
+				185FDF7524A750930043FF36 /* GalleryService.m */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
 		186394F724A1AFD0007DC26D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1704,6 +1765,7 @@
 				185EC98A24A091BE00DCAB2C /* QHWImageViewCell.m in Sources */,
 				185EC99E24A091BE00DCAB2C /* QHWSystemService.m in Sources */,
 				185EC98D24A091BE00DCAB2C /* QHWSchoolCollectionViewCell.m in Sources */,
+				185FDF7624A750930043FF36 /* GalleryService.m in Sources */,
 				185EC97C24A091BE00DCAB2C /* QHWFiltHeaderView.m in Sources */,
 				185EC97724A091BE00DCAB2C /* QHWFiltViewLabelCell.m in Sources */,
 				185EC9CE24A096B600DCAB2C /* MessageViewController.m in Sources */,
@@ -1713,6 +1775,7 @@
 				185FDF0B24A733130043FF36 /* CommunityViewController.m in Sources */,
 				1863952824A1DC22007DC26D /* CardViewController.m in Sources */,
 				185EC99B24A091BE00DCAB2C /* QHWBaseScrollContentViewController.m in Sources */,
+				185FDF6A24A749FA0043FF36 /* LiveOrganizerViewController.m in Sources */,
 				185FDF3824A73F5A0043FF36 /* MainBusinessDetailBottomView.m in Sources */,
 				186394FA24A1AFE1007DC26D /* MineService.m in Sources */,
 				185EC96D24A091BE00DCAB2C /* QHWTabBarViewController.m in Sources */,
@@ -1739,6 +1802,7 @@
 				185FDF2C24A73ECE0043FF36 /* QHWCommentModel.m in Sources */,
 				185EC98624A091BE00DCAB2C /* QHWNavgationView.m in Sources */,
 				185EC99D24A091BE00DCAB2C /* QHWBaseService.m in Sources */,
+				185FDF6D24A749FA0043FF36 /* LiveModel.m in Sources */,
 				185EC9DA24A09C5000DCAB2C /* HomeService.m in Sources */,
 				185FDF1424A733130043FF36 /* CommunityTableHeaderView.m in Sources */,
 				185FDECC24A6DD7D0043FF36 /* CardService.m in Sources */,
@@ -1773,6 +1837,7 @@
 				185EC97D24A091BE00DCAB2C /* QHWPageContentView.m in Sources */,
 				185FDEEC24A7305D0043FF36 /* ActivityDetailOrganizerTableViewCell.m in Sources */,
 				185EC96024A091BE00DCAB2C /* QHWActivityModel.m in Sources */,
+				185FDF6F24A749FA0043FF36 /* LiveDetailViewController.m in Sources */,
 				185FDF3024A73ECE0043FF36 /* MyCommentModel.m in Sources */,
 				185EC99724A091BE00DCAB2C /* QHWArticleTableViewCell.m in Sources */,
 				185EC96C24A091BE00DCAB2C /* QHWTabBar.m in Sources */,
@@ -1798,6 +1863,7 @@
 				185EC96424A091BE00DCAB2C /* QHWBannerModel.m in Sources */,
 				186394F624A1AF9D007DC26D /* MineUpdateNameViewController.m in Sources */,
 				185EC94824A091BE00DCAB2C /* Target_TZImgPicker.m in Sources */,
+				185FDF6724A749FA0043FF36 /* LiveDetailOrganizerTableViewCell.m in Sources */,
 				186394EA24A1A0D5007DC26D /* QHWCellBottomShareView.m in Sources */,
 				185EC9EF24A0A89D00DCAB2C /* QHWTableSectionHeaderView.m in Sources */,
 				185EC9A924A091BE00DCAB2C /* UITextField+Category.m in Sources */,
@@ -1825,6 +1891,7 @@
 				185EC9A524A091BE00DCAB2C /* UIView+Category.m in Sources */,
 				185EC82824A08FD800DCAB2C /* main.m in Sources */,
 				185EC95724A091BE00DCAB2C /* QHWImageModel.m in Sources */,
+				185FDF6824A749FA0043FF36 /* LiveCommentViewController.m in Sources */,
 				185EC98524A091BE00DCAB2C /* QHWCycleScrollViewCell.m in Sources */,
 				185EC95824A091BE00DCAB2C /* QHWMainBusinessDetailBaseModel.m in Sources */,
 				185FDF3524A73ECE0043FF36 /* MyCommentTableViewCell.m in Sources */,
@@ -1847,9 +1914,12 @@
 				185FDF2D24A73ECE0043FF36 /* MyCommentViewController.m in Sources */,
 				185EC95024A091BE00DCAB2C /* LoginImageCodeView.m in Sources */,
 				1863953624A32A27007DC26D /* BindCompanyViewController.m in Sources */,
+				185FDF6E24A749FA0043FF36 /* LiveListViewController.m in Sources */,
 				185EC98824A091BE00DCAB2C /* QHWAlertView.m in Sources */,
 				185EC98724A091BE00DCAB2C /* QHWStarRateView.m in Sources */,
+				185FDF6924A749FA0043FF36 /* LiveService.m in Sources */,
 				185EC97424A091BE00DCAB2C /* QHWFilterModel.m in Sources */,
+				185FDF7324A750850043FF36 /* GalleryViewController.m in Sources */,
 				185FDEEA24A7305D0043FF36 /* ArtivityDetailTableHeaderView.m in Sources */,
 				185EC9CF24A096B600DCAB2C /* RelatedToMeViewController.m in Sources */,
 				185EC97A24A091BE00DCAB2C /* FilterBtnViewCellModel.m in Sources */,

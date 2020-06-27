@@ -242,7 +242,7 @@
     if (self == [super initWithFrame:frame]) {
         UIImageView *imgView = UIImageView.ivFrame(CGRectMake((self.width - 150)/2, 0, 150, 150)).ivImage(kImageMake(image));
         [self addSubview:imgView];
-        UILabel *label = UILabel.labelFrame(CGRectMake(0, 150, kScreenW, 15)).labelText(msg).labelFont(kFontTheme14).labelTitleColor(kColorTheme2a303c).labelTextAlignment(NSTextAlignmentCenter);
+        UILabel *label = UILabel.labelFrame(CGRectMake(0, 150, self.width, 15)).labelText(msg).labelFont(kFontTheme14).labelTitleColor(kColorTheme2a303c).labelTextAlignment(NSTextAlignmentCenter);
         [self addSubview:label];
         if (button) {
             button.top = label.bottom + 10;

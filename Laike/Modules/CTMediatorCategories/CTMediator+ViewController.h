@@ -33,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForQSchool;
 
+- (void)CTMediator_viewControllerForLive;
+
+- (void)CTMediator_viewControllerForGallery;
+
 @end
 
 NS_ASSUME_NONNULL_END

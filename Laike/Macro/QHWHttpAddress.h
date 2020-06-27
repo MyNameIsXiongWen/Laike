@@ -70,6 +70,9 @@ static NSString *const kActionLikeList = @"action/like/getMyList";//点赞列表
 static NSString *const kFansList = @"fans/getMyList";//粉丝列表
 
 
+static NSString *const kGalleryList = @"gallery/getList";//图库列表
+static NSString *const kGalleryFilter = @"gallery/getVariable";//图库选项
+
 static NSString *const kHomeBanner = @"advert/home/getInfo";//首页广告位
 static NSString *const kHomeWindowBanner = @"advert/window/getInfo";//首页弹框广告位
 
