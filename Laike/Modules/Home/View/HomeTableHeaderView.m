@@ -90,6 +90,10 @@
     [CTMediator.sharedInstance CTMediator_viewControllerForCRM];
 }
 
+- (void)clickMineSchoolTableViewCell {
+    [CTMediator.sharedInstance CTMediator_viewControllerForQSchool];
+}
+
 #pragma mark ------------UI-------------
 - (UIView *)bkgView {
     if (!_bkgView) {

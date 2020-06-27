@@ -246,7 +246,7 @@ static NSInteger const CodeCountTime = 60;
 
 - (UIButton *)loginBtn {
     if (!_loginBtn) {
-        _loginBtn = UIButton.btnFrame(CGRectMake(15, self.userProtocolLabel.bottom+50, kScreenW-30, 50)).btnTitle(@"注册登录").btnTitleColor(kColorThemefff).btnFont(kFontTheme18).btnCornerRadius(4).btnBkgColor(kColorThemefb4d56);
+        _loginBtn = UIButton.btnFrame(CGRectMake(15, self.userProtocolLabel.bottom+50, kScreenW-30, 50)).btnTitle(@"注册登录").btnTitleColor(kColorThemefff).btnFont(kFontTheme18).btnCornerRadius(4).btnBkgColor(kColorTheme21a8ff);
         [_loginBtn addTarget:self action:@selector(clickLoginBtn) forControlEvents:UIControlEventTouchUpInside];
         
         UILabel *label = UILabel.labelFrame(CGRectMake((kScreenW-90)/2, _loginBtn.bottom+38, 90, 20)).labelText(@"其他登录方式").labelFont(kFontTheme14).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);

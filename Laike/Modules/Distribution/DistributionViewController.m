@@ -25,9 +25,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.kNavigationView.title = @"分销";
+    self.kNavigationView.leftBtn.hidden = YES;
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
 }
 
 #pragma mark ------------QHWPageContentViewDelegate-------------
@@ -67,14 +74,13 @@
 - (QHWTabScrollView *)tabScrollView {
     if (!_tabScrollView) {
         _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom, kScreenW, 48)];
-        _tabScrollView.itemWidthType = ItemWidthTypeFixed;
-        _tabScrollView.hideIndicatorView = NO;
-        _tabScrollView.tagIndicatorColor = kColorThemea4abb3;
-        _tabScrollView.itemSelectedColor = kColorThemea4abb3;
+        _tabScrollView.itemWidthType = ItemWidthTypeFixedAdaptive;
+        _tabScrollView.itemSelectedColor = kColorThemefb4d56;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.dataArray = @[@"CRM", @"获客", @"公海"];
+        _tabScrollView.textFont = kMediumFontTheme18;
+        _tabScrollView.dataArray = @[@"海外房产", @"移民", @"留学", @"游学", @"海外医疗"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;
@@ -88,10 +94,11 @@
 - (QHWPageContentView *)pageContentView {
     if (!_pageContentView) {
         NSMutableArray *contentVCs = [NSMutableArray array];
-        NSArray *statusArray = @[@(1), @(2), @(3)];
-        for (int i=0; i<statusArray.count; i++) {
+        NSArray *identifierArray = @[@"house", @"migration", @"student", @"study", @"treatment"];
+        for (int i=0; i<identifierArray.count; i++) {
             HomeScrollContentViewController *vc = [[HomeScrollContentViewController alloc] init];
-//            vc.cardType = [statusArray[i] integerValue];
+            vc.identifier = identifierArray[i];
+            vc.pageType = 2;
             [contentVCs addObject:vc];
         }
         _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];

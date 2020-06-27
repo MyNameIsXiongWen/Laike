@@ -24,8 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *studyCityName;
 @property (nonatomic, copy) NSString *studyCountry;
 @property (nonatomic, copy) NSString *studyCountryName;
+@property (nonatomic, copy) NSString *countryName;
 ///行程天数
-@property (nonatomic, assign) NSInteger tripDays;
+@property (nonatomic, assign) NSInteger tripCycle;
 ///出发城市数据集
 @property (nonatomic, strong) NSArray *departureCityList;
 @property (nonatomic, copy) NSString *departureCityName;
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *labelList;
 
 ///服务费（单位分 ps:展示单位万）
-@property (nonatomic, assign) long price;
+@property (nonatomic, assign) long serviceFee;
 @property (nonatomic, assign) double areaMin;
 @property (nonatomic, assign) double areaMax;
 

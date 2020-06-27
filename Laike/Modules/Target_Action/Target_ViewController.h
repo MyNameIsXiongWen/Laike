@@ -16,12 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeMainBusinessDetailViewController:(NSDictionary *)params;
 
-- (void)Action_nativeActivityListViewController:(NSDictionary *)params;
+- (void)Action_nativeActivityViewController:(NSDictionary *)params;
 
 - (void)Action_nativeActivityDetailViewController:(NSDictionary *)params;
 
 - (void)Action_nativeUserDetailViewController:(NSDictionary *)params;
 
+- (void)Action_nativeCommunityViewController:(NSDictionary *)params;
 - (void)Action_nativeCommunityDetailViewController:(NSDictionary *)params;
 
 - (void)Action_nativeH5ViewController:(NSDictionary *)params;
@@ -29,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)Action_nativeCRMViewController:(NSDictionary *)params;
 
 - (void)Action_nativeCardViewController:(NSDictionary *)params;
+
+- (void)Action_nativeQSchoolViewController:(NSDictionary *)params;
 
 @end
 

@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeScrollContentViewController : QHWBaseScrollContentViewController
 
 @property (nonatomic, assign) NSInteger businessType;
+///1: 首页  2:分销
+@property (nonatomic, assign) NSInteger pageType;
 
 @end
 

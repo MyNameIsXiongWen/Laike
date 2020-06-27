@@ -9,8 +9,13 @@
 #import "CardScrollContentViewController.h"
 #import "QHWGeneralTableViewCell.h"
 #import "RelatedToMeTableViewCell.h"
+#import "QHWBaseCellProtocol.h"
+#import "QHWBaseModel.h"
+#import "CardService.h"
 
 @interface CardScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) CardService *cardService;
 
 @end
 
@@ -28,20 +33,38 @@
     [self.tableView registerClass:VisitorTableViewCell.class forCellReuseIdentifier:NSStringFromClass(VisitorTableViewCell.class)];
     [self.tableView registerClass:RelatedToMeTableViewCell.class forCellReuseIdentifier:NSStringFromClass(RelatedToMeTableViewCell.class)];
     [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
-        
+        self.cardService.itemPageModel.pagination.currentPage = 1;
+        [self getMainData];
     }];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
-        
+        self.cardService.itemPageModel.pagination.currentPage++;
+        [self getMainData];
     }];
     [self.view addSubview:self.tableView];
 }
 
+- (void)getMainData {
+    [self.cardService getCardDataRequestWithComplete:^{
+        if ([self.tableView.mj_header isRefreshing]) {
+            [self.tableView.mj_header endRefreshing];
+        }
+        if ([self.tableView.mj_footer isRefreshing]) {
+            [self.tableView.mj_footer endRefreshing];
+        }
+        [self.tableView reloadData];
+        [self.tableView showNodataView:self.cardService.tableViewDataArray.count == 0 offsetY:0 button:nil];
+        [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.cardService.itemPageModel];
+    }];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.cardService.tableViewDataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    VisitorTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(VisitorTableViewCell.class)];
+    QHWBaseModel *model = self.cardService.tableViewDataArray[indexPath.row];
+    UITableViewCell <QHWBaseCellProtocol>*cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
+    [cell configCellData:model.data];
     return cell;
 }
 
@@ -55,6 +78,14 @@
 }
 */
 
+- (CardService *)cardService {
+    if (!_cardService) {
+        _cardService = CardService.new;
+        _cardService.cardType = self.cardType;
+    }
+    return _cardService;
+}
+
 @end
 
 @implementation VisitorTableViewCell
@@ -66,13 +97,18 @@
             make.size.mas_equalTo(CGSizeMake(50, 50));
             make.centerY.equalTo(self);
         }];
+        [self.rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-20);
+            make.size.mas_equalTo(CGSizeMake(60, 60));
+            make.centerY.equalTo(self);
+        }];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.leftImageView.mas_right).offset(10);
             make.top.equalTo(self.leftImageView.mas_top).offset(5);
         }];
         [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.titleLabel.mas_left);
-            make.top.equalTo(self.titleLabel.mas_top).offset(5);
+            make.top.equalTo(self.titleLabel.mas_bottom).offset(5);
         }];
         [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-20);
@@ -86,6 +122,23 @@
     return self;
 }
 
+- (void)configCellData:(id)data {
+    CardModel *model = (CardModel *)data;
+    [self.leftImageView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+    self.titleLabel.text = model.nickname;
+    if (model.cardType == 1) {
+        self.subTitleLabel.text = model.lastTime;
+        NSString *browse = kFormat(@"访问%ld次", model.browseCount);
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:browse];
+        [attr addAttributes:@{NSForegroundColorAttributeName: kColorThemefb4d56} range:[browse rangeOfString:kFormat(@"%ld", model.browseCount)]];
+        self.detailLabel.attributedText = attr;
+    } else {
+        self.subTitleLabel.text = model.modifyTime;
+        self.rightImageView.hidden = NO;
+        [self.rightImageView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.coverPath)]];
+    }
+}
+
 #pragma mark ------------UI-------------
 - (UIImageView *)arrowImageView {
     if (!_arrowImageView) {
@@ -97,10 +150,19 @@
 
 - (UIImageView *)leftImageView {
     if (!_leftImageView) {
-        _leftImageView = UIImageView.ivInit();
+        _leftImageView = UIImageView.ivInit().ivCornerRadius(25);
         [self.contentView addSubview:_leftImageView];
     }
     return _leftImageView;
+}
+
+- (UIImageView *)rightImageView {
+    if (!_rightImageView) {
+        _rightImageView = UIImageView.ivInit();
+        _rightImageView.hidden = YES;
+        [self.contentView addSubview:_rightImageView];
+    }
+    return _rightImageView;
 }
 
 - (UILabel *)titleLabel {

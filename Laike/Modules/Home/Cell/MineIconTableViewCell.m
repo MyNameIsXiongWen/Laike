@@ -71,11 +71,11 @@
 }
 
 - (void)click_home_news {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityWithType:1];
 }
 
 - (void)click_home_activity {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForActivityList];
 }
 
 - (void)click_home_live {
@@ -87,7 +87,7 @@
 }
 
 - (void)click_home_article {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityWithType:2];
 }
 
 - (void)click_home_card {
@@ -99,7 +99,7 @@
 }
 
 - (void)click_home_school {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForQSchool];
 }
 
 #pragma mark ------------UI-------------

@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 109001:用户端-首页
  */
 - (void)getBannerRequestWithAdvertPage:(NSInteger)advertPage Complete:(void (^)(_Nullable id response))complete;
-- (void)getActivityListRequestWithMerchantId:(NSString *)merchantId IndustryId:(NSInteger)industryId RegisterStatus:(NSInteger)registerStatus Complete:(void (^)(void))complete;
+- (void)getActivityListRequestWithIndustryId:(NSInteger)industryId RegisterStatus:(NSInteger)registerStatus Complete:(void (^)(void))complete;
 - (void)getActivityDetailInfoRequestWithActivityId:(NSString *)activityId Complete:(void (^)(BOOL status))complete;
 - (void)registerActivityRequestWithActivityId:(NSString *)activityId ColumnList:(NSArray *)columnList;
 

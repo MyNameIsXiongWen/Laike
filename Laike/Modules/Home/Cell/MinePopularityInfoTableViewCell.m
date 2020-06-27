@@ -68,6 +68,7 @@
         _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
         _headerView.titleLabel.text = @"人气王";
         _headerView.moreBtn.hidden = NO;
+        _headerView.moreBtn.userInteractionEnabled = NO;
     }
     return _headerView;
 }
@@ -82,6 +83,7 @@
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _collectionView = [UICreateView initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-30, 80) Layout:layout Object:self];
+        _collectionView.userInteractionEnabled = NO;
         [_collectionView registerClass:HomePopularitySubCollectionViewCell.class forCellWithReuseIdentifier:NSStringFromClass(HomePopularitySubCollectionViewCell.class)];
         [self.shadowView addSubview:_collectionView];
     }

@@ -73,6 +73,7 @@
         _headerView.titleLabel.text = @"Q大学";
         [_headerView.moreBtn setTitle:@"全部课程" forState:0];
         _headerView.moreBtn.hidden = NO;
+        _headerView.moreBtn.userInteractionEnabled = NO;
     }
     return _headerView;
 }

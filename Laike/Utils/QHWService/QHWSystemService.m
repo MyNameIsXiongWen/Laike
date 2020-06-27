@@ -75,13 +75,12 @@
     }];
 }
 
-- (void)getActivityListRequestWithMerchantId:(NSString *)merchantId IndustryId:(NSInteger)industryId RegisterStatus:(NSInteger)registerStatus Complete:(void (^)(void))complete {
+- (void)getActivityListRequestWithIndustryId:(NSInteger)industryId RegisterStatus:(NSInteger)registerStatus Complete:(void (^)(void))complete {
     NSMutableDictionary *params = @{@"currentPage": @(self.itemPageModel.pagination.currentPage),
                                     @"pageSize": @(self.itemPageModel.pagination.pageSize)}.mutableCopy;
     if (registerStatus) {
         params[@"registerStatus"] = @(registerStatus);
     } else {
-        params[@"merchantId"] = merchantId ?: @"";
         params[@"industryId"] = @(industryId);
     }
     [QHWHttpLoading show];

@@ -17,9 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface VisitorTableViewCell : UITableViewCell
+@interface VisitorTableViewCell : UITableViewCell <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) UIImageView *leftImageView;
+@property (nonatomic, strong) UIImageView *rightImageView;
 @property (nonatomic, strong) UIImageView *arrowImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *subTitleLabel;

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIViewController *)CTMediator_viewControllerForLogin;
 
-- (void)CTMediator_viewControllerForActivityListWithMerchantId:(NSString *)merchantId;
+- (void)CTMediator_viewControllerForActivityList;
 
 - (void)CTMediator_viewControllerForActivityDetailWithActivityId:(NSString *)activityId;
 
@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForUserDetailWithUserId:(NSString *)userId UserType:(NSInteger)userType BusinessType:(NSInteger)businessType;
 
+- (void)CTMediator_viewControllerForCommunityWithType:(NSInteger)communityType;
 - (void)CTMediator_viewControllerForCommunityDetailWithCommunityId:(NSString *)communityId CommunityType:(NSInteger)communityType;
 
 - (void)CTMediator_viewControllerForH5WithUrl:(NSString *)url TitleName:(NSString *)titleName;
@@ -29,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)CTMediator_viewControllerForCRM;
 
 - (void)CTMediator_viewControllerForCard;
+
+- (void)CTMediator_viewControllerForQSchool;
 
 @end
 

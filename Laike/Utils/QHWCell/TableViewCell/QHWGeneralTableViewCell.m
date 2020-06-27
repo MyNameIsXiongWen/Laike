@@ -7,6 +7,7 @@
 //
 
 #import "QHWGeneralTableViewCell.h"
+#import "CardService.h"
 
 @interface QHWGeneralTableViewCell ()
 
@@ -68,6 +69,15 @@
     [self.titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(width+40);
     }];
+}
+
+- (void)configCellData:(id)data {
+    if ([data isKindOfClass:CardModel.class]) {
+        [self updateLeftImageViewConstraint:50];
+        CardModel *model = (CardModel *)data;
+        [self.leftImageView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+        self.titleLabel.text = model.realName;
+    }
 }
 
 #pragma mark ------------UI-------------

@@ -10,16 +10,18 @@
 
 NSString * const kCTMediatorTargetViewController = @"ViewController";
 
-NSString * const kCTMediatorActionNativeActivityListViewController = @"nativeActivityListViewController";
+NSString * const kCTMediatorActionNativeActivityViewController = @"nativeActivityViewController";
 NSString * const kCTMediatorActionNativeActivityDetailViewController = @"nativeActivityDetailViewController";
 NSString * const kCTMediatorActionNativeMainBusinessDetailViewController = @"nativeMainBusinessDetailViewController";
 NSString * const kCTMediatorActionNativeUserDetailViewController = @"nativeUserDetailViewController";
+NSString * const kCTMediatorActionNativeCommunityViewController = @"nativeCommunityViewController";
 NSString * const kCTMediatorActionNativeCommunityDetailViewController = @"nativeCommunityDetailViewController";
 
 NSString * const kCTMediatorActionNativeLoginViewController = @"nativeLoginViewController";
 NSString * const kCTMediatorActionNativeH5ViewController = @"nativeH5ViewController";
 NSString * const kCTMediatorActionNativeCRMViewController = @"nativeCRMViewController";
 NSString * const kCTMediatorActionNativeCardViewController = @"nativeCardViewController";
+NSString * const kCTMediatorActionNativeQSchoolViewController = @"nativeQSchoolViewController";
 
 @implementation CTMediator (Login)
 
@@ -43,10 +45,10 @@ NSString * const kCTMediatorActionNativeCardViewController = @"nativeCardViewCon
     shouldCacheTarget:NO];
 }
 
-- (void)CTMediator_viewControllerForActivityListWithMerchantId:(NSString *)merchantId {
+- (void)CTMediator_viewControllerForActivityList {
     [self performTarget:kCTMediatorTargetViewController
-                 action:kCTMediatorActionNativeActivityListViewController
-                 params:@{@"merchantId": merchantId}
+                 action:kCTMediatorActionNativeActivityViewController
+                 params:@{}
     shouldCacheTarget:NO];
 }
 
@@ -63,6 +65,13 @@ NSString * const kCTMediatorActionNativeCardViewController = @"nativeCardViewCon
                  params:@{@"userId": userId,
                           @"userType": @(userType),
                           @"businessType": @(businessType)}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForCommunityWithType:(NSInteger)communityType {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeCommunityViewController
+                 params:@{@"communityType": @(communityType)}
     shouldCacheTarget:NO];
 }
 
@@ -92,6 +101,13 @@ NSString * const kCTMediatorActionNativeCardViewController = @"nativeCardViewCon
 - (void)CTMediator_viewControllerForCard {
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeCardViewController
+                 params:@{}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForQSchool {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeQSchoolViewController
                  params:@{}
     shouldCacheTarget:NO];
 }

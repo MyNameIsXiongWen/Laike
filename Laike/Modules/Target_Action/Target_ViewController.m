@@ -11,13 +11,15 @@
 #import "QHWNavgationView.h"
 #import "LoginViewController.h"
 //#import "MainBusinessDetailViewController.h"
-//#import "ActivityListViewController.h"
+#import "ActivityViewController.h"
 //#import "ActivityDetailViewController.h"
 //#import "UserDetailViewController.h"
-//#import "CommunityDetailViewController.h"
+#import "CommunityViewController.h"
+#import "CommunityDetailViewController.h"
 #import "QHWH5ViewController.h"
 #import "CRMViewController.h"
 #import "CardViewController.h"
+#import "QSchoolViewController.h"
 
 @implementation Target_ViewController
 
@@ -37,11 +39,9 @@
 //    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)Action_nativeActivityListViewController:(NSDictionary *)params {
-//    NSString *merchantId = params[@"merchantId"];
-//    ActivityListViewController *vc = ActivityListViewController.new;
-//    vc.merchantId = merchantId;
-//    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+- (void)Action_nativeActivityViewController:(NSDictionary *)params {
+    ActivityViewController *vc = ActivityViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)Action_nativeActivityDetailViewController:(NSDictionary *)params {
@@ -62,13 +62,20 @@
 //    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)Action_nativeCommunityViewController:(NSDictionary *)params {
+    NSInteger communityType = [params[@"communityType"] integerValue];
+    CommunityViewController *vc = CommunityViewController.new;
+    vc.communityType = communityType;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
 - (void)Action_nativeCommunityDetailViewController:(NSDictionary *)params {
-//    NSString *communityId = params[@"communityId"];
-//    NSInteger communityType = [params[@"communityType"] integerValue];
-//    CommunityDetailViewController *vc = CommunityDetailViewController.new;
-//    vc.communityId = communityId;
-//    vc.communityType = communityType;
-//    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+    NSString *communityId = params[@"communityId"];
+    NSInteger communityType = [params[@"communityType"] integerValue];
+    CommunityDetailViewController *vc = CommunityDetailViewController.new;
+    vc.communityId = communityId;
+    vc.communityType = communityType;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)Action_nativeH5ViewController:(NSDictionary *)params {
@@ -87,6 +94,11 @@
 
 - (void)Action_nativeCardViewController:(NSDictionary *)params {
     CardViewController *vc = CardViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeQSchoolViewController:(NSDictionary *)params {
+    QSchoolViewController *vc = QSchoolViewController.new;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

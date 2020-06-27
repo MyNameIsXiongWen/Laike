@@ -7,6 +7,11 @@
 //
 
 #import "QHWMainBusinessTableViewCell.h"
+#import "QHWHouseModel.h"
+#import "QHWStudyModel.h"
+#import "QHWStudentModel.h"
+#import "QHWMigrationModel.h"
+#import "QHWTreatmentModel.h"
 
 @implementation QHWMainBusinessTableViewCell
 
@@ -51,7 +56,7 @@
         [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(22);
-            make.top.equalTo(self.houseImgView.mas_bottom).offset(20);
+            make.top.equalTo(self.houseImgView.mas_bottom).offset(19);
         }];
         [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(0);
@@ -67,14 +72,65 @@
     return self;
 }
 
-- (void)setHouseModel:(QHWHouseModel *)houseModel {
-    _houseModel = houseModel;
-    [self.houseImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(houseModel.coverPath)] placeholderImage:kPlaceHolderImage_Banner];
-    self.houseTitleLabel.text = houseModel.name;
-    self.houseSubTitleLabel.text = kFormat(@"%@-%@㎡ | 首付 %@%%", [NSString formatterWithValue:houseModel.areaMin], [NSString formatterWithValue:houseModel.areaMax], [NSString formatterWithValue:houseModel.firstPaymentRate]);
-    self.houseMoneyLabel.text = kFormat(@"¥ %@万起", [NSString formatterWithMoneyValue:houseModel.totalPrice]);
-    self.addressLabel.text = kFormat(@"%@ • %@", houseModel.countryName, houseModel.cityName);
-    [self.tagView setTagWithTagArray:houseModel.labelList];
+- (void)configCellData:(id)data {
+    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)data;
+    [self.houseImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.coverPath)] placeholderImage:kPlaceHolderImage_Banner];
+    self.houseTitleLabel.text = model.name;
+    switch (model.businessType) {
+        case 1:
+        {
+            QHWHouseModel *houseModel = (QHWHouseModel *)model;
+            self.houseSubTitleLabel.text = kFormat(@"%@-%@㎡", [NSString formatterWithValue:houseModel.areaMin], [NSString formatterWithValue:houseModel.areaMax]);
+//            self.houseSubTitleLabel.text = kFormat(@"%@-%@㎡ | 首付 %@%%", [NSString formatterWithValue:houseModel.areaMin], [NSString formatterWithValue:houseModel.areaMax], [NSString formatterWithValue:houseModel.firstPaymentRate]);
+            self.houseMoneyLabel.text = kFormat(@"¥ %@万起", [NSString formatterWithMoneyValue:houseModel.totalPrice]);
+//            self.addressLabel.text = kFormat(@"%@ • %@", houseModel.countryName, houseModel.cityName);
+            self.addressLabel.text = houseModel.countryName;
+            [self.tagView setTagWithTagArray:houseModel.labelList];
+        }
+            break;
+        case 2:
+        {
+            QHWStudyModel *studyModel = (QHWStudyModel *)model;
+            self.houseSubTitleLabel.text = kFormat(@"%ld天", studyModel.tripCycle);
+            self.houseMoneyLabel.text = kFormat(@"¥ %@万", [NSString formatterWithMoneyValue:studyModel.serviceFee]);
+            [self.tagView setTagWithTagArray:@[studyModel.countryName ?: @"", studyModel.studyCityName ?: @"", studyModel.studyThemeName ?: @""]];
+        }
+            break;
+        case 3:
+        {
+            QHWMigrationModel *migrationModel = (QHWMigrationModel *)model;
+            self.houseSubTitleLabel.text = kFormat(@"%@万", [NSString formatterWithMoneyValue:migrationModel.serviceFee]);
+            self.houseMoneyLabel.text = kFormat(@"¥ %@万", [NSString formatterWithMoneyValue:migrationModel.investmentQuota]);
+            [self.tagView setTagWithTagArray:@[migrationModel.dentityTypeName ?: @"", migrationModel.handleCycle ?: @""]];
+        }
+            break;
+        case 4:
+        {
+            QHWStudentModel *studentModel = (QHWStudentModel *)model;
+//            self.houseSubTitleLabel.text = kFormat(@"%ld天", studentModel.tripDays);
+            self.houseMoneyLabel.text = kFormat(@"¥ %@万", [NSString formatterWithMoneyValue:studentModel.serviceFee]);
+//            [self.tagView setTagWithTagArray:@[studentModel.typeName ?: @""]];
+            NSMutableArray *tempArray = NSMutableArray.array;
+            for (NSDictionary *dic in studentModel.educationList) {
+                [tempArray addObject:dic[@"name"]];
+            }
+            [self.tagView setTagWithTagArray:tempArray];
+        }
+            break;
+            
+        default:
+        {
+            QHWTreatmentModel *treatmentModel = (QHWTreatmentModel *)model;
+            self.houseSubTitleLabel.text = treatmentModel.countryName;
+            self.houseMoneyLabel.text = kFormat(@"¥ %@万", [NSString formatterWithMoneyValue:treatmentModel.serviceFee]);
+            NSMutableArray *tempArray = NSMutableArray.array;
+            for (NSDictionary *dic in treatmentModel.treatmentTypeList) {
+                [tempArray addObject:dic[@"name"]];
+            }
+            [self.tagView setTagWithTagArray:tempArray];
+        }
+            break;
+    }
 }
 
 - (UIImageView *)houseImgView {

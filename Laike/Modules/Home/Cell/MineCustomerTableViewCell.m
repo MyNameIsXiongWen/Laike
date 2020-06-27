@@ -45,6 +45,7 @@
         _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
         _headerView.titleLabel.text = @"客户管理";
         _headerView.moreBtn.hidden = NO;
+        _headerView.moreBtn.userInteractionEnabled = NO;
     }
     return _headerView;
 }
@@ -52,6 +53,7 @@
 - (UserDataView *)userDataView {
     if (!_userDataView) {
         _userDataView = [[UserDataView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-30, 45)];
+        _userDataView.userInteractionEnabled = NO;
         WEAKSELF
         _userDataView.didSelectedItemBlock = ^(NSInteger index) {
             

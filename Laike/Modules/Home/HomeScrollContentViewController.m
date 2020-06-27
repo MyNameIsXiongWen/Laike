@@ -25,9 +25,6 @@
 
 - (void)addTableView {
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kBottomBarHeight-kStatusBarHeight-32) Style:UITableViewStylePlain Object:self];
-    for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
-        [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
-    }
     [self.view addSubview:self.tableView];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
         self.service.itemPageModel.pagination.currentPage++;
@@ -37,7 +34,10 @@
 }
 
 - (void)getProductListRequest {
-    [self.service getHomePageProductListRequestWithBusinessType:self.businessType Complete:^{
+    [self.service getHomePageProductListRequestWithIdentifier:self.identifier Complete:^{
+        for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
+            [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
+        }
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [self.tableView reloadData];
@@ -106,6 +106,7 @@
 - (HomeService *)service {
     if (!_service) {
         _service = HomeService.new;
+        _service.pageType = self.pageType;
     }
     return _service;
 }

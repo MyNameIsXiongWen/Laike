@@ -364,7 +364,7 @@
 }
 
 + (NSString *)formatterWithValue:(double)value {
-    NSString *string = @"";
+    NSString *string = @"0";
     if (value > 0) {
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         formatter.roundingMode = kCFNumberFormatterRoundFloor;
@@ -377,7 +377,7 @@
 }
 
 + (NSString *)formatterWithMoneyValue:(double)value {
-    NSString *string = @"";
+    NSString *string = @"0";
     if (value > 0) {
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         formatter.roundingMode = kCFNumberFormatterRoundFloor;

@@ -12,6 +12,7 @@
 #import "HomeScrollContentViewController.h"
 #import "HomeService.h"
 #import "QHWSystemService.h"
+#import "QSchoolService.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QHWPageContentViewDelegate, HomeTableHeaderViewDelegate>
 
@@ -23,6 +24,7 @@
 @property (nonatomic, assign) BOOL canScroll;
 @property (nonatomic, strong) HomeService *homeService;
 @property (nonatomic, strong) QHWSystemService *systemService;
+@property (nonatomic, strong) QSchoolService *schoolService;
 @property (nonatomic, strong) dispatch_group_t group;
 
 @end
@@ -49,6 +51,7 @@
     [self getHomeSchoolRequest];
     dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
         self.homeService.consultantArray = self.systemService.consultantArray;
+        self.homeService.schoolArray = self.schoolService.tableViewDataArray;
         [self.homeService handleHomeData];
         self.homeTableHeaderView.height = self.homeService.headerViewTableHeight;
         self.homeTableHeaderView.service = self.homeService;
@@ -80,7 +83,7 @@
 
 - (void)getHomeSchoolRequest {
     dispatch_group_enter(self.group);
-    [self.homeService getSchoolDataWithComplete:^{
+    [self.schoolService getSchoolDataWithLearnType:1 Complete:^{
         dispatch_group_leave(self.group);
     }];
 }
@@ -147,6 +150,7 @@
         for (int i=0; i<identifierArray.count; i++) {
             HomeScrollContentViewController *vc = [[HomeScrollContentViewController alloc] init];
             vc.identifier = identifierArray[i];
+            vc.pageType = 1;
             [contentVCs addObject:vc];
         }
         _contentCell.viewControllers = contentVCs;
@@ -228,6 +232,13 @@
         _systemService = QHWSystemService.new;
     }
     return _systemService;
+}
+
+- (QSchoolService *)schoolService {
+    if (!_schoolService) {
+        _schoolService = QSchoolService.new;
+    }
+    return _schoolService;
 }
 
 - (dispatch_group_t)group {

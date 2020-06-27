@@ -50,19 +50,24 @@ static NSString *const kSystemGetMiniCode = @"product/getQrcode";//获取分享�
 
 
 
-
+#pragma mark ------------来客接口-------------
 static NSString *const kHomeReport = @"report/getHome";//主页报表
 static NSString *const kHomeConsultant = @"merchant/user/getHome";//主页顾问
-static NSString *const kSystemLike = @"/action/like/top";//点赞排行榜
+static NSString *const kSystemLike = @"action/like/top";//点赞排行榜
 static NSString *const kProductList = @"product/getList";//产品列表
 static NSString *const kSchoolList = @"learn/getList";//大学列表
+static NSString *const kDistributionList = @"distribution/release/getList";//分销列表
 
 static NSString *const kMerchantBind = @"merchant/user/bindMerchant";//绑定公司
 
 #pragma mark ------------CRM-------------
 static NSString *const kCRMFilter = @"client/getVariable";//crm筛选条件
 static NSString *const kCRMList = @"client/getList";//crm列表
+static NSString *const kClueList = @"clue/getList";//咨询列表
 
+static NSString *const kActionBrowseList = @"action/browse/getMyList";//访客列表
+static NSString *const kActionLikeList = @"action/like/getMyList";//点赞列表
+static NSString *const kFansList = @"fans/getMyList";//粉丝列表
 
 
 static NSString *const kHomeBanner = @"advert/home/getInfo";//首页广告位

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QHWGeneralTableViewCell : UITableViewCell
+@interface QHWGeneralTableViewCell : UITableViewCell <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) UIImageView *leftImageView;
 @property (nonatomic, strong) UIImageView *rightImageView;

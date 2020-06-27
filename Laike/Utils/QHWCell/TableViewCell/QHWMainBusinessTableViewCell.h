@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "QHWTagView.h"
-#import "QHWHouseModel.h"
 #import "QHWCellBottomShareView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QHWMainBusinessTableViewCell : UITableViewCell
+@interface QHWMainBusinessTableViewCell : UITableViewCell <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) UIImageView *houseImgView;
 @property (nonatomic, strong) UILabel *addressLabel;
@@ -23,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIView *line;
 @property (nonatomic, strong) QHWTagView *tagView;
 @property (nonatomic, strong) QHWCellBottomShareView *shareView;
-@property (nonatomic, strong) QHWHouseModel *houseModel;
 
 @end
 

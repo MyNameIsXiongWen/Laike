@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.kNavigationView.title = @"名片数据";
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
@@ -74,7 +75,7 @@
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.dataArray = @[@"CRM", @"获客", @"公海"];
+        _tabScrollView.dataArray = @[@"访客", @"获赞", @"粉丝"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;
