@@ -19,7 +19,7 @@
 
 - (CGFloat)cellHeight {
     if (!_cellHeight) {
-        _cellHeight = 30;
+        _cellHeight = 30+30;
         if (self.coverPathList.count == 0) {
             _cellHeight += self.titleHeight + 15 + 20;
         } else if (self.coverPathList.count < 3) {

@@ -9,6 +9,7 @@
 #import "QHWArticleTableViewCell.h"
 #import "QHWImageViewCell.h"
 #import "QHWImageModel.h"
+#import "QHWCellBottomShareView.h"
 
 #define itemWidth (kScreenW-30-10)/3
 @interface QHWArticleTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) UIImageView *headImgView;
 @property (nonatomic, strong) UICollectionView *collectionView;//图片
 @property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, strong) QHWCellBottomShareView *shareView;
 
 ///动态类型 取值范围：1-多图动态 2-少图动态 3-纯文字动态
 @property (nonatomic, assign) ArticleType articleType;
@@ -63,7 +65,8 @@
         self.headImgView.y = self.articleTitleLabel.bottom + 15;
     }
     self.articleIssuerLabel.centerY = self.headImgView.centerY;
-    self.lineView.y = self.articleIssuerLabel.bottom+15;
+    self.shareView.y = self.headImgView.bottom + 10;
+    self.lineView.y = self.shareView.bottom+8;
 }
 
 - (void)setArticleModel:(QHWCommunityArticleModel *)articleModel {
@@ -157,9 +160,17 @@
     return _articleIssuerLabel;
 }
 
+- (QHWCellBottomShareView *)shareView {
+    if (!_shareView) {
+        _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectMake(0, self.headImgView.bottom+10, kScreenW, 22)];
+        [self.contentView addSubview:_shareView];
+    }
+    return _shareView;
+}
+
 - (UIView *)lineView {
     if (!_lineView) {
-        _lineView = [UICreateView initWithFrame:CGRectMake(15, self.articleIssuerLabel.bottom+10, kScreenW-30, 0.5) BackgroundColor:kColorThemeeee CornerRadius:0];
+        _lineView = [UICreateView initWithFrame:CGRectMake(15, self.shareView.bottom+8, kScreenW-30, 0.5) BackgroundColor:kColorThemeeee CornerRadius:0];
         [self.contentView addSubview:_lineView];
     }
     return _lineView;

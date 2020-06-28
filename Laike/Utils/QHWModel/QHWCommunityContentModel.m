@@ -32,7 +32,7 @@
 
 - (CGFloat)cellHeight {
     if (!_cellHeight) {
-        _cellHeight = 60;
+        _cellHeight = 60+30;
         _cellHeight += [self.title getHeightWithFont:[UIFont systemFontOfSize:14 weight:UIFontWeightMedium] constrainedToSize:CGSizeMake(kScreenW-30, 35)]+10;
 //        if (self.content.length > 0) {
             _cellHeight += [self.content getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-30, 35)]+10;

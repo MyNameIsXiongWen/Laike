@@ -32,7 +32,14 @@
 //    [self getBannerDataRequest];
     if (self.communityType == 2) {
         [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationPublishSuccess object:nil];
+        self.kNavigationView.rightBtn.frame = CGRectMake(kScreenW-80, kStatusBarHeight+7, 70, 30);
+        self.kNavigationView.rightBtn.btnTitle(@"发布").btnFont(kFontTheme14).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(10);
+        self.kNavigationView.rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     }
+}
+
+- (void)rightNavBtnAction:(UIButton *)sender {
+    [self.navigationController pushViewController:NSClassFromString(@"CommunityPublishViewController").new animated:YES];
 }
 
 - (void)getMainData {

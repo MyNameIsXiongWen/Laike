@@ -62,7 +62,7 @@ static NSString *const kDistributionList = @"distribution/release/getList";//分
 
 static NSString *const kMerchantBind = @"merchant/user/bindMerchant";//绑定公司
 
-#pragma mark ------------CRM-------------
+
 static NSString *const kCRMFilter = @"client/getVariable";//crm筛选条件
 static NSString *const kCRMList = @"client/getList";//crm列表
 static NSString *const kClueList = @"clue/getList";//咨询列表
@@ -117,6 +117,7 @@ static NSString *const kCommunityArticleCommentAdd = @"article/comment/add";//�
 static NSString *const kCommunityArticleCommentReply = @"article/answer/add";//头条回复评论
 static NSString *const kCommunityArticleReplyList = @"article/answer/getList";//头条回复列表
 
+static NSString *const kCommunityRelateProdect = @"content/relateProduct";//关联产品
 static NSString *const kCommunityAdd = @"content/add";//圈子发布
 static NSString *const kCommunityDelete = @"content/delete";//圈子删除
 static NSString *const kCommunityContentList = @"content/getList";//圈子列表

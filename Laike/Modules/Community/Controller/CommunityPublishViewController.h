@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IndustryView : UIView
 
+@property (nonatomic, strong) UILabel *leftLabel;
 @property (nonatomic, strong) UILabel *industryLabel;
 
 @end

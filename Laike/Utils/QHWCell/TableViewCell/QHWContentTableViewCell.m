@@ -9,6 +9,7 @@
 #import "QHWContentTableViewCell.h"
 #import "QHWImageViewCell.h"
 #import "QHWImageModel.h"
+#import "QHWCellBottomShareView.h"
 
 #define itemWidth (kScreenW-30-10)/3
 @interface QHWContentTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) UIButton *commentBtn;//评论
 @property (nonatomic, strong) UIButton *praiseBtn;//点赞
 @property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, strong) QHWCellBottomShareView *shareView;
 
 @end
 
@@ -84,11 +86,16 @@
             make.centerY.equalTo(self.praiseBtn);
             make.size.equalTo(self.praiseBtn);
         }];
+        [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(22);
+            make.top.equalTo(self.timeLabel.mas_bottom).offset(10);
+        }];
         [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
             make.height.mas_equalTo(0.5);
-            make.top.equalTo(self.timeLabel.mas_bottom).offset(10);
+            make.top.equalTo(self.shareView.mas_bottom).offset(8);
         }];
         self.userInteractionEnabled = YES;
         [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGes:)]];
@@ -266,6 +273,14 @@
         [self.contentView addSubview:_praiseBtn];
     }
     return _praiseBtn;
+}
+
+- (QHWCellBottomShareView *)shareView {
+    if (!_shareView) {
+        _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];
+        [self.contentView addSubview:_shareView];
+    }
+    return _shareView;
 }
 
 - (UIView *)lineView {

@@ -188,6 +188,7 @@
 		185FDF7D24A8329D0043FF36 /* RateKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7C24A8329D0043FF36 /* RateKeyBoardView.m */; };
 		185FDF8024A83B510043FF36 /* RateMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7F24A83B510043FF36 /* RateMoneyView.m */; };
 		185FDF8324A844280043FF36 /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF8224A844280043FF36 /* RateModel.m */; };
+		185FDF8924A8A7700043FF36 /* PublishRelateProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF8824A8A7700043FF36 /* PublishRelateProductViewController.m */; };
 		186394E724A1964F007DC26D /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394E624A1964F007DC26D /* HomeModel.m */; };
 		186394EA24A1A0D5007DC26D /* QHWCellBottomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394E924A1A0D5007DC26D /* QHWCellBottomShareView.m */; };
 		186394ED24A1A60E007DC26D /* RankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394EC24A1A60E007DC26D /* RankViewController.m */; };
@@ -595,6 +596,8 @@
 		185FDF7F24A83B510043FF36 /* RateMoneyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateMoneyView.m; sourceTree = "<group>"; };
 		185FDF8124A844280043FF36 /* RateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateModel.h; sourceTree = "<group>"; };
 		185FDF8224A844280043FF36 /* RateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateModel.m; sourceTree = "<group>"; };
+		185FDF8724A8A7700043FF36 /* PublishRelateProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublishRelateProductViewController.h; sourceTree = "<group>"; };
+		185FDF8824A8A7700043FF36 /* PublishRelateProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublishRelateProductViewController.m; sourceTree = "<group>"; };
 		186394E524A1964F007DC26D /* HomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
 		186394E624A1964F007DC26D /* HomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
 		186394E824A1A0D5007DC26D /* QHWCellBottomShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWCellBottomShareView.h; sourceTree = "<group>"; };
@@ -1163,6 +1166,8 @@
 			children = (
 				185EC90D24A091BD00DCAB2C /* QHWArticleTableViewCell.h */,
 				185EC91624A091BD00DCAB2C /* QHWArticleTableViewCell.m */,
+				185EC91224A091BD00DCAB2C /* QHWContentTableViewCell.h */,
+				185EC91C24A091BD00DCAB2C /* QHWContentTableViewCell.m */,
 				185EC91524A091BD00DCAB2C /* QHWActivityTableViewCell.h */,
 				185EC90E24A091BD00DCAB2C /* QHWActivityTableViewCell.m */,
 				185EC91824A091BD00DCAB2C /* QHWShadowTableViewCell.h */,
@@ -1175,8 +1180,6 @@
 				185EC91424A091BD00DCAB2C /* QHWSchoolTableViewCell.m */,
 				185EC91324A091BD00DCAB2C /* QHWStudyTourTableViewCell.h */,
 				185EC91A24A091BD00DCAB2C /* QHWStudyTourTableViewCell.m */,
-				185EC91224A091BD00DCAB2C /* QHWContentTableViewCell.h */,
-				185EC91C24A091BD00DCAB2C /* QHWContentTableViewCell.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1375,6 +1378,8 @@
 				185FDEF324A733120043FF36 /* CommunityDetailViewController.m */,
 				185FDEF224A733120043FF36 /* CommunityPublishViewController.h */,
 				185FDEF524A733120043FF36 /* CommunityPublishViewController.m */,
+				185FDF8724A8A7700043FF36 /* PublishRelateProductViewController.h */,
+				185FDF8824A8A7700043FF36 /* PublishRelateProductViewController.m */,
 				185FDEF124A733120043FF36 /* PublishSuccessViewController.h */,
 				185FDEF624A733120043FF36 /* PublishSuccessViewController.m */,
 			);
@@ -1806,6 +1811,7 @@
 				185EC99B24A091BE00DCAB2C /* QHWBaseScrollContentViewController.m in Sources */,
 				185FDF6A24A749FA0043FF36 /* LiveOrganizerViewController.m in Sources */,
 				185FDF3824A73F5A0043FF36 /* MainBusinessDetailBottomView.m in Sources */,
+				185FDF8924A8A7700043FF36 /* PublishRelateProductViewController.m in Sources */,
 				186394FA24A1AFE1007DC26D /* MineService.m in Sources */,
 				185EC96D24A091BE00DCAB2C /* QHWTabBarViewController.m in Sources */,
 				185EC9A024A091BE00DCAB2C /* UIImageView+Category.m in Sources */,

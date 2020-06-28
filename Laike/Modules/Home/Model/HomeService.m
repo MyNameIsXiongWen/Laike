@@ -187,24 +187,24 @@
 
 - (void)handleHomeData {
     [self.tableViewDataArray removeAllObjects];
-    if (self.consultantArray.count > 0) {
-        QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MinePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];
-        [self.tableViewDataArray addObject:userDataModel];
-    }
-    
-    if (self.reportArray.count > 0) {
-        QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCardTableViewCell"
-                                                                           Height:175
-                                                                             Data:@[self.reportArray, self.homeModel.visitTip]];
-        [self.tableViewDataArray addObject:cardDataModel];
-    }
-    
-    QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCustomerTableViewCell"
-                                                                      Height:140
-                                                                        Data:@[@{@"value": @(self.homeModel.userCount), @"title": @"CRM"},
-                                                                               @{@"value": @(self.homeModel.userDays), @"title": @"获客"},
-                                                                               @{@"value": @(self.homeModel.clueCount), @"title": @"公客"}]];
-    [self.tableViewDataArray addObject:crmDataModel];
+//    if (self.consultantArray.count > 0) {
+//        QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MinePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];
+//        [self.tableViewDataArray addObject:userDataModel];
+//    }
+//    
+//    if (self.reportArray.count > 0) {
+//        QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCardTableViewCell"
+//                                                                           Height:175
+//                                                                             Data:@[self.reportArray, self.homeModel.visitTip]];
+//        [self.tableViewDataArray addObject:cardDataModel];
+//    }
+//    
+//    QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCustomerTableViewCell"
+//                                                                      Height:140
+//                                                                        Data:@[@{@"value": @(self.homeModel.userCount), @"title": @"CRM"},
+//                                                                               @{@"value": @(self.homeModel.userDays), @"title": @"获客"},
+//                                                                               @{@"value": @(self.homeModel.clueCount), @"title": @"公客"}]];
+//    [self.tableViewDataArray addObject:crmDataModel];
     
     QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineIconTableViewCell" Height:160 Data:self.iconArray];
     [self.tableViewDataArray addObject:iconDataModel];

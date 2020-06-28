@@ -12,12 +12,15 @@
 #import "CommunityPublishService.h"
 #import "QHWPhotoBrowser.h"
 #import "QHWActionSheetView.h"
+#import "PublishRelateProductViewController.h"
 
 @interface CommunityPublishViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QHWActionSheetViewDelegate>
 
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) IndustryView *industryView;
+@property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, strong) IndustryView *businessIndustryView;
+@property (nonatomic, strong) IndustryView *productIndustryView;
 @property (nonatomic, strong) CommunityPublishService *publishService;
 
 @end
@@ -27,20 +30,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.kNavigationView.title = @"海外圈";
-    [self.kNavigationView.leftBtn setTitle:@"取消" forState:0];
-    [self.kNavigationView.leftBtn setTitleColor:kColorThemea4abb3 forState:0];
-    self.kNavigationView.leftBtn.titleLabel.font = kFontTheme16;
-    [self.kNavigationView.leftBtn setImage:nil forState:0];
-    self.kNavigationView.rightBtn.frame = CGRectMake(kScreenW-80, kStatusBarHeight, 60, 44);
-    [self.kNavigationView.rightBtn setTitle:@"发布" forState:0];
-    [self.kNavigationView.rightBtn setTitleColor:kColorThemefb4d56 forState:0];
-    self.kNavigationView.rightBtn.titleLabel.font = kFontTheme16;
+    self.kNavigationView.title = @"发布海外圈";
+    self.kNavigationView.rightBtn.frame = CGRectMake(kScreenW-80, kStatusBarHeight+7, 70, 30);
+    self.kNavigationView.rightBtn.btnTitle(@"发布").btnFont(kFontTheme14).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(10);
+    self.kNavigationView.rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     [self addKeyboardNotification];
     [self.view addSubview:UIView.viewFrame(CGRectMake(15, kTopBarHeight, kScreenW-30, 0.5)).bkgColor(kColorThemeeee)];
     [self.view addSubview:self.textView];
     [self.view addSubview:self.collectionView];
-    [self.view addSubview:self.industryView];
+    [self.view addSubview:self.bottomView];
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
@@ -54,7 +52,7 @@
     }
     if (self.publishService.industryId == 0) {
         [SVProgressHUD showInfoWithStatus:@"请选择分类"];
-        [self clickIndustryView];
+        [self clickBusinessIndustryView];
         return;
     }
     [self.publishService uploadImageWithContent:self.textView.text Completed:^{
@@ -95,12 +93,18 @@
     }
 }
 
-- (void)clickIndustryView {
+- (void)clickBusinessIndustryView {
     [self.textView endEditing:YES];
     QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*(self.publishService.industryArray.count+1)+7) title:@""];
     sheetView.dataArray = self.publishService.industryArray;
     sheetView.sheetDelegate = self;
     [sheetView show];
+}
+
+- (void)clickProductIndustryView {
+    [self.textView endEditing:YES];
+    PublishRelateProductViewController *vc = PublishRelateProductViewController.new;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark ------------QHWActionSheetViewDelegate-------------
@@ -110,8 +114,8 @@
     } else {
         self.publishService.industryId = index+1;
     }
-    self.industryView.industryLabel.text = self.publishService.industryArray[index];
-    self.industryView.industryLabel.textColor = kColorTheme2a303c;
+    self.businessIndustryView.industryLabel.text = self.publishService.industryArray[index];
+    self.businessIndustryView.industryLabel.textColor = kColorTheme2a303c;
 }
 
 #pragma mark ------------键盘通知-------------
@@ -123,12 +127,12 @@
 - (void)keyboardWasShow:(NSNotification *)notification {
     CGRect frame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     [UIView animateWithDuration:0.25 animations:^{
-        self.industryView.transform = CGAffineTransformMakeTranslation(0, -frame.size.height+kBottomDangerHeight+10);
+        self.bottomView.transform = CGAffineTransformMakeTranslation(0, -frame.size.height+kBottomDangerHeight+10);
     }];
 }
 
 - (void)keyboardWillBeHiden:(NSNotification *)notification {
-     self.industryView.transform = CGAffineTransformIdentity;
+     self.bottomView.transform = CGAffineTransformIdentity;
 }
 
 - (void)dealloc {
@@ -148,7 +152,7 @@
 
 - (UITextView *)textView {
     if (!_textView) {
-        _textView = UITextView.tvFrame(CGRectMake(15, kTopBarHeight+15, kScreenW-30, 250)).tvFont(kFontTheme16).tvPlaceholder(@"在此输入正文");
+        _textView = UITextView.tvFrame(CGRectMake(15, kTopBarHeight+15, kScreenW-30, 250)).tvFont(kFontTheme16).tvPlaceholder(@"你想对去海外用户说点什么…");
         [self.view addSubview:_textView];
     }
     return _textView;
@@ -168,13 +172,35 @@
     return _collectionView;
 }
 
-- (IndustryView *)industryView {
-    if (!_industryView) {
-        _industryView = [[IndustryView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-50, kScreenW, 40)];
-        _industryView.userInteractionEnabled = YES;
-        [_industryView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickIndustryView)]];
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = UIView.viewFrame(CGRectMake(0, kScreenH-kBottomDangerHeight-90, kScreenW, 80));
+        [_bottomView addSubview:self.businessIndustryView];
+        [_bottomView addSubview:self.productIndustryView];
     }
-    return _industryView;
+    return _bottomView;
+}
+
+- (IndustryView *)businessIndustryView {
+    if (!_businessIndustryView) {
+        _businessIndustryView = [[IndustryView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 40)];
+        _businessIndustryView.leftLabel.text = @"关联业务";
+        _businessIndustryView.industryLabel.text = @"请选择预约业务";
+        _businessIndustryView.userInteractionEnabled = YES;
+        [_businessIndustryView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBusinessIndustryView)]];
+    }
+    return _businessIndustryView;
+}
+
+- (IndustryView *)productIndustryView {
+    if (!_productIndustryView) {
+        _productIndustryView = [[IndustryView alloc] initWithFrame:CGRectMake(0, self.businessIndustryView.bottom, kScreenW, 40)];
+        _productIndustryView.leftLabel.text = @"关联产品";
+        _productIndustryView.industryLabel.text = @"请选择关联产品";
+        _productIndustryView.userInteractionEnabled = YES;
+        [_productIndustryView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickProductIndustryView)]];
+    }
+    return _productIndustryView;
 }
 
 - (CommunityPublishService *)publishService {
@@ -191,9 +217,9 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.backgroundColor = kColorThemefff;
-        UILabel *leftLabel = UILabel.labelFrame(CGRectMake(15, 0, 100, 40)).labelFont(kFontTheme14).labelTitleColor(kColorTheme2a303c).labelText(@"发布到");
-        [self addSubview:leftLabel];
-        self.industryLabel = UILabel.labelFrame(CGRectMake(leftLabel.right, 0, kScreenW-160, 40)).labelFont(kFontTheme14).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentRight).labelText(@"选择分类");
+        self.leftLabel = UILabel.labelFrame(CGRectMake(15, 0, 100, 40)).labelFont(kFontTheme16).labelTitleColor(kColorTheme000);
+        [self addSubview:self.leftLabel];
+        self.industryLabel = UILabel.labelFrame(CGRectMake(self.leftLabel.right, 0, kScreenW-160, 40)).labelFont(kFontTheme14).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentRight);
         [self addSubview:self.industryLabel];
         UIImageView *arrowImgView = UIImageView.ivFrame(CGRectMake(kScreenW-22, 13, 7, 14)).ivImage(kImageMake(@"arrow_right"));
         [self addSubview:arrowImgView];
