@@ -95,7 +95,7 @@
 }
 
 - (void)click_home_rate {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForRate];
 }
 
 - (void)click_home_school {

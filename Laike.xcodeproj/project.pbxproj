@@ -184,6 +184,10 @@
 		185FDF6F24A749FA0043FF36 /* LiveDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF6624A749FA0043FF36 /* LiveDetailViewController.m */; };
 		185FDF7324A750850043FF36 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7224A750850043FF36 /* GalleryViewController.m */; };
 		185FDF7624A750930043FF36 /* GalleryService.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7524A750930043FF36 /* GalleryService.m */; };
+		185FDF7A24A832700043FF36 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7924A832700043FF36 /* RateViewController.m */; };
+		185FDF7D24A8329D0043FF36 /* RateKeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7C24A8329D0043FF36 /* RateKeyBoardView.m */; };
+		185FDF8024A83B510043FF36 /* RateMoneyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF7F24A83B510043FF36 /* RateMoneyView.m */; };
+		185FDF8324A844280043FF36 /* RateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF8224A844280043FF36 /* RateModel.m */; };
 		186394E724A1964F007DC26D /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394E624A1964F007DC26D /* HomeModel.m */; };
 		186394EA24A1A0D5007DC26D /* QHWCellBottomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394E924A1A0D5007DC26D /* QHWCellBottomShareView.m */; };
 		186394ED24A1A60E007DC26D /* RankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186394EC24A1A60E007DC26D /* RankViewController.m */; };
@@ -583,6 +587,14 @@
 		185FDF7224A750850043FF36 /* GalleryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		185FDF7424A750920043FF36 /* GalleryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GalleryService.h; sourceTree = "<group>"; };
 		185FDF7524A750930043FF36 /* GalleryService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryService.m; sourceTree = "<group>"; };
+		185FDF7824A832700043FF36 /* RateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateViewController.h; sourceTree = "<group>"; };
+		185FDF7924A832700043FF36 /* RateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateViewController.m; sourceTree = "<group>"; };
+		185FDF7B24A8329D0043FF36 /* RateKeyBoardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateKeyBoardView.h; sourceTree = "<group>"; };
+		185FDF7C24A8329D0043FF36 /* RateKeyBoardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateKeyBoardView.m; sourceTree = "<group>"; };
+		185FDF7E24A83B510043FF36 /* RateMoneyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateMoneyView.h; sourceTree = "<group>"; };
+		185FDF7F24A83B510043FF36 /* RateMoneyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateMoneyView.m; sourceTree = "<group>"; };
+		185FDF8124A844280043FF36 /* RateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateModel.h; sourceTree = "<group>"; };
+		185FDF8224A844280043FF36 /* RateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateModel.m; sourceTree = "<group>"; };
 		186394E524A1964F007DC26D /* HomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
 		186394E624A1964F007DC26D /* HomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
 		186394E824A1A0D5007DC26D /* QHWCellBottomShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWCellBottomShareView.h; sourceTree = "<group>"; };
@@ -796,6 +808,7 @@
 		185EC86224A091BC00DCAB2C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				185FDF7724A82D8D0043FF36 /* Rate */,
 				185FDF7024A750730043FF36 /* Gallery */,
 				185FDF1724A73EC10043FF36 /* Comment */,
 				185EC86E24A091BC00DCAB2C /* CTMediatorCategories */,
@@ -1462,6 +1475,21 @@
 			path = Gallery;
 			sourceTree = "<group>";
 		};
+		185FDF7724A82D8D0043FF36 /* Rate */ = {
+			isa = PBXGroup;
+			children = (
+				185FDF7824A832700043FF36 /* RateViewController.h */,
+				185FDF7924A832700043FF36 /* RateViewController.m */,
+				185FDF7E24A83B510043FF36 /* RateMoneyView.h */,
+				185FDF7F24A83B510043FF36 /* RateMoneyView.m */,
+				185FDF7B24A8329D0043FF36 /* RateKeyBoardView.h */,
+				185FDF7C24A8329D0043FF36 /* RateKeyBoardView.m */,
+				185FDF8124A844280043FF36 /* RateModel.h */,
+				185FDF8224A844280043FF36 /* RateModel.m */,
+			);
+			path = Rate;
+			sourceTree = "<group>";
+		};
 		186394F724A1AFD0007DC26D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1746,6 +1774,7 @@
 				1863950D24A1D7E1007DC26D /* MainBusinessFilterBtnView.m in Sources */,
 				185EC95A24A091BE00DCAB2C /* QHWStudentModel.m in Sources */,
 				185EC95124A091BE00DCAB2C /* NSArray+Category.m in Sources */,
+				185FDF7A24A832700043FF36 /* RateViewController.m in Sources */,
 				185EC9A724A091BE00DCAB2C /* UILabel+Category.m in Sources */,
 				185FDEE924A7305D0043FF36 /* ActivityDetailViewController.m in Sources */,
 				185FDEEB24A7305D0043FF36 /* ActivityListViewController.m in Sources */,
@@ -1835,6 +1864,7 @@
 				185EC99F24A091BE00DCAB2C /* UICollectionView+HeaderView.m in Sources */,
 				185FDF3124A73ECE0043FF36 /* CommentKeyboardAccessoryView.m in Sources */,
 				185EC97D24A091BE00DCAB2C /* QHWPageContentView.m in Sources */,
+				185FDF7D24A8329D0043FF36 /* RateKeyBoardView.m in Sources */,
 				185FDEEC24A7305D0043FF36 /* ActivityDetailOrganizerTableViewCell.m in Sources */,
 				185EC96024A091BE00DCAB2C /* QHWActivityModel.m in Sources */,
 				185FDF6F24A749FA0043FF36 /* LiveDetailViewController.m in Sources */,
@@ -1864,6 +1894,7 @@
 				186394F624A1AF9D007DC26D /* MineUpdateNameViewController.m in Sources */,
 				185EC94824A091BE00DCAB2C /* Target_TZImgPicker.m in Sources */,
 				185FDF6724A749FA0043FF36 /* LiveDetailOrganizerTableViewCell.m in Sources */,
+				185FDF8024A83B510043FF36 /* RateMoneyView.m in Sources */,
 				186394EA24A1A0D5007DC26D /* QHWCellBottomShareView.m in Sources */,
 				185EC9EF24A0A89D00DCAB2C /* QHWTableSectionHeaderView.m in Sources */,
 				185EC9A924A091BE00DCAB2C /* UITextField+Category.m in Sources */,
@@ -1911,6 +1942,7 @@
 				185EC96124A091BE00DCAB2C /* QHWConsultantModel.m in Sources */,
 				185EC95324A091BE00DCAB2C /* NSDictionary+Category.m in Sources */,
 				185EC95D24A091BE00DCAB2C /* QHWShareModel.m in Sources */,
+				185FDF8324A844280043FF36 /* RateModel.m in Sources */,
 				185FDF2D24A73ECE0043FF36 /* MyCommentViewController.m in Sources */,
 				185EC95024A091BE00DCAB2C /* LoginImageCodeView.m in Sources */,
 				1863953624A32A27007DC26D /* BindCompanyViewController.m in Sources */,

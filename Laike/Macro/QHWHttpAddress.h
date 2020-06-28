@@ -19,6 +19,8 @@ static NSString *const kPrivacyProtocol = @"http://file.qhiwi.com/agreement/priv
 static NSString *const kExpertCertification = @"http://file.qhiwi.com/manager_intro.png";
 static NSString *const kAgencyCertification = @"http://file.qhiwi.com/merchant_intro.png";
 static NSString *const kMyCustomizeUrl = @"https://m.qhiwi.com/site/custom/#/?channel=1&pass=4";
+static NSString *const kRateUrl = @"https://sapi.k780.com/?app=finance.rate&scur=CNY&tcur=USD,EUR,GBP,HKD,THB,JPY,AED,TRY,AUD,CAD&appkey=49989&sign=697bedf526e0b062a8c70ae8e0dd3271";
+
 
 #pragma mark ------------用户模块-------------
 static NSString *const kUserLogin = @"merchant/login/login";//登录注册

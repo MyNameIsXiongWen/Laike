@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeGalleryViewController:(NSDictionary *)params;
 
+- (void)Action_nativeRateViewController:(NSDictionary *)params;
+
 @end
 
 NS_ASSUME_NONNULL_END

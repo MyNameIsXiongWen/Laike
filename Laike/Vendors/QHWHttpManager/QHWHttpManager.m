@@ -60,7 +60,7 @@
 - (void)configSuccessResponseResult:(id  _Nullable)responseObject url:(NSString *)url success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     [QHWHttpLoading dismiss];
     if (([[responseObject allKeys] containsObject:@"code"]
-        && [responseObject[@"code"] integerValue] == 200) || ([url isEqualToString:kSystemSendCode] && [responseObject[@"code"] integerValue] != 201)) {
+        && [responseObject[@"code"] integerValue] == 200) || ([url isEqualToString:kSystemSendCode] && [responseObject[@"code"] integerValue] != 201) || ([url isEqualToString:kRateUrl] && ([responseObject[@"success"] integerValue] == 1))) {
         if (success) {
             success(responseObject);
         }

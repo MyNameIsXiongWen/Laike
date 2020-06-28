@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForGallery;
 
+- (void)CTMediator_viewControllerForRate;
+
 @end
 
 NS_ASSUME_NONNULL_END

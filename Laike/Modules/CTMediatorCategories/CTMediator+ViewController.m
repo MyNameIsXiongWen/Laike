@@ -24,6 +24,7 @@ NSString * const kCTMediatorActionNativeCardViewController = @"nativeCardViewCon
 NSString * const kCTMediatorActionNativeQSchoolViewController = @"nativeQSchoolViewController";
 NSString * const kCTMediatorActionNativeLiveViewController = @"nativeLiveViewController";
 NSString * const kCTMediatorActionNativeGalleryViewController = @"nativeGalleryViewController";
+NSString * const kCTMediatorActionNativeRateViewController = @"nativeRateViewController";
 
 @implementation CTMediator (Login)
 
@@ -124,6 +125,13 @@ NSString * const kCTMediatorActionNativeGalleryViewController = @"nativeGalleryV
 - (void)CTMediator_viewControllerForGallery {
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeGalleryViewController
+                 params:@{}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForRate {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeRateViewController
                  params:@{}
     shouldCacheTarget:NO];
 }

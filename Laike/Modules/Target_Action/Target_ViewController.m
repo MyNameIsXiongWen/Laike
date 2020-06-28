@@ -22,6 +22,7 @@
 #import "QSchoolViewController.h"
 #import "LiveListViewController.h"
 #import "GalleryViewController.h"
+#import "RateViewController.h"
 
 @implementation Target_ViewController
 
@@ -111,6 +112,11 @@
 
 - (void)Action_nativeGalleryViewController:(NSDictionary *)params {
     GalleryViewController *vc = GalleryViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeRateViewController:(NSDictionary *)params {
+    RateViewController *vc = RateViewController.new;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

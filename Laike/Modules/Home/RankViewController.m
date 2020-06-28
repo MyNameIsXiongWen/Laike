@@ -80,7 +80,7 @@
 - (QHWPageContentView *)pageContentView {
     if (!_pageContentView) {
         NSMutableArray *contentVCs = [NSMutableArray array];
-        NSArray *statusArray = @[@(2), @(1)];
+        NSArray *statusArray = @[@(1), @(2)];
         for (int i=0; i<statusArray.count; i++) {
             RankScrollContentViewController *vc = [[RankScrollContentViewController alloc] init];
             vc.rankType = [statusArray[i] integerValue];

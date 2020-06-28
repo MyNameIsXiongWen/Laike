@@ -77,6 +77,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row != self.selectedIndex) {
         self.selectedIndex = indexPath.row;
+        self.galleryService.itemPageModel.pagination.currentPage = 1;
         [self getMainData];
         [tableView reloadData];
     }
