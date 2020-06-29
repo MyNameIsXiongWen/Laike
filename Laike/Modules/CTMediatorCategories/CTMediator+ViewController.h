@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForQSchool;
 
+- (void)CTMediator_viewControllerForQSchoolDetailWithSchoolId:(NSString *)schoolId;
+
 - (void)CTMediator_viewControllerForLive;
 
 - (void)CTMediator_viewControllerForGallery;

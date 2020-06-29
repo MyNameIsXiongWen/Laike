@@ -9,6 +9,7 @@
 #import "MineSchoolTableViewCell.h"
 #import "QHWTableSectionHeaderView.h"
 #import "QHWSchoolModel.h"
+#import "CTMediator+ViewController.h"
 
 @interface MineSchoolTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
 
@@ -61,8 +62,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.dataArray.count) {
-//        QHWBannerModel *model = self.btnArray[indexPath.row];
-        
+        QHWSchoolModel *model = (QHWSchoolModel *)self.dataArray[indexPath.row];
+        [CTMediator.sharedInstance CTMediator_viewControllerForQSchoolDetailWithSchoolId:model.id];
     }
 }
 

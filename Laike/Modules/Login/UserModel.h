@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *companyName;
 @property (nonatomic, copy) NSString *hideNumber;
 
+@property (nonatomic, assign) NSInteger bindStatus;
 ///1-账户存在登录；2-新账户注册登录
 @property (nonatomic, assign) NSInteger loginStatus;
 ///用户性别（默认为0）：0-无；1-男；2-女

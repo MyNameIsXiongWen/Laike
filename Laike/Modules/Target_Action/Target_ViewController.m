@@ -23,6 +23,7 @@
 #import "LiveListViewController.h"
 #import "GalleryViewController.h"
 #import "RateViewController.h"
+#import "QSchoolDetailViewController.h"
 
 @implementation Target_ViewController
 
@@ -102,6 +103,13 @@
 
 - (void)Action_nativeQSchoolViewController:(NSDictionary *)params {
     QSchoolViewController *vc = QSchoolViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeQSchoolDetailViewController:(NSDictionary *)params {
+    NSString *schoolId = params[@"schoolId"];
+    QSchoolDetailViewController *vc = QSchoolDetailViewController.new;
+    vc.schoolId = schoolId;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
