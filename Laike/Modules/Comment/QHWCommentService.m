@@ -76,6 +76,12 @@
             businessIdKey = @"businessId";
             businessIdValue = self.communityId;
             break;
+                
+        case CommentTypeQSchoolAdd:
+            urlStr = kSchoolCommentAdd;
+            businessIdKey = @"id";
+            businessIdValue = self.communityId;
+            break;
             
         default:
             break;
@@ -153,6 +159,22 @@
                                                                           @"businessType": @"103001",
                                                                           @"currentPage": @(self.itemPageModel.pagination.currentPage),
                                                                           @"pageSize": @(self.itemPageModel.pagination.pageSize)} success:^(id responseObject) {
+        self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
+        if (self.itemPageModel.pagination.currentPage == 1) {
+            [self.dataArray removeAllObjects];
+        }
+        [self.dataArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:QHWCommentModel.class json:self.itemPageModel.list]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
+- (void)getQSchoolCommentListRequestComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kSchoolCommentList parameters:@{@"id": self.communityId,
+                                                                            @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                                                                            @"pageSize": @(self.itemPageModel.pagination.pageSize)} success:^(id responseObject) {
         self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
         if (self.itemPageModel.pagination.currentPage == 1) {
             [self.dataArray removeAllObjects];

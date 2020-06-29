@@ -18,7 +18,8 @@ typedef enum : NSUInteger {
     CommentTypeArticleReply,    
     CommentTypeContentAdd,
     CommentTypeContentReply,
-    CommentTypeLiveAdd
+    CommentTypeLiveAdd,
+    CommentTypeQSchoolAdd
 } CommentType;
 
 @interface QHWCommentService : QHWBaseService
@@ -44,6 +45,8 @@ typedef enum : NSUInteger {
 - (void)getMyCommentListRequestComplete:(void (^)(void))complete;
 
 - (void)getLiveCommentListRequestComplete:(void (^)(void))complete;
+
+- (void)getQSchoolCommentListRequestComplete:(void (^)(void))complete;
 
 - (void)showCommentKeyBoardWithCommentName:(NSString *)commentName;
 

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) UILabel *commentLbl;
 @property (nonatomic, strong, readonly) UIButton *praiseButton;
+@property (nonatomic, strong, readonly) UIButton *commentButton;
 @property (nonatomic, copy) void (^ bottomViewCommentBlock)(void);
 @property (nonatomic, copy) void (^ bottomViewPraiseBlock)(void);
 

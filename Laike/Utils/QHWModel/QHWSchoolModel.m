@@ -10,4 +10,13 @@
 
 @implementation QHWSchoolModel
 
+- (NSString *)videoPath {
+    if (!_videoPath) {
+        if (self.filePathList.count > 0) {
+            _videoPath = kFilePath(self.filePathList.firstObject[@"path"]);
+        }
+    }
+    return _videoPath;
+}
+
 @end

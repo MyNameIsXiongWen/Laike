@@ -175,8 +175,8 @@
 
 - (void)setCommentModel:(QHWCommentModel *)commentModel {
     _commentModel = commentModel;
-    [self.avtarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(commentModel.subjectHead)]];
-    self.nameLabel.text = commentModel.subjectName;
+    [self.avtarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(commentModel.subjectHead ? : commentModel.headPath)]];
+    self.nameLabel.text = commentModel.subjectName ?: commentModel.releaseName;
     self.contentLabel.text = commentModel.content;
     self.timeLabel.text = commentModel.createTime;
 }

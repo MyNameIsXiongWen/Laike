@@ -25,8 +25,8 @@ static NSString *const kRateUrl = @"https://sapi.k780.com/?app=finance.rate&scur
 #pragma mark ------------用户模块-------------
 static NSString *const kUserLogin = @"merchant/login/login";//登录注册
 static NSString *const kMineMainPage = @"user/getTaInfo";//我的主页
-static NSString *const kMineInfo = @"user/getInfo";//我的信息
-static NSString *const kMineEdit = @"user/edit";//编辑信息
+static NSString *const kMineInfo = @"merchant/user/getInfo";//我的信息
+static NSString *const kMineEdit = @"merchant/user/edit";//编辑信息
 static NSString *const kUserConsultantInfo = @"user/userAndConsultTaInfo1";//个人/顾问主页
 static NSString *const kMerchantInfo = @"merchant/getInfo";//商户主页
 static NSString *const kConsultantList = @"merchant/user/getList";//顾问列表
@@ -57,8 +57,12 @@ static NSString *const kHomeReport = @"report/getHome";//主页报表
 static NSString *const kHomeConsultant = @"merchant/user/getHome";//主页顾问
 static NSString *const kSystemLike = @"action/like/top";//点赞排行榜
 static NSString *const kProductList = @"product/getList";//产品列表
-static NSString *const kSchoolList = @"learn/getList";//大学列表
 static NSString *const kDistributionList = @"distribution/release/getList";//分销列表
+
+static NSString *const kSchoolList = @"learn/getList";//Q大学列表
+static NSString *const kSchoolInfo = @"learn/getInfo";//Q大学详情
+static NSString *const kSchoolCommentList = @"learn/comment/getList";//Q大学评论列表
+static NSString *const kSchoolCommentAdd = @"learn/comment/add";//Q大学添加评论
 
 static NSString *const kMerchantBind = @"merchant/user/bindMerchant";//绑定公司
 

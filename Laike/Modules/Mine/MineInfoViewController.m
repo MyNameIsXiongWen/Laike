@@ -31,7 +31,6 @@
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"个人信息";
     self.kNavigationView.leftBtn.hidden = YES;
-    [self initialData];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.logoutBtn];
 }
@@ -39,6 +38,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)getMainData {
+    [self.service getMineInfoRequestComplete:^{
+        [self initialData];
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)initialData {

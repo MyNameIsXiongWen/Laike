@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185A62F524A988DD00E7E75D /* QSchoolCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */; };
+		185A62F624A988DD00E7E75D /* QSchoolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */; };
+		185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F824A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m */; };
+		185A62FC24A98F2F00E7E75D /* QSchoolOrganizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FA24A98F2F00E7E75D /* QSchoolOrganizerViewController.m */; };
+		185A630124A9922800E7E75D /* RichTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FD24A9922800E7E75D /* RichTextTableViewCell.m */; };
+		185A630224A9922800E7E75D /* RichTextWithTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */; };
 		185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81624A08FD700DCAB2C /* AppDelegate.m */; };
 		185EC81D24A08FD700DCAB2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81C24A08FD700DCAB2C /* ViewController.m */; };
 		185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185EC81E24A08FD700DCAB2C /* Main.storyboard */; };
@@ -229,6 +235,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolCommentViewController.m; sourceTree = "<group>"; };
+		185A62F224A988DD00E7E75D /* QSchoolCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSchoolCommentViewController.h; sourceTree = "<group>"; };
+		185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolDetailViewController.m; sourceTree = "<group>"; };
+		185A62F424A988DD00E7E75D /* QSchoolDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSchoolDetailViewController.h; sourceTree = "<group>"; };
+		185A62F724A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSchoolDetailOrganizerTableViewCell.h; sourceTree = "<group>"; };
+		185A62F824A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSchoolDetailOrganizerTableViewCell.m; sourceTree = "<group>"; };
+		185A62FA24A98F2F00E7E75D /* QSchoolOrganizerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolOrganizerViewController.m; sourceTree = "<group>"; };
+		185A62FB24A98F2F00E7E75D /* QSchoolOrganizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSchoolOrganizerViewController.h; sourceTree = "<group>"; };
+		185A62FD24A9922800E7E75D /* RichTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextTableViewCell.m; sourceTree = "<group>"; };
+		185A62FE24A9922800E7E75D /* RichTextWithTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextWithTitleTableViewCell.h; sourceTree = "<group>"; };
+		185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextWithTitleTableViewCell.m; sourceTree = "<group>"; };
+		185A630024A9922800E7E75D /* RichTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextTableViewCell.h; sourceTree = "<group>"; };
 		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -811,11 +829,11 @@
 		185EC86224A091BC00DCAB2C /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				185EC86E24A091BC00DCAB2C /* CTMediatorCategories */,
+				185EC86424A091BC00DCAB2C /* Target_Action */,
 				185FDF7724A82D8D0043FF36 /* Rate */,
 				185FDF7024A750730043FF36 /* Gallery */,
 				185FDF1724A73EC10043FF36 /* Comment */,
-				185EC86E24A091BC00DCAB2C /* CTMediatorCategories */,
-				185EC86424A091BC00DCAB2C /* Target_Action */,
 				185FDEEE24A733120043FF36 /* Community */,
 				185FDF3924A749C60043FF36 /* Live */,
 				185FDED824A7305D0043FF36 /* Activity */,
@@ -949,12 +967,12 @@
 			isa = PBXGroup;
 			children = (
 				185EC88124A091BD00DCAB2C /* NSString+Category.h */,
-				185EC88224A091BD00DCAB2C /* NSArray+Category.m */,
-				185EC88324A091BD00DCAB2C /* NSObject+Category.h */,
-				185EC88424A091BD00DCAB2C /* NSDictionary+Category.h */,
 				185EC88524A091BD00DCAB2C /* NSString+Category.m */,
 				185EC88624A091BD00DCAB2C /* NSArray+Category.h */,
+				185EC88224A091BD00DCAB2C /* NSArray+Category.m */,
+				185EC88424A091BD00DCAB2C /* NSDictionary+Category.h */,
 				185EC88724A091BD00DCAB2C /* NSDictionary+Category.m */,
+				185EC88324A091BD00DCAB2C /* NSObject+Category.h */,
 				185EC88824A091BD00DCAB2C /* NSObject+Category.m */,
 			);
 			path = NSCategory;
@@ -1321,6 +1339,18 @@
 				185FDED224A71CC40043FF36 /* QSchoolViewController.m */,
 				185FDECE24A71CB60043FF36 /* QSchoolScrollContentViewController.h */,
 				185FDECF24A71CB60043FF36 /* QSchoolScrollContentViewController.m */,
+				185A62F424A988DD00E7E75D /* QSchoolDetailViewController.h */,
+				185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */,
+				185A62FB24A98F2F00E7E75D /* QSchoolOrganizerViewController.h */,
+				185A62FA24A98F2F00E7E75D /* QSchoolOrganizerViewController.m */,
+				185A62F224A988DD00E7E75D /* QSchoolCommentViewController.h */,
+				185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */,
+				185A62F724A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.h */,
+				185A62F824A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m */,
+				185A630024A9922800E7E75D /* RichTextTableViewCell.h */,
+				185A62FD24A9922800E7E75D /* RichTextTableViewCell.m */,
+				185A62FE24A9922800E7E75D /* RichTextWithTitleTableViewCell.h */,
+				185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */,
 				185FDED424A71E4D0043FF36 /* Model */,
 			);
 			path = QSchool;
@@ -1776,6 +1806,7 @@
 				185EC99424A091BE00DCAB2C /* QHWGeneralTableViewCell.m in Sources */,
 				185EC98424A091BE00DCAB2C /* QHWCycleScrollView.m in Sources */,
 				185EC99024A091BE00DCAB2C /* QHWHouseCollectionViewCell.m in Sources */,
+				185A62F524A988DD00E7E75D /* QSchoolCommentViewController.m in Sources */,
 				1863950D24A1D7E1007DC26D /* MainBusinessFilterBtnView.m in Sources */,
 				185EC95A24A091BE00DCAB2C /* QHWStudentModel.m in Sources */,
 				185EC95124A091BE00DCAB2C /* NSArray+Category.m in Sources */,
@@ -1835,6 +1866,7 @@
 				185FDEE724A7305D0043FF36 /* ActivityScrollContentViewController.m in Sources */,
 				185EC9E324A0A7D300DCAB2C /* MineCardTableViewCell.m in Sources */,
 				185FDF2C24A73ECE0043FF36 /* QHWCommentModel.m in Sources */,
+				185A630124A9922800E7E75D /* RichTextTableViewCell.m in Sources */,
 				185EC98624A091BE00DCAB2C /* QHWNavgationView.m in Sources */,
 				185EC99D24A091BE00DCAB2C /* QHWBaseService.m in Sources */,
 				185FDF6D24A749FA0043FF36 /* LiveModel.m in Sources */,
@@ -1883,6 +1915,7 @@
 				185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */,
 				185EC95B24A091BE00DCAB2C /* QHWTagListModel.m in Sources */,
 				185EC97B24A091BE00DCAB2C /* QHWFilterView.m in Sources */,
+				185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */,
 				185EC9AE24A091DA00DCAB2C /* AppGuideViewController.m in Sources */,
 				185EC9CB24A096B600DCAB2C /* RelatedToMeTableViewCell.m in Sources */,
 				185FDF1124A733130043FF36 /* CommunityDetailService.m in Sources */,
@@ -1906,6 +1939,7 @@
 				185EC9A924A091BE00DCAB2C /* UITextField+Category.m in Sources */,
 				1863953B24A35722007DC26D /* CRMService.m in Sources */,
 				185EC96224A091BE00DCAB2C /* QHWOptionBaseModel.m in Sources */,
+				185A62F624A988DD00E7E75D /* QSchoolDetailViewController.m in Sources */,
 				185EC9A124A091BE00DCAB2C /* UINavigationBar+Category.m in Sources */,
 				186394FE24A1B0E4007DC26D /* CRMViewController.m in Sources */,
 				185EC94724A091BE00DCAB2C /* Target_Publish.m in Sources */,
@@ -1937,6 +1971,7 @@
 				185EC97124A091BE00DCAB2C /* QHWTabScrollView.m in Sources */,
 				185EC94924A091BE00DCAB2C /* Target_ViewController.m in Sources */,
 				185EC98924A091BE00DCAB2C /* QHWTextCollectionViewCell.m in Sources */,
+				185A62FC24A98F2F00E7E75D /* QSchoolOrganizerViewController.m in Sources */,
 				185FDF0E24A733130043FF36 /* CommunityPublishViewController.m in Sources */,
 				185FDF0F24A733130043FF36 /* PublishSuccessViewController.m in Sources */,
 				185EC94D24A091BE00DCAB2C /* LoginViewController.m in Sources */,
@@ -1956,6 +1991,7 @@
 				185EC98824A091BE00DCAB2C /* QHWAlertView.m in Sources */,
 				185EC98724A091BE00DCAB2C /* QHWStarRateView.m in Sources */,
 				185FDF6924A749FA0043FF36 /* LiveService.m in Sources */,
+				185A630224A9922800E7E75D /* RichTextWithTitleTableViewCell.m in Sources */,
 				185EC97424A091BE00DCAB2C /* QHWFilterModel.m in Sources */,
 				185FDF7324A750850043FF36 /* GalleryViewController.m in Sources */,
 				185FDEEA24A7305D0043FF36 /* ArtivityDetailTableHeaderView.m in Sources */,

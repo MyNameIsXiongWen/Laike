@@ -11,7 +11,7 @@
 @interface CommentBottomView ()
 
 @property (nonatomic, strong) UIView *lineView;
-@property (nonatomic, strong) UIButton *commentButton;
+@property (nonatomic, strong, readwrite) UIButton *commentButton;
 @property (nonatomic, strong, readwrite) UIButton *praiseButton;
 @property (nonatomic, strong, readwrite) UILabel *commentLbl;
 

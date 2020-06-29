@@ -28,6 +28,25 @@
     }];
 }
 
+- (void)getSchoolDetailInfoRequestWithSchoolId:(NSString *)schoolId Complete:(void (^)(BOOL))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kSchoolInfo parameters:@{@"id": schoolId ?: @""} success:^(id responseObject) {
+        self.schoolModel = [QHWSchoolModel yy_modelWithJSON:responseObject[@"data"]];
+        [self handleDetailCellData];
+        complete(YES);
+    } failure:^(NSError *error) {
+        complete(NO);
+    }];
+}
+
+- (void)handleDetailCellData {
+    QHWBaseModel *organizerModel = [[QHWBaseModel alloc] configModelIdentifier:@"QSchoolDetailOrganizerTableViewCell" Height:60 Data:self.schoolModel];
+    [self.tableViewDataArray addObject:organizerModel];
+    
+    QHWBaseModel *contentModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:50 Data:@{@"data": self.schoolModel.content ?: @"", @"identifier": @"contentRichTextTableViewCell"}];
+    [self.tableViewDataArray addObject:contentModel];
+}
+
 #pragma mark ------------DATA-------------
 - (QHWItemPageModel *)itemPageModel {
     if (!_itemPageModel) {

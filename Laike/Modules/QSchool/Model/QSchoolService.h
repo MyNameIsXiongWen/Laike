@@ -15,8 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QSchoolService : QHWBaseService
 
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
+@property (nonatomic, strong) QHWSchoolModel *schoolModel;
 
 - (void)getSchoolDataWithLearnType:(NSInteger)learnType Complete:(void (^)(void))complete;
+
+- (void)getSchoolDetailInfoRequestWithSchoolId:(NSString *)schoolId Complete:(void (^)(BOOL status))complete;
 
 @end
 

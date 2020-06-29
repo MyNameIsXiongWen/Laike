@@ -8,6 +8,7 @@
 
 #import "QSchoolScrollContentViewController.h"
 #import "QSchoolService.h"
+#import "QSchoolDetailViewController.h"
 
 @interface QSchoolScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -67,6 +68,12 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHWSchoolModel *model = (QHWSchoolModel *)self.schoolService.tableViewDataArray[indexPath.row];
+    QSchoolDetailViewController *vc = QSchoolDetailViewController.new;
+    vc.schoolId = model.id;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
 
 /*
 #pragma mark - Navigation

@@ -1,23 +1,19 @@
 //
-//  LiveOrganizerViewController.m
+//  QSchoolOrganizerViewController.m
 //  GoOverSeas
 //
 //  Created by xiaobu on 2020/6/11.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "LiveOrganizerViewController.h"
-#import "MainBusinessDetailBottomView.h"
+#import "QSchoolOrganizerViewController.h"
 #import "QHWBaseCellProtocol.h"
-#import "ActivityDetailViewController.h"
 
-@interface LiveOrganizerViewController () <UITableViewDelegate, UITableViewDataSource>
-
-@property (nonatomic, strong) MainBusinessDetailBottomView *bottomView;
+@interface QSchoolOrganizerViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
-@implementation LiveOrganizerViewController
+@implementation QSchoolOrganizerViewController
 
 - (void)dealloc {
     [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationReloadRichText object:nil];
@@ -26,16 +22,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view addSubview:self.bottomView];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(reloadRichTextCellNotification:) name:kNotificationReloadRichText object:nil];
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH - kTopBarHeight - kBottomDangerHeight - self.bottomView.height - 40 - 200) Style:UITableViewStyleGrouped Object:self];
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH - kTopBarHeight - kBottomDangerHeight - 40 - 200) Style:UITableViewStylePlain Object:self];
     for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
         [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
     }
-    [self.tableView registerClass:ActivityDetailSectionHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(ActivityDetailSectionHeaderView.class)];
     [self.view addSubview:self.tableView];
 }
 
@@ -76,32 +70,6 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    QHWBaseModel *model = self.service.tableViewDataArray[section];
-    if (model.headerTitle.length > 0) {
-        return 65;
-    }
-    return CGFLOAT_MIN;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return CGFLOAT_MIN;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    QHWBaseModel *model = self.service.tableViewDataArray[section];
-    if (model.headerTitle.length > 0) {
-        ActivityDetailSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(ActivityDetailSectionHeaderView.class)];
-        headerView.titleLabel.text = model.headerTitle;
-        return headerView;
-    }
-    return UIView.new;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return UIView.new;
-}
-
 /*
 #pragma mark - Navigation
 
@@ -111,17 +79,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (MainBusinessDetailBottomView *)bottomView {
-    if (!_bottomView) {
-        _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kTopBarHeight-200-40-kBottomDangerHeight-75, kScreenW, 75)];
-        _bottomView.businessType = 103001;
-        _bottomView.detailModel = self.service.liveDetailModel;
-        _bottomView.onlineButton.enabled = YES;
-        [_bottomView.onlineButton setTitle:@"报名" forState:0];
-        _bottomView.onlineButton.backgroundColor = kColorTheme3cb584;
-    }
-    return _bottomView;
-}
 
 @end

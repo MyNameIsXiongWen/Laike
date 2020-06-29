@@ -1,40 +1,36 @@
 //
-//  LiveDetailViewController.m
+//  QSchoolDetailViewController.m
 //  GoOverSeas
 //
 //  Created by xiaobu on 2020/6/11.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "LiveDetailViewController.h"
+#import "QSchoolDetailViewController.h"
 #import "QHWBaseSubContentTableViewCell.h"
-#import "LiveOrganizerViewController.h"
-#import "LiveCommentViewController.h"
-#import "LiveService.h"
+#import "QSchoolOrganizerViewController.h"
+#import "QSchoolCommentViewController.h"
+#import "QSchoolService.h"
 //#import "QHWShareView.h"
 #import "QHWVideoPlayerView.h"
 #import "QHWTabScrollView.h"
 #import "QHWPageContentView.h"
 
-@interface LiveDetailViewController () <QHWPageContentViewDelegate>
+@interface QSchoolDetailViewController () <QHWPageContentViewDelegate>
 
 @property (nonatomic, strong) QHWVideoPlayerView *playerView;
 @property (nonatomic, strong) QHWTabScrollView *tabScrollView;
 @property (nonatomic, strong) QHWPageContentView *pageContentView;
-@property (nonatomic, strong) LiveService *service;
+@property (nonatomic, strong) QSchoolService *service;
 
 @end
 
-@implementation LiveDetailViewController
+@implementation QSchoolDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
-    [self.view addSubview:self.playerView];
-    [self.view addSubview:self.tabScrollView];
-    [self.view addSubview:self.pageContentView];
-    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.playerView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -50,9 +46,15 @@
 }
 
 - (void)getMainData {
-    [self.service getLiveDetailInfoRequestWithLiveId:self.liveId Complete:^(BOOL status) {
-        self.kNavigationView.title = self.service.liveDetailModel.name;
-        self.playerView.videoPath = self.service.liveDetailModel.videoPath;
+    [self.service getSchoolDetailInfoRequestWithSchoolId:self.schoolId Complete:^(BOOL status) {
+        if (status) {
+            [self.view addSubview:self.playerView];
+            [self.view addSubview:self.tabScrollView];
+            [self.view addSubview:self.pageContentView];
+            [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.playerView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
+            self.kNavigationView.title = self.service.schoolModel.title;
+            self.playerView.videoPath = self.service.schoolModel.videoPath;
+        }
     }];
 }
 
@@ -92,7 +94,7 @@
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.dataArray = @[@"直播嘉宾", @"互动"];
+        _tabScrollView.dataArray = @[@"介绍", @"评论"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;
@@ -104,20 +106,20 @@
 - (QHWPageContentView *)pageContentView {
     if (!_pageContentView) {
         NSMutableArray *contentVCs = [NSMutableArray array];
-        LiveOrganizerViewController *organizerVC = LiveOrganizerViewController.new;
+        QSchoolOrganizerViewController *organizerVC = QSchoolOrganizerViewController.new;
         organizerVC.service = self.service;
         [contentVCs addObject:organizerVC];
-        LiveCommentViewController *commentVC = LiveCommentViewController.new;
-        commentVC.liveModel = self.service.liveDetailModel;
+        QSchoolCommentViewController *commentVC = QSchoolCommentViewController.new;
+        commentVC.schoolModel = self.service.schoolModel;
         [contentVCs addObject:commentVC];
         _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];
     }
     return _pageContentView;
 }
 
-- (LiveService *)service {
+- (QSchoolService *)service {
     if (!_service) {
-        _service = LiveService.new;
+        _service = QSchoolService.new;
     }
     return _service;
 }
