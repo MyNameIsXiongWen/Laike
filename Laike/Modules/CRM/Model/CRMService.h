@@ -20,7 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray <CRMModel *>*crmArray;
 
 - (void)getCRMFilterDataRequestWithComplete:(void (^)(void))complete;
-- (void)getCRMListDataRequestWithComplete:(void (^)(void))complete;
+- (void)getCRMListDataRequestWithCondition:(NSDictionary *)condition Complete:(void (^)(void))complete;
+- (void)getClueListDataRequestWithComplete:(void (^)(void))complete;
+- (void)CRMAddCustomerRequestWithName:(NSString *)name Phone:(NSString *)phone Source:(NSInteger)source Remark:(NSString *)remark Complete:(void (^)(void))complete;
 
 @end
 

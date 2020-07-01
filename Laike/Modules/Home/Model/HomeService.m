@@ -195,7 +195,7 @@
     if (self.reportArray.count > 0) {
         QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCardTableViewCell"
                                                                            Height:175
-                                                                             Data:@[self.reportArray, self.homeModel.visitTip]];
+                                                                             Data:@[self.reportArray, self.homeModel.visitTip ?: @""]];
         [self.tableViewDataArray addObject:cardDataModel];
     }
     

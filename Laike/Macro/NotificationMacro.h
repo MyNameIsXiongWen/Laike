@@ -10,6 +10,7 @@
 #define NotificationMacro_h
 
 
+static NSString *const kNotificationAddCustomerSuccess = @"kNotificationAddCustomerSuccess";//新增客户成功
 static NSString *const kNotificationPublishSuccess = @"kNotificationPublishSuccess";//发布成功
 
 static NSString *const kNotificationLikeSuccess = @"kNotificationLikeSuccess";//评论详情页点赞成功

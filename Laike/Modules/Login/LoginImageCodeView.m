@@ -76,7 +76,6 @@
 - (UITextField *)codeTextField {
     if (!_codeTextField) {
         _codeTextField = UITextField.tfFrame(CGRectMake(15, self.codeImgView.bottom+10, self.width-30, 40)).tfPlaceholder(@"请输入以上图形验证码").tfFont(kFontTheme14).tfTextColor(kColorTheme000).tfBorderColor(kColorThemeeee).tfCornerRadius(2);
-        _codeTextField.keyboardType = UIKeyboardTypeNumberPad;
         [_codeTextField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _codeTextField;

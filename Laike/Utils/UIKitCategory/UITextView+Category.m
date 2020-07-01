@@ -25,7 +25,7 @@
 
 - (UITextView * _Nonnull (^)(NSString * _Nonnull))tvPlaceholder {
     return ^(NSString *tvPlaceholder) {
-        UILabel *label = UILabel.labelFrame(CGRectMake(5, 9, 200, 16)).labelText(tvPlaceholder).labelTitleColor(kColorFromHexString(@"bfbfbf")).labelFont(self.font);
+        UILabel *label = UILabel.labelFrame(CGRectMake(5, 9, self.width-10, 16)).labelText(tvPlaceholder).labelTitleColor(kColorFromHexString(@"bfbfbf")).labelNumberOfLines(0).labelFont(self.font);
         [label sizeToFit];
         [self addSubview:label];
         [self setValue:label forKey:@"_placeholderLabel"];

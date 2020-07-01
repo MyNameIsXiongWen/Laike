@@ -13,6 +13,7 @@
 		185A62FC24A98F2F00E7E75D /* QSchoolOrganizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FA24A98F2F00E7E75D /* QSchoolOrganizerViewController.m */; };
 		185A630124A9922800E7E75D /* RichTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FD24A9922800E7E75D /* RichTextTableViewCell.m */; };
 		185A630224A9922800E7E75D /* RichTextWithTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */; };
+		185D448924AC84DE00CD3A00 /* CRMAddCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */; };
 		185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81624A08FD700DCAB2C /* AppDelegate.m */; };
 		185EC81D24A08FD700DCAB2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81C24A08FD700DCAB2C /* ViewController.m */; };
 		185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185EC81E24A08FD700DCAB2C /* Main.storyboard */; };
@@ -247,6 +248,8 @@
 		185A62FE24A9922800E7E75D /* RichTextWithTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextWithTitleTableViewCell.h; sourceTree = "<group>"; };
 		185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextWithTitleTableViewCell.m; sourceTree = "<group>"; };
 		185A630024A9922800E7E75D /* RichTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextTableViewCell.h; sourceTree = "<group>"; };
+		185D448724AC84DE00CD3A00 /* CRMAddCustomerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMAddCustomerViewController.h; sourceTree = "<group>"; };
+		185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMAddCustomerViewController.m; sourceTree = "<group>"; };
 		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1541,6 +1544,8 @@
 				186394FD24A1B0E4007DC26D /* CRMViewController.m */,
 				186394FF24A1B0FD007DC26D /* CRMScrollContentViewController.h */,
 				1863950024A1B0FD007DC26D /* CRMScrollContentViewController.m */,
+				185D448724AC84DE00CD3A00 /* CRMAddCustomerViewController.h */,
+				185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */,
 				1863953824A35712007DC26D /* Model */,
 				1863950724A1D429007DC26D /* View */,
 				1863950324A1B112007DC26D /* Cell */,
@@ -1965,6 +1970,7 @@
 				185FDF6824A749FA0043FF36 /* LiveCommentViewController.m in Sources */,
 				185EC98524A091BE00DCAB2C /* QHWCycleScrollViewCell.m in Sources */,
 				185EC95824A091BE00DCAB2C /* QHWMainBusinessDetailBaseModel.m in Sources */,
+				185D448924AC84DE00CD3A00 /* CRMAddCustomerViewController.m in Sources */,
 				185FDF3524A73ECE0043FF36 /* MyCommentTableViewCell.m in Sources */,
 				185EC95524A091BE00DCAB2C /* QHWHouseModel.m in Sources */,
 				185EC99224A091BE00DCAB2C /* QHWActivityTableViewCell.m in Sources */,
@@ -2103,7 +2109,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2155,7 +2161,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -19,16 +19,51 @@
     }];
 }
 
-- (void)getCRMListDataRequestWithComplete:(void (^)(void))complete {
+- (void)getCRMListDataRequestWithCondition:(NSDictionary *)condition Complete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
-    NSDictionary *params = @{@"currentPage": @(self.itemPageModel.pagination.currentPage),
-                             @"pageSize": @(self.itemPageModel.pagination.pageSize)};
+    NSMutableDictionary *params = @{@"currentPage": @(self.itemPageModel.pagination.currentPage),
+                                    @"pageSize": @(self.itemPageModel.pagination.pageSize)}.mutableCopy;
+    if (condition.allKeys.count > 0) {
+        [params addEntriesFromDictionary:condition];
+    }
     [QHWHttpManager.sharedInstance QHW_POST:kCRMList parameters:params success:^(id responseObject) {
         self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
         if (self.itemPageModel.pagination.currentPage == 1) {
             [self.crmArray removeAllObjects];
         }
         [self.crmArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CRMModel.class json:self.itemPageModel.list]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
+- (void)getClueListDataRequestWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    NSDictionary *params = @{@"currentPage": @(self.itemPageModel.pagination.currentPage),
+                             @"pageSize": @(self.itemPageModel.pagination.pageSize)};
+    [QHWHttpManager.sharedInstance QHW_POST:kClueList parameters:params success:^(id responseObject) {
+        self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
+        if (self.itemPageModel.pagination.currentPage == 1) {
+            [self.crmArray removeAllObjects];
+        }
+        [self.crmArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CRMModel.class json:self.itemPageModel.list]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
+- (void)CRMAddCustomerRequestWithName:(NSString *)name Phone:(NSString *)phone Source:(NSInteger)source Remark:(NSString *)remark Complete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    NSDictionary *params = @{@"clientSourceCode": @(source),
+                             @"realName": name,
+                             @"mobileNumber": phone,
+                             @"note": remark};
+    [QHWHttpManager.sharedInstance QHW_POST:kCRMAdd parameters:params success:^(id responseObject) {
+        [SVProgressHUD showInfoWithStatus:@"添加成功"];
+        [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
+        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddCustomerSuccess object:nil];
         complete();
     } failure:^(NSError *error) {
         complete();

@@ -53,11 +53,11 @@
 - (CRMTopOperationView *)topOperationView {
     if (!_topOperationView) {
         _topOperationView = [[CRMTopOperationView alloc] initWithFrame:CGRectMake(10, kTopBarHeight+10, kScreenW-20, 70)];
-        _topOperationView.dataArray = @[@{@"logo": @"",
+        _topOperationView.dataArray = @[@{@"logo": @"home_live",
                                           @"title": @"分享获客",
                                           @"subTitle": @"发布海外圈 免费获客",
                                           @"identifier": @"shareArticle"},
-                                        @{@"logo": @"",
+                                        @{@"logo": @"home_live",
                                           @"title": @"递名片",
                                           @"subTitle": @"私域流量 精准获客",
                                           @"identifier": @"sendCard"}
