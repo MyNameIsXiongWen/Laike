@@ -10,12 +10,12 @@
 
 @implementation CRMService
 
-- (void)getCRMFilterDataRequestWithComplete:(void (^)(void))complete {
+- (void)getCRMFilterDataRequestWithComplete:(void (^)(id _Nullable))complete {
     [QHWHttpManager.sharedInstance QHW_POST:kCRMFilter parameters:@{} success:^(id responseObject) {
         [self handleFilterDataWithResponse:responseObject[@"data"]];
-        complete();
+        complete(responseObject[@"data"]);
     } failure:^(NSError *error) {
-        complete();
+        complete(nil);
     }];
 }
 
@@ -32,6 +32,17 @@
             [self.crmArray removeAllObjects];
         }
         [self.crmArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CRMModel.class json:self.itemPageModel.list]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
+- (void)getCRMDetailInfoRequestWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kCRMDetailInfo parameters:@{@"id": self.customerId ?: @""} success:^(id responseObject) {
+        self.crmModel = [CRMModel yy_modelWithJSON:responseObject[@"data"]];
+        self.tableHeaderViewHeight = 140 + 40 + self.crmModel.remarkH + 40 + self.crmModel.industryH + 5 + self.crmModel.countryH + 20;
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -64,6 +75,21 @@
         [SVProgressHUD showInfoWithStatus:@"添加成功"];
         [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
         [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddCustomerSuccess object:nil];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
+- (void)CRMAddTrackRequestWithCustomerId:(NSString *)customerId FollowStatusCode:(NSInteger)followStatusCode Remark:(NSString *)remark Complete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    NSDictionary *params = @{@"followStatusCode": @(followStatusCode),
+                             @"id": customerId ?: @"",
+                             @"content": remark};
+    [QHWHttpManager.sharedInstance QHW_POST:kCRMAddTrack parameters:params success:^(id responseObject) {
+        [SVProgressHUD showInfoWithStatus:@"跟进成功"];
+        [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
+//        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddCustomerSuccess object:nil];
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -149,5 +175,72 @@
 @end
 
 @implementation CRMModel
+
+- (NSString *)genderStr {
+    switch (self.gender) {
+        case 1:
+            return @"男";
+            break;
+            
+        case 2:
+            return @"女";
+            break;
+            
+        default:
+            return @"未设置";
+            break;
+    }
+}
+
+- (NSString *)industryStr {
+    if (!_industryStr) {
+        NSMutableArray *array = NSMutableArray.array;
+        for (NSDictionary *dic in self.industryList) {
+            [array addObject:dic[@"name"]];
+        }
+        if (array.count == 0) {
+            _industryStr = @"业务：暂无";
+        } else {
+            _industryStr = kFormat(@"业务：%@", [array componentsJoinedByString:@"、"]);
+        }
+    }
+    return _industryStr;
+}
+
+- (NSString *)countryStr {
+    if (!_countryStr) {
+        NSMutableArray *array = NSMutableArray.array;
+        for (NSDictionary *dic in self.countryList) {
+            [array addObject:dic[@"name"]];
+        }
+        if (array.count == 0) {
+            _countryStr = @"国家：暂无";
+        } else {
+            _countryStr = kFormat(@"国家：%@", [array componentsJoinedByString:@"、"]);
+        }
+    }
+    return _countryStr;
+}
+
+- (CGFloat)remarkH {
+    if (!_remarkH) {
+        _remarkH = MAX(20, [self.note getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
+    }
+    return _remarkH;
+}
+
+- (CGFloat)industryH {
+    if (!_industryH) {
+        _industryH = MAX(20, [self.industryStr getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
+    }
+    return _industryH;
+}
+
+- (CGFloat)countryH {
+    if (!_countryH) {
+        _countryH = MAX(20, [self.countryStr getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
+    }
+    return _countryH;
+}
 
 @end

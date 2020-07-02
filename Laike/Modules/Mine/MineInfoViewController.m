@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"个人信息";
-    self.kNavigationView.leftBtn.hidden = YES;
+    [self initialData];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.logoutBtn];
 }
@@ -40,23 +40,13 @@
     self.navigationController.navigationBar.hidden = YES;
 }
 
-- (void)getMainData {
-    [self.service getMineInfoRequestComplete:^{
-        [self initialData];
-        [self.tableView reloadData];
-    }];
-}
-
 - (void)initialData {
     UserModel *user = UserModel.shareUser;
     self.dataArray = @[@{@"title": @"头像", @"image": user.headPath ?: @"", @"identifier": @"headPath"},
-                       @{@"title": @"昵称", @"detailTitle": user.nickname ?: @"", @"identifier": @"nickname"},
-                       @{@"title": @"性别", @"detailTitle": user.genderStr ?: @"", @"identifier": @"gender"},
+                       @{@"title": @"姓名", @"detailTitle": user.realName ?: @"", @"identifier": @"realName"},
                        @{@"title": @"个性签名", @"detailTitle": user.slogan ?: @"", @"identifier": @"slogan"},
-                       @{@"title": @"生日", @"detailTitle": user.birthday ?: @"", @"identifier": @"birthday"},
-                       @{@"title": @"婚姻", @"detailTitle": user.marriageStr ?: @"", @"identifier": @"marriageStatus"},
-                       @{@"title": @"职业", @"detailTitle": user.occupation ?: @"", @"identifier": @"occupation"},
-                       @{@"title": @"邮箱", @"detailTitle": user.mail ?: @"", @"identifier": @"mail"}].mutableCopy;
+                       @{@"title": @"业务微信", @"detailTitle": user.wechatNo ?: @"", @"identifier": @"wechatNo"},
+                       @{@"title": @"性别", @"detailTitle": user.genderStr ?: @"", @"identifier": @"gender"}].mutableCopy;
 }
 
 #pragma mark ------------UITableView-------------
@@ -85,21 +75,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *cellDic = self.dataArray[indexPath.row];
     NSString *identifier = cellDic[@"identifier"];
-    if ([identifier isEqualToString:@"headPath"] || [identifier isEqualToString:@"gender"] || [identifier isEqualToString:@"marriageStatus"]) {
+    if ([identifier isEqualToString:@"headPath"] || [identifier isEqualToString:@"gender"]) {
         NSArray *array;
         if ([identifier isEqualToString:@"headPath"]) {
             array = @[@"拍摄", @"从相册选择"];
         } else if ([identifier isEqualToString:@"gender"]) {
-            array = @[@"女", @"男"];
-        } else if ([identifier isEqualToString:@"marriageStatus"]) {
-            array = @[@"未婚", @"已婚", @"丧偶", @"离异"];
+            array = @[@"女士", @"先生"];
         }
         QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*(array.count+1)+7) title:@""];
         sheetView.dataArray = array;
         sheetView.sheetDelegate = self;
         sheetView.identifier = identifier;
         [sheetView show];
-    } else if ([identifier isEqualToString:@"nickname"] || [identifier isEqualToString:@"slogan"] || [identifier isEqualToString:@"occupation"] || [identifier isEqualToString:@"mail"]) {
+    } else if ([identifier isEqualToString:@"realName"] || [identifier isEqualToString:@"slogan"]) {
         MineUpdateNameViewController *updateVC = MineUpdateNameViewController.new;
         updateVC.identifier = identifier;
         updateVC.placeholder = cellDic[@"title"];
@@ -112,15 +100,6 @@
             [weakSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
         };
         [self.navigationController pushViewController:updateVC animated:YES];
-    } else if ([identifier isEqualToString:@"birthday"]) {
-        MineInfoTimeView *timeView = [[MineInfoTimeView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 215)];
-        if (![cellDic[@"detailTitle"] isEqualToString:@"未设置"]) {
-            if ([cellDic[@"detailTitle"] length] > 10) {
-                timeView.currentDate = [cellDic[@"detailTitle"] substringToIndex:10];
-            }
-        }
-        timeView.timeDelegate = self;
-        [timeView show];
     }
 }
 
@@ -159,14 +138,7 @@
         }
     } else if ([actionsheetView.identifier isEqualToString:@"gender"]) {
         [self updateUserInfoWithKey:@"gender" Value:@(index == 0 ? 2 : 1)];
-    } else if ([actionsheetView.identifier isEqualToString:@"marriageStatus"]) {
-        [self updateUserInfoWithKey:@"marriageStatus" Value:@(index+1)];
     }
-}
-
-#pragma mark ------------MineInfoTimeViewDelegate-------------
-- (void)mineInfoTimeView_confirm:(NSString *)time {
-    [self updateUserInfoWithKey:@"birthday" Value:time];
 }
 
 #pragma mark ------------网络请求-------------
@@ -195,19 +167,9 @@
                 userModel.headPath = value;
                 break;
                 
-            case 2:
+            case 4:
                 userModel.gender = [value integerValue];
                 dic[@"detailTitle"] = userModel.genderStr;
-                break;
-                            
-            case 4:
-                userModel.birthday = value;
-                dic[@"detailTitle"] = userModel.birthday;
-                break;
-                
-            case 5:
-                userModel.marriageStatus = [value integerValue];
-                dic[@"detailTitle"] = userModel.marriageStr;
                 break;
                 
             default:

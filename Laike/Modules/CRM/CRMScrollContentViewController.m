@@ -11,6 +11,7 @@
 #import "CRMService.h"
 #import "MainBusinessFilterBtnView.h"
 #import "QHWCountryFilterView.h"
+#import "CTMediator+ViewController.h"
 
 @interface CRMScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -95,6 +96,12 @@
     cell.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:model.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
     cell.nameLabel.text = model.realName;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CRMModel *model = self.crmService.crmArray[indexPath.row];
+//    [CTMediator.sharedInstance CTMediator_viewControllerForAddTrackWithCustomerId:model.id];
+    [CTMediator.sharedInstance CTMediator_viewControllerForCRMDetailWithCustomerId:model.id];
 }
 
 - (void)confirmSelectItemWithFilterModel:(FilterBtnViewCellModel * _Nonnull )model ItemModel:(FilterCellModel * _Nonnull) countryCellModel {

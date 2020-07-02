@@ -69,7 +69,9 @@ static NSString *const kMerchantBind = @"merchant/user/bindMerchant";//绑定公
 
 static NSString *const kCRMFilter = @"client/getVariable";//crm筛选条件
 static NSString *const kCRMList = @"client/getList";//crm列表
+static NSString *const kCRMDetailInfo = @"client/getInfo";
 static NSString *const kCRMAdd = @"client/add";//crm add
+static NSString *const kCRMAddTrack = @"client/follow/add";//crm add track
 static NSString *const kClueList = @"clue/getList";//咨询列表
 
 static NSString *const kActionBrowseList = @"action/browse/getMyList";//访客列表

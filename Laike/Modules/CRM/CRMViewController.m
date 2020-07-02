@@ -41,7 +41,7 @@
 }
 
 - (void)getMainData {
-    [self.crmService getCRMFilterDataRequestWithComplete:^{
+    [self.crmService getCRMFilterDataRequestWithComplete:^(id  _Nullable responseObject) {
         CRMScrollContentViewController *vc = self.pageContentView.childsVCs.firstObject;
         vc.filterDataArray = self.crmService.filterDataArray;
     }];

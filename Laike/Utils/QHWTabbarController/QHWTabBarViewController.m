@@ -57,7 +57,7 @@
 }
 
 -(void)addChildViewControllers {
-    NSArray *controllers = @[@"HomeViewController", @"DistributionViewController", @"MessageViewController", @"MineInfoViewController"];
+    NSArray *controllers = @[@"HomeViewController", @"DistributionViewController", @"MessageViewController", @"MineViewController"];
     NSArray *icon = @[@"tabbar_home", @"tabbar_community", @"tabbar_message", @"tabbar_mine"];
     NSArray *titleArray = @[@"首页",@"分销",@"消息",@"我的"];
     for (int i = 0; i < controllers.count; i++) {

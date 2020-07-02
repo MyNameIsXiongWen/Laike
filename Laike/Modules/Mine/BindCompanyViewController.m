@@ -29,6 +29,8 @@ static NSString *const ServiceHotLine = @"400-877-1008";
     [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[remindString rangeOfString:ServiceHotLine]];
     self.remindLabel.attributedText = attr;
     [self.remindLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:ServiceHotLine action:@selector(clickServiceHotLine)]];
+    
+    self.nameTextField.text = @"2002180000";
 }
 
 - (void)clickServiceHotLine {
@@ -36,8 +38,10 @@ static NSString *const ServiceHotLine = @"400-877-1008";
 }
 
 - (IBAction)clickConfirmBtn:(id)sender {
-    [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"1", @"merchantNumber": @"2002180000"} success:^(id responseObject) {
-        
+    [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"1", @"merchantNumber": self.nameTextField.text} success:^(id responseObject) {
+        [SVProgressHUD showInfoWithStatus:@"绑定成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationBindSuccess object:nil];
     } failure:^(NSError *error) {
         
     }];

@@ -49,6 +49,7 @@
         [tempArray addObject:dic[@"groupName"]];
     }
     self.tabScrollView.dataArray = tempArray;
+    [self.tabScrollView scrollToIndex:1];
     self.userDataView.dataArray = self.dataArray[self.tabScrollView.currentIndex][@"groupList"];
     if ([array.lastObject length] > 0) {
         [self.headerView.moreBtn setTitle:array.lastObject forState:0];

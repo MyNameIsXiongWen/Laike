@@ -1,5 +1,5 @@
 //
-//  CRMAddCustomerViewController.h
+//  MineTableHeaderView.h
 //  Laike
 //
 //  Created by xiaobu on 2020/7/1.
@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CRMAddCustomerViewController : UIViewController
+@interface MineTableHeaderView : UIView
+
+@property (nonatomic, strong) UserModel *userModel;
 
 @end
 

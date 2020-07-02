@@ -21,10 +21,17 @@
     // Do any additional setup after loading the view from its nib.
     self.kNavigationView.title = @"已绑定公司";
     self.cancelBtn.btnCornerRadius(8).btnBorderColor(kColorTheme21a8ff);
+    self.nameLabel.text = self.companyName;
 }
 
 - (IBAction)clickCancelBtn:(id)sender {
-    
+    [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"2"} success:^(id responseObject) {
+        [SVProgressHUD showInfoWithStatus:@"解绑成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationBindSuccess object:nil];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 /*

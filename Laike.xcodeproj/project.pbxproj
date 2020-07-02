@@ -14,6 +14,14 @@
 		185A630124A9922800E7E75D /* RichTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FD24A9922800E7E75D /* RichTextTableViewCell.m */; };
 		185A630224A9922800E7E75D /* RichTextWithTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */; };
 		185D448924AC84DE00CD3A00 /* CRMAddCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */; };
+		185D448D24AC973400CD3A00 /* MineTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D448C24AC973400CD3A00 /* MineTableHeaderView.m */; };
+		185D449424AC9C7A00CD3A00 /* MineDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D449324AC9C7A00CD3A00 /* MineDataTableViewCell.m */; };
+		185D449824AD735400CD3A00 /* BookAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D449724AD735400CD3A00 /* BookAppointmentViewController.m */; };
+		185D449B24AD738300CD3A00 /* CRMTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D449A24AD738300CD3A00 /* CRMTextFieldView.m */; };
+		185D44A024ADD33000CD3A00 /* CRMAddTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D449F24ADD33000CD3A00 /* CRMAddTrackViewController.m */; };
+		185D44A324ADDD4100CD3A00 /* CRMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D44A224ADDD4100CD3A00 /* CRMDetailViewController.m */; };
+		185D44A624ADDDFC00CD3A00 /* CRMDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D44A524ADDDFC00CD3A00 /* CRMDetailHeaderView.m */; };
+		185D44AA24ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D44A924ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m */; };
 		185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81624A08FD700DCAB2C /* AppDelegate.m */; };
 		185EC81D24A08FD700DCAB2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81C24A08FD700DCAB2C /* ViewController.m */; };
 		185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185EC81E24A08FD700DCAB2C /* Main.storyboard */; };
@@ -250,6 +258,22 @@
 		185A630024A9922800E7E75D /* RichTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextTableViewCell.h; sourceTree = "<group>"; };
 		185D448724AC84DE00CD3A00 /* CRMAddCustomerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMAddCustomerViewController.h; sourceTree = "<group>"; };
 		185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMAddCustomerViewController.m; sourceTree = "<group>"; };
+		185D448B24AC973400CD3A00 /* MineTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTableHeaderView.h; sourceTree = "<group>"; };
+		185D448C24AC973400CD3A00 /* MineTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineTableHeaderView.m; sourceTree = "<group>"; };
+		185D449224AC9C7A00CD3A00 /* MineDataTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineDataTableViewCell.h; sourceTree = "<group>"; };
+		185D449324AC9C7A00CD3A00 /* MineDataTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineDataTableViewCell.m; sourceTree = "<group>"; };
+		185D449624AD735400CD3A00 /* BookAppointmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookAppointmentViewController.h; sourceTree = "<group>"; };
+		185D449724AD735400CD3A00 /* BookAppointmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookAppointmentViewController.m; sourceTree = "<group>"; };
+		185D449924AD738300CD3A00 /* CRMTextFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMTextFieldView.h; sourceTree = "<group>"; };
+		185D449A24AD738300CD3A00 /* CRMTextFieldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMTextFieldView.m; sourceTree = "<group>"; };
+		185D449E24ADD33000CD3A00 /* CRMAddTrackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMAddTrackViewController.h; sourceTree = "<group>"; };
+		185D449F24ADD33000CD3A00 /* CRMAddTrackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMAddTrackViewController.m; sourceTree = "<group>"; };
+		185D44A124ADDD4100CD3A00 /* CRMDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMDetailViewController.h; sourceTree = "<group>"; };
+		185D44A224ADDD4100CD3A00 /* CRMDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMDetailViewController.m; sourceTree = "<group>"; };
+		185D44A424ADDDFC00CD3A00 /* CRMDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMDetailHeaderView.h; sourceTree = "<group>"; };
+		185D44A524ADDDFC00CD3A00 /* CRMDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMDetailHeaderView.m; sourceTree = "<group>"; };
+		185D44A824ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMDetailScrollContentViewController.h; sourceTree = "<group>"; };
+		185D44A924ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMDetailScrollContentViewController.m; sourceTree = "<group>"; };
 		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -687,6 +711,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		185D448A24AC971E00CD3A00 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				185D448B24AC973400CD3A00 /* MineTableHeaderView.h */,
+				185D448C24AC973400CD3A00 /* MineTableHeaderView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		185D448E24AC9C2A00CD3A00 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				185D449224AC9C7A00CD3A00 /* MineDataTableViewCell.h */,
+				185D449324AC9C7A00CD3A00 /* MineDataTableViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		185D449524AD734600CD3A00 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				185EC9B424A0966A00DCAB2C /* DistributionViewController.h */,
+				185EC9B524A0966A00DCAB2C /* DistributionViewController.m */,
+				185D449624AD735400CD3A00 /* BookAppointmentViewController.h */,
+				185D449724AD735400CD3A00 /* BookAppointmentViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		185D449C24AD73CE00CD3A00 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		185EC80924A08FD600DCAB2C = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +977,8 @@
 		185EC87524A091BC00DCAB2C /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				185D448E24AC9C2A00CD3A00 /* Cell */,
+				185D448A24AC971E00CD3A00 /* View */,
 				185EC9B124A0965B00DCAB2C /* MineViewController.h */,
 				185EC9B224A0965B00DCAB2C /* MineViewController.m */,
 				186394F224A1AF19007DC26D /* MineInfoViewController.h */,
@@ -1268,8 +1330,8 @@
 		185EC9B024A0963700DCAB2C /* Distribution */ = {
 			isa = PBXGroup;
 			children = (
-				185EC9B424A0966A00DCAB2C /* DistributionViewController.h */,
-				185EC9B524A0966A00DCAB2C /* DistributionViewController.m */,
+				185D449C24AD73CE00CD3A00 /* Cell */,
+				185D449524AD734600CD3A00 /* Controller */,
 			);
 			path = Distribution;
 			sourceTree = "<group>";
@@ -1546,6 +1608,12 @@
 				1863950024A1B0FD007DC26D /* CRMScrollContentViewController.m */,
 				185D448724AC84DE00CD3A00 /* CRMAddCustomerViewController.h */,
 				185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */,
+				185D449E24ADD33000CD3A00 /* CRMAddTrackViewController.h */,
+				185D449F24ADD33000CD3A00 /* CRMAddTrackViewController.m */,
+				185D44A124ADDD4100CD3A00 /* CRMDetailViewController.h */,
+				185D44A224ADDD4100CD3A00 /* CRMDetailViewController.m */,
+				185D44A824ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.h */,
+				185D44A924ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m */,
 				1863953824A35712007DC26D /* Model */,
 				1863950724A1D429007DC26D /* View */,
 				1863950324A1B112007DC26D /* Cell */,
@@ -1569,6 +1637,10 @@
 				1863950924A1D457007DC26D /* CRMTopOperationView.m */,
 				1863950B24A1D7E0007DC26D /* MainBusinessFilterBtnView.h */,
 				1863950C24A1D7E1007DC26D /* MainBusinessFilterBtnView.m */,
+				185D449924AD738300CD3A00 /* CRMTextFieldView.h */,
+				185D449A24AD738300CD3A00 /* CRMTextFieldView.m */,
+				185D44A424ADDDFC00CD3A00 /* CRMDetailHeaderView.h */,
+				185D44A524ADDDFC00CD3A00 /* CRMDetailHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1831,6 +1903,7 @@
 				185EC9E924A0A7F500DCAB2C /* MineIconTableViewCell.m in Sources */,
 				185EC96B24A091BE00DCAB2C /* QHWNavigationController.m in Sources */,
 				1863950124A1B0FD007DC26D /* CRMScrollContentViewController.m in Sources */,
+				185D448D24AC973400CD3A00 /* MineTableHeaderView.m in Sources */,
 				185EC99C24A091BE00DCAB2C /* QHWPermissionManager.m in Sources */,
 				185EC98A24A091BE00DCAB2C /* QHWImageViewCell.m in Sources */,
 				185EC99E24A091BE00DCAB2C /* QHWSystemService.m in Sources */,
@@ -1858,6 +1931,7 @@
 				185EC96924A091BE00DCAB2C /* CTMediator.m in Sources */,
 				185EC9DD24A0A76400DCAB2C /* MinePopularityInfoTableViewCell.m in Sources */,
 				185EC9C924A096B600DCAB2C /* SystemMessageViewController.m in Sources */,
+				185D44A024ADD33000CD3A00 /* CRMAddTrackViewController.m in Sources */,
 				185EC96E24A091BE00DCAB2C /* QHWPhotoBrowserCollectionViewCell.m in Sources */,
 				185EC94B24A091BE00DCAB2C /* CTMediator+TZImgPicker.m in Sources */,
 				185EC99324A091BE00DCAB2C /* QHWShadowTableViewCell.m in Sources */,
@@ -1890,6 +1964,7 @@
 				185FDF1624A733130043FF36 /* PublishImgViewCell.m in Sources */,
 				185EC97624A091BE00DCAB2C /* QHWFiltViewWordCell.m in Sources */,
 				185EC97824A091BE00DCAB2C /* QHWCountryFilterView.m in Sources */,
+				185D449824AD735400CD3A00 /* BookAppointmentViewController.m in Sources */,
 				185EC98C24A091BE00DCAB2C /* QHWStudyAbroadCollectionViewCell.m in Sources */,
 				185FDF1024A733130043FF36 /* CommunityDetailRecommendTableViewCell.m in Sources */,
 				185FDF2E24A73ECE0043FF36 /* AllCommentViewController.m in Sources */,
@@ -1920,6 +1995,7 @@
 				185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */,
 				185EC95B24A091BE00DCAB2C /* QHWTagListModel.m in Sources */,
 				185EC97B24A091BE00DCAB2C /* QHWFilterView.m in Sources */,
+				185D44A624ADDDFC00CD3A00 /* CRMDetailHeaderView.m in Sources */,
 				185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */,
 				185EC9AE24A091DA00DCAB2C /* AppGuideViewController.m in Sources */,
 				185EC9CB24A096B600DCAB2C /* RelatedToMeTableViewCell.m in Sources */,
@@ -1934,6 +2010,7 @@
 				185EC9B624A0966A00DCAB2C /* DistributionViewController.m in Sources */,
 				185FDF3324A73ECE0043FF36 /* CommentReplyListViewController.m in Sources */,
 				186394E724A1964F007DC26D /* HomeModel.m in Sources */,
+				185D449B24AD738300CD3A00 /* CRMTextFieldView.m in Sources */,
 				185EC96424A091BE00DCAB2C /* QHWBannerModel.m in Sources */,
 				186394F624A1AF9D007DC26D /* MineUpdateNameViewController.m in Sources */,
 				185EC94824A091BE00DCAB2C /* Target_TZImgPicker.m in Sources */,
@@ -1963,6 +2040,7 @@
 				185EC95624A091BE00DCAB2C /* QHWMigrationModel.m in Sources */,
 				185FDED024A71CB60043FF36 /* QSchoolScrollContentViewController.m in Sources */,
 				185EC96624A091BE00DCAB2C /* QHWBottomUserModel.m in Sources */,
+				185D44A324ADDD4100CD3A00 /* CRMDetailViewController.m in Sources */,
 				185EC9AF24A091DA00DCAB2C /* AppDelegate+Service.m in Sources */,
 				185EC9A524A091BE00DCAB2C /* UIView+Category.m in Sources */,
 				185EC82824A08FD800DCAB2C /* main.m in Sources */,
@@ -1982,6 +2060,7 @@
 				185FDF0F24A733130043FF36 /* PublishSuccessViewController.m in Sources */,
 				185EC94D24A091BE00DCAB2C /* LoginViewController.m in Sources */,
 				185EC95924A091BE00DCAB2C /* QHWBaseModel.m in Sources */,
+				185D44AA24ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m in Sources */,
 				185FDEED24A7305D0043FF36 /* ActivityViewController.m in Sources */,
 				185EC9EC24A0A80500DCAB2C /* MineSchoolTableViewCell.m in Sources */,
 				185EC99A24A091BE00DCAB2C /* QHWBaseSubContentTableViewCell.m in Sources */,
@@ -2002,6 +2081,7 @@
 				185FDF7324A750850043FF36 /* GalleryViewController.m in Sources */,
 				185FDEEA24A7305D0043FF36 /* ArtivityDetailTableHeaderView.m in Sources */,
 				185EC9CF24A096B600DCAB2C /* RelatedToMeViewController.m in Sources */,
+				185D449424AC9C7A00CD3A00 /* MineDataTableViewCell.m in Sources */,
 				185EC97A24A091BE00DCAB2C /* FilterBtnViewCellModel.m in Sources */,
 				185FDED324A71CC40043FF36 /* QSchoolViewController.m in Sources */,
 				186394F024A1A6D6007DC26D /* RankScrollContentViewController.m in Sources */,

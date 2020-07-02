@@ -1,8 +1,8 @@
 //
-//  CRMAddCustomerViewController.h
+//  BookAppointmentViewController.h
 //  Laike
 //
-//  Created by xiaobu on 2020/7/1.
+//  Created by xiaobu on 2020/7/2.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CRMAddCustomerViewController : UIViewController
+@interface BookAppointmentViewController : UIViewController
 
 @end
 

@@ -41,6 +41,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForRate;
 
+- (void)CTMediator_viewControllerForAddTrackWithCustomerId:(NSString *)customerId;
+
+- (void)CTMediator_viewControllerForCRMDetailWithCustomerId:(NSString *)customerId;
+
 @end
 
 NS_ASSUME_NONNULL_END

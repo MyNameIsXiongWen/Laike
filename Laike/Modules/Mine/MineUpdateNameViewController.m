@@ -59,14 +59,10 @@
 - (void)updateUserInfoWithKey:(NSString *)key Value:(NSString *)value {
     [self.service updateMineInfoRequestWithParam:@{key: value} Complete:^{
         UserModel *userModel = UserModel.shareUser;
-        if ([self.identifier isEqualToString:@"nickName"]) {
-            userModel.nickname = value;
+        if ([self.identifier isEqualToString:@"realName"]) {
+            userModel.realName = value;
         } else if ([self.identifier isEqualToString:@"slogan"]) {
             userModel.slogan = value;
-        } else if ([self.identifier isEqualToString:@"occupation"]) {
-            userModel.occupation = value;
-        } else if ([self.identifier isEqualToString:@"mail"]) {
-            userModel.mail = value;
         }
         if (self.updateNameBlock) {
             self.updateNameBlock(value);

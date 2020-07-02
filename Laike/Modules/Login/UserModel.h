@@ -42,6 +42,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *companyName;
 @property (nonatomic, copy) NSString *hideNumber;
 
+
+///客户来源：1-网路客；2-自拓客；3-渠道客；4-其它
+@property (nonatomic, assign) NSInteger clientSourceCode;
+@property (nonatomic, copy) NSString *clientSourceName;
+///客户意向等级代码(1-高；2-中；3-低；4-放弃)
+@property (nonatomic, assign) NSInteger intentionLevelCode;
+@property (nonatomic, copy) NSString *intentionLevelName;
+@property (nonatomic, copy) NSString *industryName;
+@property (nonatomic, copy) NSString *industryId;
+
+///商户绑定状态:1-已绑定；2未绑定
 @property (nonatomic, assign) NSInteger bindStatus;
 ///1-账户存在登录；2-新账户注册登录
 @property (nonatomic, assign) NSInteger loginStatus;

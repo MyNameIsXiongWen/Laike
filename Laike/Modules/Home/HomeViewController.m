@@ -161,11 +161,14 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    self.homeCommunityTypeHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeCommunityTypeHeaderView.class)];
-    WEAKSELF
-    self.homeCommunityTypeHeaderView.tabScrollView.clickTagBlock = ^(NSInteger index) {
-        weakSelf.contentCell.pageContentView.contentViewCurrentIndex = index;
-    };
+    if (!self.homeCommunityTypeHeaderView) {
+        self.homeCommunityTypeHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(HomeCommunityTypeHeaderView.class)];
+        self.homeCommunityTypeHeaderView.tabScrollView.dataArray = @[@"海外房产", @"移民", @"留学", @"游学", @"海外医疗"];
+        WEAKSELF
+        self.homeCommunityTypeHeaderView.tabScrollView.clickTagBlock = ^(NSInteger index) {
+            weakSelf.contentCell.pageContentView.contentViewCurrentIndex = index;
+        };
+    }
     return self.homeCommunityTypeHeaderView;
 }
 
@@ -268,7 +271,6 @@
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
         _tabScrollView.textFont = kMediumFontTheme18;
-        _tabScrollView.dataArray = @[@"海外房产", @"移民", @"留学", @"游学", @"海外医疗"];
         [self addSubview:_tabScrollView];
     }
     return _tabScrollView;

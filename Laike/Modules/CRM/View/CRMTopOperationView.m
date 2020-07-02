@@ -7,6 +7,7 @@
 //
 
 #import "CRMTopOperationView.h"
+#import "CTMediator.h"
 
 @interface CRMTopOperationView ()
 
@@ -45,14 +46,8 @@
     _dataArray = dataArray;
     NSDictionary *leftDic = dataArray.firstObject;
     NSDictionary *rightDic = dataArray.lastObject;
-    
-    self.leftOperationView.logoImgView.image = kImageMake(leftDic[@"logo"]);
-    self.leftOperationView.titleLabel.text = leftDic[@"title"];
-    self.leftOperationView.subTitleLabel.text = leftDic[@"subTitle"];
-    
-    self.rightOperationView.logoImgView.image = kImageMake(rightDic[@"logo"]);
-    self.rightOperationView.titleLabel.text = rightDic[@"title"];
-    self.rightOperationView.subTitleLabel.text = rightDic[@"subTitle"];
+    self.leftOperationView.dataDic = leftDic;
+    self.rightOperationView.dataDic = rightDic;
 }
 
 @end
@@ -70,8 +65,31 @@
         
         self.subTitleLabel = UILabel.labelFrame(CGRectMake(self.logoImgView.right+10, self.titleLabel.bottom, self.width-65, 15)).labelTitleColor(kColorTheme707070).labelFont(kFontTheme10);
         [self addSubview:self.subTitleLabel];
+
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSelfView)]];
     }
     return self;
+}
+
+- (void)setDataDic:(NSDictionary *)dataDic {
+    _dataDic = dataDic;
+    self.logoImgView.image = kImageMake(dataDic[@"logo"]);
+    self.titleLabel.text = dataDic[@"title"];
+    self.subTitleLabel.text = dataDic[@"subTitle"];
+}
+
+- (void)tapSelfView {
+    NSString *identifier = self.dataDic[@"identifier"];
+    [CTMediator.sharedInstance performTarget:self action:kFormat(@"click_%@", identifier) params:nil];
+}
+
+- (void)click_customerProcess {
+    
+}
+
+- (void)click_bookAppointment {
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"BookAppointmentViewController").new animated:YES];
 }
 
 @end

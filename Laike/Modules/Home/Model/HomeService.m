@@ -202,8 +202,7 @@
     QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCustomerTableViewCell"
                                                                       Height:140
                                                                         Data:@[@{@"value": @(self.homeModel.userCount), @"title": @"CRM"},
-                                                                               @{@"value": @(self.homeModel.userDays), @"title": @"获客"},
-                                                                               @{@"value": @(self.homeModel.clueCount), @"title": @"公客"}]];
+                                                                               @{@"value": @(self.homeModel.userDays), @"title": @"获客"}]];
     [self.tableViewDataArray addObject:crmDataModel];
     
     QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineIconTableViewCell" Height:160 Data:self.iconArray];

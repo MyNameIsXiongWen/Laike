@@ -30,4 +30,11 @@
     }];
 }
 
+- (UserModel *)userModel {
+    if (!_userModel) {
+        _userModel = UserModel.shareUser;
+    }
+    return _userModel;
+}
+
 @end
