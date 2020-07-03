@@ -49,6 +49,16 @@
     }];
 }
 
+- (void)getCountryDataRequestWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading show];
+    [QHWHttpManager.sharedInstance QHW_POST:kSystemCountry parameters:@{} success:^(id responseObject) {
+        self.countryArray = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"list"]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
 - (void)getLikeRankRequestWithSubjectType:(NSInteger)subjectType Complete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kSystemLike parameters:@{@"subjectType": @(subjectType),

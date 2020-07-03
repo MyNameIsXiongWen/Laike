@@ -11,6 +11,8 @@
 #import "QHWBaseSubContentTableViewCell.h"
 #import "CRMDetailScrollContentViewController.h"
 #import "CRMService.h"
+#import "CTMediator+ViewController.h"
+#import "QHWMoreView.h"
 
 @interface CRMDetailViewController () <UITableViewDelegate, UITableViewDataSource, QHWPageContentViewDelegate>
 
@@ -31,9 +33,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"客户详情";
+    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_more") forState:0];
     self.canScroll = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatusNotification) name:@"CRMDetailSwipeLeaveTop" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
     [self.view addSubview:self.btmView];
+}
+
+- (void)rightNavBtnAction:(UIButton *)sender {
+    QHWMoreView *moreView = [[QHWMoreView alloc] initWithFrame:CGRectMake(kScreenW-125, kTopBarHeight, 105, 85)
+                                                     ViewArray:@[@{@"title":@"完善信息", @"identifier":@"completeInfomation"},
+                                                                 @{@"title":@"放弃跟进", @"identifier":@"giveUpFollowUp"}]];
+    WEAKSELF
+    moreView.clickBtnBlock = ^(NSString * _Nonnull identifier) {
+        if ([identifier isEqualToString:@"completeInfomation"]) {
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+        } else if ([identifier isEqualToString:@"giveUpFollowUp"]) {
+            [weakSelf.crmService CRMGiveUpTrackRequest];
+        }
+    };
+    [moreView show];
 }
 
 - (void)getMainData {
@@ -107,6 +126,7 @@
         for (int i=0; i<identifierArray.count; i++) {
             CRMDetailScrollContentViewController *vc = [[CRMDetailScrollContentViewController alloc] init];
             vc.identifier = identifierArray[i];
+            vc.crmService = self.crmService;
             [contentVCs addObject:vc];
         }
         _contentCell.viewControllers = contentVCs;
@@ -181,6 +201,7 @@
 - (CRMDetailBottomView *)btmView {
     if (!_btmView) {
         _btmView = [[CRMDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
+        _btmView.customerId = self.customerId;
     }
     return _btmView;
 }
@@ -240,11 +261,11 @@
 }
 
 - (void)clickInfoBtn {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:self.customerId];
 }
 
 - (void)clickTrackBtn {
-    
+    [CTMediator.sharedInstance CTMediator_viewControllerForAddTrackWithCustomerId:self.customerId];
 }
 
 - (void)clickContactBtn {

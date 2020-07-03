@@ -41,6 +41,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, strong) NSMutableArray <FilterCellModel *>*data;
+@property (nonatomic, strong) NSMutableArray <FilterCellModel *>*children;
 
 + (instancetype)modelWithName:(NSString *)name Code:(NSString *)code;
 

@@ -12,6 +12,7 @@
 #import "QHWActivityModel.h"
 #import "QHWItemPageModel.h"
 #import "QHWImageModel.h"
+#import "QHWFilterModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray <QHWActivityModel *>*activityArray;
 @property (nonatomic, strong) NSArray <SearchContentModel *>*hotSearchArray;
 @property (nonatomic, strong) NSArray <SearchContentModel *>*searchResultArray;
+@property (nonatomic, strong) NSArray <FilterCellModel *>*countryArray;
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
 
 @property (nonatomic, strong) QHWActivityModel *activityDetailModel;
@@ -30,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)showLabelAlertViewWithTitle:(NSString *)title Img:(NSString *)img MerchantId:(NSString *)merchantId IndustryId:(NSInteger)industryId BusinessId:(NSString *)businessId DescribeCode:(NSInteger)describeCode PositionCode:(NSInteger)positionCode;
 
+- (void)getCountryDataRequestWithComplete:(void (^)(void))complete;
 - (void)getLikeRankRequestWithSubjectType:(NSInteger)subjectType Complete:(void (^)(void))complete;
 
 /*

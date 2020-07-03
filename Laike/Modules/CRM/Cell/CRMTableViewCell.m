@@ -54,7 +54,7 @@
 
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
-        _nameLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme21a8ff);
+        _nameLabel = UILabel.labelInit().labelFont(kFontTheme16).labelTitleColor(kColorTheme2a303c);
         [self.contentView addSubview:_nameLabel];
     }
     return _nameLabel;

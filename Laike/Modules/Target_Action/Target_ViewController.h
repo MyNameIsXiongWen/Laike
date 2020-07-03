@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeRateViewController:(NSDictionary *)params;
 
+- (void)Action_nativeAddCustomerViewController:(NSDictionary *)params;
+
 - (void)Action_nativeAddTrackViewController:(NSDictionary *)params;
 
 - (void)Action_nativeCRMDetailViewController:(NSDictionary *)params;

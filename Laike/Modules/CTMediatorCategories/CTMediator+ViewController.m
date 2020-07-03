@@ -26,6 +26,7 @@ NSString * const kCTMediatorActionNativeQSchoolDetailViewController = @"nativeQS
 NSString * const kCTMediatorActionNativeLiveViewController = @"nativeLiveViewController";
 NSString * const kCTMediatorActionNativeGalleryViewController = @"nativeGalleryViewController";
 NSString * const kCTMediatorActionNativeRateViewController = @"nativeRateViewController";
+NSString * const kCTMediatorActionNativeAddCustomerViewController = @"nativeAddCustomerViewController";
 NSString * const kCTMediatorActionNativeAddTrackViewController = @"nativeAddTrackViewController";
 NSString * const kCTMediatorActionNativeCRMDetailViewController = @"nativeCRMDetailViewController";
 
@@ -143,6 +144,13 @@ NSString * const kCTMediatorActionNativeCRMDetailViewController = @"nativeCRMDet
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeRateViewController
                  params:@{}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForAddCustomerWithCustomerId:(NSString *)customerId {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeAddCustomerViewController
+                 params:@{@"customerId": customerId ?: @""}
     shouldCacheTarget:NO];
 }
 

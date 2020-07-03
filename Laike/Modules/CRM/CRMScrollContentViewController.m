@@ -92,9 +92,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CRMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CRMTableViewCell.class)];
     CRMModel *model = self.crmService.crmArray[indexPath.row];
-//    [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
-    cell.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:model.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+    if (model.headPath.length > 0) {
+        [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+    } else {
+        cell.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:model.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+    }
     cell.nameLabel.text = model.realName;
+    if (model.industryNameArray.count == 0) {
+        [cell.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(cell.contentView);
+        }];
+    } else {
+        [cell.tagView setTagWithTagArray:model.industryNameArray];
+    }
     return cell;
 }
 

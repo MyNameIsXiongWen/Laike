@@ -52,7 +52,10 @@ static NSString *const kSystemGetMiniCode = @"product/getQrcode";//获取分享�
 
 
 
+
 #pragma mark ------------来客接口-------------
+static NSString *const kSystemCountry = @"configure/city/getAllOverseasCountryTree";//所有国家
+
 static NSString *const kHomeReport = @"report/getHome";//主页报表
 static NSString *const kHomeConsultant = @"merchant/user/getHome";//主页顾问
 static NSString *const kSystemLike = @"action/like/top";//点赞排行榜
@@ -71,7 +74,11 @@ static NSString *const kCRMFilter = @"client/getVariable";//crm筛选条件
 static NSString *const kCRMList = @"client/getList";//crm列表
 static NSString *const kCRMDetailInfo = @"client/getInfo";
 static NSString *const kCRMAdd = @"client/add";//crm add
+static NSString *const kCRMEdit = @"client/edit";//crm edit
 static NSString *const kCRMAddTrack = @"client/follow/add";//crm add track
+static NSString *const kCRMGiveUpTrack = @"client/giveUp";//crm giveUp track
+static NSString *const kCRMTrackList = @"client/follow/getList";//crm track list
+
 static NSString *const kClueList = @"clue/getList";//咨询列表
 
 static NSString *const kActionBrowseList = @"action/browse/getMyList";//访客列表

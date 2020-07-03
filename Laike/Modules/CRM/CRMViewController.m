@@ -12,6 +12,7 @@
 #import "QHWTabScrollView.h"
 #import "QHWPageContentView.h"
 #import "CRMService.h"
+#import "CTMediator+ViewController.h"
 
 @interface CRMViewController () <QHWPageContentViewDelegate>
 
@@ -33,11 +34,16 @@
     [self.view addSubview:self.pageContentView];
     [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
     [self.kNavigationView.rightBtn setTitle:@"+" forState:0];
+    [self.kNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
 //    [self.kNavigationView.rightBtn setImage:kImageMake(@"customize_add") forState:0];
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-    [self.navigationController pushViewController:NSClassFromString(@"CRMAddCustomerViewController").new animated:YES];
+    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@""];
+}
+
+- (void)rightAnthorNavBtnAction:(UIButton *)sender {
+    
 }
 
 - (void)getMainData {

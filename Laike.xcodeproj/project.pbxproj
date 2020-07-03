@@ -22,6 +22,11 @@
 		185D44A324ADDD4100CD3A00 /* CRMDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D44A224ADDD4100CD3A00 /* CRMDetailViewController.m */; };
 		185D44A624ADDDFC00CD3A00 /* CRMDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D44A524ADDDFC00CD3A00 /* CRMDetailHeaderView.m */; };
 		185D44AA24ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D44A924ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m */; };
+		185E155A24AEC76E00F15A90 /* SearchContentLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E155924AEC76E00F15A90 /* SearchContentLayout.m */; };
+		185E155E24AEC81500F15A90 /* CRMBtnCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185E155B24AEC81500F15A90 /* CRMBtnCollectionViewCell.xib */; };
+		185E155F24AEC81500F15A90 /* CRMBtnCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E155D24AEC81500F15A90 /* CRMBtnCollectionViewCell.m */; };
+		185E156224AEFD5800F15A90 /* QHWMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E156124AEFD5800F15A90 /* QHWMoreView.m */; };
+		185E156524AF2D8600F15A90 /* SelectCountryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E156424AF2D8600F15A90 /* SelectCountryView.m */; };
 		185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81624A08FD700DCAB2C /* AppDelegate.m */; };
 		185EC81D24A08FD700DCAB2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81C24A08FD700DCAB2C /* ViewController.m */; };
 		185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185EC81E24A08FD700DCAB2C /* Main.storyboard */; };
@@ -274,6 +279,15 @@
 		185D44A524ADDDFC00CD3A00 /* CRMDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMDetailHeaderView.m; sourceTree = "<group>"; };
 		185D44A824ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMDetailScrollContentViewController.h; sourceTree = "<group>"; };
 		185D44A924ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMDetailScrollContentViewController.m; sourceTree = "<group>"; };
+		185E155824AEC76E00F15A90 /* SearchContentLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchContentLayout.h; path = ../../../../../SearchContentLayout.h; sourceTree = "<group>"; };
+		185E155924AEC76E00F15A90 /* SearchContentLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchContentLayout.m; path = ../../../../../SearchContentLayout.m; sourceTree = "<group>"; };
+		185E155B24AEC81500F15A90 /* CRMBtnCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRMBtnCollectionViewCell.xib; sourceTree = "<group>"; };
+		185E155C24AEC81500F15A90 /* CRMBtnCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMBtnCollectionViewCell.h; sourceTree = "<group>"; };
+		185E155D24AEC81500F15A90 /* CRMBtnCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMBtnCollectionViewCell.m; sourceTree = "<group>"; };
+		185E156024AEFD5800F15A90 /* QHWMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWMoreView.h; sourceTree = "<group>"; };
+		185E156124AEFD5800F15A90 /* QHWMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWMoreView.m; sourceTree = "<group>"; };
+		185E156324AF2D8600F15A90 /* SelectCountryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCountryView.h; sourceTree = "<group>"; };
+		185E156424AF2D8600F15A90 /* SelectCountryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCountryView.m; sourceTree = "<group>"; };
 		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1142,6 +1156,8 @@
 				185EC9EE24A0A89D00DCAB2C /* QHWTableSectionHeaderView.m */,
 				186394E824A1A0D5007DC26D /* QHWCellBottomShareView.h */,
 				186394E924A1A0D5007DC26D /* QHWCellBottomShareView.m */,
+				185E156024AEFD5800F15A90 /* QHWMoreView.h */,
+				185E156124AEFD5800F15A90 /* QHWMoreView.m */,
 				185EC8C224A091BD00DCAB2C /* QHWPhotoBrowser */,
 				185EC8D024A091BD00DCAB2C /* QHWFilterView */,
 				185EC8E224A091BD00DCAB2C /* QHWSwipeContentView */,
@@ -1624,6 +1640,9 @@
 		1863950324A1B112007DC26D /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				185E155C24AEC81500F15A90 /* CRMBtnCollectionViewCell.h */,
+				185E155D24AEC81500F15A90 /* CRMBtnCollectionViewCell.m */,
+				185E155B24AEC81500F15A90 /* CRMBtnCollectionViewCell.xib */,
 				1863950424A1B143007DC26D /* CRMTableViewCell.h */,
 				1863950524A1B143007DC26D /* CRMTableViewCell.m */,
 			);
@@ -1641,6 +1660,10 @@
 				185D449A24AD738300CD3A00 /* CRMTextFieldView.m */,
 				185D44A424ADDDFC00CD3A00 /* CRMDetailHeaderView.h */,
 				185D44A524ADDDFC00CD3A00 /* CRMDetailHeaderView.m */,
+				185E155824AEC76E00F15A90 /* SearchContentLayout.h */,
+				185E155924AEC76E00F15A90 /* SearchContentLayout.m */,
+				185E156324AF2D8600F15A90 /* SelectCountryView.h */,
+				185E156424AF2D8600F15A90 /* SelectCountryView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1791,6 +1814,7 @@
 			files = (
 				1863953724A32A27007DC26D /* BindCompanyViewController.xib in Resources */,
 				185EC82524A08FD800DCAB2C /* LaunchScreen.storyboard in Resources */,
+				185E155E24AEC81500F15A90 /* CRMBtnCollectionViewCell.xib in Resources */,
 				185EC82224A08FD800DCAB2C /* Assets.xcassets in Resources */,
 				185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */,
 				1863953224A32A0A007DC26D /* CancelBindCompanyViewController.xib in Resources */,
@@ -1894,6 +1918,7 @@
 				185EC96824A091BE00DCAB2C /* QHWCommunityContentModel.m in Sources */,
 				185EC96A24A091BE00DCAB2C /* UITabBar+Push.m in Sources */,
 				185EC9CA24A096B600DCAB2C /* MessageTableViewCell.m in Sources */,
+				185E156524AF2D8600F15A90 /* SelectCountryView.m in Sources */,
 				185FDF1224A733130043FF36 /* CommunityPublishService.m in Sources */,
 				185EC9CD24A096B600DCAB2C /* MessageSearchViewController.m in Sources */,
 				185EC96324A091BE00DCAB2C /* QHWCategoryModel.m in Sources */,
@@ -1983,6 +2008,7 @@
 				185FDF3124A73ECE0043FF36 /* CommentKeyboardAccessoryView.m in Sources */,
 				185EC97D24A091BE00DCAB2C /* QHWPageContentView.m in Sources */,
 				185FDF7D24A8329D0043FF36 /* RateKeyBoardView.m in Sources */,
+				185E156224AEFD5800F15A90 /* QHWMoreView.m in Sources */,
 				185FDEEC24A7305D0043FF36 /* ActivityDetailOrganizerTableViewCell.m in Sources */,
 				185EC96024A091BE00DCAB2C /* QHWActivityModel.m in Sources */,
 				185FDF6F24A749FA0043FF36 /* LiveDetailViewController.m in Sources */,
@@ -1996,6 +2022,7 @@
 				185EC95B24A091BE00DCAB2C /* QHWTagListModel.m in Sources */,
 				185EC97B24A091BE00DCAB2C /* QHWFilterView.m in Sources */,
 				185D44A624ADDDFC00CD3A00 /* CRMDetailHeaderView.m in Sources */,
+				185E155A24AEC76E00F15A90 /* SearchContentLayout.m in Sources */,
 				185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */,
 				185EC9AE24A091DA00DCAB2C /* AppGuideViewController.m in Sources */,
 				185EC9CB24A096B600DCAB2C /* RelatedToMeTableViewCell.m in Sources */,
@@ -2056,6 +2083,7 @@
 				185EC94924A091BE00DCAB2C /* Target_ViewController.m in Sources */,
 				185EC98924A091BE00DCAB2C /* QHWTextCollectionViewCell.m in Sources */,
 				185A62FC24A98F2F00E7E75D /* QSchoolOrganizerViewController.m in Sources */,
+				185E155F24AEC81500F15A90 /* CRMBtnCollectionViewCell.m in Sources */,
 				185FDF0E24A733130043FF36 /* CommunityPublishViewController.m in Sources */,
 				185FDF0F24A733130043FF36 /* PublishSuccessViewController.m in Sources */,
 				185EC94D24A091BE00DCAB2C /* LoginViewController.m in Sources */,

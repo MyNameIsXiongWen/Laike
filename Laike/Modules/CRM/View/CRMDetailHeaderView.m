@@ -90,11 +90,7 @@
     _crmModel = crmModel;
     [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:crmModel.headPath]];
     self.nameLabel.text = crmModel.realName;
-    NSMutableArray *array = NSMutableArray.array;
-    for (NSDictionary *dic in crmModel.industryList) {
-        [array addObject:dic[@"name"]];
-    }
-    [self.tagView setTagWithTagArray:array];
+    [self.tagView setTagWithTagArray:crmModel.industryNameArray];
     self.remarkValueLabel.text = crmModel.note ?: @"暂无";
     self.intentionBusinessValueLabel.text = crmModel.industryStr;
     self.intentionCountryValueLabel.text = crmModel.countryStr;

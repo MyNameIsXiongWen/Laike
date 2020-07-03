@@ -28,7 +28,9 @@
 @implementation FilterCellModel
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"data": FilterCellModel.class};
+    return @{@"data": FilterCellModel.class,
+             @"children": FilterCellModel.class
+    };
 }
 
 - (CGSize)size {

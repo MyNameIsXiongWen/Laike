@@ -17,7 +17,6 @@
 @property (nonatomic, strong) CRMTextFieldView *typeTFView;
 @property (nonatomic, strong) UITextView *remarkTextView;
 @property (nonatomic, strong) CRMService *crmService;
-@property (nonatomic, strong) NSArray <FilterCellModel *>*typeArray;
 @property (nonatomic, assign) NSInteger selectedIndex;
 
 @end
@@ -43,30 +42,27 @@
         [SVProgressHUD showInfoWithStatus:@"请输入跟进说明"];
         return;
     }
-    [self.crmService CRMAddTrackRequestWithCustomerId:self.customerId FollowStatusCode:self.typeArray[self.selectedIndex].code.integerValue Remark:self.remarkTextView.text Complete:^{
+    [self.crmService CRMAddTrackRequestWithFollowStatusCode:self.crmService.followStatusList[self.selectedIndex].code.integerValue Remark:self.remarkTextView.text Complete:^{
         
     }];
 }
 
 - (void)getMainData {
     [self.crmService getCRMFilterDataRequestWithComplete:^(id  _Nullable responseObject) {
-        if ([responseObject isKindOfClass:NSDictionary.class]) {
-            self.typeArray = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"followStatusList"]];
-        }
     }];
 }
 
 - (void)tapTypeView {
     [self.view endEditing:YES];
-    QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*MIN(5, (self.typeArray.count+1))+7) title:@""];
-    sheetView.dataArray = [self.typeArray convertToTitleArrayWithKeyName:@"name"];
+    QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*MIN(5, (self.crmService.followStatusList.count+1))+7) title:@""];
+    sheetView.dataArray = [self.crmService.followStatusList convertToTitleArrayWithKeyName:@"name"];
     sheetView.sheetDelegate = self;
     [sheetView show];
 }
 
 - (void)actionSheetViewSelectedIndex:(NSInteger)index WithActionSheetView:(QHWActionSheetView *)actionsheetView {
     self.selectedIndex = index;
-    self.typeTFView.rightLabel.text = self.typeArray[index].name;
+    self.typeTFView.rightLabel.text = self.crmService.followStatusList[index].name;
     self.typeTFView.textField.placeholder = @"";
 }
 
@@ -120,6 +116,7 @@
 - (CRMService *)crmService {
     if (!_crmService) {
         _crmService = CRMService.new;
+        _crmService.customerId = self.customerId;
     }
     return _crmService;
 }

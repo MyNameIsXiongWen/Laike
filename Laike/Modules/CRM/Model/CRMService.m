@@ -12,6 +12,10 @@
 
 - (void)getCRMFilterDataRequestWithComplete:(void (^)(id _Nullable))complete {
     [QHWHttpManager.sharedInstance QHW_POST:kCRMFilter parameters:@{} success:^(id responseObject) {
+        self.clientSourceList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"clientSourceList"]];
+        self.industryList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"industryList"]];
+        self.intentionLevelList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"intentionLevelList"]];
+        self.followStatusList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"followStatusList"]];
         [self handleFilterDataWithResponse:responseObject[@"data"]];
         complete(responseObject[@"data"]);
     } failure:^(NSError *error) {
@@ -42,7 +46,23 @@
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kCRMDetailInfo parameters:@{@"id": self.customerId ?: @""} success:^(id responseObject) {
         self.crmModel = [CRMModel yy_modelWithJSON:responseObject[@"data"]];
-        self.tableHeaderViewHeight = 140 + 40 + self.crmModel.remarkH + 40 + self.crmModel.industryH + 5 + self.crmModel.countryH + 20;
+        self.tableHeaderViewHeight = 140 + 40 + self.crmModel.detailRemarkStrH + 40 + self.crmModel.detailIndustryStrH + 5 + self.crmModel.detailCountryStrH + 10;
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
+- (void)getCRMTrackListDataRequestWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kCRMTrackList parameters:@{@"id": self.customerId ?: @"",
+                                                                       @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                                                                       @"pageSize": @(self.itemPageModel.pagination.pageSize)} success:^(id responseObject) {
+        self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
+        if (self.itemPageModel.pagination.currentPage == 1) {
+            [self.trackArray removeAllObjects];
+        }
+        [self.trackArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CRMTrackModel.class json:self.itemPageModel.list]];
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -65,14 +85,68 @@
     }];
 }
 
-- (void)CRMAddCustomerRequestWithName:(NSString *)name Phone:(NSString *)phone Source:(NSInteger)source Remark:(NSString *)remark Complete:(void (^)(void))complete {
+- (void)CRMAddCustomerRequestWithComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
-    NSDictionary *params = @{@"clientSourceCode": @(source),
-                             @"realName": name,
-                             @"mobileNumber": phone,
-                             @"note": remark};
-    [QHWHttpManager.sharedInstance QHW_POST:kCRMAdd parameters:params success:^(id responseObject) {
-        [SVProgressHUD showInfoWithStatus:@"添加成功"];
+    NSMutableArray *businessArray = NSMutableArray.array;
+    for (FilterCellModel *model in self.industryList) {
+        if (model.selected) {
+            [businessArray addObject:@{@"id": model.id}];
+        }
+    }
+    NSMutableArray *countryArray = NSMutableArray.array;
+    for (FilterCellModel *model in self.intentionCountryArray) {
+        if (model.selected) {
+            [countryArray addObject:@{@"id": model.id}];
+        }
+    }
+    FilterCellModel *intentionModel;
+    for (FilterCellModel *model in self.intentionLevelList) {
+        if (model.selected) {
+            intentionModel = model;
+            break;
+        }
+    }
+    
+    NSMutableDictionary *params = @{@"realName": self.crmModel.realName ?: @""}.mutableCopy;
+    if (self.crmModel.gender) {
+        params[@"gender"] = @(self.crmModel.gender);
+    }
+    if (self.crmModel.wechatNumber) {
+        params[@"wechatNumber"] = self.crmModel.wechatNumber;
+    }
+    if (self.crmModel.note.length > 0) {
+        params[@"note"] = self.crmModel.note;
+    }
+    if (businessArray.count > 0) {
+        params[@"industryList"] = businessArray;
+    }
+    if (countryArray.count > 0) {
+        params[@"countryList"] = countryArray;
+    }
+    if (intentionModel) {
+        params[@"intentionLevelCode"] = intentionModel.code;
+    }
+    NSString *urlString = kCRMAdd;
+    NSString *remiderString = @"添加成功";
+    if (self.customerId.length > 0) {
+        params[@"id"] = self.customerId;
+        urlString = kCRMEdit;
+        remiderString = @"";
+    } else {
+        FilterCellModel *sourceModel;
+        for (FilterCellModel *model in self.clientSourceList) {
+            if (model.selected) {
+                sourceModel = model;
+                break;
+            }
+        }
+        if (sourceModel) {
+            params[@"clientSourceCode"] = sourceModel.code;
+        }
+        params[@"mobileNumber"] = self.crmModel.mobileNumber ?: @"";
+    }
+    [QHWHttpManager.sharedInstance QHW_POST:urlString parameters:params success:^(id responseObject) {
+        [SVProgressHUD showInfoWithStatus:remiderString];
         [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
         [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddCustomerSuccess object:nil];
         complete();
@@ -81,18 +155,33 @@
     }];
 }
 
-- (void)CRMAddTrackRequestWithCustomerId:(NSString *)customerId FollowStatusCode:(NSInteger)followStatusCode Remark:(NSString *)remark Complete:(void (^)(void))complete {
+- (void)CRMAddTrackRequestWithFollowStatusCode:(NSInteger)followStatusCode Remark:(NSString *)remark Complete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
     NSDictionary *params = @{@"followStatusCode": @(followStatusCode),
-                             @"id": customerId ?: @"",
+                             @"id": self.customerId ?: @"",
                              @"content": remark};
     [QHWHttpManager.sharedInstance QHW_POST:kCRMAddTrack parameters:params success:^(id responseObject) {
         [SVProgressHUD showInfoWithStatus:@"跟进成功"];
         [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
-//        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddCustomerSuccess object:nil];
+        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddTrackSuccess object:nil];
         complete();
     } failure:^(NSError *error) {
         complete();
+    }];
+}
+
+- (void)CRMGiveUpTrackRequest {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kCRMGiveUpTrack parameters:@{@"id": self.customerId ?: @""} success:^(id responseObject) {
+        [SVProgressHUD showInfoWithStatus:@"放弃跟进"];
+        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddCustomerSuccess object:nil];
+        for (UIViewController *vc in self.getCurrentMethodCallerVC.navigationController.childViewControllers) {
+            if ([NSStringFromClass(vc.class) isEqualToString:@"CRMViewController"]) {
+                [self.getCurrentMethodCallerVC.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+    } failure:^(NSError *error) {
     }];
 }
 
@@ -101,7 +190,7 @@
     FilterCellModel *nolimitSourceModel = [FilterCellModel modelWithName:@"不限" Code:@""];
     nolimitSourceModel.valueStr = @"clientSourceCode";
     [tempSourceFilterArray addObject:nolimitSourceModel];
-    [tempSourceFilterArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:FilterCellModel.class json:dic[@"clientSourceList"]]];
+    [tempSourceFilterArray addObjectsFromArray:self.clientSourceList];
     [self.filterDataArray addObject:[FilterBtnViewCellModel modelWithName:@"来源"
                                                                   Img:@"global_down"
                                                             DataArray:@[[QHWFilterModel modelWithTitle:@"来源"
@@ -114,7 +203,7 @@
     FilterCellModel *nolimitDemandModel = [FilterCellModel modelWithName:@"不限" Code:@""];
     nolimitDemandModel.valueStr = @"industryId";
     [tempDemandFilterArray addObject:nolimitDemandModel];
-    [tempDemandFilterArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:FilterCellModel.class json:dic[@"industryList"]]];
+    [tempDemandFilterArray addObjectsFromArray:self.industryList];
     [self.filterDataArray addObject:[FilterBtnViewCellModel modelWithName:@"需求"
                                                                   Img:@"global_down"
                                                             DataArray:@[[QHWFilterModel modelWithTitle:@"需求"
@@ -127,7 +216,7 @@
     FilterCellModel *nolimitIntentionModel = [FilterCellModel modelWithName:@"不限" Code:@""];
     nolimitIntentionModel.valueStr = @"intentionLevelCode";
     [tempIntentionFilterArray addObject:nolimitIntentionModel];
-    [tempIntentionFilterArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:FilterCellModel.class json:dic[@"intentionLevelList"]]];
+    [tempIntentionFilterArray addObjectsFromArray:self.intentionLevelList];
     [self.filterDataArray addObject:[FilterBtnViewCellModel modelWithName:@"意向"
                                                                   Img:@"global_down"
                                                             DataArray:@[[QHWFilterModel modelWithTitle:@"意向"
@@ -140,7 +229,7 @@
     FilterCellModel *nolimitProcessModel = [FilterCellModel modelWithName:@"不限" Code:@""];
     nolimitProcessModel.valueStr = @"followStatusCode";
     [tempProcessFilterArray addObject:nolimitProcessModel];
-    [tempProcessFilterArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:FilterCellModel.class json:dic[@"followStatusList"]]];
+    [tempProcessFilterArray addObjectsFromArray:self.followStatusList];
     [self.filterDataArray addObject:[FilterBtnViewCellModel modelWithName:@"进度"
                                                                   Img:@"global_down"
                                                             DataArray:@[[QHWFilterModel modelWithTitle:@"进度"
@@ -150,12 +239,126 @@
                                                                 Color:kColorTheme2a303c]];
 }
 
+- (void)handleCRMDetailInfoData {
+    [self.tableViewDataArray removeAllObjects];
+    QHWBaseModel *nameModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerTFViewCell" Height:60 Data:@{@"title": @"* 姓名", @"placeholder": @"请输入客户姓名", @"data": self.crmModel, @"identifier": @"realName"}];
+    [self.tableViewDataArray addObject:nameModel];
+    
+    QHWBaseModel *genderModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerGenderCell" Height:60 Data:self.crmModel];
+    [self.tableViewDataArray addObject:genderModel];
+    
+    QHWBaseModel *phoneModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerTFViewCell" Height:60 Data:@{@"title": @"* 手机", @"placeholder": @"请输入客户手机号", @"data": self.crmModel, @"identifier": @"mobileNumber", @"disable": @(YES)}];
+    [self.tableViewDataArray addObject:phoneModel];
+    
+    QHWBaseModel *wechatModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerTFViewCell" Height:60 Data:@{@"title": @"   微信", @"placeholder": @"请输入客户微信号", @"data": self.crmModel, @"identifier": @"wechatNumber"}];
+    [self.tableViewDataArray addObject:wechatModel];
+    
+    QHWBaseModel *remarkModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerRemarkCell" Height:165 Data:self.crmModel];
+    [self.tableViewDataArray addObject:remarkModel];
+    
+    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source"}];
+    [self.tableViewDataArray addObject:sourceModel];
+    
+    QHWBaseModel *crmLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.followStatusList] Data:@{@"title": @"客户等级", @"mutable": @(NO), @"data": self.followStatusList, @"model": self.crmModel, @"identifier": @"crmLevel"}];
+    [self.tableViewDataArray addObject:crmLevelModel];
+    
+    QHWBaseModel *businessModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.industryList] Data:@{@"title": @"意向业务", @"mutable": @(YES), @"data": self.industryList, @"model": self.crmModel, @"identifier": @"business"}];
+    [self.tableViewDataArray addObject:businessModel];
+    
+    QHWBaseModel *intentionLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.intentionLevelList] Data:@{@"title": @"意向等级", @"mutable": @(NO), @"data": self.intentionLevelList, @"model": self.crmModel, @"identifier": @"intentionLevel"}];
+    [self.tableViewDataArray addObject:intentionLevelModel];
+    
+    if (self.customerId.length > 0) {
+        if (self.crmModel.clientSourceCode) {
+            for (FilterCellModel *cellModel in self.clientSourceList) {
+                if (cellModel.code.integerValue == self.crmModel.clientSourceCode) {
+                    cellModel.selected = YES;
+                    break;
+                }
+            }
+        }
+        if (self.crmModel.intentionLevelCode) {
+            for (FilterCellModel *cellModel in self.intentionLevelList) {
+                if (cellModel.code.integerValue == self.crmModel.intentionLevelCode) {
+                    cellModel.selected = YES;
+                    break;
+                }
+            }
+        }
+        if (self.crmModel.industryList.count > 0) {
+            for (NSDictionary *dic in self.crmModel.industryList) {
+                for (FilterCellModel *cellModel in self.industryList) {
+                    if ([cellModel.code isEqualToString:dic[@"id"]]) {
+                        cellModel.selected = YES;
+                    }
+                }
+            }
+            
+        }
+        if (self.crmModel.countryList.count > 0) {
+            for (NSDictionary *dic in self.crmModel.countryList) {
+                @autoreleasepool {
+                    for (FilterCellModel *continentModel in self.countryArray) {
+                        @autoreleasepool {
+                            for (FilterCellModel *countryModel in continentModel.children) {
+                                if ([countryModel.id isEqualToString:dic[@"id"]]) {
+                                    countryModel.selected = YES;
+                                    [self.intentionCountryArray addObject:countryModel];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    QHWBaseModel *countryModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerCountryCell" Height:self.intentionCountryHeight Data:@{@"title": @"意向国家", @"placeholder": @"请选择意向国家", @"data": self, @"identifier": @"country", @"selection": @(YES)}];
+    [self.tableViewDataArray addObject:countryModel];
+}
+
+- (CGFloat)getHeightFromArray:(NSArray *)array {
+    NSInteger row = ceil(array.count/3.0);
+    return row * 45 - 15;
+}
+
+- (CGFloat)intentionCountryHeight {
+    return [self getHeightByTargetColumnSource:self.intentionCountryArray];
+}
+
+- (CGFloat)getHeightByTargetColumnSource:(NSArray *)target {
+    CGFloat height = 30+30;
+    CGFloat width = 0;
+    NSMutableArray *array = target.mutableCopy;
+    [array addObject:FilterCellModel.new];
+    for (FilterCellModel *model in array) {
+        CGFloat modelWidth = [model.name getWidthWithFont:kFontTheme14 constrainedToSize:CGSizeMake(1000, 30)];
+        if (modelWidth < 30) {
+            modelWidth = 30;
+        }
+        model.size = CGSizeMake(modelWidth + 20, 30);
+        width += modelWidth + 20 + 15;
+        if (width > (kScreenW - 100 - 30)) {
+            width = 0;
+            height += 45;
+        }
+    }
+    return height;
+}
+
 #pragma mark ------------DATA-------------
 - (QHWItemPageModel *)itemPageModel {
     if (!_itemPageModel) {
         _itemPageModel = QHWItemPageModel.new;
     }
     return _itemPageModel;
+}
+
+- (CRMModel *)crmModel {
+    if (!_crmModel) {
+        _crmModel = CRMModel.new;
+    }
+    return _crmModel;
 }
 
 - (NSMutableArray<FilterBtnViewCellModel *> *)filterDataArray {
@@ -170,6 +373,20 @@
         _crmArray = NSMutableArray.array;
     }
     return _crmArray;
+}
+
+- (NSMutableArray *)trackArray {
+    if (!_trackArray) {
+        _trackArray = NSMutableArray.array;
+    }
+    return _trackArray;
+}
+
+- (NSMutableArray *)intentionCountryArray {
+    if (!_intentionCountryArray) {
+        _intentionCountryArray  = NSMutableArray.array;
+    }
+    return _intentionCountryArray;
 }
 
 @end
@@ -207,6 +424,17 @@
     return _industryStr;
 }
 
+- (NSArray *)industryNameArray {
+    if (!_industryNameArray) {
+        NSMutableArray *array = NSMutableArray.array;
+        for (NSDictionary *dic in self.industryList) {
+            [array addObject:dic[@"name"]];
+        }
+        _industryNameArray = array.copy;
+    }
+    return _industryNameArray;
+}
+
 - (NSString *)countryStr {
     if (!_countryStr) {
         NSMutableArray *array = NSMutableArray.array;
@@ -222,25 +450,36 @@
     return _countryStr;
 }
 
-- (CGFloat)remarkH {
-    if (!_remarkH) {
-        _remarkH = MAX(20, [self.note getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
+- (CGFloat)detailRemarkStrH {
+    if (!_detailRemarkStrH) {
+        _detailRemarkStrH = MAX(20, [self.note getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
     }
-    return _remarkH;
+    return _detailRemarkStrH;
 }
 
-- (CGFloat)industryH {
-    if (!_industryH) {
-        _industryH = MAX(20, [self.industryStr getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
+- (CGFloat)detailIndustryStrH {
+    if (!_detailIndustryStrH) {
+        _detailIndustryStrH = MAX(20, [self.industryStr getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
     }
-    return _industryH;
+    return _detailIndustryStrH;
 }
 
-- (CGFloat)countryH {
-    if (!_countryH) {
-        _countryH = MAX(20, [self.countryStr getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
+- (CGFloat)detailCountryStrH {
+    if (!_detailCountryStrH) {
+        _detailCountryStrH = MAX(20, [self.countryStr getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);
     }
-    return _countryH;
+    return _detailCountryStrH;
+}
+
+@end
+
+@implementation CRMTrackModel
+
+- (CGFloat)trackHeight {
+    if (!_trackHeight) {
+        _trackHeight = 10 + 20 + 10 + 10 + MAX(20, [self.content getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-60, CGFLOAT_MAX)]);
+    }
+    return _trackHeight;
 }
 
 @end

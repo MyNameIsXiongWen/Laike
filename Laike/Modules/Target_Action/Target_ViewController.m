@@ -24,6 +24,7 @@
 #import "GalleryViewController.h"
 #import "RateViewController.h"
 #import "QSchoolDetailViewController.h"
+#import "CRMAddCustomerViewController.h"
 #import "CRMAddTrackViewController.h"
 #import "CRMDetailViewController.h"
 
@@ -127,6 +128,13 @@
 
 - (void)Action_nativeRateViewController:(NSDictionary *)params {
     RateViewController *vc = RateViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeAddCustomerViewController:(NSDictionary *)params {
+    NSString *customerId = params[@"customerId"];
+    CRMAddCustomerViewController *vc = CRMAddCustomerViewController.new;
+    vc.customerId = customerId;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
