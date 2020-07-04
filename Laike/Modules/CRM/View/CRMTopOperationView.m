@@ -85,7 +85,7 @@
 }
 
 - (void)click_customerProcess {
-    
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"DistributionClientViewController").new animated:YES];
 }
 
 - (void)click_bookAppointment {

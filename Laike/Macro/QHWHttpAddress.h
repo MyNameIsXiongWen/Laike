@@ -60,7 +60,13 @@ static NSString *const kHomeReport = @"report/getHome";//主页报表
 static NSString *const kHomeConsultant = @"merchant/user/getHome";//主页顾问
 static NSString *const kSystemLike = @"action/like/top";//点赞排行榜
 static NSString *const kProductList = @"product/getList";//产品列表
+
+static NSString *const kDistributionFilter = @"distribution/client/getVariable";//筛选条件
 static NSString *const kDistributionList = @"distribution/release/getList";//分销列表
+static NSString *const kDistributionTrackList = @"distribution/follow/getList";//分销模块-进度-列表
+static NSString *const kDistributionClientInfo = @"distribution/client/getInfo";//分销模块-客户-信息
+static NSString *const kDistributionClientList = @"distribution/client/getList";//分销模块-客户-列表
+static NSString *const kDistributionClientAdd = @"distribution/client/add";//分销模块-客户-添加
 
 static NSString *const kSchoolList = @"learn/getList";//Q大学列表
 static NSString *const kSchoolInfo = @"learn/getInfo";//Q大学详情
@@ -79,7 +85,8 @@ static NSString *const kCRMAddTrack = @"client/follow/add";//crm add track
 static NSString *const kCRMGiveUpTrack = @"client/giveUp";//crm giveUp track
 static NSString *const kCRMTrackList = @"client/follow/getList";//crm track list
 
-static NSString *const kClueList = @"clue/getList";//咨询列表
+static NSString *const kClueList = @"clue/getList";//咨询(获客)列表
+static NSString *const kClueActionAllList = @"clue/action/getAllList";//线索模块-行为-客户所有列表
 
 static NSString *const kActionBrowseList = @"action/browse/getMyList";//访客列表
 static NSString *const kActionLikeList = @"action/like/getMyList";//点赞列表

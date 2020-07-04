@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray <FilterBtnViewCellModel *>*filterDataArray;
 @property (nonatomic, strong) NSMutableArray <CRMModel *>*crmArray;
 @property (nonatomic, strong) NSMutableArray *trackArray;
+@property (nonatomic, strong) NSMutableArray *advisoryArray;
 @property (nonatomic, strong) NSArray *countryArray;
 @property (nonatomic, strong) NSMutableArray *intentionCountryArray;
 @property (nonatomic, assign) CGFloat tableHeaderViewHeight;
@@ -34,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getCRMFilterDataRequestWithComplete:(void (^)(_Nullable id responseObject))complete;
 - (void)getCRMListDataRequestWithCondition:(NSDictionary *)condition Complete:(void (^)(void))complete;
 - (void)getClueListDataRequestWithComplete:(void (^)(void))complete;
+- (void)getClueActionAllListDataRequestWithComplete:(void (^)(void))complete;
 
 
 - (void)getCRMDetailInfoRequestWithComplete:(void (^)(void))complete;
@@ -85,6 +87,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *createTime;
 @property (nonatomic, assign) CGFloat trackHeight;
+
+@end
+
+@interface CRMAdvisoryModel : NSObject
+
+@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) NSString *title1;
+@property (nonatomic, copy) NSString *title2;
+@property (nonatomic, copy) NSString *createTime;
+@property (nonatomic, copy) NSString *businessId;
+@property (nonatomic, assign) NSInteger businessType;
+@property (nonatomic, assign) CGFloat advisoryHeight;
 
 @end
 

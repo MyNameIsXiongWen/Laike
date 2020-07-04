@@ -55,9 +55,10 @@
 
 - (void)getCRMTrackListDataRequestWithComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
-    [QHWHttpManager.sharedInstance QHW_POST:kCRMTrackList parameters:@{@"id": self.customerId ?: @"",
-                                                                       @"currentPage": @(self.itemPageModel.pagination.currentPage),
-                                                                       @"pageSize": @(self.itemPageModel.pagination.pageSize)} success:^(id responseObject) {
+    NSDictionary *params = @{@"id": self.customerId ?: @"",
+                             @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                             @"pageSize": @(self.itemPageModel.pagination.pageSize)};
+    [QHWHttpManager.sharedInstance QHW_POST:kCRMTrackList parameters:params success:^(id responseObject) {
         self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
         if (self.itemPageModel.pagination.currentPage == 1) {
             [self.trackArray removeAllObjects];
@@ -79,6 +80,23 @@
             [self.crmArray removeAllObjects];
         }
         [self.crmArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CRMModel.class json:self.itemPageModel.list]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
+- (void)getClueActionAllListDataRequestWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    NSDictionary *params = @{@"id": self.customerId ?: @"",
+                             @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                             @"pageSize": @(self.itemPageModel.pagination.pageSize)};
+    [QHWHttpManager.sharedInstance QHW_POST:kClueActionAllList parameters:params success:^(id responseObject) {
+        self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
+        if (self.itemPageModel.pagination.currentPage == 1) {
+            [self.advisoryArray removeAllObjects];
+        }
+        [self.advisoryArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CRMAdvisoryModel.class json:self.itemPageModel.list]];
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -337,9 +355,9 @@
             modelWidth = 30;
         }
         model.size = CGSizeMake(modelWidth + 20, 30);
-        width += modelWidth + 20 + 15;
-        if (width > (kScreenW - 100 - 30)) {
-            width = 0;
+        width += model.size.width + 15;
+        if (width > (kScreenW - 100)) {
+            width = model.size.width + 15;
             height += 45;
         }
     }
@@ -380,6 +398,13 @@
         _trackArray = NSMutableArray.array;
     }
     return _trackArray;
+}
+
+- (NSMutableArray *)advisoryArray {
+    if (!_advisoryArray) {
+        _advisoryArray = NSMutableArray.array;
+    }
+    return _advisoryArray;
 }
 
 - (NSMutableArray *)intentionCountryArray {
@@ -477,9 +502,20 @@
 
 - (CGFloat)trackHeight {
     if (!_trackHeight) {
-        _trackHeight = 10 + 20 + 10 + 10 + MAX(20, [self.content getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-60, CGFLOAT_MAX)]);
+        _trackHeight = 10 + 20 + 10 + 10 + MAX(20, [self.content getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-60, CGFLOAT_MAX)]);
     }
     return _trackHeight;
+}
+
+@end
+
+@implementation CRMAdvisoryModel
+
+- (CGFloat)advisoryHeight {
+    if (!_advisoryHeight) {
+        _advisoryHeight = 10 + 20 + 10 + 10 + MAX(20, [self.title2 getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-60, CGFLOAT_MAX)]);
+    }
+    return _advisoryHeight;
 }
 
 @end

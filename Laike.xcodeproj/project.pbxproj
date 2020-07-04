@@ -27,6 +27,24 @@
 		185E155F24AEC81500F15A90 /* CRMBtnCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E155D24AEC81500F15A90 /* CRMBtnCollectionViewCell.m */; };
 		185E156224AEFD5800F15A90 /* QHWMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E156124AEFD5800F15A90 /* QHWMoreView.m */; };
 		185E156524AF2D8600F15A90 /* SelectCountryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E156424AF2D8600F15A90 /* SelectCountryView.m */; };
+		185E156824B01E5800F15A90 /* AdvisoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E156724B01E5800F15A90 /* AdvisoryDetailViewController.m */; };
+		185E156B24B01E7800F15A90 /* AdvisoryDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E156A24B01E7800F15A90 /* AdvisoryDetailHeaderView.m */; };
+		185E156F24B027F400F15A90 /* DistributionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E156E24B027F400F15A90 /* DistributionService.m */; };
+		185E157224B0281B00F15A90 /* DistributionClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E157124B0281B00F15A90 /* DistributionClientViewController.m */; };
+		185E157524B0283000F15A90 /* DistributionClientScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E157424B0283000F15A90 /* DistributionClientScrollContentViewController.m */; };
+		185E157824B031E700F15A90 /* RelateProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E157724B031E700F15A90 /* RelateProductViewController.m */; };
+		185E157B24B051A900F15A90 /* MainBusinessDetailService.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E157924B051A900F15A90 /* MainBusinessDetailService.m */; };
+		185E157E24B051BC00F15A90 /* MainBusinessDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E157D24B051BC00F15A90 /* MainBusinessDetailViewController.m */; };
+		185E158324B0520700F15A90 /* MainBusinessDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E157F24B0520600F15A90 /* MainBusinessDetailBottomView.m */; };
+		185E158424B0520700F15A90 /* MainBusinessDetailTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E158124B0520600F15A90 /* MainBusinessDetailTableHeaderView.m */; };
+		185E158724B0526300F15A90 /* HouseDetailConfigTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E158624B0526300F15A90 /* HouseDetailConfigTableViewCell.m */; };
+		185E158A24B052AD00F15A90 /* QHWHouseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E158924B052AD00F15A90 /* QHWHouseTableViewCell.m */; };
+		185E159824B0575F00F15A90 /* CommunityArticleShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E158C24B0575E00F15A90 /* CommunityArticleShareView.m */; };
+		185E159924B0575F00F15A90 /* ConsultantShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E159024B0575E00F15A90 /* ConsultantShareView.m */; };
+		185E159A24B0575F00F15A90 /* MainBusinessShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E159124B0575E00F15A90 /* MainBusinessShareView.m */; };
+		185E159B24B0575F00F15A90 /* CommunityContentShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E159224B0575E00F15A90 /* CommunityContentShareView.m */; };
+		185E159C24B0575F00F15A90 /* MerchantShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E159424B0575F00F15A90 /* MerchantShareView.m */; };
+		185E159D24B0575F00F15A90 /* QHWShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E159524B0575F00F15A90 /* QHWShareView.m */; };
 		185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81624A08FD700DCAB2C /* AppDelegate.m */; };
 		185EC81D24A08FD700DCAB2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81C24A08FD700DCAB2C /* ViewController.m */; };
 		185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185EC81E24A08FD700DCAB2C /* Main.storyboard */; };
@@ -194,7 +212,6 @@
 		185FDF3324A73ECE0043FF36 /* CommentReplyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF2324A73ECD0043FF36 /* CommentReplyListViewController.m */; };
 		185FDF3424A73ECE0043FF36 /* QHWCommentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF2924A73ECD0043FF36 /* QHWCommentService.m */; };
 		185FDF3524A73ECE0043FF36 /* MyCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF2A24A73ECE0043FF36 /* MyCommentTableViewCell.m */; };
-		185FDF3824A73F5A0043FF36 /* MainBusinessDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF3724A73F5A0043FF36 /* MainBusinessDetailBottomView.m */; };
 		185FDF6724A749FA0043FF36 /* LiveDetailOrganizerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF5624A749F80043FF36 /* LiveDetailOrganizerTableViewCell.m */; };
 		185FDF6824A749FA0043FF36 /* LiveCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF5924A749F80043FF36 /* LiveCommentViewController.m */; };
 		185FDF6924A749FA0043FF36 /* LiveService.m in Sources */ = {isa = PBXBuildFile; fileRef = 185FDF5C24A749F90043FF36 /* LiveService.m */; };
@@ -288,6 +305,42 @@
 		185E156124AEFD5800F15A90 /* QHWMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWMoreView.m; sourceTree = "<group>"; };
 		185E156324AF2D8600F15A90 /* SelectCountryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCountryView.h; sourceTree = "<group>"; };
 		185E156424AF2D8600F15A90 /* SelectCountryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCountryView.m; sourceTree = "<group>"; };
+		185E156624B01E5800F15A90 /* AdvisoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdvisoryDetailViewController.h; sourceTree = "<group>"; };
+		185E156724B01E5800F15A90 /* AdvisoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvisoryDetailViewController.m; sourceTree = "<group>"; };
+		185E156924B01E7800F15A90 /* AdvisoryDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdvisoryDetailHeaderView.h; sourceTree = "<group>"; };
+		185E156A24B01E7800F15A90 /* AdvisoryDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvisoryDetailHeaderView.m; sourceTree = "<group>"; };
+		185E156D24B027F400F15A90 /* DistributionService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributionService.h; sourceTree = "<group>"; };
+		185E156E24B027F400F15A90 /* DistributionService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionService.m; sourceTree = "<group>"; };
+		185E157024B0281B00F15A90 /* DistributionClientViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributionClientViewController.h; sourceTree = "<group>"; };
+		185E157124B0281B00F15A90 /* DistributionClientViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionClientViewController.m; sourceTree = "<group>"; };
+		185E157324B0283000F15A90 /* DistributionClientScrollContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributionClientScrollContentViewController.h; sourceTree = "<group>"; };
+		185E157424B0283000F15A90 /* DistributionClientScrollContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionClientScrollContentViewController.m; sourceTree = "<group>"; };
+		185E157624B031E700F15A90 /* RelateProductViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RelateProductViewController.h; sourceTree = "<group>"; };
+		185E157724B031E700F15A90 /* RelateProductViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RelateProductViewController.m; sourceTree = "<group>"; };
+		185E157924B051A900F15A90 /* MainBusinessDetailService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessDetailService.m; sourceTree = "<group>"; };
+		185E157A24B051A900F15A90 /* MainBusinessDetailService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainBusinessDetailService.h; sourceTree = "<group>"; };
+		185E157C24B051BB00F15A90 /* MainBusinessDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainBusinessDetailViewController.h; sourceTree = "<group>"; };
+		185E157D24B051BC00F15A90 /* MainBusinessDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessDetailViewController.m; sourceTree = "<group>"; };
+		185E157F24B0520600F15A90 /* MainBusinessDetailBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessDetailBottomView.m; sourceTree = "<group>"; };
+		185E158024B0520600F15A90 /* MainBusinessDetailTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainBusinessDetailTableHeaderView.h; sourceTree = "<group>"; };
+		185E158124B0520600F15A90 /* MainBusinessDetailTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessDetailTableHeaderView.m; sourceTree = "<group>"; };
+		185E158224B0520700F15A90 /* MainBusinessDetailBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainBusinessDetailBottomView.h; sourceTree = "<group>"; };
+		185E158524B0526300F15A90 /* HouseDetailConfigTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseDetailConfigTableViewCell.h; sourceTree = "<group>"; };
+		185E158624B0526300F15A90 /* HouseDetailConfigTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseDetailConfigTableViewCell.m; sourceTree = "<group>"; };
+		185E158824B052AD00F15A90 /* QHWHouseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWHouseTableViewCell.h; sourceTree = "<group>"; };
+		185E158924B052AD00F15A90 /* QHWHouseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWHouseTableViewCell.m; sourceTree = "<group>"; };
+		185E158C24B0575E00F15A90 /* CommunityArticleShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityArticleShareView.m; sourceTree = "<group>"; };
+		185E158D24B0575E00F15A90 /* MainBusinessShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainBusinessShareView.h; sourceTree = "<group>"; };
+		185E158E24B0575E00F15A90 /* MerchantShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MerchantShareView.h; sourceTree = "<group>"; };
+		185E158F24B0575E00F15A90 /* QHWShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWShareView.h; sourceTree = "<group>"; };
+		185E159024B0575E00F15A90 /* ConsultantShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultantShareView.m; sourceTree = "<group>"; };
+		185E159124B0575E00F15A90 /* MainBusinessShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessShareView.m; sourceTree = "<group>"; };
+		185E159224B0575E00F15A90 /* CommunityContentShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityContentShareView.m; sourceTree = "<group>"; };
+		185E159324B0575F00F15A90 /* CommunityContentShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityContentShareView.h; sourceTree = "<group>"; };
+		185E159424B0575F00F15A90 /* MerchantShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MerchantShareView.m; sourceTree = "<group>"; };
+		185E159524B0575F00F15A90 /* QHWShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWShareView.m; sourceTree = "<group>"; };
+		185E159624B0575F00F15A90 /* CommunityArticleShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityArticleShareView.h; sourceTree = "<group>"; };
+		185E159724B0575F00F15A90 /* ConsultantShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultantShareView.h; sourceTree = "<group>"; };
 		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -627,8 +680,6 @@
 		185FDF2924A73ECD0043FF36 /* QHWCommentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWCommentService.m; sourceTree = "<group>"; };
 		185FDF2A24A73ECE0043FF36 /* MyCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentTableViewCell.m; sourceTree = "<group>"; };
 		185FDF2B24A73ECE0043FF36 /* CommentReplyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentReplyListViewController.h; sourceTree = "<group>"; };
-		185FDF3624A73F5A0043FF36 /* MainBusinessDetailBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainBusinessDetailBottomView.h; sourceTree = "<group>"; };
-		185FDF3724A73F5A0043FF36 /* MainBusinessDetailBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessDetailBottomView.m; sourceTree = "<group>"; };
 		185FDF5624A749F80043FF36 /* LiveDetailOrganizerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveDetailOrganizerTableViewCell.m; sourceTree = "<group>"; };
 		185FDF5724A749F80043FF36 /* LiveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveModel.h; sourceTree = "<group>"; };
 		185FDF5824A749F80043FF36 /* LiveDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveDetailViewController.h; sourceTree = "<group>"; };
@@ -750,6 +801,12 @@
 				185EC9B524A0966A00DCAB2C /* DistributionViewController.m */,
 				185D449624AD735400CD3A00 /* BookAppointmentViewController.h */,
 				185D449724AD735400CD3A00 /* BookAppointmentViewController.m */,
+				185E157624B031E700F15A90 /* RelateProductViewController.h */,
+				185E157724B031E700F15A90 /* RelateProductViewController.m */,
+				185E157024B0281B00F15A90 /* DistributionClientViewController.h */,
+				185E157124B0281B00F15A90 /* DistributionClientViewController.m */,
+				185E157324B0283000F15A90 /* DistributionClientScrollContentViewController.h */,
+				185E157424B0283000F15A90 /* DistributionClientScrollContentViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -759,6 +816,34 @@
 			children = (
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		185E156C24B027DA00F15A90 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				185E156D24B027F400F15A90 /* DistributionService.h */,
+				185E156E24B027F400F15A90 /* DistributionService.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		185E158B24B0574D00F15A90 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				185E159624B0575F00F15A90 /* CommunityArticleShareView.h */,
+				185E158C24B0575E00F15A90 /* CommunityArticleShareView.m */,
+				185E159324B0575F00F15A90 /* CommunityContentShareView.h */,
+				185E159224B0575E00F15A90 /* CommunityContentShareView.m */,
+				185E159724B0575F00F15A90 /* ConsultantShareView.h */,
+				185E159024B0575E00F15A90 /* ConsultantShareView.m */,
+				185E158D24B0575E00F15A90 /* MainBusinessShareView.h */,
+				185E159124B0575E00F15A90 /* MainBusinessShareView.m */,
+				185E158E24B0575E00F15A90 /* MerchantShareView.h */,
+				185E159424B0575F00F15A90 /* MerchantShareView.m */,
+				185E158F24B0575E00F15A90 /* QHWShareView.h */,
+				185E159524B0575F00F15A90 /* QHWShareView.m */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 		185EC80924A08FD600DCAB2C = {
@@ -908,6 +993,7 @@
 			children = (
 				185EC86E24A091BC00DCAB2C /* CTMediatorCategories */,
 				185EC86424A091BC00DCAB2C /* Target_Action */,
+				185E158B24B0574D00F15A90 /* Share */,
 				185FDF7724A82D8D0043FF36 /* Rate */,
 				185FDF7024A750730043FF36 /* Gallery */,
 				185FDF1724A73EC10043FF36 /* Comment */,
@@ -937,6 +1023,8 @@
 				186394EC24A1A60E007DC26D /* RankViewController.m */,
 				186394EE24A1A6D6007DC26D /* RankScrollContentViewController.h */,
 				186394EF24A1A6D6007DC26D /* RankScrollContentViewController.m */,
+				185E157C24B051BB00F15A90 /* MainBusinessDetailViewController.h */,
+				185E157D24B051BC00F15A90 /* MainBusinessDetailViewController.m */,
 				185EC9D724A09C3100DCAB2C /* Model */,
 				185EC9F324A0AF9C00DCAB2C /* Cell */,
 				185EC9D324A09AA600DCAB2C /* View */,
@@ -1279,6 +1367,8 @@
 				185EC91424A091BD00DCAB2C /* QHWSchoolTableViewCell.m */,
 				185EC91324A091BD00DCAB2C /* QHWStudyTourTableViewCell.h */,
 				185EC91A24A091BD00DCAB2C /* QHWStudyTourTableViewCell.m */,
+				185E158824B052AD00F15A90 /* QHWHouseTableViewCell.h */,
+				185E158924B052AD00F15A90 /* QHWHouseTableViewCell.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1346,8 +1436,9 @@
 		185EC9B024A0963700DCAB2C /* Distribution */ = {
 			isa = PBXGroup;
 			children = (
-				185D449C24AD73CE00CD3A00 /* Cell */,
 				185D449524AD734600CD3A00 /* Controller */,
+				185E156C24B027DA00F15A90 /* Model */,
+				185D449C24AD73CE00CD3A00 /* Cell */,
 			);
 			path = Distribution;
 			sourceTree = "<group>";
@@ -1370,6 +1461,10 @@
 				185EC9D524A09AC900DCAB2C /* HomeTableHeaderView.m */,
 				185EC9F124A0AF9A00DCAB2C /* UserDataView.h */,
 				185EC9F024A0AF9900DCAB2C /* UserDataView.m */,
+				185E158224B0520700F15A90 /* MainBusinessDetailBottomView.h */,
+				185E157F24B0520600F15A90 /* MainBusinessDetailBottomView.m */,
+				185E158024B0520600F15A90 /* MainBusinessDetailTableHeaderView.h */,
+				185E158124B0520600F15A90 /* MainBusinessDetailTableHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1381,6 +1476,8 @@
 				185EC9D924A09C5000DCAB2C /* HomeService.m */,
 				186394E524A1964F007DC26D /* HomeModel.h */,
 				186394E624A1964F007DC26D /* HomeModel.m */,
+				185E157A24B051A900F15A90 /* MainBusinessDetailService.h */,
+				185E157924B051A900F15A90 /* MainBusinessDetailService.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1400,6 +1497,12 @@
 				185EC9E824A0A7F500DCAB2C /* MineIconTableViewCell.m */,
 				185EC9EA24A0A80500DCAB2C /* MineSchoolTableViewCell.h */,
 				185EC9EB24A0A80500DCAB2C /* MineSchoolTableViewCell.m */,
+				185E158524B0526300F15A90 /* HouseDetailConfigTableViewCell.h */,
+				185E158624B0526300F15A90 /* HouseDetailConfigTableViewCell.m */,
+				185A630024A9922800E7E75D /* RichTextTableViewCell.h */,
+				185A62FD24A9922800E7E75D /* RichTextTableViewCell.m */,
+				185A62FE24A9922800E7E75D /* RichTextWithTitleTableViewCell.h */,
+				185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1428,10 +1531,6 @@
 				185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */,
 				185A62F724A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.h */,
 				185A62F824A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m */,
-				185A630024A9922800E7E75D /* RichTextTableViewCell.h */,
-				185A62FD24A9922800E7E75D /* RichTextTableViewCell.m */,
-				185A62FE24A9922800E7E75D /* RichTextWithTitleTableViewCell.h */,
-				185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */,
 				185FDED424A71E4D0043FF36 /* Model */,
 			);
 			path = QSchool;
@@ -1463,8 +1562,6 @@
 				185FDEDD24A7305D0043FF36 /* ArtivityDetailTableHeaderView.m */,
 				185FDEE024A7305D0043FF36 /* QHWH5ViewController.h */,
 				185FDEDA24A7305D0043FF36 /* QHWH5ViewController.m */,
-				185FDF3624A73F5A0043FF36 /* MainBusinessDetailBottomView.h */,
-				185FDF3724A73F5A0043FF36 /* MainBusinessDetailBottomView.m */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -1630,6 +1727,8 @@
 				185D44A224ADDD4100CD3A00 /* CRMDetailViewController.m */,
 				185D44A824ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.h */,
 				185D44A924ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m */,
+				185E156624B01E5800F15A90 /* AdvisoryDetailViewController.h */,
+				185E156724B01E5800F15A90 /* AdvisoryDetailViewController.m */,
 				1863953824A35712007DC26D /* Model */,
 				1863950724A1D429007DC26D /* View */,
 				1863950324A1B112007DC26D /* Cell */,
@@ -1664,6 +1763,8 @@
 				185E155924AEC76E00F15A90 /* SearchContentLayout.m */,
 				185E156324AF2D8600F15A90 /* SelectCountryView.h */,
 				185E156424AF2D8600F15A90 /* SelectCountryView.m */,
+				185E156924B01E7800F15A90 /* AdvisoryDetailHeaderView.h */,
+				185E156A24B01E7800F15A90 /* AdvisoryDetailHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1909,10 +2010,15 @@
 				185EC99024A091BE00DCAB2C /* QHWHouseCollectionViewCell.m in Sources */,
 				185A62F524A988DD00E7E75D /* QSchoolCommentViewController.m in Sources */,
 				1863950D24A1D7E1007DC26D /* MainBusinessFilterBtnView.m in Sources */,
+				185E158424B0520700F15A90 /* MainBusinessDetailTableHeaderView.m in Sources */,
 				185EC95A24A091BE00DCAB2C /* QHWStudentModel.m in Sources */,
 				185EC95124A091BE00DCAB2C /* NSArray+Category.m in Sources */,
 				185FDF7A24A832700043FF36 /* RateViewController.m in Sources */,
+				185E156B24B01E7800F15A90 /* AdvisoryDetailHeaderView.m in Sources */,
+				185E156824B01E5800F15A90 /* AdvisoryDetailViewController.m in Sources */,
 				185EC9A724A091BE00DCAB2C /* UILabel+Category.m in Sources */,
+				185E157524B0283000F15A90 /* DistributionClientScrollContentViewController.m in Sources */,
+				185E157824B031E700F15A90 /* RelateProductViewController.m in Sources */,
 				185FDEE924A7305D0043FF36 /* ActivityDetailViewController.m in Sources */,
 				185FDEEB24A7305D0043FF36 /* ActivityListViewController.m in Sources */,
 				185EC96824A091BE00DCAB2C /* QHWCommunityContentModel.m in Sources */,
@@ -1928,10 +2034,12 @@
 				185EC9E924A0A7F500DCAB2C /* MineIconTableViewCell.m in Sources */,
 				185EC96B24A091BE00DCAB2C /* QHWNavigationController.m in Sources */,
 				1863950124A1B0FD007DC26D /* CRMScrollContentViewController.m in Sources */,
+				185E157B24B051A900F15A90 /* MainBusinessDetailService.m in Sources */,
 				185D448D24AC973400CD3A00 /* MineTableHeaderView.m in Sources */,
 				185EC99C24A091BE00DCAB2C /* QHWPermissionManager.m in Sources */,
 				185EC98A24A091BE00DCAB2C /* QHWImageViewCell.m in Sources */,
 				185EC99E24A091BE00DCAB2C /* QHWSystemService.m in Sources */,
+				185E156F24B027F400F15A90 /* DistributionService.m in Sources */,
 				185EC98D24A091BE00DCAB2C /* QHWSchoolCollectionViewCell.m in Sources */,
 				185FDF7624A750930043FF36 /* GalleryService.m in Sources */,
 				185EC97C24A091BE00DCAB2C /* QHWFiltHeaderView.m in Sources */,
@@ -1944,7 +2052,6 @@
 				1863952824A1DC22007DC26D /* CardViewController.m in Sources */,
 				185EC99B24A091BE00DCAB2C /* QHWBaseScrollContentViewController.m in Sources */,
 				185FDF6A24A749FA0043FF36 /* LiveOrganizerViewController.m in Sources */,
-				185FDF3824A73F5A0043FF36 /* MainBusinessDetailBottomView.m in Sources */,
 				185FDF8924A8A7700043FF36 /* PublishRelateProductViewController.m in Sources */,
 				186394FA24A1AFE1007DC26D /* MineService.m in Sources */,
 				185EC96D24A091BE00DCAB2C /* QHWTabBarViewController.m in Sources */,
@@ -1960,10 +2067,12 @@
 				185EC96E24A091BE00DCAB2C /* QHWPhotoBrowserCollectionViewCell.m in Sources */,
 				185EC94B24A091BE00DCAB2C /* CTMediator+TZImgPicker.m in Sources */,
 				185EC99324A091BE00DCAB2C /* QHWShadowTableViewCell.m in Sources */,
+				185E158324B0520700F15A90 /* MainBusinessDetailBottomView.m in Sources */,
 				185EC9A424A091BE00DCAB2C /* UIButton+Category.m in Sources */,
 				185EC98F24A091BE00DCAB2C /* QHWBrokerCollectionViewCell.m in Sources */,
 				185FDF3424A73ECE0043FF36 /* QHWCommentService.m in Sources */,
 				185EC98024A091BE00DCAB2C /* QHWLabelAlertView.m in Sources */,
+				185E159D24B0575F00F15A90 /* QHWShareView.m in Sources */,
 				185EC9D624A09AC900DCAB2C /* HomeTableHeaderView.m in Sources */,
 				185EC95224A091BE00DCAB2C /* NSString+Category.m in Sources */,
 				1863953124A32A0A007DC26D /* CancelBindCompanyViewController.m in Sources */,
@@ -1977,6 +2086,7 @@
 				185EC9DA24A09C5000DCAB2C /* HomeService.m in Sources */,
 				185FDF1424A733130043FF36 /* CommunityTableHeaderView.m in Sources */,
 				185FDECC24A6DD7D0043FF36 /* CardService.m in Sources */,
+				185E159A24B0575F00F15A90 /* MainBusinessShareView.m in Sources */,
 				185EC9A824A091BE00DCAB2C /* UIViewController+Category.m in Sources */,
 				1863952724A1DC22007DC26D /* CardScrollContentViewController.m in Sources */,
 				185EC98E24A091BE00DCAB2C /* QHWImmigrationCollectionViewCell.m in Sources */,
@@ -1995,6 +2105,7 @@
 				185FDF2E24A73ECE0043FF36 /* AllCommentViewController.m in Sources */,
 				185EC94A24A091BE00DCAB2C /* CTMediator+ViewController.m in Sources */,
 				185EC9E024A0A7A600DCAB2C /* MineBannerTableViewCell.m in Sources */,
+				185E159924B0575F00F15A90 /* ConsultantShareView.m in Sources */,
 				185EC9A624A091BE00DCAB2C /* UITextView+Category.m in Sources */,
 				1863950A24A1D457007DC26D /* CRMTopOperationView.m in Sources */,
 				185EC97224A091BE00DCAB2C /* QHWVideoPlayerView.m in Sources */,
@@ -2009,6 +2120,8 @@
 				185EC97D24A091BE00DCAB2C /* QHWPageContentView.m in Sources */,
 				185FDF7D24A8329D0043FF36 /* RateKeyBoardView.m in Sources */,
 				185E156224AEFD5800F15A90 /* QHWMoreView.m in Sources */,
+				185E157E24B051BC00F15A90 /* MainBusinessDetailViewController.m in Sources */,
+				185E158A24B052AD00F15A90 /* QHWHouseTableViewCell.m in Sources */,
 				185FDEEC24A7305D0043FF36 /* ActivityDetailOrganizerTableViewCell.m in Sources */,
 				185EC96024A091BE00DCAB2C /* QHWActivityModel.m in Sources */,
 				185FDF6F24A749FA0043FF36 /* LiveDetailViewController.m in Sources */,
@@ -2045,12 +2158,14 @@
 				185FDF8024A83B510043FF36 /* RateMoneyView.m in Sources */,
 				186394EA24A1A0D5007DC26D /* QHWCellBottomShareView.m in Sources */,
 				185EC9EF24A0A89D00DCAB2C /* QHWTableSectionHeaderView.m in Sources */,
+				185E157224B0281B00F15A90 /* DistributionClientViewController.m in Sources */,
 				185EC9A924A091BE00DCAB2C /* UITextField+Category.m in Sources */,
 				1863953B24A35722007DC26D /* CRMService.m in Sources */,
 				185EC96224A091BE00DCAB2C /* QHWOptionBaseModel.m in Sources */,
 				185A62F624A988DD00E7E75D /* QSchoolDetailViewController.m in Sources */,
 				185EC9A124A091BE00DCAB2C /* UINavigationBar+Category.m in Sources */,
 				186394FE24A1B0E4007DC26D /* CRMViewController.m in Sources */,
+				185E159C24B0575F00F15A90 /* MerchantShareView.m in Sources */,
 				185EC94724A091BE00DCAB2C /* Target_Publish.m in Sources */,
 				185EC94524A091BE00DCAB2C /* QHWHttpLoading.m in Sources */,
 				185EC9A324A091BE00DCAB2C /* UIImage+Category.m in Sources */,
@@ -2079,6 +2194,7 @@
 				185FDF3524A73ECE0043FF36 /* MyCommentTableViewCell.m in Sources */,
 				185EC95524A091BE00DCAB2C /* QHWHouseModel.m in Sources */,
 				185EC99224A091BE00DCAB2C /* QHWActivityTableViewCell.m in Sources */,
+				185E158724B0526300F15A90 /* HouseDetailConfigTableViewCell.m in Sources */,
 				185EC97124A091BE00DCAB2C /* QHWTabScrollView.m in Sources */,
 				185EC94924A091BE00DCAB2C /* Target_ViewController.m in Sources */,
 				185EC98924A091BE00DCAB2C /* QHWTextCollectionViewCell.m in Sources */,
@@ -2089,6 +2205,8 @@
 				185EC94D24A091BE00DCAB2C /* LoginViewController.m in Sources */,
 				185EC95924A091BE00DCAB2C /* QHWBaseModel.m in Sources */,
 				185D44AA24ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m in Sources */,
+				185E159B24B0575F00F15A90 /* CommunityContentShareView.m in Sources */,
+				185E159824B0575F00F15A90 /* CommunityArticleShareView.m in Sources */,
 				185FDEED24A7305D0043FF36 /* ActivityViewController.m in Sources */,
 				185EC9EC24A0A80500DCAB2C /* MineSchoolTableViewCell.m in Sources */,
 				185EC99A24A091BE00DCAB2C /* QHWBaseSubContentTableViewCell.m in Sources */,

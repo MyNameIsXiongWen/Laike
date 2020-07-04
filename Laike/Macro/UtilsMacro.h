@@ -28,6 +28,7 @@
 #define kStudentDetailPath(id) kFormat(@"http://file.qhiwi.com/pages/study/studyDetail?id=%@", id)
 #define kStudyDetailPath(id) kFormat(@"http://file.qhiwi.com/pages/overSea/overSeaDetail?id=%@", id)
 #define kMigrationDetailPath(id) kFormat(@"http://file.qhiwi.com/pages/migrate/migrateDetail?id=%@", id)
+#define kTreatmentDetailPath(id) kFormat(@"http://file.qhiwi.com/pages/medical/medicalDetail?id=%@", id)
 #define kActivityDetailPath(id) kFormat(@"http://file.qhiwi.com/pages/activity/activityDetail?id=%@", id)
 #define kArticleDetailPath(id) kFormat(@"http://file.qhiwi.com/pages/headline/headlineDetail?id=%@", id)
 #define kConsultantDetailPath(id) kFormat(@"http://file.qhiwi.com/pages/counselor/counselorDetail?id=%@", id)

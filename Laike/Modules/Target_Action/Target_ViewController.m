@@ -10,9 +10,9 @@
 #import "QHWNavigationController.h"
 #import "QHWNavgationView.h"
 #import "LoginViewController.h"
-//#import "MainBusinessDetailViewController.h"
+#import "MainBusinessDetailViewController.h"
 #import "ActivityViewController.h"
-//#import "ActivityDetailViewController.h"
+#import "ActivityDetailViewController.h"
 //#import "UserDetailViewController.h"
 #import "CommunityViewController.h"
 #import "CommunityDetailViewController.h"
@@ -27,6 +27,7 @@
 #import "CRMAddCustomerViewController.h"
 #import "CRMAddTrackViewController.h"
 #import "CRMDetailViewController.h"
+#import "AdvisoryDetailViewController.h"
 
 @implementation Target_ViewController
 
@@ -38,12 +39,12 @@
 }
 
 - (void)Action_nativeMainBusinessDetailViewController:(NSDictionary *)params {
-//    NSInteger businessType = [params[@"businessType"] integerValue];
-//    NSString *businessId = params[@"businessId"];
-//    MainBusinessDetailViewController *vc = MainBusinessDetailViewController.new;
-//    vc.businessType = businessType;
-//    vc.businessId = businessId;
-//    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+    NSInteger businessType = [params[@"businessType"] integerValue];
+    NSString *businessId = params[@"businessId"];
+    MainBusinessDetailViewController *vc = MainBusinessDetailViewController.new;
+    vc.businessType = businessType;
+    vc.businessId = businessId;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)Action_nativeActivityViewController:(NSDictionary *)params {
@@ -52,10 +53,10 @@
 }
 
 - (void)Action_nativeActivityDetailViewController:(NSDictionary *)params {
-//    NSString *activityId = params[@"activityId"];
-//    ActivityDetailViewController *vc = ActivityDetailViewController.new;
-//    vc.activityId = activityId;
-//    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+    NSString *activityId = params[@"activityId"];
+    ActivityDetailViewController *vc = ActivityDetailViewController.new;
+    vc.activityId = activityId;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)Action_nativeUserDetailViewController:(NSDictionary *)params {
@@ -148,6 +149,13 @@
 - (void)Action_nativeCRMDetailViewController:(NSDictionary *)params {
     NSString *customerId = params[@"customerId"];
     CRMDetailViewController *vc = CRMDetailViewController.new;
+    vc.customerId = customerId;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeAdvisoryDetailViewController:(NSDictionary *)params {
+    NSString *customerId = params[@"customerId"];
+    AdvisoryDetailViewController *vc = AdvisoryDetailViewController.new;
     vc.customerId = customerId;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }

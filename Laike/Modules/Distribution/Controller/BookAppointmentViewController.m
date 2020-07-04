@@ -8,8 +8,9 @@
 
 #import "BookAppointmentViewController.h"
 #import "CRMTextFieldView.h"
+#import "QHWActionSheetView.h"
 
-@interface BookAppointmentViewController ()
+@interface BookAppointmentViewController () <QHWActionSheetViewDelegate>
 
 @property (nonatomic, strong) CRMTextFieldView *businessTextFieldView;
 @property (nonatomic, strong) CRMTextFieldView *productTextFieldView;
@@ -33,11 +34,20 @@
 }
 
 - (void)clickBusinessTFView {
-    
+    NSArray *array = @[@"房产", @"移民", @"留学", @"游学", @"医疗"];
+    QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*MIN(5, (array.count+1))+7) title:@""];
+    sheetView.dataArray = array;
+    sheetView.sheetDelegate = self;
+    [sheetView show];
+}
+
+- (void)actionSheetViewSelectedIndex:(NSInteger)index WithActionSheetView:(QHWActionSheetView *)actionsheetView {
+    self.businessTextFieldView.textField.placeholder = @"";
+    self.businessTextFieldView.rightLabel.text = actionsheetView.dataArray[index];
 }
 
 - (void)clickProductTFView {
-    
+    [self.navigationController pushViewController:NSClassFromString(@"RelateProductViewController").new animated:YES];
 }
 
 - (void)clickSubmitBtn {

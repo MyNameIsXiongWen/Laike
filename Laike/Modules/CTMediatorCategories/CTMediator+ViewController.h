@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForCRMDetailWithCustomerId:(NSString *)customerId;
 
+- (void)CTMediator_viewControllerForAdvisoryDetailWithCustomerId:(NSString *)customerId;
+
 @end
 
 NS_ASSUME_NONNULL_END

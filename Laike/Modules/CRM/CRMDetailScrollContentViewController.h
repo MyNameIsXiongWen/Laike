@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CRMTrackCell : UITableViewCell
 
+@property (nonatomic, strong) UIView *circle;
+@property (nonatomic, strong) UIView *topLine;
+@property (nonatomic, strong) UIView *btmLine;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *contentLabel;

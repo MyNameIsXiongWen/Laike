@@ -110,8 +110,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CRMModel *model = self.crmService.crmArray[indexPath.row];
-//    [CTMediator.sharedInstance CTMediator_viewControllerForAddTrackWithCustomerId:model.id];
-    [CTMediator.sharedInstance CTMediator_viewControllerForCRMDetailWithCustomerId:model.id];
+    if (self.crmType == 1) {
+        [CTMediator.sharedInstance CTMediator_viewControllerForCRMDetailWithCustomerId:model.id];
+    } else {
+        [CTMediator.sharedInstance CTMediator_viewControllerForAdvisoryDetailWithCustomerId:model.id];
+    }
 }
 
 - (void)confirmSelectItemWithFilterModel:(FilterBtnViewCellModel * _Nonnull )model ItemModel:(FilterCellModel * _Nonnull) countryCellModel {

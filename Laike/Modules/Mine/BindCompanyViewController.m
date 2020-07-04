@@ -7,6 +7,7 @@
 //
 
 #import "BindCompanyViewController.h"
+#import "QHWLabelAlertView.h"
 
 static NSString *const ServiceHotLine = @"400-877-1008";
 @interface BindCompanyViewController ()
@@ -31,6 +32,12 @@ static NSString *const ServiceHotLine = @"400-877-1008";
     [self.remindLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:ServiceHotLine action:@selector(clickServiceHotLine)]];
     
     self.nameTextField.text = @"2002180000";
+    [self.nameTextField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+}
+
+- (void)textFieldValueChanged:(UITextField *)textField {
+    self.confirmBtn.backgroundColor = textField.text.length == 0 ? [UIColor colorWithRed:33 green:168 blue:255 alpha:0.3] : kColorTheme21a8ff;
+    self.confirmBtn.userInteractionEnabled = textField.text.length > 0;
 }
 
 - (void)clickServiceHotLine {
@@ -38,13 +45,25 @@ static NSString *const ServiceHotLine = @"400-877-1008";
 }
 
 - (IBAction)clickConfirmBtn:(id)sender {
-    [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"1", @"merchantNumber": self.nameTextField.text} success:^(id responseObject) {
-        [SVProgressHUD showInfoWithStatus:@"绑定成功"];
-        [self.navigationController popViewControllerAnimated:YES];
-        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationBindSuccess object:nil];
-    } failure:^(NSError *error) {
-        
-    }];
+    if (self.nameTextField.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入公司代码"];
+        return;
+    }
+    QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+    [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认绑定"];
+    alert.contentString = kFormat(@"请确认绑定%@", self.nameTextField.text);
+    WEAKSELF
+    alert.confirmBlock = ^{
+        [alert dismiss];
+        [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"1", @"merchantNumber": weakSelf.nameTextField.text} success:^(id responseObject) {
+            [SVProgressHUD showInfoWithStatus:@"绑定成功"];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [NSNotificationCenter.defaultCenter postNotificationName:kNotificationBindSuccess object:nil];
+        } failure:^(NSError *error) {
+            
+        }];
+    };
+    [alert show];
 }
 
 /*

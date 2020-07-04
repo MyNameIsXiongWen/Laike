@@ -35,31 +35,57 @@
 }
 
 - (void)getMainData {
-    [self.crmService getCRMTrackListDataRequestWithComplete:^{
-        if ([self.tableView.mj_footer isRefreshing]) {
-            [self.tableView.mj_footer endRefreshing];
-        }
-        [self.tableView reloadData];
-        [self.tableView showNodataView:self.crmService.trackArray.count == 0 offsetY:0 button:nil];
-        [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.crmService.itemPageModel];
-    }];
+    if ([self.identifier isEqualToString:@"track"]) {
+        [self.crmService getCRMTrackListDataRequestWithComplete:^{
+            if ([self.tableView.mj_footer isRefreshing]) {
+                [self.tableView.mj_footer endRefreshing];
+            }
+            [self.tableView reloadData];
+            [self.tableView showNodataView:self.crmService.trackArray.count == 0 offsetY:0 button:nil];
+            [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.crmService.itemPageModel];
+        }];
+    } else if ([self.identifier isEqualToString:@"advisory"]) {
+        [self.crmService getClueActionAllListDataRequestWithComplete:^{
+            if ([self.tableView.mj_footer isRefreshing]) {
+                [self.tableView.mj_footer endRefreshing];
+            }
+            [self.tableView reloadData];
+            [self.tableView showNodataView:self.crmService.trackArray.count == 0 offsetY:0 button:nil];
+            [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.crmService.itemPageModel];
+        }];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.crmService.trackArray.count;
+    if ([self.identifier isEqualToString:@"track"]) {
+        return self.crmService.trackArray.count;
+    }
+    return self.crmService.advisoryArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CRMTrackModel *model = self.crmService.trackArray[indexPath.row];
-    return model.trackHeight;
+    if ([self.identifier isEqualToString:@"track"]) {
+        CRMTrackModel *model = self.crmService.trackArray[indexPath.row];
+        return model.trackHeight;
+    }
+    CRMAdvisoryModel *model = self.crmService.advisoryArray[indexPath.row];
+    return model.advisoryHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CRMTrackModel *model = self.crmService.trackArray[indexPath.row];
     CRMTrackCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CRMTrackCell.class)];
-    cell.titleLabel.text = kFormat(@"%@ - %@", model.followName, self.crmService.crmModel.realName);
-    cell.timeLabel.text = model.createTime;
-    cell.contentLabel.text = model.content;
+    cell.topLine.hidden = indexPath.row == 0;
+    if ([self.identifier isEqualToString:@"track"]) {
+        CRMTrackModel *model = self.crmService.trackArray[indexPath.row];
+        cell.titleLabel.text = kFormat(@"%@ - %@", model.followName, self.crmService.crmModel.realName);
+        cell.timeLabel.text = model.createTime;
+        cell.contentLabel.text = model.content;
+    } else {
+        CRMAdvisoryModel *model = self.crmService.advisoryArray[indexPath.row];
+        cell.titleLabel.text = model.title1;
+        cell.timeLabel.text = model.createTime;
+        cell.contentLabel.text = model.title2;
+    }
     return cell;
 }
 
@@ -114,6 +140,23 @@
             make.right.mas_equalTo(-20);
             make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
         }];
+        [self.topLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(19);
+            make.top.mas_equalTo(0);
+            make.width.mas_equalTo(2);
+            make.height.mas_equalTo(14);
+        }];
+        [self.circle mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.topLine.mas_centerX);
+            make.top.equalTo(self.topLine.mas_bottom);
+            make.width.height.mas_equalTo(8);
+        }];
+        [self.btmLine mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.topLine.mas_centerX);
+            make.bottom.mas_equalTo(0);
+            make.width.mas_equalTo(2);
+            make.top.equalTo(self.circle.mas_bottom);
+        }];
     }
     return self;
 }
@@ -140,6 +183,30 @@
         [self.contentView addSubview:_contentLabel];
     }
     return _contentLabel;
+}
+
+- (UIView *)circle {
+    if (!_circle) {
+        _circle = UIView.viewInit().bkgColor(kColorThemeeee).cornerRadius(4);
+        [self.contentView addSubview:_circle];
+    }
+    return _circle;
+}
+
+- (UIView *)topLine {
+    if (!_topLine) {
+        _topLine = UIView.viewInit().bkgColor(kColorThemeeee);
+        [self.contentView addSubview:_topLine];
+    }
+    return _topLine;
+}
+
+- (UIView *)btmLine {
+    if (!_btmLine) {
+        _btmLine = UIView.viewInit().bkgColor(kColorThemeeee);
+        [self.contentView addSubview:_btmLine];
+    }
+    return _btmLine;
 }
 
 @end

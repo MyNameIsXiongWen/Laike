@@ -46,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeCRMDetailViewController:(NSDictionary *)params;
 
+- (void)Action_nativeAdvisoryDetailViewController:(NSDictionary *)params;
+
 @end
 
 NS_ASSUME_NONNULL_END

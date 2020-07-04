@@ -9,6 +9,7 @@
 #import "HomeScrollContentViewController.h"
 #import "QHWBaseCellProtocol.h"
 #import "HomeService.h"
+#import "CTMediator+ViewController.h"
 
 @interface HomeScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -90,7 +91,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.service.tableViewDataArray.count) {
-//        [self.service pushToTargetViewControllerWithIdentifier:self.identifier IndexPath:indexPath];
+        QHWMainBusinessDetailBaseModel *baseModel = (QHWMainBusinessDetailBaseModel *)self.service.tableViewDataArray[indexPath.row].data;
+        for (NSDictionary *dic in self.service.tableViewCellArray) {
+            if ([self.identifier isEqualToString:dic[@"identifier"]]) {
+                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:[dic[@"businessType"] integerValue] BusinessId:baseModel.id];
+                break;
+            }
+        }
     }
 }
 
