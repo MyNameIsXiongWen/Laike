@@ -45,6 +45,12 @@
 		185E159B24B0575F00F15A90 /* CommunityContentShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E159224B0575E00F15A90 /* CommunityContentShareView.m */; };
 		185E159C24B0575F00F15A90 /* MerchantShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E159424B0575F00F15A90 /* MerchantShareView.m */; };
 		185E159D24B0575F00F15A90 /* QHWShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E159524B0575F00F15A90 /* QHWShareView.m */; };
+		185E15A124B071C700F15A90 /* VistorDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15A024B071C700F15A90 /* VistorDetailHeaderView.m */; };
+		185E15A424B0728600F15A90 /* VisitorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15A324B0728600F15A90 /* VisitorDetailViewController.m */; };
+		185E15A724B075C100F15A90 /* CRMTrackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15A624B075C100F15A90 /* CRMTrackCell.m */; };
+		185E15B024B0830000F15A90 /* GalleryScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15AF24B0830000F15A90 /* GalleryScrollContentViewController.m */; };
+		185E15B324B0830C00F15A90 /* GalleryGenerateScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15B224B0830C00F15A90 /* GalleryGenerateScrollContentViewController.m */; };
+		185E15B624B08ADA00F15A90 /* IntervalCRMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15B524B08ADA00F15A90 /* IntervalCRMViewController.m */; };
 		185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81624A08FD700DCAB2C /* AppDelegate.m */; };
 		185EC81D24A08FD700DCAB2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81C24A08FD700DCAB2C /* ViewController.m */; };
 		185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185EC81E24A08FD700DCAB2C /* Main.storyboard */; };
@@ -341,6 +347,18 @@
 		185E159524B0575F00F15A90 /* QHWShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWShareView.m; sourceTree = "<group>"; };
 		185E159624B0575F00F15A90 /* CommunityArticleShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityArticleShareView.h; sourceTree = "<group>"; };
 		185E159724B0575F00F15A90 /* ConsultantShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultantShareView.h; sourceTree = "<group>"; };
+		185E159F24B071C700F15A90 /* VistorDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VistorDetailHeaderView.h; sourceTree = "<group>"; };
+		185E15A024B071C700F15A90 /* VistorDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VistorDetailHeaderView.m; sourceTree = "<group>"; };
+		185E15A224B0728600F15A90 /* VisitorDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisitorDetailViewController.h; sourceTree = "<group>"; };
+		185E15A324B0728600F15A90 /* VisitorDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisitorDetailViewController.m; sourceTree = "<group>"; };
+		185E15A524B075C100F15A90 /* CRMTrackCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMTrackCell.h; sourceTree = "<group>"; };
+		185E15A624B075C100F15A90 /* CRMTrackCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMTrackCell.m; sourceTree = "<group>"; };
+		185E15AE24B0830000F15A90 /* GalleryScrollContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GalleryScrollContentViewController.h; sourceTree = "<group>"; };
+		185E15AF24B0830000F15A90 /* GalleryScrollContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryScrollContentViewController.m; sourceTree = "<group>"; };
+		185E15B124B0830C00F15A90 /* GalleryGenerateScrollContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GalleryGenerateScrollContentViewController.h; sourceTree = "<group>"; };
+		185E15B224B0830C00F15A90 /* GalleryGenerateScrollContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryGenerateScrollContentViewController.m; sourceTree = "<group>"; };
+		185E15B424B08ADA00F15A90 /* IntervalCRMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntervalCRMViewController.h; sourceTree = "<group>"; };
+		185E15B524B08ADA00F15A90 /* IntervalCRMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntervalCRMViewController.m; sourceTree = "<group>"; };
 		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -844,6 +862,15 @@
 				185E159524B0575F00F15A90 /* QHWShareView.m */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		185E159E24B071A600F15A90 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				185E159F24B071C700F15A90 /* VistorDetailHeaderView.h */,
+				185E15A024B071C700F15A90 /* VistorDetailHeaderView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		185EC80924A08FD600DCAB2C = {
@@ -1682,6 +1709,10 @@
 			children = (
 				185FDF7124A750850043FF36 /* GalleryViewController.h */,
 				185FDF7224A750850043FF36 /* GalleryViewController.m */,
+				185E15AE24B0830000F15A90 /* GalleryScrollContentViewController.h */,
+				185E15AF24B0830000F15A90 /* GalleryScrollContentViewController.m */,
+				185E15B124B0830C00F15A90 /* GalleryGenerateScrollContentViewController.h */,
+				185E15B224B0830C00F15A90 /* GalleryGenerateScrollContentViewController.m */,
 				185FDF7424A750920043FF36 /* GalleryService.h */,
 				185FDF7524A750930043FF36 /* GalleryService.m */,
 			);
@@ -1715,6 +1746,8 @@
 		186394FB24A1B087007DC26D /* CRM */ = {
 			isa = PBXGroup;
 			children = (
+				185E15B424B08ADA00F15A90 /* IntervalCRMViewController.h */,
+				185E15B524B08ADA00F15A90 /* IntervalCRMViewController.m */,
 				1863951524A1DBB1007DC26D /* CRMViewController.h */,
 				186394FD24A1B0E4007DC26D /* CRMViewController.m */,
 				186394FF24A1B0FD007DC26D /* CRMScrollContentViewController.h */,
@@ -1744,6 +1777,8 @@
 				185E155B24AEC81500F15A90 /* CRMBtnCollectionViewCell.xib */,
 				1863950424A1B143007DC26D /* CRMTableViewCell.h */,
 				1863950524A1B143007DC26D /* CRMTableViewCell.m */,
+				185E15A524B075C100F15A90 /* CRMTrackCell.h */,
+				185E15A624B075C100F15A90 /* CRMTrackCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1776,7 +1811,10 @@
 				1863952624A1DC22007DC26D /* CardViewController.m */,
 				1863952324A1DC22007DC26D /* CardScrollContentViewController.h */,
 				1863952424A1DC22007DC26D /* CardScrollContentViewController.m */,
+				185E15A224B0728600F15A90 /* VisitorDetailViewController.h */,
+				185E15A324B0728600F15A90 /* VisitorDetailViewController.m */,
 				185FDEC924A6DD6D0043FF36 /* Model */,
+				185E159E24B071A600F15A90 /* View */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -2029,6 +2067,7 @@
 				185EC9CD24A096B600DCAB2C /* MessageSearchViewController.m in Sources */,
 				185EC96324A091BE00DCAB2C /* QHWCategoryModel.m in Sources */,
 				185EC96F24A091BE00DCAB2C /* QHWPhotoBrowser.m in Sources */,
+				185E15B024B0830000F15A90 /* GalleryScrollContentViewController.m in Sources */,
 				185EC96724A091BE00DCAB2C /* QHWStudyModel.m in Sources */,
 				185EC97324A091BE00DCAB2C /* QHWBaseTableView.m in Sources */,
 				185EC9E924A0A7F500DCAB2C /* MineIconTableViewCell.m in Sources */,
@@ -2190,6 +2229,7 @@
 				185FDF6824A749FA0043FF36 /* LiveCommentViewController.m in Sources */,
 				185EC98524A091BE00DCAB2C /* QHWCycleScrollViewCell.m in Sources */,
 				185EC95824A091BE00DCAB2C /* QHWMainBusinessDetailBaseModel.m in Sources */,
+				185E15B624B08ADA00F15A90 /* IntervalCRMViewController.m in Sources */,
 				185D448924AC84DE00CD3A00 /* CRMAddCustomerViewController.m in Sources */,
 				185FDF3524A73ECE0043FF36 /* MyCommentTableViewCell.m in Sources */,
 				185EC95524A091BE00DCAB2C /* QHWHouseModel.m in Sources */,
@@ -2197,6 +2237,7 @@
 				185E158724B0526300F15A90 /* HouseDetailConfigTableViewCell.m in Sources */,
 				185EC97124A091BE00DCAB2C /* QHWTabScrollView.m in Sources */,
 				185EC94924A091BE00DCAB2C /* Target_ViewController.m in Sources */,
+				185E15A124B071C700F15A90 /* VistorDetailHeaderView.m in Sources */,
 				185EC98924A091BE00DCAB2C /* QHWTextCollectionViewCell.m in Sources */,
 				185A62FC24A98F2F00E7E75D /* QSchoolOrganizerViewController.m in Sources */,
 				185E155F24AEC81500F15A90 /* CRMBtnCollectionViewCell.m in Sources */,
@@ -2205,10 +2246,12 @@
 				185EC94D24A091BE00DCAB2C /* LoginViewController.m in Sources */,
 				185EC95924A091BE00DCAB2C /* QHWBaseModel.m in Sources */,
 				185D44AA24ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m in Sources */,
+				185E15B324B0830C00F15A90 /* GalleryGenerateScrollContentViewController.m in Sources */,
 				185E159B24B0575F00F15A90 /* CommunityContentShareView.m in Sources */,
 				185E159824B0575F00F15A90 /* CommunityArticleShareView.m in Sources */,
 				185FDEED24A7305D0043FF36 /* ActivityViewController.m in Sources */,
 				185EC9EC24A0A80500DCAB2C /* MineSchoolTableViewCell.m in Sources */,
+				185E15A724B075C100F15A90 /* CRMTrackCell.m in Sources */,
 				185EC99A24A091BE00DCAB2C /* QHWBaseSubContentTableViewCell.m in Sources */,
 				185EC98224A091BE00DCAB2C /* QHWCycleScrollViewFlowLayout.m in Sources */,
 				185EC96124A091BE00DCAB2C /* QHWConsultantModel.m in Sources */,
@@ -2228,6 +2271,7 @@
 				185FDEEA24A7305D0043FF36 /* ArtivityDetailTableHeaderView.m in Sources */,
 				185EC9CF24A096B600DCAB2C /* RelatedToMeViewController.m in Sources */,
 				185D449424AC9C7A00CD3A00 /* MineDataTableViewCell.m in Sources */,
+				185E15A424B0728600F15A90 /* VisitorDetailViewController.m in Sources */,
 				185EC97A24A091BE00DCAB2C /* FilterBtnViewCellModel.m in Sources */,
 				185FDED324A71CC40043FF36 /* QSchoolViewController.m in Sources */,
 				186394F024A1A6D6007DC26D /* RankScrollContentViewController.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "Target_TZImgPicker.h"
 #import "TZImagePickerController.h"
+#import "QHWPermissionManager.h"
 
 @interface Target_TZImgPicker () <TZImagePickerControllerDelegate>
 
@@ -15,16 +16,52 @@
 
 @implementation Target_TZImgPicker
 
-- (void)Action_nativeShowTZImagePickerViewController:(NSDictionary *)params {
-    NSInteger count = [params[@"maxCount"] integerValue];
-    __block void (^blk)(NSArray<UIImage *> *photos) = params[@"block"];
-    TZImagePickerController *imagePickerVC = [[TZImagePickerController alloc] initWithMaxImagesCount:count delegate:self];
-    [imagePickerVC setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-        if (blk) {
-            blk(photos);
+- (void)Action_nativeOnlyPhotoShowTZImagePickerViewController:(NSDictionary *)params {
+    [QHWPermissionManager openAlbumService:^(BOOL isOpen) {
+        if (isOpen) {
+            NSInteger count = [params[@"maxCount"] integerValue];
+            __block void (^blk)(NSArray<UIImage *> *photos) = params[@"block"];
+            TZImagePickerController *imagePickerVC = [[TZImagePickerController alloc] initWithMaxImagesCount:count delegate:self];
+            [imagePickerVC setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+                if (blk) {
+                    blk(photos);
+                }
+            }];
+            [self.getCurrentMethodCallerVC presentViewController:imagePickerVC animated:YES completion:nil];
         }
     }];
-    [self.getCurrentMethodCallerVC presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)Action_nativeShowTZImagePickerViewController:(NSDictionary *)params {
+    [QHWPermissionManager openAlbumService:^(BOOL isOpen) {
+        if (isOpen) {
+            NSInteger count = [params[@"maxCount"] integerValue];
+            TZImagePickerController *imagePickerVC = [[TZImagePickerController alloc] initWithMaxImagesCount:count delegate:self];
+            imagePickerVC.preferredLanguage = @"zh-Hans";
+            imagePickerVC.iconThemeColor = kColorTheme21a8ff;
+            imagePickerVC.showPhotoCannotSelectLayer = YES;
+            imagePickerVC.showSelectedIndex = YES;
+            imagePickerVC.allowPickingOriginalPhoto = NO;
+            imagePickerVC.allowPickingGif = NO;
+            imagePickerVC.allowPickingMultipleVideo = NO;
+            __block void (^blk)(id selectedObject) = params[@"block"];
+            [imagePickerVC setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+                if (blk) {
+                    blk(photos);
+                }
+            }];
+            [imagePickerVC setDidFinishPickingVideoHandle:^(UIImage *coverImage, PHAsset *asset) {
+                [TZImageManager.manager getVideoWithAsset:asset completion:^(AVPlayerItem *playerItem, NSDictionary *info) {
+                    AVURLAsset *urlAsset = (AVURLAsset *)playerItem.asset;
+                    if (blk) {
+                        blk(urlAsset.URL);
+                    }
+                }];
+            }];
+            imagePickerVC.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self.getCurrentMethodCallerVC presentViewController:imagePickerVC animated:YES completion:nil];
+        }
+    }];
 }
 
 @end

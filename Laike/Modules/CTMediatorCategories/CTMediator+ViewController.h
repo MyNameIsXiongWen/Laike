@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForH5WithUrl:(NSString *)url TitleName:(NSString *)titleName;
 
-- (void)CTMediator_viewControllerForCRM;
+- (void)CTMediator_viewControllerForIntervalCRM;
 
 - (void)CTMediator_viewControllerForCard;
 

@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CTMediator (TZImgPicker)
 
-- (void)CTMediator_showTZImagePickerWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(NSArray <UIImage *>* photos))blk;
+- (void)CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(NSArray <UIImage *>* photos))blk;
+
+- (void)CTMediator_showTZImagePickerWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(id selectedObject))blk;
 
 @end
 

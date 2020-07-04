@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Target_TZImgPicker : NSObject
 
+- (void)Action_nativeOnlyPhotoShowTZImagePickerViewController:(NSDictionary *)params;
+
 - (void)Action_nativeShowTZImagePickerViewController:(NSDictionary *)params;
 
 @end

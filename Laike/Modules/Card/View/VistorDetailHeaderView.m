@@ -1,26 +1,24 @@
 //
-//  AdvisoryDetailHeaderView.m
+//  VistorDetailHeaderView.m
 //  Laike
 //
 //  Created by xiaobu on 2020/7/4.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "AdvisoryDetailHeaderView.h"
-#import "QHWTagView.h"
+#import "VistorDetailHeaderView.h"
 
-@interface AdvisoryDetailHeaderView ()
+@interface VistorDetailHeaderView ()
 
 @property (nonatomic, strong) UIImageView *avatarImgView;
 @property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) QHWTagView *tagView;
 @property (nonatomic, strong) UIView *firstLine;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *secondLine;
 
 @end
 
-@implementation AdvisoryDetailHeaderView
+@implementation VistorDetailHeaderView
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -38,14 +36,8 @@
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.avatarImgView.mas_right).offset(20);
-            make.top.equalTo(self.avatarImgView.mas_top);
+            make.centerY.equalTo(self.avatarImgView.mas_centerY);
             make.right.mas_equalTo(-15);
-        }];
-        [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.nameLabel.mas_left);
-            make.right.mas_equalTo(-15);
-            make.height.mas_equalTo(18);
-            make.top.equalTo(self.nameLabel.mas_bottom).offset(7);
         }];
         [self.firstLine mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
@@ -67,15 +59,14 @@
     return self;
 }
 
-- (void)setCrmModel:(CRMModel *)crmModel {
-    _crmModel = crmModel;
-    if (crmModel.headPath.length > 0) {
-        [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(crmModel.headPath)]];
+- (void)setCardModel:(CardModel *)cardModel {
+    _cardModel = cardModel;
+    if (cardModel.headPath.length > 0) {
+        [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(cardModel.headPath)]];
     } else {
-        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:crmModel.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:cardModel.nickname textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
     }
-    self.nameLabel.text = crmModel.realName;
-    [self.tagView setTagWithTagArray:crmModel.industryNameArray];
+    self.nameLabel.text = cardModel.nickname;
 }
 
 #pragma mark ------------UI-------------
@@ -95,14 +86,6 @@
     return _nameLabel;
 }
 
-- (QHWTagView *)tagView {
-    if (!_tagView) {
-        _tagView = [[QHWTagView alloc] initWithFrame:CGRectZero];
-        [self addSubview:_tagView];
-    }
-    return _tagView;
-}
-
 - (UIView *)firstLine {
     if (!_firstLine) {
         _firstLine = UIView.viewInit().bkgColor(kColorThemeeee);
@@ -113,7 +96,7 @@
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = UILabel.labelInit().labelFont(kFontTheme16).labelTitleColor(kColorTheme000).labelText(@"咨询记录");
+        _titleLabel = UILabel.labelInit().labelFont(kFontTheme16).labelTitleColor(kColorTheme000).labelText(@"访客足迹");
         [self addSubview:_titleLabel];
     }
     return _titleLabel;

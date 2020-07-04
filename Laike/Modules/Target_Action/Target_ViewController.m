@@ -17,7 +17,7 @@
 #import "CommunityViewController.h"
 #import "CommunityDetailViewController.h"
 #import "QHWH5ViewController.h"
-#import "CRMViewController.h"
+#import "IntervalCRMViewController.h"
 #import "CardViewController.h"
 #import "QSchoolViewController.h"
 #import "LiveListViewController.h"
@@ -95,8 +95,8 @@
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)Action_nativeCRMViewController:(NSDictionary *)params {
-    CRMViewController *vc = CRMViewController.new;
+- (void)Action_nativeIntervalCRMViewController:(NSDictionary *)params {
+    IntervalCRMViewController *vc = IntervalCRMViewController.new;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

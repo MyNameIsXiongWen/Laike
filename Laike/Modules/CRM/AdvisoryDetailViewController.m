@@ -11,7 +11,8 @@
 #import "CRMService.h"
 #import "QHWMoreView.h"
 #import "CTMediator+ViewController.h"
-#import "CRMDetailScrollContentViewController.h"
+#import "CRMTrackCell.h"
+#import "QHWLabelAlertView.h"
 
 @interface AdvisoryDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -39,12 +40,24 @@
     WEAKSELF
     moreView.clickBtnBlock = ^(NSString * _Nonnull identifier) {
         if ([identifier isEqualToString:@"convertCRM"]) {
-            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+            [weakSelf showAlertLabelView];
         } else if ([identifier isEqualToString:@"giveUpFollowUp"]) {
             [weakSelf.crmService CRMGiveUpTrackRequest];
         }
     };
     [moreView show];
+}
+
+- (void)showAlertLabelView {
+    QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+    [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认"];
+    alert.contentString = @"是否放弃跟进?";
+    WEAKSELF
+    alert.confirmBlock = ^{
+        [alert dismiss];
+        [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+    };
+    [alert show];
 }
 
 - (void)getMainData {

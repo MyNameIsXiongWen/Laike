@@ -38,6 +38,12 @@
 //    [self.kNavigationView.rightBtn setImage:kImageMake(@"customize_add") forState:0];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+    self.kNavigationView.leftBtn.hidden = !self.interval;
+}
+
 - (void)rightNavBtnAction:(UIButton *)sender {
     [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@""];
 }

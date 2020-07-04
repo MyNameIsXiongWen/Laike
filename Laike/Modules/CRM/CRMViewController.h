@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CRMViewController : UIViewController
 
+@property (nonatomic, assign) BOOL interval;
+
 @end
 
 NS_ASSUME_NONNULL_END

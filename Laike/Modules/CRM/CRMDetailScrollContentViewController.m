@@ -7,6 +7,7 @@
 //
 
 #import "CRMDetailScrollContentViewController.h"
+#import "CRMTrackCell.h"
 
 @interface CRMDetailScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -120,93 +121,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-@end
-
-@implementation CRMTrackCell
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(40);
-            make.top.mas_equalTo(10);
-        }];
-        [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-20);
-            make.top.mas_equalTo(10);
-        }];
-        [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.titleLabel.mas_left);
-            make.right.mas_equalTo(-20);
-            make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
-        }];
-        [self.topLine mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(19);
-            make.top.mas_equalTo(0);
-            make.width.mas_equalTo(2);
-            make.height.mas_equalTo(14);
-        }];
-        [self.circle mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.topLine.mas_centerX);
-            make.top.equalTo(self.topLine.mas_bottom);
-            make.width.height.mas_equalTo(8);
-        }];
-        [self.btmLine mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.topLine.mas_centerX);
-            make.bottom.mas_equalTo(0);
-            make.width.mas_equalTo(2);
-            make.top.equalTo(self.circle.mas_bottom);
-        }];
-    }
-    return self;
-}
-
-- (UILabel *)titleLabel {
-    if (!_titleLabel) {
-        _titleLabel = UILabel.labelInit().labelFont(kFontTheme13).labelTitleColor(kColorTheme2a303c);
-        [self.contentView addSubview:_titleLabel];
-    }
-    return _titleLabel;
-}
-
-- (UILabel *)timeLabel {
-    if (!_timeLabel) {
-        _timeLabel = UILabel.labelInit().labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentRight);
-        [self.contentView addSubview:_timeLabel];
-    }
-    return _timeLabel;
-}
-
-- (UILabel *)contentLabel {
-    if (!_contentLabel) {
-        _contentLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme2a303c).labelNumberOfLines(0);
-        [self.contentView addSubview:_contentLabel];
-    }
-    return _contentLabel;
-}
-
-- (UIView *)circle {
-    if (!_circle) {
-        _circle = UIView.viewInit().bkgColor(kColorThemeeee).cornerRadius(4);
-        [self.contentView addSubview:_circle];
-    }
-    return _circle;
-}
-
-- (UIView *)topLine {
-    if (!_topLine) {
-        _topLine = UIView.viewInit().bkgColor(kColorThemeeee);
-        [self.contentView addSubview:_topLine];
-    }
-    return _topLine;
-}
-
-- (UIView *)btmLine {
-    if (!_btmLine) {
-        _btmLine = UIView.viewInit().bkgColor(kColorThemeeee);
-        [self.contentView addSubview:_btmLine];
-    }
-    return _btmLine;
-}
 
 @end

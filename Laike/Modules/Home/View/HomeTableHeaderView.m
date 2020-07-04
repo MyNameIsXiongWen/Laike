@@ -87,7 +87,7 @@
 }
 
 - (void)clickMineCustomerTableViewCell {
-    [CTMediator.sharedInstance CTMediator_viewControllerForCRM];
+    [CTMediator.sharedInstance CTMediator_viewControllerForIntervalCRM];
 }
 
 - (void)clickMineSchoolTableViewCell {

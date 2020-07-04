@@ -89,6 +89,7 @@ static NSString *const kClueList = @"clue/getList";//咨询(获客)列表
 static NSString *const kClueActionAllList = @"clue/action/getAllList";//线索模块-行为-客户所有列表
 
 static NSString *const kActionBrowseList = @"action/browse/getMyList";//访客列表
+static NSString *const kActionBrowseInfo = @"action/browse/getMyInfo";//访客详情
 static NSString *const kActionLikeList = @"action/like/getMyList";//点赞列表
 static NSString *const kFansList = @"fans/getMyList";//粉丝列表
 

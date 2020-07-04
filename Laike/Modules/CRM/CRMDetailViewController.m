@@ -13,6 +13,7 @@
 #import "CRMService.h"
 #import "CTMediator+ViewController.h"
 #import "QHWMoreView.h"
+#import "QHWLabelAlertView.h"
 
 @interface CRMDetailViewController () <UITableViewDelegate, UITableViewDataSource, QHWPageContentViewDelegate>
 
@@ -47,12 +48,24 @@
     WEAKSELF
     moreView.clickBtnBlock = ^(NSString * _Nonnull identifier) {
         if ([identifier isEqualToString:@"completeInfomation"]) {
-            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+            [weakSelf showAlertLabelView];
         } else if ([identifier isEqualToString:@"giveUpFollowUp"]) {
             [weakSelf.crmService CRMGiveUpTrackRequest];
         }
     };
     [moreView show];
+}
+
+- (void)showAlertLabelView {
+    QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+    [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认"];
+    alert.contentString = @"是否放弃跟进?";
+    WEAKSELF
+    alert.confirmBlock = ^{
+        [alert dismiss];
+        [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+    };
+    [alert show];
 }
 
 - (void)getMainData {

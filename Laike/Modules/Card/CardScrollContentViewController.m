@@ -12,6 +12,8 @@
 #import "QHWBaseCellProtocol.h"
 #import "QHWBaseModel.h"
 #import "CardService.h"
+#import "VisitorDetailViewController.h"
+#import "CTMediator+ViewController.h"
 
 @interface CardScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -44,7 +46,7 @@
 }
 
 - (void)getMainData {
-    [self.cardService getCardDataRequestWithComplete:^{
+    [self.cardService getCardListDataRequestWithComplete:^{
         if ([self.tableView.mj_header isRefreshing]) {
             [self.tableView.mj_header endRefreshing];
         }
@@ -66,6 +68,18 @@
     UITableViewCell <QHWBaseCellProtocol>*cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
     [cell configCellData:model.data];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.cardType == 1) {
+        CardModel *model = (CardModel *)self.cardService.tableViewDataArray[indexPath.row].data;
+        VisitorDetailViewController *vc = VisitorDetailViewController.new;
+        vc.userId = model.id;
+        [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+    } else if (self.cardType == 2) {
+        CardModel *model = (CardModel *)self.cardService.tableViewDataArray[indexPath.row].data;
+        [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:model.businessId CommunityType:2];
+    }
 }
 
 /*

@@ -10,16 +10,25 @@
 
 NSString * const kCTMediatorTargetTZImgPicker = @"TZImgPicker";
 
+NSString * const kCTMediatorActionNativeOnlyPhotoShowTZImagePickerViewController = @"nativeOnlyPhotoShowTZImagePickerViewController";
 NSString * const kCTMediatorActionNativeShowTZImagePickerViewController = @"nativeShowTZImagePickerViewController";
 
 @implementation CTMediator (TZImgPicker)
 
-- (void)CTMediator_showTZImagePickerWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(NSArray<UIImage *> * _Nonnull))blk {
+- (void)CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(NSArray<UIImage *> * _Nonnull))blk {
     [self performTarget:kCTMediatorTargetTZImgPicker
-                 action:kCTMediatorActionNativeShowTZImagePickerViewController
+                 action:kCTMediatorActionNativeOnlyPhotoShowTZImagePickerViewController
                  params:@{@"maxCount": @(maxCount),
                           @"block": blk}
       shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_showTZImagePickerWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(id _Nonnull))blk {
+    [self performTarget:kCTMediatorTargetTZImgPicker
+               action:kCTMediatorActionNativeShowTZImagePickerViewController
+               params:@{@"maxCount": @(maxCount),
+                        @"block": blk}
+    shouldCacheTarget:NO];
 }
 
 @end

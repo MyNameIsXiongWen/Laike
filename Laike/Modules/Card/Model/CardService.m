@@ -10,7 +10,7 @@
 
 @implementation CardService
 
-- (void)getCardDataRequestWithComplete:(void (^)(void))complete {
+- (void)getCardListDataRequestWithComplete:(void (^)(void))complete {
     NSString *urlString;
     NSString *identifier;
     if (self.cardType == 1) {
@@ -42,6 +42,24 @@
     }];
 }
 
+- (void)getCardDetailInfoRequestWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    NSDictionary *params = @{@"userId": self.userId ?: @"",
+                             @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                             @"pageSize": @(self.itemPageModel.pagination.pageSize)};
+    [QHWHttpManager.sharedInstance QHW_POST:kActionBrowseInfo parameters:params success:^(id responseObject) {
+        self.cardDetailModel = [CardModel yy_modelWithJSON:responseObject[@"data"]];
+        self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
+        if (self.itemPageModel.pagination.currentPage == 1) {
+            [self.tableViewDataArray removeAllObjects];
+        }
+        [self.tableViewDataArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CardModel.class json:self.itemPageModel.list]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
 #pragma mark ------------DATA-------------
 - (QHWItemPageModel *)itemPageModel {
     if (!_itemPageModel) {
@@ -53,5 +71,12 @@
 @end
 
 @implementation CardModel
+
+- (CGFloat)businessHeight {
+    if (!_businessHeight) {
+        _businessHeight = 10 + 20 + 10 + 10 + MAX(20, [self.businessName getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-80, CGFLOAT_MAX)]);
+    }
+    return _businessHeight;
+}
 
 @end

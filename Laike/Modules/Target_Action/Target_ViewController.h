@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeH5ViewController:(NSDictionary *)params;
 
-- (void)Action_nativeCRMViewController:(NSDictionary *)params;
+- (void)Action_nativeIntervalCRMViewController:(NSDictionary *)params;
 
 - (void)Action_nativeCardViewController:(NSDictionary *)params;
 

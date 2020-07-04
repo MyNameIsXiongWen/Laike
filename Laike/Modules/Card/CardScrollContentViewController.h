@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CardScrollContentViewController : QHWBaseScrollContentViewController
 
-/// 名片类型 
+/// 名片类型  1:访客  2:获赞   3:粉丝
 @property (nonatomic, assign) NSInteger cardType;
 
 @end

@@ -88,7 +88,11 @@
 
 - (void)setCrmModel:(CRMModel *)crmModel {
     _crmModel = crmModel;
-    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:crmModel.headPath]];
+    if (crmModel.headPath.length > 0) {
+        [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(crmModel.headPath)]];
+    } else {
+        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:crmModel.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+    }
     self.nameLabel.text = crmModel.realName;
     [self.tagView setTagWithTagArray:crmModel.industryNameArray];
     self.remarkValueLabel.text = crmModel.note ?: @"暂无";

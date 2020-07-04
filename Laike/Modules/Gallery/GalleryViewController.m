@@ -7,16 +7,15 @@
 //
 
 #import "GalleryViewController.h"
-#import "GalleryService.h"
-#import "QHWImageViewCell.h"
+#import "GalleryScrollContentViewController.h"
+#import "GalleryGenerateScrollContentViewController.h"
+#import "QHWTabScrollView.h"
+#import "QHWPageContentView.h"
 
-@interface GalleryViewController () <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface GalleryViewController () <QHWPageContentViewDelegate>
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UICollectionView *collectionView;
-
-@property (nonatomic, strong) GalleryService *galleryService;
-@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, strong) QHWTabScrollView *tabScrollView;
+@property (nonatomic, strong) QHWPageContentView *pageContentView;
 
 @end
 
@@ -26,73 +25,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"霸屏海报";
-    [self getFilterDataRequest];
+    [self.view addSubview:self.tabScrollView];
+    [self.view addSubview:self.pageContentView];
 }
 
-- (void)getMainData {
-    NSString *code = @"0";
-    if (self.selectedIndex > 0) {
-        FilterCellModel *cellModel = self.galleryService.filterArray[self.selectedIndex];
-        code = cellModel.code;
-    }
-    [self.galleryService getGalleryListWithType:code Complete:^{
-        [self.collectionView reloadData];
-        [self.collectionView.mj_header endRefreshing];
-        [self.collectionView.mj_footer endRefreshing];
-        [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.collectionView PageModel:self.galleryService.itemPageModel];
-        [self.collectionView showNodataView:self.galleryService.tableViewDataArray.count == 0 offsetY:0 button:nil];
-    }];
+#pragma mark ------------QHWPageContentViewDelegate-------------
+- (void)QHWContentViewWillBeginDragging:(QHWPageContentView *)contentView {
+    
 }
 
-- (void)getFilterDataRequest {
-    [self.galleryService getGalleryFilterDataWithComplete:^{
-        [self.tableView reloadData];
-    }];
-}
-
-#pragma mark ------------UITableViewDelegate-------------
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.galleryService.filterArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(UITableViewCell.class)];
-    cell.textLabel.font = kFontTheme14;
-    cell.textLabel.width = tableView.width;
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    if (indexPath.row == self.selectedIndex) {
-        cell.textLabel.textColor = kColorTheme2a303c;
-        cell.textLabel.font = kMediumFontTheme12;
-        cell.contentView.backgroundColor = kColorThemefff;
-    } else {
-        cell.textLabel.textColor = kColorTheme666;
-        cell.textLabel.font = kFontTheme12;
-        cell.contentView.backgroundColor = kColorThemef5f5f5;
-    }
-    FilterCellModel *cellModel = self.galleryService.filterArray[indexPath.row];
-    cell.textLabel.text = cellModel.name;
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row != self.selectedIndex) {
-        self.selectedIndex = indexPath.row;
-        self.galleryService.itemPageModel.pagination.currentPage = 1;
-        [self getMainData];
-        [tableView reloadData];
-    }
-}
-
-#pragma mark ------------UICollectionViewDelegate-------------
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.galleryService.tableViewDataArray.count;
-}
-
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    QHWImageViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(QHWImageViewCell.class) forIndexPath:indexPath];
-    GalleryModel *model = (GalleryModel *)self.galleryService.tableViewDataArray[indexPath.row];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.imgPath)]];
-    return cell;
+- (void)QHWContentViewDidEndDecelerating:(QHWPageContentView *)contentView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex {
+    [self.tabScrollView scrollToIndex:endIndex];
 }
 
 /*
@@ -105,46 +48,33 @@
 }
 */
 
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, kTopBarHeight, 80, kScreenH-kTopBarHeight) Style:UITableViewStylePlain Object:self];
-        _tableView.backgroundColor = kColorThemef5f5f5;
-        _tableView.rowHeight = 40;
-        [_tableView registerClass:UITableViewCell.class forCellReuseIdentifier:NSStringFromClass(UITableViewCell.class)];
-        [self.view addSubview:_tableView];
+- (QHWTabScrollView *)tabScrollView {
+    if (!_tabScrollView) {
+        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, 48)];
+        _tabScrollView.itemWidthType = ItemWidthTypeFixed;
+        _tabScrollView.itemSelectedColor = kColorThemea4abb3;
+        _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
+        _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
+        _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
+        _tabScrollView.dataArray = @[@"霸屏海报", @"专属海报"];
+        WEAKSELF
+        _tabScrollView.clickTagBlock = ^(NSInteger index) {
+            weakSelf.pageContentView.contentViewCurrentIndex = index;
+        };
     }
-    return _tableView;
+    return _tabScrollView;
 }
 
-- (UICollectionView *)collectionView {
-    if (!_collectionView) {
-        CGFloat width = floor((kScreenW-110)/2.0);
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
-        flowLayout.itemSize = CGSizeMake(width, width*1.5);
-        flowLayout.minimumLineSpacing = 10;
-        flowLayout.minimumInteritemSpacing = 10;
-        flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-        _collectionView = [UICreateView initWithFrame:CGRectMake(self.tableView.right, kTopBarHeight, kScreenW-self.tableView.right, kScreenH-kTopBarHeight) Layout:flowLayout Object:self];
-        [_collectionView registerClass:QHWImageViewCell.class forCellWithReuseIdentifier:NSStringFromClass(QHWImageViewCell.class)];
-        [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_collectionView RefreshBlock:^{
-            self.galleryService.itemPageModel.pagination.currentPage = 1;
-            [self getMainData];
-        }];
-        [QHWRefreshManager.sharedInstance normalFooterWithScrollView:_collectionView RefreshBlock:^{
-            self.galleryService.itemPageModel.pagination.currentPage++;
-            [self getMainData];
-        }];
-        [self.view addSubview:_collectionView];
+- (QHWPageContentView *)pageContentView {
+    if (!_pageContentView) {
+        NSMutableArray *contentVCs = [NSMutableArray array];
+        GalleryScrollContentViewController *vc1 = GalleryScrollContentViewController.new;
+        [contentVCs addObject:vc1];
+        GalleryGenerateScrollContentViewController *vc2 = GalleryGenerateScrollContentViewController.new;
+        [contentVCs addObject:vc2];
+        _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];
     }
-    return _collectionView;
-}
-
-
-- (GalleryService *)galleryService {
-    if (!_galleryService) {
-        _galleryService = GalleryService.new;
-    }
-    return _galleryService;
+    return _pageContentView;
 }
 
 @end

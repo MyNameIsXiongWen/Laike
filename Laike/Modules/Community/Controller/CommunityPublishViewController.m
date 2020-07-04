@@ -13,6 +13,7 @@
 #import "QHWPhotoBrowser.h"
 #import "QHWActionSheetView.h"
 #import "PublishRelateProductViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CommunityPublishViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QHWActionSheetViewDelegate>
 
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) IndustryView *businessIndustryView;
 @property (nonatomic, strong) IndustryView *productIndustryView;
 @property (nonatomic, strong) CommunityPublishService *publishService;
+@property (nonatomic, assign) NSInteger fileType;
 
 @end
 
@@ -70,7 +72,8 @@
     WEAKSELF
     return [CTMediator.sharedInstance CTMediator_collectionViewCellWithIndexPath:indexPath
                                                                   CollectionView:collectionView
-                                                                       ImageArray:self.publishService.imageArray ResultBlk:^{
+                                                                      ImageArray:self.publishService.imageArray
+                                                                       ResultBlk:^{
         [weakSelf.publishService.imageArray removeObjectAtIndex:indexPath.row];
         [collectionView reloadData];
     }];
@@ -78,19 +81,57 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.publishService.imageArray.count) {
-        WEAKSELF
-        [CTMediator.sharedInstance CTMediator_showTZImagePickerWithMaxCount:kPublishImgCount-self.publishService.imageArray.count ResultBlk:^(NSArray<UIImage *> * _Nonnull photos) {
-            for (UIImage *img in photos) {
-                QHWImageModel *tempModel = QHWImageModel.new;
-                tempModel.image = img;
-                [weakSelf.publishService.imageArray addObject:tempModel];
-            }
-            [collectionView reloadData];
-        }];
+        [self selectAlbum];
     } else {
         QHWPhotoBrowser *browser = [[QHWPhotoBrowser alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH) ImgArray:self.publishService.imageArray.mutableCopy CurrentIndex:indexPath.row];
         [browser show];
     }
+}
+
+- (void)selectAlbum {
+    [CTMediator.sharedInstance CTMediator_showTZImagePickerWithMaxCount:kPublishImgCount-self.publishService.imageArray.count ResultBlk:^(id  _Nonnull selectedObject) {
+        if ([selectedObject isKindOfClass:NSURL.class]) {
+            self.fileType = 2;
+            NSURL *URL = (NSURL *)selectedObject;
+            QHWImageModel *tempModel = QHWImageModel.new;
+            [self generateSnapShotWithURL:URL Complete:^(UIImage *img) {
+                tempModel.image = img;
+            }];
+            self.publishService.imageArray = @[tempModel].mutableCopy;
+        } else if ([selectedObject isKindOfClass:NSArray.class]) {
+            self.fileType = 1;
+            NSArray *photos = (NSArray *)selectedObject;
+            for (UIImage *img in photos) {
+                QHWImageModel *tempModel = QHWImageModel.new;
+                tempModel.image = img;
+                [self.publishService.imageArray addObject:tempModel];
+            }
+        }
+        [self.collectionView reloadData];
+    }];
+}
+
+- (void)generateSnapShotWithURL:(NSURL *)URL Complete:(void (^)(UIImage *img))complete; {
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:URL options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    
+    CFTimeInterval thumbnailImageTime = 0; // 第0秒的截图
+    NSError *thumbnailImageGenerationError = nil;
+
+    CGImageRef thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60)actualTime:NULL error:&thumbnailImageGenerationError];
+    if (thumbnailImageGenerationError) {
+        complete(UIImage.new);
+        return;
+    }
+    if (thumbnailImageRef) {
+        complete([[UIImage alloc] initWithCGImage: thumbnailImageRef]);
+    } else {
+        NSLog(@"thumbnailImageGenerationError %@",thumbnailImageGenerationError);
+    }
+    CFRelease(thumbnailImageRef);
 }
 
 - (void)clickBusinessIndustryView {

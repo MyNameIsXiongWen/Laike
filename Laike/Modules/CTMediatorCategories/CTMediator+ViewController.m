@@ -19,7 +19,7 @@ NSString * const kCTMediatorActionNativeCommunityDetailViewController = @"native
 
 NSString * const kCTMediatorActionNativeLoginViewController = @"nativeLoginViewController";
 NSString * const kCTMediatorActionNativeH5ViewController = @"nativeH5ViewController";
-NSString * const kCTMediatorActionNativeCRMViewController = @"nativeCRMViewController";
+NSString * const kCTMediatorActionNativeIntervalCRMViewController = @"nativeIntervalCRMViewController";
 NSString * const kCTMediatorActionNativeCardViewController = @"nativeCardViewController";
 NSString * const kCTMediatorActionNativeQSchoolViewController = @"nativeQSchoolViewController";
 NSString * const kCTMediatorActionNativeQSchoolDetailViewController = @"nativeQSchoolDetailViewController";
@@ -99,9 +99,9 @@ NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeA
     shouldCacheTarget:NO];
 }
 
-- (void)CTMediator_viewControllerForCRM {
+- (void)CTMediator_viewControllerForIntervalCRM {
     [self performTarget:kCTMediatorTargetViewController
-                 action:kCTMediatorActionNativeCRMViewController
+                 action:kCTMediatorActionNativeIntervalCRMViewController
                  params:@{}
     shouldCacheTarget:NO];
 }

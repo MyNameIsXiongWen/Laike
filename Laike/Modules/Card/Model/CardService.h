@@ -11,12 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CardModel;
 @interface CardService : QHWBaseService
 
 ///1:访客  2:点赞  3:粉丝
 @property (nonatomic, assign) NSInteger cardType;
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
-- (void)getCardDataRequestWithComplete:(void (^)(void))complete;
+@property (nonatomic, strong) CardModel *cardDetailModel;
+@property (nonatomic, copy) NSString *userId;
+- (void)getCardListDataRequestWithComplete:(void (^)(void))complete;
+- (void)getCardDetailInfoRequestWithComplete:(void (^)(void))complete;
 
 @end
 
@@ -31,12 +35,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *lastTime;
 ///浏览数量
 @property (nonatomic, assign) NSInteger browseCount;
+///访问页面次数
+@property (nonatomic, assign) NSInteger browsePageCount;
 
 
 @property (nonatomic, copy) NSString *modifyTime;
+@property (nonatomic, copy) NSString *createTime;
+@property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *coverPath;
 @property (nonatomic, copy) NSString *businessId;
+@property (nonatomic, copy) NSString *businessName;
 @property (nonatomic, assign) NSInteger businessType;
+@property (nonatomic, assign) CGFloat businessHeight;
 
 
 @property (nonatomic, copy) NSString *realName;
