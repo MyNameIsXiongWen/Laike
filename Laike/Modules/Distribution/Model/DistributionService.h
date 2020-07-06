@@ -17,9 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
 @property (nonatomic, strong) NSMutableArray <FilterCellModel *>*followStatusArray;
 @property (nonatomic, strong) NSMutableArray *clientArray;
+@property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, assign) CGFloat tableHeaderViewHeight;
 
 - (void)getClientFilterDataRequestWithComplete:(void (^)(void))complete;
 - (void)getClientListRequestWithFollowStatusCode:(NSString *)code Complete:(void (^)(void))complete;
+- (void)getClientDetailInfoRequestComplete:(void (^)(void))complete;
 
 @end
 

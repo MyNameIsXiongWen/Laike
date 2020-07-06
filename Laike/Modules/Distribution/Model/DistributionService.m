@@ -40,6 +40,23 @@
     }];
 }
 
+- (void)getClientDetailInfoRequestComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    NSDictionary *params = @{@"clientId": self.customerId ?: @"",
+                             @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                             @"pageSize": @(self.itemPageModel.pagination.pageSize)};
+    [QHWHttpManager.sharedInstance QHW_POST:kDistributionClientList parameters:params success:^(id responseObject) {
+        self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
+        if (self.itemPageModel.pagination.currentPage == 1) {
+            [self.clientArray removeAllObjects];
+        }
+        [self.clientArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:ClientModel.class json:self.itemPageModel.list]];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
 - (QHWItemPageModel *)itemPageModel {
     if (!_itemPageModel) {
         _itemPageModel = QHWItemPageModel.new;

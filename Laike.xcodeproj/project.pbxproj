@@ -55,6 +55,8 @@
 		185E15BC24B2C71300F15A90 /* MainBusinessRulesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15BB24B2C71300F15A90 /* MainBusinessRulesTableViewCell.m */; };
 		185E15BF24B2CB4E00F15A90 /* PDFDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15BE24B2CB4E00F15A90 /* PDFDetailViewController.m */; };
 		185E15C224B2F82400F15A90 /* GalleryShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15C124B2F82400F15A90 /* GalleryShareView.m */; };
+		185E15C724B319E000F15A90 /* DistributionClientDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15C624B319E000F15A90 /* DistributionClientDetailViewController.m */; };
+		185E15CA24B31DD000F15A90 /* DistributionClientDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15C924B31DD000F15A90 /* DistributionClientDetailHeaderView.m */; };
 		185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81624A08FD700DCAB2C /* AppDelegate.m */; };
 		185EC81D24A08FD700DCAB2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81C24A08FD700DCAB2C /* ViewController.m */; };
 		185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185EC81E24A08FD700DCAB2C /* Main.storyboard */; };
@@ -372,6 +374,10 @@
 		185E15C024B2F82400F15A90 /* GalleryShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GalleryShareView.h; sourceTree = "<group>"; };
 		185E15C124B2F82400F15A90 /* GalleryShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GalleryShareView.m; sourceTree = "<group>"; };
 		185E15C424B306C500F15A90 /* QHWShareBottomViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWShareBottomViewProtocol.h; sourceTree = "<group>"; };
+		185E15C524B319E000F15A90 /* DistributionClientDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributionClientDetailViewController.h; sourceTree = "<group>"; };
+		185E15C624B319E000F15A90 /* DistributionClientDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionClientDetailViewController.m; sourceTree = "<group>"; };
+		185E15C824B31DD000F15A90 /* DistributionClientDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributionClientDetailHeaderView.h; sourceTree = "<group>"; };
+		185E15C924B31DD000F15A90 /* DistributionClientDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionClientDetailHeaderView.m; sourceTree = "<group>"; };
 		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -838,15 +844,19 @@
 				185E157124B0281B00F15A90 /* DistributionClientViewController.m */,
 				185E157324B0283000F15A90 /* DistributionClientScrollContentViewController.h */,
 				185E157424B0283000F15A90 /* DistributionClientScrollContentViewController.m */,
+				185E15C524B319E000F15A90 /* DistributionClientDetailViewController.h */,
+				185E15C624B319E000F15A90 /* DistributionClientDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		185D449C24AD73CE00CD3A00 /* Cell */ = {
+		185D449C24AD73CE00CD3A00 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				185E15C824B31DD000F15A90 /* DistributionClientDetailHeaderView.h */,
+				185E15C924B31DD000F15A90 /* DistributionClientDetailHeaderView.m */,
 			);
-			path = Cell;
+			path = View;
 			sourceTree = "<group>";
 		};
 		185E156C24B027DA00F15A90 /* Model */ = {
@@ -1483,7 +1493,7 @@
 			children = (
 				185D449524AD734600CD3A00 /* Controller */,
 				185E156C24B027DA00F15A90 /* Model */,
-				185D449C24AD73CE00CD3A00 /* Cell */,
+				185D449C24AD73CE00CD3A00 /* View */,
 			);
 			path = Distribution;
 			sourceTree = "<group>";
@@ -2080,6 +2090,7 @@
 				185E15BF24B2CB4E00F15A90 /* PDFDetailViewController.m in Sources */,
 				185EC9A724A091BE00DCAB2C /* UILabel+Category.m in Sources */,
 				185E157524B0283000F15A90 /* DistributionClientScrollContentViewController.m in Sources */,
+				185E15C724B319E000F15A90 /* DistributionClientDetailViewController.m in Sources */,
 				185E157824B031E700F15A90 /* RelateProductViewController.m in Sources */,
 				185FDEE924A7305D0043FF36 /* ActivityDetailViewController.m in Sources */,
 				185FDEEB24A7305D0043FF36 /* ActivityListViewController.m in Sources */,
@@ -2223,6 +2234,7 @@
 				185FDF8024A83B510043FF36 /* RateMoneyView.m in Sources */,
 				186394EA24A1A0D5007DC26D /* QHWCellBottomShareView.m in Sources */,
 				185EC9EF24A0A89D00DCAB2C /* QHWTableSectionHeaderView.m in Sources */,
+				185E15CA24B31DD000F15A90 /* DistributionClientDetailHeaderView.m in Sources */,
 				185E157224B0281B00F15A90 /* DistributionClientViewController.m in Sources */,
 				185EC9A924A091BE00DCAB2C /* UITextField+Category.m in Sources */,
 				1863953B24A35722007DC26D /* CRMService.m in Sources */,

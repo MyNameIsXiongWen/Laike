@@ -8,6 +8,7 @@
 
 #import "DistributionClientScrollContentViewController.h"
 #import "DistributionService.h"
+#import "DistributionClientDetailViewController.h"
 
 @interface DistributionClientScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -71,7 +72,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    ClientModel *model = self.disService.clientArray[indexPath.row];
+    ClientModel *model = self.disService.clientArray[indexPath.row];
+    DistributionClientDetailViewController *vc = DistributionClientDetailViewController.new;
+    vc.customerId = model.id;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
 /*

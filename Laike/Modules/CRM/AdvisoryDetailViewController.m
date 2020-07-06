@@ -127,6 +127,10 @@
     if (!_btmView) {
         _btmView = [[AdvisoryDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
         _btmView.customerId = self.customerId;
+        WEAKSELF
+        _btmView.clickLeftBtnBlock = ^{
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+        };
     }
     return _btmView;
 }
@@ -157,7 +161,9 @@
 }
 
 - (void)clickConvertCRMBtn {
-    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:self.customerId];
+    if (self.clickLeftBtnBlock) {
+        self.clickLeftBtnBlock();
+    }
 }
 
 - (void)clickContactBtn {

@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *convertCRMBtn;
 @property (nonatomic, strong) UIButton *contactBtn;
 @property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, copy) void (^ clickLeftBtnBlock)(void);
+@property (nonatomic, copy) void (^ clickRightBtnBlock)(void);
 
 @end
 
