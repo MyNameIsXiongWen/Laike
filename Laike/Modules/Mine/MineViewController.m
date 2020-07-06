@@ -79,6 +79,14 @@
     }
 }
 
+- (void)clickservice {
+    [self.navigationController pushViewController:NSClassFromString(@"MyServiceViewController").new animated:YES];
+}
+
+- (void)clickfeedback {
+    [self.navigationController pushViewController:NSClassFromString(@"FeedbackViewController").new animated:YES];
+}
+
 /*
 #pragma mark - Navigation
 

@@ -57,6 +57,8 @@
 		185E15C224B2F82400F15A90 /* GalleryShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15C124B2F82400F15A90 /* GalleryShareView.m */; };
 		185E15C724B319E000F15A90 /* DistributionClientDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15C624B319E000F15A90 /* DistributionClientDetailViewController.m */; };
 		185E15CA24B31DD000F15A90 /* DistributionClientDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15C924B31DD000F15A90 /* DistributionClientDetailHeaderView.m */; };
+		185E15CF24B33E0300F15A90 /* MyServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15CC24B33E0300F15A90 /* MyServiceViewController.m */; };
+		185E15D024B33E0300F15A90 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E15CE24B33E0300F15A90 /* FeedbackViewController.m */; };
 		185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81624A08FD700DCAB2C /* AppDelegate.m */; };
 		185EC81D24A08FD700DCAB2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC81C24A08FD700DCAB2C /* ViewController.m */; };
 		185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185EC81E24A08FD700DCAB2C /* Main.storyboard */; };
@@ -378,6 +380,10 @@
 		185E15C624B319E000F15A90 /* DistributionClientDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionClientDetailViewController.m; sourceTree = "<group>"; };
 		185E15C824B31DD000F15A90 /* DistributionClientDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributionClientDetailHeaderView.h; sourceTree = "<group>"; };
 		185E15C924B31DD000F15A90 /* DistributionClientDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionClientDetailHeaderView.m; sourceTree = "<group>"; };
+		185E15CB24B33E0200F15A90 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		185E15CC24B33E0300F15A90 /* MyServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyServiceViewController.m; sourceTree = "<group>"; };
+		185E15CD24B33E0300F15A90 /* MyServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyServiceViewController.h; sourceTree = "<group>"; };
+		185E15CE24B33E0300F15A90 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1142,6 +1148,10 @@
 				186394F124A1AF19007DC26D /* MineInfoViewController.m */,
 				186394F424A1AF9D007DC26D /* MineUpdateNameViewController.h */,
 				186394F524A1AF9D007DC26D /* MineUpdateNameViewController.m */,
+				185E15CB24B33E0200F15A90 /* FeedbackViewController.h */,
+				185E15CE24B33E0300F15A90 /* FeedbackViewController.m */,
+				185E15CD24B33E0300F15A90 /* MyServiceViewController.h */,
+				185E15CC24B33E0300F15A90 /* MyServiceViewController.m */,
 				1863953324A32A27007DC26D /* BindCompanyViewController.h */,
 				1863953424A32A27007DC26D /* BindCompanyViewController.m */,
 				1863953524A32A27007DC26D /* BindCompanyViewController.xib */,
@@ -2166,6 +2176,7 @@
 				185EC9A824A091BE00DCAB2C /* UIViewController+Category.m in Sources */,
 				1863952724A1DC22007DC26D /* CardScrollContentViewController.m in Sources */,
 				185EC98E24A091BE00DCAB2C /* QHWImmigrationCollectionViewCell.m in Sources */,
+				185E15D024B33E0300F15A90 /* FeedbackViewController.m in Sources */,
 				185EC97924A091BE00DCAB2C /* QHWFiltViewTFCell.m in Sources */,
 				185EC9B324A0965B00DCAB2C /* MineViewController.m in Sources */,
 				185EC95F24A091BE00DCAB2C /* QHWItemPageModel.m in Sources */,
@@ -2212,6 +2223,7 @@
 				185EC97B24A091BE00DCAB2C /* QHWFilterView.m in Sources */,
 				185D44A624ADDDFC00CD3A00 /* CRMDetailHeaderView.m in Sources */,
 				185E155A24AEC76E00F15A90 /* SearchContentLayout.m in Sources */,
+				185E15CF24B33E0300F15A90 /* MyServiceViewController.m in Sources */,
 				185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */,
 				185EC9AE24A091DA00DCAB2C /* AppGuideViewController.m in Sources */,
 				185EC9CB24A096B600DCAB2C /* RelatedToMeTableViewCell.m in Sources */,
