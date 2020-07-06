@@ -1432,9 +1432,9 @@
 			isa = PBXGroup;
 			children = (
 				185EC91E24A091BD00DCAB2C /* QHWBaseScrollContentViewController.h */,
+				185EC92124A091BE00DCAB2C /* QHWBaseScrollContentViewController.m */,
 				185EC91F24A091BD00DCAB2C /* QHWBaseSubContentTableViewCell.h */,
 				185EC92024A091BD00DCAB2C /* QHWBaseSubContentTableViewCell.m */,
-				185EC92124A091BE00DCAB2C /* QHWBaseScrollContentViewController.m */,
 			);
 			path = QHWBaseScrollContentViewController;
 			sourceTree = "<group>";

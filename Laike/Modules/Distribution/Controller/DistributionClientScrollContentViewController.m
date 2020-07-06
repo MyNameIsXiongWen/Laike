@@ -47,18 +47,18 @@
             [self.tableView.mj_footer endRefreshing];
         }
         [self.tableView reloadData];
-        [self.tableView showNodataView:self.disService.clientArray.count == 0 offsetY:0 button:nil];
+        [self.tableView showNodataView:self.disService.tableViewDataArray.count == 0 offsetY:0 button:nil];
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.disService.itemPageModel];
     }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.disService.clientArray.count;
+    return self.disService.tableViewDataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DistributionClientCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(DistributionClientCell.class)];
-    ClientModel *model = self.disService.clientArray[indexPath.row];
+    ClientModel *model = (ClientModel *)self.disService.tableViewDataArray[indexPath.row];
     if (model.headPath.length > 0) {
         [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
     } else {
@@ -72,7 +72,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ClientModel *model = self.disService.clientArray[indexPath.row];
+    ClientModel *model = (ClientModel *)self.disService.tableViewDataArray[indexPath.row];
     DistributionClientDetailViewController *vc = DistributionClientDetailViewController.new;
     vc.customerId = model.id;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];

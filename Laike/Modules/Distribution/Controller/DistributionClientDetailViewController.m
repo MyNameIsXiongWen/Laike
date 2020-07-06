@@ -11,6 +11,7 @@
 #import "AdvisoryDetailViewController.h"
 #import "CRMTrackCell.h"
 #import "DistributionService.h"
+#import "CRMService.h"
 
 @interface DistributionClientDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -32,9 +33,14 @@
 
 - (void)getMainData {
     [self.distributionService getClientDetailInfoRequestComplete:^{
-//        self.kNavigationView.title = self.distributionService.crmModel.realName;
+        self.kNavigationView.title = self.distributionService.clientDetailModel.name;
         self.tableHeaderView.height = self.distributionService.tableHeaderViewHeight;
-//        self.tableHeaderView.crmModel = self.crmService.crmModel;
+        self.tableHeaderView.clientDetailModel = self.distributionService.clientDetailModel;
+        [self.tableView reloadData];
+    }];
+    [self.distributionService getClientDetailTrackListRequestComplete:^{
+        [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.distributionService.itemPageModel];
+        [self.tableView showNodataView:self.distributionService.tableViewDataArray.count == 0 offsetY:0 button:nil];
         [self.tableView reloadData];
     }];
 }
@@ -44,17 +50,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    CRMAdvisoryModel *model = self.distributionService.tableViewDataArray[indexPath.row];
-//    return model.advisoryHeight;
-    return 1;
+    CRMTrackModel *model = (CRMTrackModel *)self.distributionService.tableViewDataArray[indexPath.row];
+    return model.trackHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    CRMAdvisoryModel *model = self.distributionService.tableViewDataArray[indexPath.row];
+    CRMTrackModel *model = (CRMTrackModel *)self.distributionService.tableViewDataArray[indexPath.row];
     CRMTrackCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CRMTrackCell.class)];
-//    cell.titleLabel.text = model.title1;
-//    cell.timeLabel.text = model.createTime;
-//    cell.contentLabel.text = model.title2;
+    cell.titleLabel.text = model.followName;
+    cell.timeLabel.text = model.createTime;
+    cell.contentLabel.text = model.content;
     cell.topLine.hidden = indexPath.row == 0;
     return cell;
 }
