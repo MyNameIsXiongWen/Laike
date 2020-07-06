@@ -28,20 +28,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.kNavigationView.title = @"客户管理";
+    self.kNavigationView.hidden = YES;
+    QHWNavgationView *tempNavigationView = [[QHWNavgationView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTopBarHeight)];
+    tempNavigationView.leftBtn.hidden = !self.interval;
+    tempNavigationView.title = @"客户管理";
+    [tempNavigationView.rightBtn setTitle:@"+" forState:0];
+//    [tempNavigationView.rightBtn setImage:kImageMake(@"customize_add") forState:0];
+    [tempNavigationView.leftBtn setImage:kImageMake(@"global_back") forState:0];
+    [tempNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
+    [tempNavigationView.leftBtn addTarget:self action:@selector(leftNavBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [tempNavigationView.rightBtn addTarget:self action:@selector(rightNavBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [tempNavigationView.rightAnotherBtn addTarget:self action:@selector(rightAnthorNavBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:tempNavigationView];
+    
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
     [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
-    [self.kNavigationView.rightBtn setTitle:@"+" forState:0];
-    [self.kNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
-//    [self.kNavigationView.rightBtn setImage:kImageMake(@"customize_add") forState:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
-    self.kNavigationView.leftBtn.hidden = !self.interval;
+}
+
+- (void)leftNavBtnAction:(UIButton *)sender {
+    [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
@@ -119,9 +131,11 @@
         for (int i=0; i<statusArray.count; i++) {
             CRMScrollContentViewController *vc = [[CRMScrollContentViewController alloc] init];
             vc.crmType = [statusArray[i] integerValue];
+            vc.interval = self.interval;
             [contentVCs addObject:vc];
         }
-        _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];
+        CGFloat height = self.interval ? (kScreenH-self.tabScrollView.bottom) : (kScreenH-self.tabScrollView.bottom-kBottomBarHeight);
+        _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, height) childVCs:contentVCs parentVC:self delegate:self];
     }
     return _pageContentView;
 }

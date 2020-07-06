@@ -126,23 +126,27 @@
     [self.praiseBtn setImage:kImageMake(contentModel.likeStatus == 2 ? @"big_like_white_orange" : @"big_like_white") forState:0];
     
     if (contentModel.fileType == 1 && contentModel.filePathList.count > 0) {
-        if ([contentModel.filePathList.firstObject isKindOfClass:NSDictionary.class]) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                id object = contentModel.filePathList.firstObject;
-                if ([object isKindOfClass:NSDictionary.class]) {
-                    contentModel.filePathList = @[UIImage.new];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.collectionView reloadData];
-                    });
-                    NSDictionary *dic = (NSDictionary *)object;
-                    [dic[@"path"] thumbnailImageForVideoWithComplete:^(UIImage *img) {
-                        contentModel.filePathList = @[img];
+        if (contentModel.coverPath.length > 0) {
+            contentModel.filePathList = @[kFilePath(contentModel.coverPath)];
+        } else {
+            if ([contentModel.filePathList.firstObject isKindOfClass:NSDictionary.class]) {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    id object = contentModel.filePathList.firstObject;
+                    if ([object isKindOfClass:NSDictionary.class]) {
+                        contentModel.filePathList = @[UIImage.new];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self.collectionView reloadData];
                         });
-                    }];
-                }
-            });
+                        NSDictionary *dic = (NSDictionary *)object;
+                        [dic[@"path"] thumbnailImageForVideoWithComplete:^(UIImage *img) {
+                            contentModel.filePathList = @[img];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.collectionView reloadData];
+                            });
+                        }];
+                    }
+                });
+            }
         }
     }
     if (contentModel.filePathList.count == 0) {
@@ -167,6 +171,7 @@
         if ([imgObject isKindOfClass:NSString.class]) {
             NSString *imgSrc = (NSString *)imgObject;
             [cell.imgView sd_setImageWithURL:[NSURL URLWithString:imgSrc] placeholderImage:kPlaceHolderImage_Banner];
+            cell.playImageView.hidden = self.contentModel.fileType != 1;
         } else if ([imgObject isKindOfClass:QHWImageModel.class]) {
             QHWImageModel *imgModel = (QHWImageModel *)imgObject;
             [cell.imgView sd_setImageWithURL:[NSURL URLWithString:imgModel.imageSrc] placeholderImage:kPlaceHolderImage_Banner];

@@ -17,7 +17,8 @@ typedef enum : NSUInteger {
     ShareTypeMerchant, //商户
     ShareTypeConsultant, //顾问
     ShareTypeCertification, //认证
-    ShareTypeLive //直播
+    ShareTypeLive, //直播
+    ShareTypeGallery //海报
 } ShareType;
 
 @class QHWShareCollectionCell;

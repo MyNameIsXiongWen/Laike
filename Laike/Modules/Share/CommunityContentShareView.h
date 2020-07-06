@@ -8,20 +8,15 @@
 
 #import "QHWPopView.h"
 #import "CommunityDetailService.h"
+#import "QHWShareBottomViewProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@protocol CommunityContentShareViewDelegate <NSObject>
-
-@optional
-- (void)CommunityContentShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image;
-
-@end
 
 @interface CommunityContentShareView : QHWPopView
 
 @property (nonatomic, copy) NSString *miniCodePath;
 @property (nonatomic, strong) CommunityDetailModel *detailModel;
-@property (nonatomic, weak) id<CommunityContentShareViewDelegate>delegate;
+@property (nonatomic, weak) id<QHWShareBottomViewProtocol>delegate;
 
 @end
 

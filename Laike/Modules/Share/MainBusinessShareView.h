@@ -9,21 +9,16 @@
 #import "QHWPopView.h"
 #import "QHWMainBusinessDetailBaseModel.h"
 #import "LiveModel.h"
+#import "QHWShareBottomViewProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@protocol MainBusinessShareViewDelegate <NSObject>
-
-@optional
-- (void)MainBusinessShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image;
-
-@end
 
 @interface MainBusinessShareView : QHWPopView
 
 @property (nonatomic, copy) NSString *miniCodePath;
 @property (nonatomic, strong) QHWMainBusinessDetailBaseModel *mainBusinessDetailModel;
 @property (nonatomic, strong) LiveModel *liveModel;
-@property (nonatomic, weak) id<MainBusinessShareViewDelegate>delegate;
+@property (nonatomic, weak) id<QHWShareBottomViewProtocol>delegate;
 
 @end
 

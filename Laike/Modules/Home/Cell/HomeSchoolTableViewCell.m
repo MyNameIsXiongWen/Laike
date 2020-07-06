@@ -1,17 +1,17 @@
 //
-//  MineSchoolTableViewCell.m
+//  HomeSchoolTableViewCell.m
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "MineSchoolTableViewCell.h"
+#import "HomeSchoolTableViewCell.h"
 #import "QHWTableSectionHeaderView.h"
 #import "QHWSchoolModel.h"
 #import "CTMediator+ViewController.h"
 
-@interface MineSchoolTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
+@interface HomeSchoolTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
 
 @property (nonatomic, strong) QHWTableSectionHeaderView *headerView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation MineSchoolTableViewCell
+@implementation HomeSchoolTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -22,9 +22,11 @@
     UICollectionView *collectionView = params[@"collectionView"];
     NSIndexPath *indexPath = params[@"indexPath"];
     NSMutableArray *imageArray = params[@"imageArray"];
+    BOOL showPlayImgView = [params[@"showPlayImgView"] boolValue];
     void (^blk)(void) = params[@"block"];
     PublishImgViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(PublishImgViewCell.class) forIndexPath:indexPath];
     cell.closeAction = blk;
+    cell.playImageView.hidden = !showPlayImgView;
     if (imageArray.count < kPublishImgCount) {
         if (indexPath.row == imageArray.count) {
             cell.button.hidden = YES;

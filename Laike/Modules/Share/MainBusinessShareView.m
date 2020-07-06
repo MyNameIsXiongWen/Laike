@@ -48,6 +48,8 @@
         self.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         self.popType = PopTypeBottom;
         [self configUI];
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
     }
     return self;
 }
@@ -55,6 +57,7 @@
 - (void)configUI {
     self.bkgView = UIView.viewFrame(CGRectMake(10, 0, kScreenW-20, 530)).bkgColor(kColorThemefff);
     self.bkgView.userInteractionEnabled = YES;
+    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBkgView)]];
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
     
@@ -90,11 +93,15 @@
     self.bottomView = [[ShareBottomView alloc] initWithFrame:CGRectMake(0, self.height-100, kScreenW, 100)];
     WEAKSELF
     self.bottomView.clickBtnBlock = ^(NSInteger index) {
-        if ([weakSelf.delegate respondsToSelector:@selector(MainBusinessShareView_clickBottomBtnWithIndex:Image:)]) {
-            [weakSelf.delegate MainBusinessShareView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot]];
+        if ([weakSelf.delegate respondsToSelector:@selector(ShareBottomView_clickBottomBtnWithIndex:Image:TargetView:)]) {
+            [weakSelf.delegate ShareBottomView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot] TargetView:self];
         }
     };
     [self addSubview:self.bottomView];
+}
+
+- (void)clickBkgView {
+    
 }
 
 - (void)longPressBkgView:(UILongPressGestureRecognizer *)recognizer {

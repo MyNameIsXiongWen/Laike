@@ -1,5 +1,5 @@
 //
-//  MineCustomerTableViewCell.h
+//  HomeCardTableViewCell.h
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MineCustomerTableViewCell : QHWShadowTableViewCell
+@interface HomeCardTableViewCell : QHWShadowTableViewCell
 
 @property (nonatomic, strong) UserDataView *userDataView;
 

@@ -1,14 +1,14 @@
 //
-//  MineBannerTableViewCell.m
+//  HomeBannerTableViewCell.m
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "MineBannerTableViewCell.h"
+#import "HomeBannerTableViewCell.h"
 
-@implementation MineBannerTableViewCell
+@implementation HomeBannerTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -13,7 +13,7 @@
 #import "QHWPhotoBrowser.h"
 #import "QHWActionSheetView.h"
 #import "PublishRelateProductViewController.h"
-#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 @interface CommunityPublishViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QHWActionSheetViewDelegate>
 
@@ -23,7 +23,6 @@
 @property (nonatomic, strong) IndustryView *businessIndustryView;
 @property (nonatomic, strong) IndustryView *productIndustryView;
 @property (nonatomic, strong) CommunityPublishService *publishService;
-@property (nonatomic, assign) NSInteger fileType;
 
 @end
 
@@ -65,17 +64,28 @@
 
 #pragma mark ------------UICollectionViewDelegate-------------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (self.publishService.fileType == 1) {
+        return 1;
+    }
     return MIN(self.publishService.imageArray.count + 1, kPublishImgCount);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     WEAKSELF
+    BOOL showPlayImgView = NO;
+    if (self.publishService.fileType == 1 && self.publishService.imageArray.count == 1) {
+        showPlayImgView = YES;
+    }
     return [CTMediator.sharedInstance CTMediator_collectionViewCellWithIndexPath:indexPath
                                                                   CollectionView:collectionView
                                                                       ImageArray:self.publishService.imageArray
+                                                                 ShowPlayImgView:showPlayImgView
                                                                        ResultBlk:^{
         [weakSelf.publishService.imageArray removeObjectAtIndex:indexPath.row];
         [collectionView reloadData];
+        if (weakSelf.publishService.imageArray.count == 0) {
+            weakSelf.publishService.fileType = 0;
+        }
     }];
 }
 
@@ -83,55 +93,58 @@
     if (indexPath.row == self.publishService.imageArray.count) {
         [self selectAlbum];
     } else {
+        if (self.publishService.fileType == 1 && self.publishService.imageArray.count == 1) {
+            QHWImageModel *tempModel = self.publishService.imageArray.firstObject;
+            AVPlayer *player = [[AVPlayer alloc] initWithURL:tempModel.URL];
+            AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
+            playerVC.player = player;
+            [self presentViewController:playerVC animated:YES completion:nil];
+            return;
+        }
         QHWPhotoBrowser *browser = [[QHWPhotoBrowser alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH) ImgArray:self.publishService.imageArray.mutableCopy CurrentIndex:indexPath.row];
         [browser show];
     }
 }
 
 - (void)selectAlbum {
-    [CTMediator.sharedInstance CTMediator_showTZImagePickerWithMaxCount:kPublishImgCount-self.publishService.imageArray.count ResultBlk:^(id  _Nonnull selectedObject) {
-        if ([selectedObject isKindOfClass:NSURL.class]) {
-            self.fileType = 2;
-            NSURL *URL = (NSURL *)selectedObject;
+    if (self.publishService.fileType == 1) {
+        [CTMediator.sharedInstance CTMediator_showTZImagePickerOnlyVideoWithResultBlk:^(NSURL * _Nonnull videoURL, UIImage * _Nullable coverImage) {
             QHWImageModel *tempModel = QHWImageModel.new;
-            [self generateSnapShotWithURL:URL Complete:^(UIImage *img) {
-                tempModel.image = img;
-            }];
+            tempModel.URL = videoURL;
+            tempModel.image = coverImage;
             self.publishService.imageArray = @[tempModel].mutableCopy;
-        } else if ([selectedObject isKindOfClass:NSArray.class]) {
-            self.fileType = 1;
-            NSArray *photos = (NSArray *)selectedObject;
+            [self.collectionView reloadData];
+        }];
+    } else if (self.publishService.fileType == 2) {
+        [CTMediator.sharedInstance CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:kPublishImgCount-self.publishService.imageArray.count ResultBlk:^(NSArray<UIImage *> * _Nonnull photos) {
             for (UIImage *img in photos) {
                 QHWImageModel *tempModel = QHWImageModel.new;
                 tempModel.image = img;
                 [self.publishService.imageArray addObject:tempModel];
             }
-        }
-        [self.collectionView reloadData];
-    }];
-}
-
-- (void)generateSnapShotWithURL:(NSURL *)URL Complete:(void (^)(UIImage *img))complete; {
-    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:URL options:nil];
-    NSParameterAssert(asset);
-    AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-    assetImageGenerator.appliesPreferredTrackTransform = YES;
-    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
-    
-    CFTimeInterval thumbnailImageTime = 0; // 第0秒的截图
-    NSError *thumbnailImageGenerationError = nil;
-
-    CGImageRef thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60)actualTime:NULL error:&thumbnailImageGenerationError];
-    if (thumbnailImageGenerationError) {
-        complete(UIImage.new);
-        return;
-    }
-    if (thumbnailImageRef) {
-        complete([[UIImage alloc] initWithCGImage: thumbnailImageRef]);
+            [self.collectionView reloadData];
+        }];
     } else {
-        NSLog(@"thumbnailImageGenerationError %@",thumbnailImageGenerationError);
+        [CTMediator.sharedInstance CTMediator_showTZImagePickerWithMaxCount:kPublishImgCount-self.publishService.imageArray.count ResultBlk:^(id  _Nonnull selectedObject, UIImage * _Nullable coverImage) {
+            if ([selectedObject isKindOfClass:NSURL.class]) {
+                self.publishService.fileType = 1;
+                NSURL *URL = (NSURL *)selectedObject;
+                QHWImageModel *tempModel = QHWImageModel.new;
+                tempModel.URL = URL;
+                tempModel.image = coverImage;
+                self.publishService.imageArray = @[tempModel].mutableCopy;
+            } else if ([selectedObject isKindOfClass:NSArray.class]) {
+                self.publishService.fileType = 2;
+                NSArray *photos = (NSArray *)selectedObject;
+                for (UIImage *img in photos) {
+                    QHWImageModel *tempModel = QHWImageModel.new;
+                    tempModel.image = img;
+                    [self.publishService.imageArray addObject:tempModel];
+                }
+            }
+            [self.collectionView reloadData];
+        }];
     }
-    CFRelease(thumbnailImageRef);
 }
 
 - (void)clickBusinessIndustryView {

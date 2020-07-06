@@ -41,6 +41,8 @@
         self.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         self.popType = PopTypeBottom;
         [self configUI];
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
     }
     return self;
 }
@@ -48,6 +50,7 @@
 - (void)configUI {
     self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, 480)).bkgColor(kColorThemefff);
     self.bkgView.userInteractionEnabled = YES;
+    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBkgView)]];
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
     
@@ -63,7 +66,7 @@
     
     [self.bkgView addSubview:UIView.viewFrame(CGRectMake(0, self.descLabel.bottom+15, self.bkgView.width, 1)).bkgColor(kColorThemeeee)];
     
-    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-90, self.descLabel.bottom+25, 70, 70)).ivBkgColor(kColorThemeeee);
+    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-90, self.descLabel.bottom+25, 70, 70)).ivCornerRadius(35);
     [self.bkgView addSubview:self.miniCodeImgView];
     self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
     [self.miniCodeImgView addSubview:self.logoImgView];
@@ -78,11 +81,15 @@
     self.bottomView = [[ShareBottomView alloc] initWithFrame:CGRectMake(0, self.height-100, kScreenW, 100)];
     WEAKSELF
     self.bottomView.clickBtnBlock = ^(NSInteger index) {
-        if ([weakSelf.delegate respondsToSelector:@selector(ConsultantShareView_clickBottomBtnWithIndex:Image:)]) {
-            [weakSelf.delegate ConsultantShareView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot]];
+        if ([weakSelf.delegate respondsToSelector:@selector(ShareBottomView_clickBottomBtnWithIndex:Image:TargetView:)]) {
+            [weakSelf.delegate ShareBottomView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot] TargetView:self];
         }
     };
     [self addSubview:self.bottomView];
+}
+
+- (void)clickBkgView {
+    
 }
 
 - (void)longPressBkgView:(UILongPressGestureRecognizer *)recognizer {

@@ -1,5 +1,5 @@
 //
-//  MinePopularityInfoTableViewCell.h
+//  HomePopularityInfoTableViewCell.h
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MinePopularityInfoTableViewCell : QHWShadowTableViewCell 
+@interface HomePopularityInfoTableViewCell : QHWShadowTableViewCell 
 
 @end
 

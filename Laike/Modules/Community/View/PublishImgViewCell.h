@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PublishImgViewCell : UICollectionViewCell
 @property(nonatomic,strong)UIImageView *bgImageView;
+@property (nonatomic, strong) UIImageView *playImageView;
 @property(nonatomic,strong)UIButton *button;
 
 @property(nonatomic,copy)void(^closeAction)(void);

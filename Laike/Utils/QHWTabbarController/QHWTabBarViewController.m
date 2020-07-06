@@ -57,9 +57,9 @@
 }
 
 -(void)addChildViewControllers {
-    NSArray *controllers = @[@"HomeViewController", @"DistributionViewController", @"MessageViewController", @"MineViewController"];
-    NSArray *icon = @[@"tabbar_home", @"tabbar_community", @"tabbar_message", @"tabbar_mine"];
-    NSArray *titleArray = @[@"首页",@"分销",@"消息",@"我的"];
+    NSArray *controllers = @[@"HomeViewController", @"MessageViewController", @"CRMViewController", @"DistributionViewController", @"MineViewController"];
+    NSArray *icon = @[@"tabbar_home", @"tabbar_community", @"tabbar_message", @"tabbar_message", @"tabbar_mine"];
+    NSArray *titleArray = @[@"首页", @"消息", @"客户", @"分销", @"我的"];
     for (int i = 0; i < controllers.count; i++) {
         id vc = [NSClassFromString(controllers[i]) new];
         QHWNavigationController *navC = [[QHWNavigationController alloc] initWithRootViewController:vc];

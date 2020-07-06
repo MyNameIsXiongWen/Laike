@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger crmType;
 @property (nonatomic, strong) NSMutableArray <FilterBtnViewCellModel *>*filterDataArray;
 
+@property (nonatomic, assign) BOOL interval;
+
 @end
 
 NS_ASSUME_NONNULL_END

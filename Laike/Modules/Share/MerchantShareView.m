@@ -88,8 +88,8 @@
     self.bottomView = [[ShareBottomView alloc] initWithFrame:CGRectMake(0, self.height-100, kScreenW, 100)];
     WEAKSELF
     self.bottomView.clickBtnBlock = ^(NSInteger index) {
-        if ([weakSelf.delegate respondsToSelector:@selector(MerchantShareView_clickBottomBtnWithIndex:Image:)]) {
-            [weakSelf.delegate MerchantShareView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot]];
+        if ([weakSelf.delegate respondsToSelector:@selector(ShareBottomView_clickBottomBtnWithIndex:Image:TargetView:)]) {
+            [weakSelf.delegate ShareBottomView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot] TargetView:self];
         }
     };
     [self addSubview:self.bottomView];

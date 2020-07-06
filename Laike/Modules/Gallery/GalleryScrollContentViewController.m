@@ -9,6 +9,7 @@
 #import "GalleryScrollContentViewController.h"
 #import "GalleryService.h"
 #import "QHWImageViewCell.h"
+#import "QHWShareView.h"
 
 @interface GalleryScrollContentViewController () <UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -115,6 +116,12 @@
     GalleryModel *model = (GalleryModel *)self.galleryService.tableViewDataArray[indexPath.row];
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.imgPath)]];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    GalleryModel *model = (GalleryModel *)self.galleryService.tableViewDataArray[indexPath.row];
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"coverImg":model.imgPath, @"shareType": @(ShareTypeGallery)}];
+    [shareView show];
 }
 
 /*

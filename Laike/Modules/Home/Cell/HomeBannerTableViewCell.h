@@ -1,5 +1,5 @@
 //
-//  MineBannerTableViewCell.h
+//  HomeBannerTableViewCell.h
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MineBannerTableViewCell : QHWShadowTableViewCell <QHWBaseCellProtocol>
+@interface HomeBannerTableViewCell : QHWShadowTableViewCell <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) QHWCycleScrollView *bannerView;
 

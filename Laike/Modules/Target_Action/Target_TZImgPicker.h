@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeOnlyPhotoShowTZImagePickerViewController:(NSDictionary *)params;
 
+- (void)Action_nativeOnlyVideoShowTZImagePickerViewController:(NSDictionary *)params;
+
 - (void)Action_nativeShowTZImagePickerViewController:(NSDictionary *)params;
 
 @end

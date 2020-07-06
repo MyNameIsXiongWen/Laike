@@ -1,5 +1,5 @@
 //
-//  MineIconTableViewCell.h
+//  HomeIconTableViewCell.h
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MineIconTableViewCell : UITableViewCell
+@interface HomeIconTableViewCell : UITableViewCell
 
 @property (nonatomic, strong, readonly) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *btnArray;

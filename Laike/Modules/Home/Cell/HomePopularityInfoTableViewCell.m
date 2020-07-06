@@ -1,16 +1,16 @@
 //
-//  MinePopularityInfoTableViewCell.m
+//  HomePopularityInfoTableViewCell.m
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "MinePopularityInfoTableViewCell.h"
+#import "HomePopularityInfoTableViewCell.h"
 #import "QHWTableSectionHeaderView.h"
 #import "QHWConsultantModel.h"
 
-@interface MinePopularityInfoTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
+@interface HomePopularityInfoTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
 
 @property (nonatomic, strong) QHWTableSectionHeaderView *headerView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation MinePopularityInfoTableViewCell
+@implementation HomePopularityInfoTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

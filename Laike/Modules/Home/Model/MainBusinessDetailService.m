@@ -23,7 +23,9 @@
                                     @"RichTextTableViewCell",
                                     @"RichTextWithTitleTableViewCell",
                                     @"HouseDetailConfigTableViewCell",
-                                    @"QHWHouseTableViewCell"];
+                                    @"QHWHouseTableViewCell",
+                                    @"MainBusinessFileTableViewCell",
+                                    @"MainBusinessRulesTableViewCell"];
     }
     return self;
 }

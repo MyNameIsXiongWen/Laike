@@ -41,8 +41,9 @@
 }
 
 - (void)addTableView {
-    CGFloat height = self.crmType == 1 ? 40 : 0;
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, height, kScreenW, kScreenH-kTopBarHeight-(128+height)) Style:UITableViewStylePlain Object:self];
+    CGFloat headerHeight = self.crmType == 1 ? 40 : 0;
+    CGFloat tableHeight = self.interval ? (kScreenH-kTopBarHeight-128-headerHeight) : (kScreenH-kTopBarHeight-128-headerHeight-kBottomBarHeight);
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, headerHeight, kScreenW, tableHeight) Style:UITableViewStylePlain Object:self];
     self.tableView.rowHeight = 80;
     [self.tableView registerClass:CRMTableViewCell.class forCellReuseIdentifier:NSStringFromClass(CRMTableViewCell.class)];
     [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{

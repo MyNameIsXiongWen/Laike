@@ -7,24 +7,16 @@
 //
 
 #import "QHWPopView.h"
-
-
 #import "UserModel.h"
+#import "QHWShareBottomViewProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@protocol MerchantShareViewDelegate <NSObject>
-
-@optional
-- (void)MerchantShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image;
-
-@end
 
 @interface MerchantShareView : QHWPopView
 
 @property (nonatomic, copy) NSString *miniCodePath;
 @property (nonatomic, strong) UserModel *userModel;
-@property (nonatomic, weak) id<MerchantShareViewDelegate>delegate;
+@property (nonatomic, weak) id<QHWShareBottomViewProtocol>delegate;
 
 @end
 

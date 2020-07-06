@@ -48,9 +48,9 @@
     WEAKSELF
     moreView.clickBtnBlock = ^(NSString * _Nonnull identifier) {
         if ([identifier isEqualToString:@"completeInfomation"]) {
-            [weakSelf showAlertLabelView];
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
         } else if ([identifier isEqualToString:@"giveUpFollowUp"]) {
-            [weakSelf.crmService CRMGiveUpTrackRequest];
+            [weakSelf showAlertLabelView];
         }
     };
     [moreView show];
@@ -63,7 +63,7 @@
     WEAKSELF
     alert.confirmBlock = ^{
         [alert dismiss];
-        [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+        [weakSelf.crmService CRMGiveUpTrackRequest];
     };
     [alert show];
 }

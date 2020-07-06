@@ -78,19 +78,19 @@
     [CTMediator.sharedInstance performTarget:self action:kFormat(@"click%@", model.identifier) params:nil];
 }
 
-- (void)clickMinePopularityInfoTableViewCell {
+- (void)clickHomePopularityInfoTableViewCell {
     [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"RankViewController").new animated:YES];
 }
 
-- (void)clickMineCardTableViewCell {
+- (void)clickHomeCardTableViewCell {
     [CTMediator.sharedInstance CTMediator_viewControllerForCard];
 }
 
-- (void)clickMineCustomerTableViewCell {
+- (void)clickHomeCustomerTableViewCell {
     [CTMediator.sharedInstance CTMediator_viewControllerForIntervalCRM];
 }
 
-- (void)clickMineSchoolTableViewCell {
+- (void)clickHomeSchoolTableViewCell {
     [CTMediator.sharedInstance CTMediator_viewControllerForQSchool];
 }
 
@@ -124,6 +124,9 @@
 
 @end
 
+#import "QHWShareView.h"
+#import "UserModel.h"
+
 @implementation UserInfoView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -144,7 +147,8 @@
 }
 
 - (void)clickShareBtn {
-    
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":UserModel.shareUser, @"shareType": @(ShareTypeConsultant)}];
+    [shareView show];
 }
 
 @end

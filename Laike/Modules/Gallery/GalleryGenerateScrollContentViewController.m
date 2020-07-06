@@ -8,6 +8,7 @@
 
 #import "GalleryGenerateScrollContentViewController.h"
 #import "CTMediator+TZImgPicker.h"
+#import "QHWShareView.h"
 
 @interface GalleryGenerateScrollContentViewController ()
 
@@ -27,6 +28,8 @@
 - (void)clickAddBtn {
     [CTMediator.sharedInstance CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:1 ResultBlk:^(NSArray<UIImage *> * _Nonnull photos) {
         self.imgView.image = photos.firstObject;
+        QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"coverImg":photos.firstObject, @"shareType": @(ShareTypeGallery)}];
+        [shareView show];
     }];
 }
 

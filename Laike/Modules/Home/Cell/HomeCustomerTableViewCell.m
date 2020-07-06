@@ -1,21 +1,21 @@
 //
-//  MineCustomerTableViewCell.m
+//  HomeCustomerTableViewCell.m
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "MineCustomerTableViewCell.h"
+#import "HomeCustomerTableViewCell.h"
 #import "QHWTableSectionHeaderView.h"
 
-@interface MineCustomerTableViewCell () <QHWBaseCellProtocol>
+@interface HomeCustomerTableViewCell () <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) QHWTableSectionHeaderView *headerView;
 
 @end
 
-@implementation MineCustomerTableViewCell
+@implementation HomeCustomerTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

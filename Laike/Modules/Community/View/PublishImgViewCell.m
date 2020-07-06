@@ -27,7 +27,7 @@
 -(UIImageView *)bgImageView
 {
     if (!_bgImageView) {
-        _bgImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 7.5, self.width - 7.5, self.height - 7.5)];
+        _bgImageView = UIImageView.ivFrame(CGRectMake(0, 7.5, self.width - 7.5, self.height - 7.5));
     }
     return _bgImageView;
 }
@@ -42,6 +42,15 @@
         _button.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
     }
     return _button;
+}
+
+- (UIImageView *)playImageView {
+    if (!_playImageView) {
+        _playImageView = UIImageView.ivFrame(CGRectMake((self.width-50)/2.0, (self.height-50)/2.0, 50, 50)).ivImage(kImageMake(@"video_play"));
+        _playImageView.hidden = YES;
+        [self.contentView addSubview:_playImageView];
+    }
+    return _playImageView;
 }
 
 @end

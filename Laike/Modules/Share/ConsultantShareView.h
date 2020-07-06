@@ -8,21 +8,15 @@
 
 #import "QHWPopView.h"
 #import "UserModel.h"
+#import "QHWShareBottomViewProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@protocol ConsultantShareViewDelegate <NSObject>
-
-@optional
-- (void)ConsultantShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image;
-
-@end
 
 @interface ConsultantShareView : QHWPopView
 
 @property (nonatomic, copy) NSString *miniCodePath;
 @property (nonatomic, strong) UserModel *userModel;
-@property (nonatomic, weak) id<ConsultantShareViewDelegate>delegate;
+@property (nonatomic, weak) id<QHWShareBottomViewProtocol>delegate;
 
 @end
 

@@ -1,16 +1,16 @@
 //
-//  MineCardTableViewCell.m
+//  HomeCardTableViewCell.m
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "MineCardTableViewCell.h"
+#import "HomeCardTableViewCell.h"
 #import "QHWTableSectionHeaderView.h"
 #import "QHWTabScrollView.h"
 
-@interface MineCardTableViewCell () <QHWBaseCellProtocol>
+@interface HomeCardTableViewCell () <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) QHWTableSectionHeaderView *headerView;
 @property (nonatomic, strong) QHWTabScrollView *tabScrollView;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation MineCardTableViewCell
+@implementation HomeCardTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(NSArray <UIImage *>* photos))blk;
 
-- (void)CTMediator_showTZImagePickerWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(id selectedObject))blk;
+- (void)CTMediator_showTZImagePickerOnlyVideoWithResultBlk:(void (^)(NSURL *videoURL, UIImage * _Nullable coverImage))blk;
+
+- (void)CTMediator_showTZImagePickerWithMaxCount:(NSInteger)maxCount ResultBlk:(void (^)(id selectedObject, UIImage * _Nullable coverImage))blk;
 
 @end
 

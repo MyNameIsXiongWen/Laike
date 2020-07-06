@@ -1,22 +1,24 @@
 //
-//  MineIconTableViewCell.m
+//  HomeIconTableViewCell.m
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "MineIconTableViewCell.h"
+#import "HomeIconTableViewCell.h"
 #import "QHWBannerModel.h"
 #import "CTMediator+ViewController.h"
+#import "QHWShareView.h"
+#import "UserModel.h"
 
-@interface MineIconTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
+@interface HomeIconTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
 
 @property (nonatomic, strong, readwrite) UICollectionView *collectionView;
 
 @end
 
-@implementation MineIconTableViewCell
+@implementation HomeIconTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -91,7 +93,8 @@
 }
 
 - (void)click_home_card {
-    
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":UserModel.shareUser, @"shareType": @(ShareTypeConsultant)}];
+    [shareView show];
 }
 
 - (void)click_home_rate {

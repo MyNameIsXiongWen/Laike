@@ -74,7 +74,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)clickCollectRequestWithBusinessType:(NSInteger)businessType BusinessId:(NSString *)businessId CollectionStatus:(NSInteger)collectionStatus Complete:(void (^)(BOOL status))complete;
 
-- (void)uploadImageWithArray:(NSMutableArray *)imgArray Completed:(void (^)(NSMutableArray *pathArray))completed;
+- (void)uploadImageWithArray:(NSArray *)imgArray Completed:(void (^)(NSMutableArray *pathArray))completed;
+- (void)uploadVideoWithURL:(NSURL *)videoUrl Completed:(void (^)(NSMutableArray *pathArray))completed;
 
 - (void)getMyCustomizeDataRequest;
 

@@ -22,12 +22,13 @@ NSString * const kCTMediatorActionNativePublishImageCell = @"nativePublishImageC
         shouldCacheTarget:NO];
 }
 
-- (UICollectionViewCell *)CTMediator_collectionViewCellWithIndexPath:(NSIndexPath *)indexPath CollectionView:(UICollectionView *)collectionView ImageArray:(NSMutableArray *)imageArray ResultBlk:(void (^)(void))blk {
+- (UICollectionViewCell *)CTMediator_collectionViewCellWithIndexPath:(NSIndexPath *)indexPath CollectionView:(UICollectionView *)collectionView ImageArray:(NSMutableArray *)imageArray ShowPlayImgView:(BOOL)showPlayImgView ResultBlk:(void (^)(void))blk {
     UICollectionViewCell *cell = [self performTarget:kCTMediatorTargetPublish
                                               action:kCTMediatorActionNativePublishImageCell
                                               params:@{@"indexPath": indexPath,
                                                        @"collectionView": collectionView,
                                                        @"imageArray": imageArray,
+                                                       @"showPlayImgView": @(showPlayImgView),
                                                        @"block": blk}
                                    shouldCacheTarget:YES];
     if ([cell isKindOfClass:UICollectionViewCell.class]) {

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QHWImageModel : NSObject
 
+@property (nonatomic, strong) NSURL *URL;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, copy) NSString *imageSrc;//图片地址
 @property (nonatomic, assign) CGFloat imageWidth;//图片宽度

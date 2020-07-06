@@ -203,7 +203,7 @@
     }];
 }
 
-- (void)uploadImageWithArray:(NSMutableArray *)imgArray Completed:(void (^)(NSMutableArray * _Nonnull))completed {
+- (void)uploadImageWithArray:(NSArray *)imgArray Completed:(void (^)(NSMutableArray * _Nonnull))completed {
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kSystemQNToken parameters:@{@"guid": UserModel.shareUser.id} success:^(id responseObject) {
         [QHWHttpLoading showWithMaskTypeBlack];
@@ -233,6 +233,30 @@
                 completed(tempArray);
             });
         }
+    } failure:^(NSError *error) {
+        completed(NSMutableArray.array);
+    }];
+}
+
+- (void)uploadVideoWithURL:(NSURL *)videoUrl Completed:(void (^)(NSMutableArray * _Nonnull))completed {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kSystemQNToken parameters:@{@"guid": UserModel.shareUser.id} success:^(id responseObject) {
+        [QHWHttpLoading showWithMaskTypeBlack];
+        NSString *token = responseObject[@"data"][@"token"];
+        __block NSMutableArray *tempArray = NSMutableArray.array;
+        NSData *imageData = [NSData dataWithContentsOfURL:videoUrl];
+        QNUploadManager *uploadManager = QNUploadManager.new;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *time = [formatter stringFromDate:[NSDate date]];
+        NSString *keyyy = [NSString stringWithFormat:@"%@.mp4",time];
+        [uploadManager putData:imageData key:keyyy token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+            [QHWHttpLoading dismiss];
+            NSLog(@"%@", info);
+            NSLog(@"%@", resp);
+            [tempArray addObject:@{@"path": key}];
+            completed(tempArray);
+        } option:nil];
     } failure:^(NSError *error) {
         completed(NSMutableArray.array);
     }];

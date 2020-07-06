@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 //- (void)publishRequestWithImage:(NSArray *)array Completed:(void (^)(void))completed;
 - (void)uploadImageWithContent:(NSString *)content Completed:(void (^)(void))completed;
 @property (nonatomic, strong) NSArray *dataSource;
+///1--视频；2-图片
+@property (nonatomic, assign) NSInteger fileType;
 @property (nonatomic, strong) NSMutableArray *imageArray;
 @property (nonatomic, assign) NSInteger industryId;
 @property (nonatomic, strong) NSArray *industryArray;

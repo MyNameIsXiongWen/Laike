@@ -1,5 +1,5 @@
 //
-//  MineSchoolTableViewCell.h
+//  HomeSchoolTableViewCell.h
 //  Laike
 //
 //  Created by xiaobu on 2020/6/22.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MineSchoolTableViewCell : UITableViewCell
+@interface HomeSchoolTableViewCell : UITableViewCell
 
 @end
 

@@ -188,28 +188,28 @@
 - (void)handleHomeData {
     [self.tableViewDataArray removeAllObjects];
     if (self.consultantArray.count > 0) {
-        QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MinePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];
+        QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];
         [self.tableViewDataArray addObject:userDataModel];
     }
     
     if (self.reportArray.count > 0) {
-        QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCardTableViewCell"
+        QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCardTableViewCell"
                                                                            Height:175
                                                                              Data:@[self.reportArray, self.homeModel.visitTip ?: @""]];
         [self.tableViewDataArray addObject:cardDataModel];
     }
     
-    QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineCustomerTableViewCell"
+    QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCustomerTableViewCell"
                                                                       Height:140
                                                                         Data:@[@{@"value": @(self.homeModel.userCount), @"title": @"CRM"},
                                                                                @{@"value": @(self.homeModel.userDays), @"title": @"获客"}]];
     [self.tableViewDataArray addObject:crmDataModel];
     
-    QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineIconTableViewCell" Height:160 Data:self.iconArray];
+    QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeIconTableViewCell" Height:160 Data:self.iconArray];
     [self.tableViewDataArray addObject:iconDataModel];
     
     if (self.schoolArray.count > 0) {
-        QHWBaseModel *schoolDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"MineSchoolTableViewCell" Height:225 Data:self.schoolArray];
+        QHWBaseModel *schoolDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeSchoolTableViewCell" Height:225 Data:self.schoolArray];
         [self.tableViewDataArray addObject:schoolDataModel];
     }
     

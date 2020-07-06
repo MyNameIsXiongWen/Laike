@@ -27,7 +27,12 @@
 }
 
 - (void)leftNavBtnAction:(UIButton *)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    for (UIViewController *vc in self.navigationController.childViewControllers) {
+        if ([NSStringFromClass(vc.class) isEqualToString:@"CommunityViewController"]) {
+            [self.getCurrentMethodCallerVC.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 /*

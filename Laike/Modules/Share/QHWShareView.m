@@ -15,13 +15,15 @@
 #import "CommunityContentShareView.h"
 #import "ConsultantShareView.h"
 #import "MerchantShareView.h"
+#import "GalleryShareView.h"
 #import "QHWMainBusinessDetailBaseModel.h"
 #import "CommunityDetailService.h"
 #import "UserModel.h"
 #import "LiveModel.h"
 #import "QHWMigrationModel.h"
+#import "QHWShareBottomViewProtocol.h"
 
-@interface QHWShareView () <UICollectionViewDelegate, UICollectionViewDataSource, MainBusinessShareViewDelegate, CommunityArticleShareViewDelegate, CommunityContentShareViewDelegate, MerchantShareViewDelegate, ConsultantShareViewDelegate>
+@interface QHWShareView () <UICollectionViewDelegate, UICollectionViewDataSource, QHWShareBottomViewProtocol>
 
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -33,11 +35,13 @@
 @property (nonatomic, strong) UserModel *userModel;
 @property (nonatomic, strong) LiveModel *liveModel;
 @property (nonatomic, strong) UIImage *certificateImage;
+@property (nonatomic, strong) id galleryImg;
 @property (nonatomic, strong) MainBusinessShareView *mainBusinessShareView;
 @property (nonatomic, strong) CommunityArticleShareView *articleShareView;
 @property (nonatomic, strong) CommunityContentShareView *contentShareView;
 @property (nonatomic, strong) ConsultantShareView *consultantShareView;
 @property (nonatomic, strong) MerchantShareView *merchantShareView;
+@property (nonatomic, strong) GalleryShareView *galleryShareView;
 @property (nonatomic, assign) ShareType shareType;
 
 @end
@@ -76,6 +80,8 @@
             [self.dataArray removeLastObject];
         } else if (self.shareType == ShareTypeLive) {
             self.liveModel = dict[@"detailModel"];
+        } else if (self.shareType == ShareTypeGallery) {
+            self.galleryImg = dict[@"coverImg"];
         }
         self.popType = PopTypeBottom;
         [self addSubview:self.collectionView];
@@ -147,6 +153,9 @@
     } else if (self.shareType == ShareTypeLive) {
         type = 103001;
         idString = self.liveModel.id;
+    } else if (self.shareType == ShareTypeGallery) {
+        type = 15;
+        idString = UserModel.shareUser.id;
     }
     [QHWSystemService.new getShareMiniCodeRequestWithBusinessType:type BusinessId:idString Completed:^(NSString * _Nonnull miniCodePath) {
         if (self.shareType == ShareTypeMainBusiness || self.shareType == ShareTypeLive) {
@@ -165,6 +174,12 @@
             self.articleShareView.detailModel = self.communityDetailModel;
             self.articleShareView.delegate = self;
             [self.articleShareView show];
+        } else if (self.shareType == ShareTypeGallery) {
+            self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 590)];
+            self.galleryShareView.miniCodePath = miniCodePath;
+            self.galleryShareView.galleryImg = self.galleryImg;
+            self.galleryShareView.delegate = self;
+            [self.galleryShareView show];
         }
     }];
 }
@@ -315,33 +330,9 @@
 }
 
 #pragma mark ------------ShareViewDelegate-------------
-- (void)MainBusinessShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image {
+- (void)ShareBottomView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image TargetView:(nonnull QHWPopView *)targetView {
     [self dismiss];
-    [self.mainBusinessShareView dismiss];
-    [self getShareContentWithPlatformType:index Poster:image];
-}
-
-- (void)CommunityArticleShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image {
-    [self dismiss];
-    [self.articleShareView dismiss];
-    [self getShareContentWithPlatformType:index Poster:image];
-}
-
-- (void)CommunityContentShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image {
-    [self dismiss];
-    [self.contentShareView dismiss];
-    [self getShareContentWithPlatformType:index Poster:image];
-}
-
-- (void)ConsultantShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image {
-    [self dismiss];
-    [self.consultantShareView dismiss];
-    [self getShareContentWithPlatformType:index Poster:image];
-}
-
-- (void)MerchantShareView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image {
-    [self dismiss];
-    [self.merchantShareView dismiss];
+    [targetView dismiss];
     [self getShareContentWithPlatformType:index Poster:image];
 }
 
