@@ -43,7 +43,7 @@
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.avatarImgView.mas_right).offset(20);
-            make.top.equalTo(self.avatarImgView.mas_top);
+            make.top.equalTo(self.avatarImgView.mas_top).offset(5);
             make.right.mas_equalTo(-15);
         }];
         [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -67,6 +67,7 @@
             make.left.mas_equalTo(20);
             make.right.mas_equalTo(-20);
             make.top.equalTo(self.businessKeyLabel.mas_bottom).offset(5);
+            make.height.mas_greaterThanOrEqualTo(20);
         }];
         [self.productKeyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(20);
@@ -77,6 +78,7 @@
             make.left.mas_equalTo(20);
             make.right.mas_equalTo(-20);
             make.top.equalTo(self.productKeyLabel.mas_bottom).offset(5);
+            make.height.mas_greaterThanOrEqualTo(20);
         }];
         [self.infoKeyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(20);
@@ -87,6 +89,7 @@
             make.left.mas_equalTo(20);
             make.right.mas_equalTo(-20);
             make.top.equalTo(self.infoKeyLabel.mas_bottom).offset(5);
+            make.height.mas_greaterThanOrEqualTo(20);
         }];
         [self.processView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
@@ -105,7 +108,7 @@
         self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:clientDetailModel.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
     }
     self.nameLabel.text = clientDetailModel.realName;
-//    [self.tagView setTagWithTagArray:@[]];
+    [self.tagView setTagWithTagArray:@[clientDetailModel.followName ?: @""]];
     self.businessValueLabel.text = clientDetailModel.businessName;
     self.productValueLabel.text = clientDetailModel.name;
     self.infoValueLabel.text = clientDetailModel.note;

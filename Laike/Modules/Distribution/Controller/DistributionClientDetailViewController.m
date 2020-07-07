@@ -32,17 +32,29 @@
 }
 
 - (void)getMainData {
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
     [self.distributionService getClientDetailInfoRequestComplete:^{
-        self.kNavigationView.title = self.distributionService.clientDetailModel.name;
+        dispatch_group_leave(group);
+        self.kNavigationView.title = self.distributionService.clientDetailModel.name ?: @"报备详情";
+    }];
+    dispatch_group_enter(group);
+    [self.distributionService getClientDetailTrackListRequestComplete:^{
+        dispatch_group_leave(group);
+    }];
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        if ([self.tableView.mj_header isRefreshing]) {
+            [self.tableView.mj_header endRefreshing];
+        }
+        if ([self.tableView.mj_footer isRefreshing]) {
+            [self.tableView.mj_footer endRefreshing];
+        }
         self.tableHeaderView.height = self.distributionService.tableHeaderViewHeight;
         self.tableHeaderView.clientDetailModel = self.distributionService.clientDetailModel;
-        [self.tableView reloadData];
-    }];
-    [self.distributionService getClientDetailTrackListRequestComplete:^{
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.distributionService.itemPageModel];
-        [self.tableView showNodataView:self.distributionService.tableViewDataArray.count == 0 offsetY:0 button:nil];
+        [self.tableView showNodataView:self.distributionService.tableViewDataArray.count == 0 offsetY:self.distributionService.tableHeaderViewHeight button:nil];
         [self.tableView reloadData];
-    }];
+    });
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

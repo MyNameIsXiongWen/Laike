@@ -16,6 +16,7 @@
 #import "ConsultantShareView.h"
 #import "MerchantShareView.h"
 #import "GalleryShareView.h"
+#import "RateShareView.h"
 #import "QHWMainBusinessDetailBaseModel.h"
 #import "CommunityDetailService.h"
 #import "UserModel.h"
@@ -36,12 +37,14 @@
 @property (nonatomic, strong) LiveModel *liveModel;
 @property (nonatomic, strong) UIImage *certificateImage;
 @property (nonatomic, strong) id galleryImg;
+@property (nonatomic, strong) NSArray *rateArray;
 @property (nonatomic, strong) MainBusinessShareView *mainBusinessShareView;
 @property (nonatomic, strong) CommunityArticleShareView *articleShareView;
 @property (nonatomic, strong) CommunityContentShareView *contentShareView;
 @property (nonatomic, strong) ConsultantShareView *consultantShareView;
 @property (nonatomic, strong) MerchantShareView *merchantShareView;
 @property (nonatomic, strong) GalleryShareView *galleryShareView;
+@property (nonatomic, strong) RateShareView *rateShareView;
 @property (nonatomic, assign) ShareType shareType;
 
 @end
@@ -82,6 +85,8 @@
             self.liveModel = dict[@"detailModel"];
         } else if (self.shareType == ShareTypeGallery) {
             self.galleryImg = dict[@"coverImg"];
+        } else if (self.shareType == ShareTypeRate) {
+            self.rateArray = dict[@"rateData"];
         }
         self.popType = PopTypeBottom;
         [self addSubview:self.collectionView];
@@ -154,8 +159,17 @@
         type = 103001;
         idString = self.liveModel.id;
     } else if (self.shareType == ShareTypeGallery) {
-        type = 15;
-        idString = UserModel.shareUser.id;
+        self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 550)];
+        self.galleryShareView.galleryImg = self.galleryImg;
+        self.galleryShareView.delegate = self;
+        [self.galleryShareView show];
+        return;
+    } else if (self.shareType == ShareTypeRate) {
+        self.rateShareView = [[RateShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 650)];
+        self.rateShareView.rateArray = self.rateArray;
+        self.rateShareView.delegate = self;
+        [self.rateShareView show];
+        return;
     }
     [QHWSystemService.new getShareMiniCodeRequestWithBusinessType:type BusinessId:idString Completed:^(NSString * _Nonnull miniCodePath) {
         if (self.shareType == ShareTypeMainBusiness || self.shareType == ShareTypeLive) {
@@ -174,12 +188,6 @@
             self.articleShareView.detailModel = self.communityDetailModel;
             self.articleShareView.delegate = self;
             [self.articleShareView show];
-        } else if (self.shareType == ShareTypeGallery) {
-            self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 590)];
-            self.galleryShareView.miniCodePath = miniCodePath;
-            self.galleryShareView.galleryImg = self.galleryImg;
-            self.galleryShareView.delegate = self;
-            [self.galleryShareView show];
         }
     }];
 }

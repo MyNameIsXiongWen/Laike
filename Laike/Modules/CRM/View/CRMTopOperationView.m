@@ -52,6 +52,9 @@
 
 @end
 
+#import "QHWShareView.h"
+#import "UserModel.h"
+
 @implementation OperationCollectionSubView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -89,7 +92,8 @@
 }
 
 - (void)click_sendCard {
-    
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":UserModel.shareUser, @"shareType": @(ShareTypeConsultant)}];
+    [shareView show];
 }
 
 - (void)click_customerProcess {

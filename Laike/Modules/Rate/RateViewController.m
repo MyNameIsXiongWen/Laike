@@ -10,6 +10,7 @@
 #import "RateMoneyView.h"
 #import "RateKeyBoardView.h"
 #import "RateModel.h"
+#import "QHWShareView.h"
 
 @interface RateViewController ()
 
@@ -25,9 +26,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"汇率转换";
+    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
     [self.view addSubview:self.moneyView];
     [self.view addSubview:self.keyboardView];
     [self.view addSubview:UIView.viewFrame(CGRectMake(10, self.moneyView.bottom, kScreenW-20, 0.5)).bkgColor(kColorThemeeee)];
+}
+
+- (void)rightNavBtnAction:(UIButton *)sender {
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"rateData":self.moneyView.rateArray, @"shareType": @(ShareTypeRate)}];
+    [shareView show];
 }
 
 /*
@@ -41,14 +48,14 @@
 */
 - (RateMoneyView *)moneyView {
     if (!_moneyView) {
-        _moneyView = [[RateMoneyView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, (kScreenH-kTopBarHeight)*0.4)];
+        _moneyView = [[RateMoneyView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight-kScreenW*0.7)];
     }
     return _moneyView;
 }
 
 - (RateKeyBoardView *)keyboardView {
     if (!_keyboardView) {
-        _keyboardView = [[RateKeyBoardView alloc] initWithFrame:CGRectMake(0, self.moneyView.bottom, kScreenW, (kScreenH-kTopBarHeight)*0.6)];
+        _keyboardView = [[RateKeyBoardView alloc] initWithFrame:CGRectMake(0, self.moneyView.bottom, kScreenW, kScreenW*0.7)];
         WEAKSELF
         _keyboardView.clickKeyBoardBlock = ^(NSString * _Nonnull title) {
             MoneySubView *subView = weakSelf.moneyView.viewArray[weakSelf.moneyView.selectedMoneyViewIndex];

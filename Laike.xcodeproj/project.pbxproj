@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1855D79324B44F10002FF7E2 /* CRMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79224B44F0F002FF7E2 /* CRMSearchViewController.m */; };
+		1855D79624B4630F002FF7E2 /* RateShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79524B4630F002FF7E2 /* RateShareView.m */; };
 		185A62F524A988DD00E7E75D /* QSchoolCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */; };
 		185A62F624A988DD00E7E75D /* QSchoolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */; };
 		185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F824A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m */; };
@@ -280,6 +282,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1855D79124B44F0F002FF7E2 /* CRMSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMSearchViewController.h; sourceTree = "<group>"; };
+		1855D79224B44F0F002FF7E2 /* CRMSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMSearchViewController.m; sourceTree = "<group>"; };
+		1855D79424B4630F002FF7E2 /* RateShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateShareView.h; sourceTree = "<group>"; };
+		1855D79524B4630F002FF7E2 /* RateShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateShareView.m; sourceTree = "<group>"; };
 		185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolCommentViewController.m; sourceTree = "<group>"; };
 		185A62F224A988DD00E7E75D /* QSchoolCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSchoolCommentViewController.h; sourceTree = "<group>"; };
 		185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolDetailViewController.m; sourceTree = "<group>"; };
@@ -882,6 +888,8 @@
 				185E159524B0575F00F15A90 /* QHWShareView.m */,
 				185E15C024B2F82400F15A90 /* GalleryShareView.h */,
 				185E15C124B2F82400F15A90 /* GalleryShareView.m */,
+				1855D79424B4630F002FF7E2 /* RateShareView.h */,
+				1855D79524B4630F002FF7E2 /* RateShareView.m */,
 				185E159624B0575F00F15A90 /* CommunityArticleShareView.h */,
 				185E158C24B0575E00F15A90 /* CommunityArticleShareView.m */,
 				185E159324B0575F00F15A90 /* CommunityContentShareView.h */,
@@ -1794,6 +1802,8 @@
 				186394FD24A1B0E4007DC26D /* CRMViewController.m */,
 				186394FF24A1B0FD007DC26D /* CRMScrollContentViewController.h */,
 				1863950024A1B0FD007DC26D /* CRMScrollContentViewController.m */,
+				1855D79124B44F0F002FF7E2 /* CRMSearchViewController.h */,
+				1855D79224B44F0F002FF7E2 /* CRMSearchViewController.m */,
 				185D448724AC84DE00CD3A00 /* CRMAddCustomerViewController.h */,
 				185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */,
 				185D449E24ADD33000CD3A00 /* CRMAddTrackViewController.h */,
@@ -2223,6 +2233,7 @@
 				185EC97B24A091BE00DCAB2C /* QHWFilterView.m in Sources */,
 				185D44A624ADDDFC00CD3A00 /* CRMDetailHeaderView.m in Sources */,
 				185E155A24AEC76E00F15A90 /* SearchContentLayout.m in Sources */,
+				1855D79624B4630F002FF7E2 /* RateShareView.m in Sources */,
 				185E15CF24B33E0300F15A90 /* MyServiceViewController.m in Sources */,
 				185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */,
 				185EC9AE24A091DA00DCAB2C /* AppGuideViewController.m in Sources */,
@@ -2321,6 +2332,7 @@
 				185FDEEA24A7305D0043FF36 /* ArtivityDetailTableHeaderView.m in Sources */,
 				185EC9CF24A096B600DCAB2C /* RelatedToMeViewController.m in Sources */,
 				185D449424AC9C7A00CD3A00 /* MineDataTableViewCell.m in Sources */,
+				1855D79324B44F10002FF7E2 /* CRMSearchViewController.m in Sources */,
 				185E15A424B0728600F15A90 /* VisitorDetailViewController.m in Sources */,
 				185EC97A24A091BE00DCAB2C /* FilterBtnViewCellModel.m in Sources */,
 				185FDED324A71CC40043FF36 /* QSchoolViewController.m in Sources */,

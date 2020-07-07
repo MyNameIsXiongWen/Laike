@@ -8,12 +8,11 @@
 
 #import "RateMoneyView.h"
 #import "QHWActionSheetView.h"
-#import "RateModel.h"
 
 @interface RateMoneyView () <QHWActionSheetViewDelegate>
 
-@property (nonatomic, strong, readwrite) NSArray <MoneySubView *> *viewArray;
-@property (nonatomic, strong) NSMutableArray <RateModel *>*rateArray;
+@property (nonatomic, strong, readwrite) NSMutableArray <MoneySubView *> *viewArray;
+@property (nonatomic, strong, readwrite) NSMutableArray <RateModel *>*rateArray;
 
 
 @end
@@ -30,11 +29,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.viewArray = @[self.topMoneyView, self.midMoneyView, self.btmMoneyView];
-        self.selectedMoneyViewIndex = 0;
-        self.topMoneyView.currencySelectedIndex = 0;
-        self.midMoneyView.currencySelectedIndex = 1;
-        self.btmMoneyView.currencySelectedIndex = 2;
         [self getMainData];
     }
     return self;
@@ -125,12 +119,20 @@
             [self.rateArray addObject:tempModel];
         }
         
-        RateModel *secondModel = self.rateArray[1];
-        RateModel *thirdModel = self.rateArray[2];
-        self.topMoneyView.currencyView.currencyLabel.text = model.currencyName;
-        self.midMoneyView.currencyView.currencyLabel.text = secondModel.currencyName;
-        self.btmMoneyView.currencyView.currencyLabel.text = thirdModel.currencyName;
+        NSInteger viewCount = MIN(self.height / 40.0, self.rateArray.count);
+        CGFloat spaceHeight = (self.height - viewCount * 40.0) / viewCount;
+        for (int i=0; i<viewCount; i++) {
+            MoneySubView *subView = [self createMoneySubViewWithFrame:CGRectMake(0, (40+spaceHeight)*i, self.width, 40) Tag:100+i];
+            subView.currencySelectedIndex = i;
+            [self addSubview:subView];
+            [self.viewArray addObject:subView];
+        }
+        self.selectedMoneyViewIndex = 0;
         
+        [self.viewArray enumerateObjectsUsingBlock:^(MoneySubView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            RateModel *rateModel = self.rateArray[idx];
+            obj.currencyView.currencyLabel.text = rateModel.currencyName;
+        }];
         self.currentMoney = @"100";
     } failure:^(NSError *error) {
         
@@ -153,30 +155,6 @@
 }
 
 #pragma mark ------------UI-------------
-- (MoneySubView *)topMoneyView {
-    if (!_topMoneyView) {
-        _topMoneyView = [self createMoneySubViewWithFrame:CGRectMake(0, 0, self.width, 40) Tag:100];
-        [self addSubview:_topMoneyView];
-    }
-    return _topMoneyView;
-}
-
-- (MoneySubView *)midMoneyView {
-    if (!_midMoneyView) {
-        _midMoneyView = [self createMoneySubViewWithFrame:CGRectMake(0, self.topMoneyView.bottom+(self.height-120)/3.0, self.width, 40) Tag:101];
-        [self addSubview:_midMoneyView];
-    }
-    return _midMoneyView;
-}
-
-- (MoneySubView *)btmMoneyView {
-    if (!_btmMoneyView) {
-        _btmMoneyView = [self createMoneySubViewWithFrame:CGRectMake(0, self.midMoneyView.bottom+(self.height-120)/3.0, self.width, 40) Tag:102];
-        [self addSubview:_btmMoneyView];
-    }
-    return _btmMoneyView;
-}
-
 - (MoneySubView *)createMoneySubViewWithFrame:(CGRect)rect Tag:(NSInteger)tag {
     MoneySubView *subView = [[MoneySubView alloc] initWithFrame:rect];
     WEAKSELF
@@ -194,6 +172,13 @@
         _rateArray = NSMutableArray.array;
     }
     return _rateArray;
+}
+
+- (NSMutableArray<MoneySubView *> *)viewArray {
+    if (!_viewArray) {
+        _viewArray = NSMutableArray.array;
+    }
+    return _viewArray;
 }
 
 @end

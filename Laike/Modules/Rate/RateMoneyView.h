@@ -7,18 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RateModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class MoneySubView;
 @interface RateMoneyView : UIView
 
-@property (nonatomic, strong) MoneySubView *topMoneyView;
-@property (nonatomic, strong) MoneySubView *midMoneyView;
-@property (nonatomic, strong) MoneySubView *btmMoneyView;
-
 @property (nonatomic, assign) NSInteger selectedMoneyViewIndex;
-@property (nonatomic, strong, readonly) NSArray <MoneySubView *> *viewArray;
+@property (nonatomic, strong, readonly) NSMutableArray <MoneySubView *> *viewArray;
+@property (nonatomic, strong, readonly) NSMutableArray <RateModel *>*rateArray;
 
 @property (nonatomic, copy) NSString *currentMoney;
 - (NSString *)getCorrectString:(NSString *)string;

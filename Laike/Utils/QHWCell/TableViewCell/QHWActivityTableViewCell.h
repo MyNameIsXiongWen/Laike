@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "QHWActivityModel.h"
+#import "QHWCellBottomShareView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) UIView *line;
 @property (nonatomic, strong) QHWActivityModel *activityModel;
+@property (nonatomic, strong) QHWCellBottomShareView *shareView;
 
 @end
 

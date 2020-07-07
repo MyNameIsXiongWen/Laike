@@ -17,8 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *subjectId;
 @property (nonatomic, copy) NSString *nickname;
 @property (nonatomic, copy) NSString *realName;
-///如果是商户 没有这个值 如果是用户这个有值
-@property (nonatomic, copy) NSString *merchantId;
 ///头像路径,七牛云
 @property (nonatomic, copy) NSString *headPath;
 ///背景路径,七牛云
@@ -31,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *slogan;
 @property (nonatomic, copy) NSString *mobileNumber;
 @property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *merchantId;
 @property (nonatomic, copy) NSString *merchantHead;
 @property (nonatomic, copy) NSString *merchantInfo;
 @property (nonatomic, copy) NSString *merchantName;
@@ -85,6 +84,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger fansCount;
 @property (nonatomic, assign) NSInteger productCount;
 @property (nonatomic, assign) NSInteger contentCount;
+@property (nonatomic, assign) NSInteger distributionCount;
+///访客总量
+@property (nonatomic, assign) NSInteger userCount;
+///去海外咨询总量
+@property (nonatomic, assign) NSInteger clueCount;
 
 @property (nonatomic, strong) NSArray *countryList;
 @property (nonatomic, strong) NSArray *contentList;

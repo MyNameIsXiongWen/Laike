@@ -51,7 +51,7 @@
                 [self.tableView.mj_footer endRefreshing];
             }
             [self.tableView reloadData];
-            [self.tableView showNodataView:self.crmService.trackArray.count == 0 offsetY:0 button:nil];
+            [self.tableView showNodataView:self.crmService.advisoryArray.count == 0 offsetY:0 button:nil];
             [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.crmService.itemPageModel];
         }];
     }

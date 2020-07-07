@@ -134,10 +134,10 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.backgroundColor = kColorThemefb4d56;
-        UIView *bkgView = UIView.viewFrame(CGRectMake(15, kStatusBarHeight+6, kScreenW-80, 32)).bkgColor(kColorThemefff).cornerRadius(16);
-        [bkgView addSubview:self.searchImgView];
-        [bkgView addSubview:self.searchTextField];
-        [self addSubview:bkgView];
+        self.bkgView = UIView.viewFrame(CGRectMake(15, kStatusBarHeight+6, kScreenW-80, 32)).bkgColor(kColorThemefff).cornerRadius(16);
+        [self.bkgView addSubview:self.searchImgView];
+        [self.bkgView addSubview:self.searchTextField];
+        [self addSubview:self.bkgView];
         [self addSubview:self.cancelBtn];
     }
     return self;

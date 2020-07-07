@@ -41,9 +41,18 @@
     }];
 }
 
+- (void)addDistributionClientRequestWithParams:(NSDictionary *)params {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kDistributionClientAdd parameters:params success:^(id responseObject) {
+        [SVProgressHUD showInfoWithStatus:@"预约签单成功"];
+        [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSError *error) {
+    }];
+}
+
 - (void)getClientDetailInfoRequestComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
-    NSDictionary *params = @{@"clientId": self.customerId ?: @"",
+    NSDictionary *params = @{@"id": self.customerId ?: @"",
                              @"currentPage": @(self.itemPageModel.pagination.currentPage),
                              @"pageSize": @(self.itemPageModel.pagination.pageSize)};
     [QHWHttpManager.sharedInstance QHW_POST:kDistributionClientInfo parameters:params success:^(id responseObject) {
@@ -57,7 +66,7 @@
 
 - (void)getClientDetailTrackListRequestComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
-    NSDictionary *params = @{@"clientId": self.customerId ?: @"",
+    NSDictionary *params = @{@"id": self.customerId ?: @"",
                              @"currentPage": @(self.itemPageModel.pagination.currentPage),
                              @"pageSize": @(self.itemPageModel.pagination.pageSize)};
     [QHWHttpManager.sharedInstance QHW_POST:kDistributionTrackList parameters:params success:^(id responseObject) {

@@ -10,7 +10,7 @@
 #import "MineTableHeaderView.h"
 #import "QHWGeneralTableViewCell.h"
 #import "MineService.h"
-#import "CTMediator.h"
+#import "CTMediator+ViewController.h"
 #import "BindCompanyViewController.h"
 #import "CancelBindCompanyViewController.h"
 
@@ -68,6 +68,18 @@
     [CTMediator.sharedInstance performTarget:self action:kFormat(@"click_%@", dic[@"identifier"]) params:nil];
 }
 
+- (void)click_school {
+    [CTMediator.sharedInstance CTMediator_viewControllerForQSchool];
+}
+
+- (void)clickservice {
+    [self.navigationController pushViewController:NSClassFromString(@"MyServiceViewController").new animated:YES];
+}
+
+- (void)clickfeedback {
+    [self.navigationController pushViewController:NSClassFromString(@"FeedbackViewController").new animated:YES];
+}
+
 - (void)click_company {
     if (self.service.userModel.bindStatus == 1) {
         CancelBindCompanyViewController *vc = CancelBindCompanyViewController.new;
@@ -77,14 +89,6 @@
         BindCompanyViewController *vc = BindCompanyViewController.new;
         [self.navigationController pushViewController:vc animated:YES];
     }
-}
-
-- (void)clickservice {
-    [self.navigationController pushViewController:NSClassFromString(@"MyServiceViewController").new animated:YES];
-}
-
-- (void)clickfeedback {
-    [self.navigationController pushViewController:NSClassFromString(@"FeedbackViewController").new animated:YES];
 }
 
 /*

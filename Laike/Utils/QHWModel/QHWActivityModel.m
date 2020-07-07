@@ -16,7 +16,7 @@
 
 - (CGFloat)cellHeight {
     if (!_cellHeight) {
-        _cellHeight = 15 + 200 + 10 + 15 + 15 + 15;
+        _cellHeight = 15 + 200 + 10 + 15 + 15 + 15 + 35;
         _cellHeight += MAX(25, [self.name getHeightWithFont:kMediumFontTheme16 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)]);
     }
     return _cellHeight;

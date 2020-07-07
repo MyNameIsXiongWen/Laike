@@ -203,7 +203,7 @@
         _tableView.scrollsToTop = NO;
         _tableView.tableHeaderView = self.homeTableHeaderView;
         _tableView.rowHeight = kScreenH-kBottomBarHeight-kStatusBarHeight-32;
-        _tableView.sectionHeaderHeight = 32;
+        _tableView.sectionHeaderHeight = kStatusBarHeight+32;
         [_tableView registerClass:QHWBaseSubContentTableViewCell.class forCellReuseIdentifier:NSStringFromClass(QHWBaseSubContentTableViewCell.class)];
         [_tableView registerClass:HomeCommunityTypeHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(HomeCommunityTypeHeaderView.class)];
         [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
@@ -264,7 +264,7 @@
 
 - (QHWTabScrollView *)tabScrollView {
     if (!_tabScrollView) {
-        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 32)];
+        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenW, 32)];
         _tabScrollView.itemWidthType = ItemWidthTypeFixedAdaptive;
         _tabScrollView.itemSelectedColor = kColorThemefb4d56;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;

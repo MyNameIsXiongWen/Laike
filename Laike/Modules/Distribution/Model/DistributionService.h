@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getClientListRequestWithFollowStatusCode:(NSString *)code Complete:(void (^)(void))complete;
 - (void)getClientDetailInfoRequestComplete:(void (^)(void))complete;
 - (void)getClientDetailTrackListRequestComplete:(void (^)(void))complete;
+- (void)addDistributionClientRequestWithParams:(NSDictionary *)params;
 
 @end
 
@@ -42,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *businessId;
 @property (nonatomic, copy) NSString *businessName;
+@property (nonatomic, copy) NSString *modifyTime;
+@property (nonatomic, copy) NSString *followName;
+@property (nonatomic, assign) NSInteger followStatus;
 @property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, assign) CGFloat businessHeight;
 @property (nonatomic, assign) CGFloat productHeight;

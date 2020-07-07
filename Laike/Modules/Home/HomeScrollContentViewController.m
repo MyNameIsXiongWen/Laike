@@ -25,16 +25,27 @@
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kBottomBarHeight-kStatusBarHeight-32) Style:UITableViewStylePlain Object:self];
+    CGFloat height = 0;
+    if (self.pageType == 1) {
+        height = kScreenH-kBottomBarHeight-kStatusBarHeight-32;
+    } else {
+        height = kScreenH-kBottomBarHeight-kTopBarHeight-128;
+    }
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, height) Style:UITableViewStylePlain Object:self];
     [self.view addSubview:self.tableView];
+    if (self.pageType == 2) {
+        [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
+            self.service.itemPageModel.pagination.currentPage = 1;
+            [self getMainData];
+        }];
+    }
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
         self.service.itemPageModel.pagination.currentPage++;
-        [self getProductListRequest];
+        [self getMainData];
     }];
-    [self getProductListRequest];
 }
 
-- (void)getProductListRequest {
+- (void)getMainData {
     [self.service getHomePageProductListRequestWithIdentifier:self.identifier Complete:^{
         for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
             [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
@@ -58,14 +69,16 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (!self.vcCanScroll) {
-        scrollView.contentOffset = CGPointZero;
-    }
-    NSLog(@"subScroll======%f", scrollView.contentOffset.y);
-    if (scrollView.contentOffset.y <= 0) {
-        self.vcCanScroll = NO;
-        scrollView.contentOffset = CGPointZero;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"HomeSwipeLeaveTop" object:nil];//到顶通知父视图改变状态
+    if (self.pageType == 1) {
+        if (!self.vcCanScroll) {
+            scrollView.contentOffset = CGPointZero;
+        }
+        NSLog(@"subScroll======%f", scrollView.contentOffset.y);
+        if (scrollView.contentOffset.y <= 0) {
+            self.vcCanScroll = NO;
+            scrollView.contentOffset = CGPointZero;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"HomeSwipeLeaveTop" object:nil];//到顶通知父视图改变状态
+        }
     }
 }
 

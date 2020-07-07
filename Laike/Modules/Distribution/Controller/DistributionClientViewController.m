@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"客户进度";
     [self.kNavigationView.rightBtn setTitle:@"+" forState:0];
-    [self.kNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
+//    [self.kNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {

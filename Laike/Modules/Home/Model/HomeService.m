@@ -8,6 +8,7 @@
 
 #import "HomeService.h"
 #import "QHWBannerModel.h"
+#import "UserModel.h"
 
 @interface HomeService ()
 
@@ -87,6 +88,16 @@
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kHomeConsultant parameters:@{} success:^(id responseObject) {
         self.homeModel = [HomeModel yy_modelWithJSON:responseObject[@"data"]];
+        UserModel *user = UserModel.shareUser;
+        user.merchantId = self.homeModel.merchantId;
+        user.merchantName = self.homeModel.merchantName;
+        user.merchantInfo = self.homeModel.merchantInfo;
+        user.merchantName = self.homeModel.merchantName;
+        user.qrCode = self.homeModel.qrCode;
+        user.mobileNumber = self.homeModel.mobileNumber;
+        user.userCount = self.homeModel.userCount;
+        user.clueCount = self.homeModel.clueCount;
+        user.distributionCount = self.homeModel.distributionCount;
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -140,46 +151,7 @@
 }
 
 - (void)handleRequestDataArrayWithBusinessType:(NSInteger)businessType {
-    CGFloat height = 0;
     for (NSObject *obj in self.requestDataArray) {
-//        switch (businessType) {
-//            case 1:
-//                height = 110;
-//                break;
-//            case 2:
-//            case 3:
-//            case 4:
-//            case 102001:
-//            {
-//                QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)obj;
-//                model.businessType = businessType.integerValue;
-//                height = model.mainBusinessCellHeight;
-//            }
-//                break;
-//            case 5:
-//            {
-//                QHWCommunityArticleModel *model = (QHWCommunityArticleModel *)obj;
-//                height = model.cellHeight;
-//            }
-//                break;
-//            case 17:
-//            {
-//                QHWActivityModel *model = (QHWActivityModel *)obj;
-//                height = model.cellHeight;
-//            }
-//                break;
-//            case 18:
-//            case 21:
-//            case 1821:
-//            {
-//                QHWCommunityContentModel *model = (QHWCommunityContentModel *)obj;
-//                height = model.cellHeight;
-//            }
-//                break;
-//
-//            default:
-//                break;
-//        }
         QHWBaseModel *baseModel = [[QHWBaseModel alloc] configModelIdentifier:@"QHWMainBusinessTableViewCell" Height:140 Data:obj];
         [self.tableViewDataArray addObject:baseModel];
     }

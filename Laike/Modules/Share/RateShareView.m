@@ -1,19 +1,19 @@
 //
-//  GalleryShareView.m
+//  RateShareView.m
 //  Laike
 //
-//  Created by xiaobu on 2020/7/6.
+//  Created by xiaobu on 2020/7/7.
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "GalleryShareView.h"
+#import "RateShareView.h"
 #import "MainBusinessShareView.h"
 #import "UserModel.h"
+#import "RateModel.h"
 
-@interface GalleryShareView ()
+@interface RateShareView ()
 
 @property (nonatomic, strong) UIView *bkgView;
-@property (nonatomic, strong) UIImageView *coverImgView;
 @property (nonatomic, strong) UIImageView *avatarImgView;
 @property (nonatomic, strong) UIImageView *miniCodeImgView;
 @property (nonatomic, strong) UIImageView *logoImgView;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation GalleryShareView
+@implementation RateShareView
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -47,26 +47,28 @@
 
 - (void)configUI {
     UserModel *userModel = UserModel.shareUser;
-    self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, 430)).bkgColor(kColorThemefff);
+    self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, 530)).bkgColor(kColorThemefff);
     self.bkgView.userInteractionEnabled = YES;
     [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBkgView)]];
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
+        
+    UIButton *closeBtn = UIButton.btnFrame(CGRectMake(self.bkgView.width-50, 0, 50, 50)).btnImage(kImageMake(@"publish_close")).btnAction(self, @selector(dismiss));
+    [self.bkgView addSubview:closeBtn];
+    CGFloat rateViewHeight = 410;
+    [self.bkgView addSubview:UIView.viewFrame(CGRectMake(0, rateViewHeight, self.bkgView.width, 1)).bkgColor(kColorThemeeee)];
     
-    self.coverImgView = UIImageView.ivFrame(CGRectMake(10, 10, self.bkgView.width-20, 300));
-    [self.bkgView addSubview:self.coverImgView];
-    
-    self.avatarImgView = UIImageView.ivFrame(CGRectMake(10, self.coverImgView.bottom+25, 40, 40)).ivCornerRadius(20);
+    self.avatarImgView = UIImageView.ivFrame(CGRectMake(10, rateViewHeight+25, 40, 40)).ivCornerRadius(20);
     [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(userModel.headPath)]];
-    self.nameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+10, self.avatarImgView.top, self.coverImgView.width-140, 20)).labelFont(kMediumFontTheme18).labelTitleColor(kColorTheme2a303c).labelText(userModel.realName);
+    self.nameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+10, self.avatarImgView.top, self.bkgView.width-20-140, 20)).labelFont(kMediumFontTheme18).labelTitleColor(kColorTheme2a303c).labelText(userModel.realName);
     self.phoneLabel = UILabel.labelFrame(CGRectMake(self.nameLabel.left, self.nameLabel.bottom+10, self.nameLabel.width, 17)).labelFont(kFontTheme12).labelTitleColor(kColorTheme2a303c).labelText(userModel.mobileNumber);
-    self.sloganLabel = UILabel.labelFrame(CGRectMake(10, self.avatarImgView.bottom+20, self.coverImgView.width, 15)).labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelText(kFormat(@"去海外全球美好生活找%@", userModel.realName));
+    self.sloganLabel = UILabel.labelFrame(CGRectMake(10, self.avatarImgView.bottom+20, self.bkgView.width-20, 15)).labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelText(kFormat(@"去海外全球美好生活找%@", userModel.realName));
     [self.bkgView addSubview:self.avatarImgView];
     [self.bkgView addSubview:self.nameLabel];
     [self.bkgView addSubview:self.phoneLabel];
     [self.bkgView addSubview:self.sloganLabel];
     
-    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-80, self.coverImgView.bottom+10, 70, 70)).ivCornerRadius(35);
+    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-80, rateViewHeight+10, 70, 70)).ivCornerRadius(35);
     [self.miniCodeImgView sd_setImageWithURL:[NSURL URLWithString:kMiniCodePath(userModel.qrCode)]];
     [self.bkgView addSubview:self.miniCodeImgView];
     self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
@@ -81,6 +83,23 @@
         }
     };
     [self addSubview:self.bottomView];
+}
+
+- (void)setRateArray:(NSArray *)rateArray {
+    _rateArray = rateArray;
+    CGFloat width = (kScreenW-80-80)/2.0;
+    [rateArray enumerateObjectsUsingBlock:^(RateModel *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx > 0 && idx < 9) {
+            UIView *countryView = UIView.viewFrame(CGRectMake((idx-1) % 2 == 0 ? 40 : (40+width), 10 + (idx-1) / 2 * 100, width, 100));
+            UIImageView *imgView = UIImageView.ivFrame(CGRectMake((width-50)/2, 0, 50, 50)).ivCornerRadius(25).ivBkgColor(kColorThemef5f5f5).ivBorderColor(kColorThemeeee);
+            UILabel *nameLabel = UILabel.labelFrame(CGRectMake(0, imgView.bottom, width, 25)).labelText(obj.currencyName).labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);
+            UILabel *rateLabel = UILabel.labelFrame(CGRectMake(0, nameLabel.bottom, width, 20)).labelText(obj.rate).labelFont(kMediumFontTheme14).labelTitleColor(kColorThemefb4d56).labelTextAlignment(NSTextAlignmentCenter);
+            [countryView addSubview:imgView];
+            [countryView addSubview:nameLabel];
+            [countryView addSubview:rateLabel];
+            [self.bkgView addSubview:countryView];
+        }
+    }];
 }
 
 - (void)clickBkgView {
@@ -107,14 +126,6 @@
     UIImage *screenShotImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return screenShotImage;
-}
-
-- (void)setGalleryImg:(id)galleryImg {
-    if ([galleryImg isKindOfClass:NSString.class]) {
-        [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath((NSString *)galleryImg)]];
-    } else if ([galleryImg isKindOfClass:UIImage.class]) {
-        self.coverImgView.image = (UIImage *)galleryImg;
-    }
 }
 
 @end

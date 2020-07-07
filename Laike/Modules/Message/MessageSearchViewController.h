@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MessageSearchTopView : UIView
 
+@property (nonatomic, strong) UIView *bkgView;
 @property (nonatomic, strong) UIImageView *searchImgView;
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UITextField *searchTextField;

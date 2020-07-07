@@ -89,7 +89,7 @@
     WEAKSELF
     self.bottomView.clickBtnBlock = ^(NSInteger index) {
         if ([weakSelf.delegate respondsToSelector:@selector(ShareBottomView_clickBottomBtnWithIndex:Image:TargetView:)]) {
-            [weakSelf.delegate ShareBottomView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot] TargetView:self];
+            [weakSelf.delegate ShareBottomView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot] TargetView:weakSelf];
         }
     };
     [self addSubview:self.bottomView];

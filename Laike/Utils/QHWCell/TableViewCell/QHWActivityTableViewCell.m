@@ -64,6 +64,11 @@
             make.height.mas_equalTo(0.5);
             make.bottom.mas_equalTo(0);
         }];
+        [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(22);
+            make.bottom.equalTo(self.line.mas_top).offset(-10);
+        }];
     }
     return self;
 }
@@ -160,6 +165,14 @@
         [self.contentView addSubview:_line];
     }
     return _line;
+}
+
+- (QHWCellBottomShareView *)shareView {
+    if (!_shareView) {
+        _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];
+        [self.contentView addSubview:_shareView];
+    }
+    return _shareView;
 }
 
 @end

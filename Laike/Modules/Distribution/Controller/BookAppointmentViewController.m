@@ -7,8 +7,10 @@
 //
 
 #import "BookAppointmentViewController.h"
+#import "RelateProductViewController.h"
 #import "CRMTextFieldView.h"
 #import "QHWActionSheetView.h"
+#import "DistributionService.h"
 
 @interface BookAppointmentViewController () <QHWActionSheetViewDelegate>
 
@@ -16,7 +18,12 @@
 @property (nonatomic, strong) CRMTextFieldView *productTextFieldView;
 @property (nonatomic, strong) CRMTextFieldView *nameTextFieldView;
 @property (nonatomic, strong) CRMTextFieldView *phoneTextFieldView;
+
+@property (nonatomic, strong) DistributionService *disService;
+@property (nonatomic, strong) NSArray *businessArray;
 @property (nonatomic, strong) UIButton *submitBtn;
+@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, copy) NSString *businessId;
 
 @end
 
@@ -42,16 +49,49 @@
 }
 
 - (void)actionSheetViewSelectedIndex:(NSInteger)index WithActionSheetView:(QHWActionSheetView *)actionsheetView {
+    self.selectedIndex = index + 100;
     self.businessTextFieldView.textField.placeholder = @"";
     self.businessTextFieldView.rightLabel.text = actionsheetView.dataArray[index];
 }
 
 - (void)clickProductTFView {
-    [self.navigationController pushViewController:NSClassFromString(@"RelateProductViewController").new animated:YES];
+    if (!self.selectedIndex) {
+        [self clickBusinessTFView];
+        return;
+    }
+    NSDictionary *dic = self.businessArray[self.selectedIndex-100];
+    RelateProductViewController *vc = RelateProductViewController.new;
+    vc.identifier = dic[@"identifier"];
+    WEAKSELF
+    vc.didSelectProductBlock = ^(NSString * _Nonnull businessId, NSString * _Nonnull businessName) {
+         weakSelf.businessId = businessId;
+         weakSelf.productTextFieldView.textField.placeholder = @"";
+         weakSelf.productTextFieldView.rightLabel.text = businessName;
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)clickSubmitBtn {
-    
+    if (!self.selectedIndex) {
+        [SVProgressHUD showInfoWithStatus:@"请选择预约业务"];
+        [self clickBusinessTFView];
+        return;
+    }
+    if (!self.businessId) {
+        [SVProgressHUD showInfoWithStatus:@"请选择预约产品"];
+        return;
+    }
+    if (self.nameTextFieldView.textField.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入客户姓名"];
+        return;
+    }
+    if (self.phoneTextFieldView.textField.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入客户手机号"];
+        return;
+    }
+    [self.disService addDistributionClientRequestWithParams:@{@"id": self.businessId ?: @"",
+                                                              @"realName": self.nameTextFieldView.textField.text ?: @"",
+                                                              @"mobileNumber": self.phoneTextFieldView.textField.text ?: @""}];
 }
 
 /*
@@ -117,6 +157,24 @@
         _submitBtn = UIButton.btnFrame(CGRectMake(15, self.phoneTextFieldView.bottom+15, kScreenW-30, 45)).btnTitle(@"提交").btnFont(kFontTheme20).btnTitleColor(kColorTheme21a8ff).btnBorderColor(kColorTheme21a8ff).btnCornerRadius(8).btnAction(self, @selector(clickSubmitBtn));
     }
     return _submitBtn;
+}
+
+- (DistributionService *)disService {
+    if (!_disService) {
+        _disService = DistributionService.new;
+    }
+    return _disService;
+}
+
+- (NSArray *)businessArray {
+    if (!_businessArray) {
+        _businessArray = @[@{@"businessType": @(1), @"identifier": @"house"},
+                           @{@"businessType": @(3), @"identifier": @"migration"},
+                           @{@"businessType": @(4), @"identifier": @"student"},
+                           @{@"businessType": @(2), @"identifier": @"study"},
+                           @{@"businessType": @(102001), @"identifier": @"treatment"}];
+    }
+    return _businessArray;
 }
 
 @end

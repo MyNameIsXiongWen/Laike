@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RelateProductViewController : UIViewController
 
+@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, copy) void (^ didSelectProductBlock)(NSString *businessId, NSString *businessName);
+
 @end
 
 NS_ASSUME_NONNULL_END

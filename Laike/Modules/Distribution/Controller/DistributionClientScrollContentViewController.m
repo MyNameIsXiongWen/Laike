@@ -66,8 +66,8 @@
     }
     cell.nameLabel.text = model.realName;
     cell.sloganLabel.text = model.name;
-//    cell.statusLabel.text = model.name;
-//    cell.timeLabel.text = model.name;
+    cell.statusLabel.text = model.followName;
+    cell.timeLabel.text = model.modifyTime;
     return cell;
 }
 

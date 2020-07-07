@@ -61,7 +61,7 @@
 }
 
 - (void)rightAnthorNavBtnAction:(UIButton *)sender {
-    
+    [self.navigationController pushViewController:NSClassFromString(@"CRMSearchViewController").new animated:YES];
 }
 
 - (void)getMainData {
