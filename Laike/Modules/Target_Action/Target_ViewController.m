@@ -41,9 +41,11 @@
 - (void)Action_nativeMainBusinessDetailViewController:(NSDictionary *)params {
     NSInteger businessType = [params[@"businessType"] integerValue];
     NSString *businessId = params[@"businessId"];
+    BOOL isDistribution = [params[@"isDistribution"] boolValue];
     MainBusinessDetailViewController *vc = MainBusinessDetailViewController.new;
     vc.businessType = businessType;
     vc.businessId = businessId;
+    vc.idDistribution = isDistribution;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
@@ -134,8 +136,12 @@
 
 - (void)Action_nativeAddCustomerViewController:(NSDictionary *)params {
     NSString *customerId = params[@"customerId"];
+    NSString *realName = params[@"realName"];
+    NSString *mobilePhone = params[@"mobilePhone"];
     CRMAddCustomerViewController *vc = CRMAddCustomerViewController.new;
     vc.customerId = customerId;
+    vc.realName = realName;
+    vc.mobilePhone = mobilePhone;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

@@ -229,7 +229,7 @@
     QHWBaseModel *baseModel = self.detailService.tableViewDataArray[indexPath.section];
     NSArray *array = (NSArray *)baseModel.data;
     QHWHouseModel *model = array[indexPath.row];
-    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:1 BusinessId:model.id];
+    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:1 BusinessId:model.id IsDistribution:self.idDistribution];
 }
 
 /*

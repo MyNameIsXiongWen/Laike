@@ -73,7 +73,8 @@
 }
 
 - (void)click_home_news {
-    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityWithType:1];
+//    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityWithType:1];
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CommunityArticleViewController").new animated:YES];
 }
 
 - (void)click_home_activity {

@@ -60,6 +60,8 @@
         [self getCRMInfoRequest];
     }
     dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+        self.crmService.crmModel.realName = self.realName;
+        self.crmService.crmModel.mobileNumber = self.mobilePhone;
         [self.crmService handleCRMDetailInfoData];
         for (QHWBaseModel *model in self.crmService.tableViewDataArray) {
             [self.tableView registerClass:NSClassFromString(model.identifier) forCellReuseIdentifier:model.identifier];
@@ -183,6 +185,7 @@
 
 - (void)configCellData:(id)data {
     NSDictionary *dic = (NSDictionary *)data;
+    self.dataDic = dic;
     self.crmModel = dic[@"data"];
     self.tfView.title = dic[@"title"];
     self.tfView.textField.placeholder = dic[@"placeholder"];
@@ -211,12 +214,11 @@
     } else {
         self.tfView.textField.text = [self.crmModel valueForKey:dic[@"identifier"]];
     }
-    if ([self.dataDic[@"identifier"] isEqualToString:@"mobileNumber"]) {
+    if ([dic[@"identifier"] isEqualToString:@"mobileNumber"]) {
         self.tfView.textField.keyboardType = UIKeyboardTypePhonePad;
     } else {
         self.tfView.textField.keyboardType = UIKeyboardTypeDefault;
     }
-    self.dataDic = dic;
 }
 
 - (void)textFieldValueChanged:(UITextField *)textField {

@@ -75,14 +75,14 @@ static dispatch_once_t onceToken;
 
 - (void)keyArchiveUserModel {
     NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [docPath.firstObject stringByAppendingPathComponent:@"user.qhw"];
+    NSString *path = [docPath.firstObject stringByAppendingPathComponent:@"user.lk"];
     BOOL success = [NSKeyedArchiver archiveRootObject:self toFile:path];
     NSLog(@"keyarchive=====%d",success);
 }
 
 + (UserModel *)keyUnarchiveUserModel {
     NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [docPath.firstObject stringByAppendingPathComponent:@"user.qhw"];
+    NSString *path = [docPath.firstObject stringByAppendingPathComponent:@"user.lk"];
     NSData *data = [NSData dataWithContentsOfFile:path];
     
     if ([data isKindOfClass:NSData.class]) {
@@ -112,7 +112,7 @@ static dispatch_once_t onceToken;
         });
     }
     NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [docPath.firstObject stringByAppendingPathComponent:@"user.qhw"];
+    NSString *path = [docPath.firstObject stringByAppendingPathComponent:@"user.lk"];
     [NSFileManager.defaultManager removeItemAtPath:path error:nil];
     user = nil;
     onceToken = 0;

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1855D79324B44F10002FF7E2 /* CRMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79224B44F0F002FF7E2 /* CRMSearchViewController.m */; };
 		1855D79624B4630F002FF7E2 /* RateShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79524B4630F002FF7E2 /* RateShareView.m */; };
+		1855D79924B59DAF002FF7E2 /* CommunityArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79824B59DAF002FF7E2 /* CommunityArticleViewController.m */; };
+		1855D79C24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79B24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.m */; };
 		185A62F524A988DD00E7E75D /* QSchoolCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */; };
 		185A62F624A988DD00E7E75D /* QSchoolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */; };
 		185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F824A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m */; };
@@ -286,6 +288,10 @@
 		1855D79224B44F0F002FF7E2 /* CRMSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMSearchViewController.m; sourceTree = "<group>"; };
 		1855D79424B4630F002FF7E2 /* RateShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RateShareView.h; sourceTree = "<group>"; };
 		1855D79524B4630F002FF7E2 /* RateShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RateShareView.m; sourceTree = "<group>"; };
+		1855D79724B59DAF002FF7E2 /* CommunityArticleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityArticleViewController.h; sourceTree = "<group>"; };
+		1855D79824B59DAF002FF7E2 /* CommunityArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityArticleViewController.m; sourceTree = "<group>"; };
+		1855D79A24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityArticleScrollContentViewController.h; sourceTree = "<group>"; };
+		1855D79B24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityArticleScrollContentViewController.m; sourceTree = "<group>"; };
 		185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolCommentViewController.m; sourceTree = "<group>"; };
 		185A62F224A988DD00E7E75D /* QSchoolCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSchoolCommentViewController.h; sourceTree = "<group>"; };
 		185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolDetailViewController.m; sourceTree = "<group>"; };
@@ -1659,6 +1665,10 @@
 			children = (
 				185FDEF724A733120043FF36 /* CommunityViewController.h */,
 				185FDEF024A733120043FF36 /* CommunityViewController.m */,
+				1855D79724B59DAF002FF7E2 /* CommunityArticleViewController.h */,
+				1855D79824B59DAF002FF7E2 /* CommunityArticleViewController.m */,
+				1855D79A24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.h */,
+				1855D79B24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.m */,
 				185FDEF924A733120043FF36 /* CommunityDetailViewController.h */,
 				185FDEF324A733120043FF36 /* CommunityDetailViewController.m */,
 				185FDEF224A733120043FF36 /* CommunityPublishViewController.h */,
@@ -2236,9 +2246,11 @@
 				1855D79624B4630F002FF7E2 /* RateShareView.m in Sources */,
 				185E15CF24B33E0300F15A90 /* MyServiceViewController.m in Sources */,
 				185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */,
+				1855D79924B59DAF002FF7E2 /* CommunityArticleViewController.m in Sources */,
 				185EC9AE24A091DA00DCAB2C /* AppGuideViewController.m in Sources */,
 				185EC9CB24A096B600DCAB2C /* RelatedToMeTableViewCell.m in Sources */,
 				185FDF1124A733130043FF36 /* CommunityDetailService.m in Sources */,
+				1855D79C24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.m in Sources */,
 				185EC9E624A0A7E000DCAB2C /* HomeCustomerTableViewCell.m in Sources */,
 				185EC99824A091BE00DCAB2C /* QHWStudyTourTableViewCell.m in Sources */,
 				185EC96524A091BE00DCAB2C /* QHWTreatmentModel.m in Sources */,

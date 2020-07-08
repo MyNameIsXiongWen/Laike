@@ -27,7 +27,7 @@
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, 0, 80, kScreenH-kTopBarHeight-48) Style:UITableViewStylePlain Object:self];
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, 80, kScreenH-kTopBarHeight-48) Style:UITableViewStylePlain Object:self];
     self.tableView.backgroundColor = kColorThemef5f5f5;
     self.tableView.rowHeight = 40;
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:NSStringFromClass(UITableViewCell.class)];

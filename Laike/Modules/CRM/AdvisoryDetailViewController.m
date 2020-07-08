@@ -40,9 +40,9 @@
     WEAKSELF
     moreView.clickBtnBlock = ^(NSString * _Nonnull identifier) {
         if ([identifier isEqualToString:@"convertCRM"]) {
-            [weakSelf showAlertLabelView];
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
         } else if ([identifier isEqualToString:@"giveUpFollowUp"]) {
-            [weakSelf.crmService CRMGiveUpTrackRequest];
+            [weakSelf showAlertLabelView];
         }
     };
     [moreView show];
@@ -50,21 +50,28 @@
 
 - (void)showAlertLabelView {
     QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-    [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认"];
-    alert.contentString = @"是否放弃跟进?";
+    [alert configWithTitle:@"放弃跟进" cancleText:@"取消" confirmText:@"确认放弃"];
+    alert.contentString = @"您的客户将会转回到公司公客";
     WEAKSELF
     alert.confirmBlock = ^{
         [alert dismiss];
-        [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+        [weakSelf.crmService advisoryGiveUpTrackRequest];
     };
     [alert show];
 }
 
 - (void)getMainData {
     [self.crmService getClueActionAllListDataRequestWithComplete:^{
-        self.kNavigationView.title = self.crmService.crmModel.realName;
         self.tableHeaderView.crmModel = self.crmService.crmModel;
         [self.tableView reloadData];
+        if ([self.tableView.mj_header isRefreshing]) {
+            [self.tableView.mj_header endRefreshing];
+        }
+        if ([self.tableView.mj_footer isRefreshing]) {
+            [self.tableView.mj_footer endRefreshing];
+        }
+        [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.crmService.itemPageModel];
+        [self.tableView showNodataView:self.crmService.advisoryArray.count == 0 offsetY:180 button:nil];
     }];
 }
 
@@ -99,7 +106,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight-kBottomDangerHeight-75) Style:UITableViewStylePlain Object:self];
+        _tableView = [UICreateView initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight-kBottomDangerHeight-75) Style:UITableViewStylePlain Object:self];
         _tableView.tableHeaderView = self.tableHeaderView;
         [_tableView registerClass:CRMTrackCell.class forCellReuseIdentifier:NSStringFromClass(CRMTrackCell.class)];
         [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
@@ -129,7 +136,10 @@
         _btmView.customerId = self.customerId;
         WEAKSELF
         _btmView.clickLeftBtnBlock = ^{
-            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId];
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
+        };
+        _btmView.clickRightBtnBlock = ^{
+            kCallTel(weakSelf.crmService.crmModel.mobileNumber);
         };
     }
     return _btmView;

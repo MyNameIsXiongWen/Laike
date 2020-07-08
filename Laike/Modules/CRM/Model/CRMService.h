@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)CRMAddCustomerRequestWithComplete:(void (^)(void))complete;
 - (void)CRMAddTrackRequestWithFollowStatusCode:(NSInteger)followStatusCode Remark:(NSString *)remark Complete:(void (^)(void))complete;
 - (void)CRMGiveUpTrackRequest;
+- (void)advisoryGiveUpTrackRequest;
 
 @end
 
@@ -66,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *industryStr;
 @property (nonatomic, strong) NSArray *industryNameArray;
 @property (nonatomic, copy) NSString *countryStr;
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, assign) NSInteger actionCount;
 
 ///客户来源：1-网路客；2-自拓客；3-渠道客；4-其它
 @property (nonatomic, assign) NSInteger clientSourceCode;

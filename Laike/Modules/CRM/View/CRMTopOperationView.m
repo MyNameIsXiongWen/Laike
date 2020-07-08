@@ -87,6 +87,10 @@
     [CTMediator.sharedInstance performTarget:self action:kFormat(@"click_%@", identifier) params:nil];
 }
 
+- (void)click_communityArticle {
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CommunityArticleViewController").new animated:YES];
+}
+
 - (void)click_shareArticle {
     [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CommunityPublishViewController").new animated:YES];
 }

@@ -12,9 +12,21 @@
 
 - (void)getMineInfoRequestComplete:(void (^)(void))complete {
     [QHWHttpManager.sharedInstance QHW_POST:kMineInfo parameters:@{} success:^(id responseObject) {
+        UserModel *user = self.userModel;
+        NSDictionary *dic = @{@"merchantName": user.merchantName ?: @"",
+                              @"merchantInfo": user.merchantInfo ?: @"",
+                              @"qrCode": user.qrCode ?: @"",
+                              @"mobileNumber": user.mobileNumber ?: @"",
+                              @"userCount": @(user.userCount),
+                              @"clueCount": @(user.clueCount),
+                              @"distributionCount": @(user.distributionCount)};
+        
         [UserModel clearUser];
-        UserModel *model = [UserModel yy_modelWithJSON:responseObject[@"data"]];
-        [model keyArchiveUserModel];
+        self.userModel = [UserModel yy_modelWithJSON:responseObject[@"data"]];
+        [dic enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [self.userModel setValue:obj forKey:key];
+        }];
+        [self.userModel keyArchiveUserModel];
         complete();
     } failure:^(NSError *error) {
         complete();

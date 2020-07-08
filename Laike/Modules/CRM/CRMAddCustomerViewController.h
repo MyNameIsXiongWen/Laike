@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CRMAddCustomerViewController : UIViewController
 
 @property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, copy) NSString *realName;
+@property (nonatomic, copy) NSString *mobilePhone;
 
 @end
 

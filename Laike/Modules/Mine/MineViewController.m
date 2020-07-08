@@ -72,11 +72,11 @@
     [CTMediator.sharedInstance CTMediator_viewControllerForQSchool];
 }
 
-- (void)clickservice {
+- (void)click_service {
     [self.navigationController pushViewController:NSClassFromString(@"MyServiceViewController").new animated:YES];
 }
 
-- (void)clickfeedback {
+- (void)click_feedback {
     [self.navigationController pushViewController:NSClassFromString(@"FeedbackViewController").new animated:YES];
 }
 

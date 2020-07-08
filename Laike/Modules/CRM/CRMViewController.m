@@ -57,7 +57,7 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@""];
+    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:@"" MobilePhone:@""];
 }
 
 - (void)rightAnthorNavBtnAction:(UIButton *)sender {
@@ -97,9 +97,9 @@
                                           @"subTitle": @"发布海外圈 免费获客",
                                           @"identifier": @"shareArticle"},
                                         @{@"logo": @"home_live",
-                                          @"title": @"公海抢客",
-                                          @"subTitle": @"意向客户 抢单成交",
-                                          @"identifier": @"grabGuest"}
+                                          @"title": @"获客资讯",
+                                          @"subTitle": @"每日转发 获客利器",
+                                          @"identifier": @"communityArticle"}
         ];
     }
     return _topOperationView;

@@ -92,12 +92,12 @@
         user.merchantId = self.homeModel.merchantId;
         user.merchantName = self.homeModel.merchantName;
         user.merchantInfo = self.homeModel.merchantInfo;
-        user.merchantName = self.homeModel.merchantName;
         user.qrCode = self.homeModel.qrCode;
         user.mobileNumber = self.homeModel.mobileNumber;
         user.userCount = self.homeModel.userCount;
         user.clueCount = self.homeModel.clueCount;
         user.distributionCount = self.homeModel.distributionCount;
+        [user keyArchiveUserModel];
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -174,7 +174,7 @@
     QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCustomerTableViewCell"
                                                                       Height:140
                                                                         Data:@[@{@"value": @(self.homeModel.userCount), @"title": @"CRM"},
-                                                                               @{@"value": @(self.homeModel.userDays), @"title": @"获客"}]];
+                                                                               @{@"value": @(self.homeModel.clueCount), @"title": @"获客"}]];
     [self.tableViewDataArray addObject:crmDataModel];
     
     QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeIconTableViewCell" Height:160 Data:self.iconArray];

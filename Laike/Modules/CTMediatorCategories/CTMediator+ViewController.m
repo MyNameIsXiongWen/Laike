@@ -45,11 +45,13 @@ NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeA
     }
 }
 
-- (void)CTMediator_viewControllerForMainBusinessDetailWithBusinessType:(NSInteger)businessType BusinessId:(NSString *)businessId {
+- (void)CTMediator_viewControllerForMainBusinessDetailWithBusinessType:(NSInteger)businessType BusinessId:(NSString *)businessId IsDistribution:(BOOL)isDistribution {
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeMainBusinessDetailViewController
                  params:@{@"businessType": @(businessType),
-                          @"businessId": businessId}
+                          @"businessId": businessId,
+                          @"isDistribution": @(isDistribution)
+                 }
     shouldCacheTarget:NO];
 }
 
@@ -148,10 +150,12 @@ NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeA
     shouldCacheTarget:NO];
 }
 
-- (void)CTMediator_viewControllerForAddCustomerWithCustomerId:(NSString *)customerId {
+- (void)CTMediator_viewControllerForAddCustomerWithCustomerId:(NSString *)customerId RealName:(NSString *)realName MobilePhone:(NSString *)mobilePhone {
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeAddCustomerViewController
-                 params:@{@"customerId": customerId ?: @""}
+                 params:@{@"customerId": customerId ?: @"",
+                          @"realName": realName ?: @"",
+                          @"mobilePhone": mobilePhone ?: @""}
     shouldCacheTarget:NO];
 }
 

@@ -22,7 +22,7 @@
             case 2:
             case 3:
             case 4:
-                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:self.businessType BusinessId:self.businessId];
+                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:self.businessType BusinessId:self.businessId IsDistribution:NO];
                 break;
                 
             case 5:

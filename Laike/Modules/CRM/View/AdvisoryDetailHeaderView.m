@@ -38,15 +38,16 @@
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.avatarImgView.mas_right).offset(20);
-            make.top.equalTo(self.avatarImgView.mas_top);
+//            make.top.equalTo(self.avatarImgView.mas_top);
+            make.centerY.equalTo(self.avatarImgView.mas_centerY);
             make.right.mas_equalTo(-15);
         }];
-        [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.nameLabel.mas_left);
-            make.right.mas_equalTo(-15);
-            make.height.mas_equalTo(18);
-            make.top.equalTo(self.nameLabel.mas_bottom).offset(7);
-        }];
+//        [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.nameLabel.mas_left);
+//            make.right.mas_equalTo(-15);
+//            make.height.mas_equalTo(18);
+//            make.top.equalTo(self.nameLabel.mas_bottom).offset(7);
+//        }];
         [self.firstLine mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(0.5);
@@ -75,7 +76,7 @@
         self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:crmModel.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
     }
     self.nameLabel.text = crmModel.realName;
-    [self.tagView setTagWithTagArray:crmModel.industryNameArray];
+//    [self.tagView setTagWithTagArray:crmModel.industryNameArray];
 }
 
 #pragma mark ------------UI-------------

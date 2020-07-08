@@ -76,16 +76,16 @@
             make.left.mas_equalTo(15);
             make.top.equalTo(self.collectionView.mas_bottom).offset(10);
         }];
-        [self.praiseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-15);
-            make.centerY.equalTo(self.timeLabel);
-            make.size.mas_equalTo(CGSizeMake(50, 30));
-        }];
-        [self.commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.praiseBtn.mas_left).offset(-15);
-            make.centerY.equalTo(self.praiseBtn);
-            make.size.equalTo(self.praiseBtn);
-        }];
+//        [self.praiseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.mas_equalTo(-15);
+//            make.centerY.equalTo(self.timeLabel);
+//            make.size.mas_equalTo(CGSizeMake(50, 30));
+//        }];
+//        [self.commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(self.praiseBtn.mas_left).offset(-15);
+//            make.centerY.equalTo(self.praiseBtn);
+//            make.size.equalTo(self.praiseBtn);
+//        }];
         [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.height.mas_equalTo(22);

@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///社区类型 1:头条  2:圈子
 @property (nonatomic, assign) NSInteger communityType;
+@property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 - (void)getCoummunityDataWithComplete:(void (^)(void))complete;

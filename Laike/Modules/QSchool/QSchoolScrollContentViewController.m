@@ -25,7 +25,7 @@
 
 - (void)addTableView {
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-48) Style:UITableViewStylePlain Object:self];
-    self.tableView.rowHeight = 80;
+    self.tableView.rowHeight = 90;
     [self.tableView registerClass:QSchoolTableViewCell.class forCellReuseIdentifier:NSStringFromClass(QSchoolTableViewCell.class)];
     UIView *headerView = UIView.viewFrame(CGRectMake(0, 0, kScreenW, 35));
     [headerView addSubview:UILabel.labelFrame(CGRectMake(10, 10, kScreenW-20, 25)).labelText(@"热门精选").labelTitleColor(kColorTheme2a303c).labelFont(kMediumFontTheme12)];
@@ -98,9 +98,9 @@
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self.bkgImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
-            make.height.mas_equalTo(70);
+            make.top.mas_equalTo(5);
+            make.bottom.mas_equalTo(-5);
             make.width.mas_equalTo(130);
-            make.centerY.equalTo(self.contentView.mas_centerY);
         }];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.bkgImgView.mas_right).offset(10);

@@ -88,10 +88,11 @@
 
 - (void)getClueActionAllListDataRequestWithComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
-    NSDictionary *params = @{@"id": self.customerId ?: @"",
+    NSDictionary *params = @{@"userId": self.customerId ?: @"",
                              @"currentPage": @(self.itemPageModel.pagination.currentPage),
                              @"pageSize": @(self.itemPageModel.pagination.pageSize)};
-    [QHWHttpManager.sharedInstance QHW_POST:kClueActionAllList parameters:params success:^(id responseObject) {
+    [QHWHttpManager.sharedInstance QHW_POST:kClueActionList parameters:params success:^(id responseObject) {
+        self.crmModel = [CRMModel yy_modelWithJSON:responseObject[@"data"]];
         self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
         if (self.itemPageModel.pagination.currentPage == 1) {
             [self.advisoryArray removeAllObjects];
@@ -203,6 +204,21 @@
     }];
 }
 
+- (void)advisoryGiveUpTrackRequest {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kCRMAdvisoryGiveUpTrack parameters:@{@"id": self.customerId ?: @""} success:^(id responseObject) {
+        [SVProgressHUD showInfoWithStatus:@"放弃跟进"];
+        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddCustomerSuccess object:nil];
+        for (UIViewController *vc in self.getCurrentMethodCallerVC.navigationController.childViewControllers) {
+            if ([NSStringFromClass(vc.class) isEqualToString:@"CRMViewController"]) {
+                [self.getCurrentMethodCallerVC.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+    } failure:^(NSError *error) {
+    }];
+}
+
 - (void)handleFilterDataWithResponse:(NSDictionary *)dic {
     NSMutableArray *tempSourceFilterArray = NSMutableArray.array;
     FilterCellModel *nolimitSourceModel = [FilterCellModel modelWithName:@"不限" Code:@""];
@@ -265,7 +281,15 @@
     QHWBaseModel *genderModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerGenderCell" Height:60 Data:self.crmModel];
     [self.tableViewDataArray addObject:genderModel];
     
-    QHWBaseModel *phoneModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerTFViewCell" Height:60 Data:@{@"title": @"* 手机", @"placeholder": @"请输入客户手机号", @"data": self.crmModel, @"identifier": @"mobileNumber", @"disable": @(YES)}];
+    BOOL disable = NO;
+    if (self.customerId.length > 0) {
+        disable = YES;
+    } else {
+        if (self.crmModel.mobileNumber.length > 0) {
+            disable = YES;
+        }
+    }
+    QHWBaseModel *phoneModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerTFViewCell" Height:60 Data:@{@"title": @"* 手机", @"placeholder": @"请输入客户手机号", @"data": self.crmModel, @"identifier": @"mobileNumber", @"disable": @(disable)}];
     [self.tableViewDataArray addObject:phoneModel];
     
     QHWBaseModel *wechatModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerTFViewCell" Height:60 Data:@{@"title": @"   微信", @"placeholder": @"请输入客户微信号", @"data": self.crmModel, @"identifier": @"wechatNumber"}];

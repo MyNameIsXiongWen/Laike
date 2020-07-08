@@ -106,7 +106,7 @@
 #pragma mark ------------UI-------------
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight-50-kBottomDangerHeight) Style:UITableViewStylePlain Object:self];
+        _tableView = [UICreateView initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight-50-kBottomDangerHeight) Style:UITableViewStylePlain Object:self];
         [_tableView registerClass:CommentListCell.class forCellReuseIdentifier:NSStringFromClass(CommentListCell.class)];
         [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
             self.commentService.itemPageModel.pagination.currentPage = 1;

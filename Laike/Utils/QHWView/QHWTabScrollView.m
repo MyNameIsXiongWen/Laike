@@ -51,6 +51,7 @@
     if (dataArray.count > 0) {
         [self addSubview:self.tagIndicatorView];
     }
+    [self.tagBtnArray removeAllObjects];
     CGFloat itemWidth = 0;
     CGFloat originX = 0;
     for (UIView *vvv in self.subviews) {

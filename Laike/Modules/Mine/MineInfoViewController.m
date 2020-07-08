@@ -14,6 +14,7 @@
 #import "QHWPermissionManager.h"
 #import "MineService.h"
 #import "QHWSystemService.h"
+#import "CTMediator+TZImgPicker.h"
 
 @interface MineInfoViewController () <UITableViewDelegate, UITableViewDataSource, MineInfoTimeViewDelegate, QHWActionSheetViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -75,13 +76,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *cellDic = self.dataArray[indexPath.row];
     NSString *identifier = cellDic[@"identifier"];
-    if ([identifier isEqualToString:@"headPath"] || [identifier isEqualToString:@"gender"]) {
-        NSArray *array;
-        if ([identifier isEqualToString:@"headPath"]) {
-            array = @[@"拍摄", @"从相册选择"];
-        } else if ([identifier isEqualToString:@"gender"]) {
-            array = @[@"女士", @"先生"];
-        }
+    if ([identifier isEqualToString:@"headPath"]) {
+        [CTMediator.sharedInstance CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:1 ResultBlk:^(NSArray<UIImage *> * _Nonnull photos) {
+            if (photos.count > 0) {
+                QHWImageModel *model = QHWImageModel.new;
+                model.image = photos.firstObject;
+                [self uploadImageRequest:@[model].mutableCopy];
+            }
+        }];
+    } else if ([identifier isEqualToString:@"gender"]) {
+        NSArray *array = @[@"女士", @"先生"];
+//        if ([identifier isEqualToString:@"headPath"]) {
+//            array = @[@"拍摄", @"从相册选择"];
+//        } else if ([identifier isEqualToString:@"gender"]) {
+//            array = @[@"女士", @"先生"];
+//        }
         QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*(array.count+1)+7) title:@""];
         sheetView.dataArray = array;
         sheetView.sheetDelegate = self;

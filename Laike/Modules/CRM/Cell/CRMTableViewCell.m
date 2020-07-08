@@ -39,6 +39,10 @@
             make.height.mas_equalTo(18);
             make.top.equalTo(self.nameLabel.mas_bottom).offset(2);
         }];
+        [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-15);
+            make.centerY.equalTo(self.contentView);
+        }];
     }
     return self;
 }
@@ -66,6 +70,15 @@
         [self.contentView addSubview:_tagView];
     }
     return _tagView;
+}
+
+- (UILabel *)countLabel {
+    if (!_countLabel) {
+        _countLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme2a303c);
+        _countLabel.hidden = YES;
+        [self.contentView addSubview:_countLabel];
+    }
+    return _countLabel;
 }
 
 @end

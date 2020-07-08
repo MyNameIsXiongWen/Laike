@@ -92,6 +92,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CRMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CRMTableViewCell.class)];
+    cell.countLabel.hidden = self.crmType == 1;
     CRMModel *model = self.crmService.crmArray[indexPath.row];
     if (model.headPath.length > 0) {
         [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
@@ -106,6 +107,10 @@
     } else {
         [cell.tagView setTagWithTagArray:model.industryNameArray];
     }
+    NSString *countStr = kFormat(@"咨询%ld次", model.actionCount);
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:countStr];
+    [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[countStr rangeOfString:kFormat(@"%ld", model.actionCount)]];
+    cell.countLabel.attributedText = attr;
     return cell;
 }
 
@@ -114,7 +119,7 @@
     if (self.crmType == 1) {
         [CTMediator.sharedInstance CTMediator_viewControllerForCRMDetailWithCustomerId:model.id];
     } else {
-        [CTMediator.sharedInstance CTMediator_viewControllerForAdvisoryDetailWithCustomerId:model.id];
+        [CTMediator.sharedInstance CTMediator_viewControllerForAdvisoryDetailWithCustomerId:model.userId];
     }
 }
 
