@@ -53,6 +53,8 @@
     [self.service getLiveDetailInfoRequestWithLiveId:self.liveId Complete:^(BOOL status) {
         self.kNavigationView.title = self.service.liveDetailModel.name;
         self.playerView.videoPath = self.service.liveDetailModel.videoPath;
+        LiveOrganizerViewController *vc = self.pageContentView.childsVCs.firstObject;
+        vc.service = self.service;
     }];
 }
 
@@ -92,7 +94,7 @@
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.dataArray = @[@"直播嘉宾", @"互动"];
+        _tabScrollView.dataArray = @[@"直播嘉宾"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;
@@ -107,9 +109,9 @@
         LiveOrganizerViewController *organizerVC = LiveOrganizerViewController.new;
         organizerVC.service = self.service;
         [contentVCs addObject:organizerVC];
-        LiveCommentViewController *commentVC = LiveCommentViewController.new;
-        commentVC.liveModel = self.service.liveDetailModel;
-        [contentVCs addObject:commentVC];
+//        LiveCommentViewController *commentVC = LiveCommentViewController.new;
+//        commentVC.liveModel = self.service.liveDetailModel;
+//        [contentVCs addObject:commentVC];
         _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];
     }
     return _pageContentView;

@@ -60,8 +60,10 @@
         [self getCRMInfoRequest];
     }
     dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
-        self.crmService.crmModel.realName = self.realName;
-        self.crmService.crmModel.mobileNumber = self.mobilePhone;
+        if (self.customerId.length == 0) {
+            self.crmService.crmModel.realName = self.realName;
+            self.crmService.crmModel.mobileNumber = self.mobilePhone;
+        }
         [self.crmService handleCRMDetailInfoData];
         for (QHWBaseModel *model in self.crmService.tableViewDataArray) {
             [self.tableView registerClass:NSClassFromString(model.identifier) forCellReuseIdentifier:model.identifier];

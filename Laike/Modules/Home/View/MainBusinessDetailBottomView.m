@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UILabel *consultationLabel;
 
 @property (nonatomic, strong, readwrite) UIButton *onlineButton;
+@property (nonatomic, strong, readwrite) UIButton *rightOperationButton;
 @property (nonatomic, strong) UIButton *phoneButton;
 @property (nonatomic, strong) ActivityRegisterView *activityView;
 
@@ -36,8 +37,9 @@
         [self addSubview:self.subjectButton];
         [self addSubview:self.nameLabel];
         [self addSubview:self.consultationLabel];
-        [self addSubview:self.onlineButton];
-        [self addSubview:self.phoneButton];
+//        [self addSubview:self.onlineButton];
+//        [self addSubview:self.phoneButton];
+        [self addSubview:self.rightOperationButton];
         [self addKeyboardNotification];
     }
     return self;
@@ -51,10 +53,16 @@
 }
 
 - (void)subjectButtonClick {
-    if (self.businessType == 102001 || self.businessType == 103001) {
-        [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.detailModel.bottomData.subjectId UserType:3 BusinessType:self.businessType];
-    } else {
-        [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.detailModel.bottomData.subjectId UserType:self.detailModel.bottomData.subjectType == 1 ? 3 : 2 BusinessType:self.businessType];
+//    if (self.businessType == 102001 || self.businessType == 103001) {
+//        [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.detailModel.bottomData.subjectId UserType:3 BusinessType:self.businessType];
+//    } else {
+//        [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.detailModel.bottomData.subjectId UserType:self.detailModel.bottomData.subjectType == 1 ? 3 : 2 BusinessType:self.businessType];
+//    }
+}
+
+- (void)rightOperationButtonClick {
+    if (self.rightOperationBlock) {
+        self.rightOperationBlock();
     }
 }
 
@@ -145,6 +153,13 @@
         _onlineButton = UIButton.btnFrame(CGRectMake(kScreenW-120-110, 15, 100, 45)).btnTitle(@"在线问").btnFont(kFontTheme14).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme3cb584).btnCornerRadius(4).btnAction(self, @selector(onlineButtonClick));
     }
     return _onlineButton;
+}
+
+- (UIButton *)rightOperationButton {
+    if (!_rightOperationButton) {
+        _rightOperationButton = UIButton.btnFrame(CGRectMake(kScreenW-120-110, 15, 210, 45)).btnTitle(@"微信推广获客").btnFont(kFontTheme18).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(4).btnAction(self, @selector(rightOperationButtonClick));
+    }
+    return _rightOperationButton;
 }
 
 /*

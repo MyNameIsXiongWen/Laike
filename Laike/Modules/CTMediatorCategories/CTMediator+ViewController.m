@@ -78,10 +78,10 @@ NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeA
     shouldCacheTarget:NO];
 }
 
-- (void)CTMediator_viewControllerForCommunityWithType:(NSInteger)communityType {
+- (void)CTMediator_viewControllerForCommunity {
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeCommunityViewController
-                 params:@{@"communityType": @(communityType)}
+                 params:@{}
     shouldCacheTarget:NO];
 }
 

@@ -30,7 +30,7 @@
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
-    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
+    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.tabScrollView.bottom-0.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,7 +74,7 @@
 
 - (QHWTabScrollView *)tabScrollView {
     if (!_tabScrollView) {
-        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom, kScreenW, 48)];
+        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom+10, kScreenW, 48)];
         _tabScrollView.itemWidthType = ItemWidthTypeFixedAdaptive;
         _tabScrollView.itemSelectedColor = kColorThemefb4d56;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;

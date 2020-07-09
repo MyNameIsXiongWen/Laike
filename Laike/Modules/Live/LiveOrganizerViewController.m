@@ -32,11 +32,17 @@
 
 - (void)addTableView {
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH - kTopBarHeight - kBottomDangerHeight - self.bottomView.height - 48 - 200) Style:UITableViewStyleGrouped Object:self];
-    for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
-        [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
-    }
     [self.tableView registerClass:ActivityDetailSectionHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(ActivityDetailSectionHeaderView.class)];
     [self.view addSubview:self.tableView];
+}
+
+- (void)setService:(LiveService *)service {
+    _service = service;
+    self.bottomView.detailModel = service.liveDetailModel;
+    for (QHWBaseModel *baseModel in service.tableViewDataArray) {
+        [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark ------------Notification-------------
@@ -116,7 +122,6 @@
     if (!_bottomView) {
         _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kTopBarHeight-200-40-kBottomDangerHeight-75, kScreenW, 75)];
         _bottomView.businessType = 103001;
-        _bottomView.detailModel = self.service.liveDetailModel;
         _bottomView.onlineButton.enabled = YES;
         [_bottomView.onlineButton setTitle:@"报名" forState:0];
         _bottomView.onlineButton.backgroundColor = kColorTheme3cb584;

@@ -57,6 +57,7 @@ static NSString *const kSystemGetMiniCode = @"product/getQrcode";//获取分享�
 static NSString *const kSystemCountry = @"configure/city/getAllOverseasCountryTree";//所有国家
 
 static NSString *const kHomeReport = @"report/getHome";//主页报表
+static NSString *const kHomeReportCount = @"report/getCount";//主页报表
 static NSString *const kHomeConsultant = @"merchant/user/getHome";//主页顾问
 static NSString *const kSystemLike = @"action/like/top";//点赞排行榜
 static NSString *const kProductList = @"product/getList";//产品列表

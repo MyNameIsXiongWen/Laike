@@ -20,6 +20,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) ItemWidthType itemWidthType;
 @property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong, readonly) NSMutableArray *tagBtnArray;
 /**
  tab之间的间隔，可不传，默认10
  */
@@ -61,6 +62,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, strong) UIFont *textFont;
 
+@property (nonatomic, assign) CGFloat btnCornerRadius;
 /**
  滑动到指定索引
 

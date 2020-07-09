@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class HomeClientModel;
 @interface HomeModel : NSObject
 
 @property (nonatomic, copy) NSString *companyName;
@@ -29,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSArray *countryList;
 @property (nonatomic, strong) NSArray *industryList;
-@property (nonatomic, strong) NSDictionary *clientData;
+@property (nonatomic, strong) HomeClientModel *clientData;
 
 @property (nonatomic, assign) NSInteger bindStatus;
 @property (nonatomic, assign) NSInteger payStatus;
@@ -37,8 +38,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger productCount;
 @property (nonatomic, assign) NSInteger shareCount;
 @property (nonatomic, assign) NSInteger distributionCount;
+///访客总量
 @property (nonatomic, assign) NSInteger userCount;
+///近7日访客
 @property (nonatomic, assign) NSInteger userDays;
+
+@end
+
+@interface HomeClientModel : NSObject
+
+@property (nonatomic, assign) NSInteger intentionLevel1Count;
+@property (nonatomic, assign) NSInteger intentionLevel2Count;
+@property (nonatomic, assign) NSInteger intentionLevel3Count;
+@property (nonatomic, assign) NSInteger crmCount;
 
 @end
 

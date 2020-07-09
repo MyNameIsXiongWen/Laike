@@ -7,13 +7,17 @@
 //
 
 #import "CommunityTableHeaderView.h"
-#import "QHWCycleScrollView.h"
+#import "UserDataView.h"
+#import "QHWTableSectionHeaderView.h"
+#import "QHWTabScrollView.h"
 
 @interface CommunityTableHeaderView ()
 
-@property (nonatomic, strong) UILabel *leftLabel;
-@property (nonatomic, strong) UILabel *rightLabel;
-@property (nonatomic, strong) QHWCycleScrollView *bannerView;
+@property (nonatomic, strong) UIView *contentBkgView;
+@property (nonatomic, strong) UserDataView *userDataView;
+@property (nonatomic, strong) QHWTableSectionHeaderView *headerView;
+@property (nonatomic, strong) QHWTabScrollView *tabScrollView;
+@property (nonatomic, strong) NSArray *dataArray;
 
 @end
 
@@ -30,75 +34,76 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.backgroundColor = UIColor.whiteColor;
-        [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(5);
-            make.height.mas_equalTo(100);
-        }];
-        [self.leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.top.equalTo(self.bannerView.mas_bottom);
-            make.height.mas_equalTo(40);
-        }];
-        [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-15);
-            make.top.equalTo(self.leftLabel.mas_top);
-            make.height.equalTo(self.leftLabel);
-        }];
+        [self addSubview:self.contentBkgView];
+        [self.contentBkgView addSubview:self.headerView];
+        [self.contentBkgView addSubview:self.userDataView];
+        [self.contentBkgView addSubview:self.tabScrollView];
     }
     return self;
 }
 
-- (void)setCommunityType:(NSInteger)communityType {
-    _communityType = communityType;
-    if (communityType == 1) {
-        self.leftLabel.text = @"权威机构";
-        self.rightLabel.text = @"机构认证 >";
-    } else {
-        self.leftLabel.text = @"专家顾问";
-        self.rightLabel.text = @"专家认证 >";
+- (void)configCellData:(id)data {
+    self.dataArray = (NSArray *)data;
+    NSMutableArray *tempArray = NSMutableArray.array;
+    for (NSDictionary *dic in self.dataArray) {
+        [tempArray addObject:dic[@"groupName"]];
     }
-}
-
-- (void)setBannerArray:(NSArray *)bannerArray {
-    _bannerArray = bannerArray;
-    self.bannerView.hidden = bannerArray.count == 0;
-    if (bannerArray.count > 0) {
-        self.bannerView.imgArray = bannerArray;
-    } else {
-        [self.leftLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(0);
-        }];
-    }
+    self.tabScrollView.dataArray = tempArray;
+    [self.tabScrollView scrollToIndex:1];
+    self.userDataView.dataArray = self.dataArray[self.tabScrollView.currentIndex][@"groupList"];
 }
 
 #pragma mark ------------UI-------------
-- (QHWCycleScrollView *)bannerView {
-    if (!_bannerView) {
-        _bannerView = [[QHWCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 100)];
-        _bannerView.imgCornerRadius = 5;
-        [self addSubview:_bannerView];
+- (UIView *)contentBkgView {
+    if (!_contentBkgView) {
+        _contentBkgView = UIView.viewFrame(CGRectMake(15, 10, kScreenW-30, self.height-20)).bkgColor(kColorThemefff).cornerRadius(10);
+        _contentBkgView.layer.shadowColor = [UIColor colorWithWhite:0 alpha:0.2].CGColor;
+        _contentBkgView.layer.shadowOffset = CGSizeMake(0, 0);
+        _contentBkgView.layer.shadowOpacity = 0.5;
+        _contentBkgView.layer.shadowRadius = 10;
+        _contentBkgView.clipsToBounds = NO;
     }
-    return _bannerView;
+    return _contentBkgView;
 }
 
-- (UILabel *)leftLabel {
-    if (!_leftLabel) {
-        _leftLabel = UILabel.labelInit().labelFont(kMediumFontTheme15).labelTitleColor(kColorTheme2a303c);
-        [self addSubview:_leftLabel];
+- (QHWTableSectionHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
+        _headerView.titleLabel.text = @"我的数据";
+        _headerView.moreBtn.hidden = YES;
+        _headerView.moreBtn.userInteractionEnabled = NO;
     }
-    return _leftLabel;
+    return _headerView;
 }
 
-- (UILabel *)rightLabel {
-    if (!_rightLabel) {
-        _rightLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme2a303c).labelTextAlignment(NSTextAlignmentRight);
-        _rightLabel.userInteractionEnabled = YES;
-        [_rightLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCertificate)]];
-        [self addSubview:_rightLabel];
+- (UserDataView *)userDataView {
+    if (!_userDataView) {
+        _userDataView = [[UserDataView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-30, 45)];
+        _userDataView.userInteractionEnabled = NO;
     }
-    return _rightLabel;
+    return _userDataView;
+}
+
+- (QHWTabScrollView *)tabScrollView {
+    if (!_tabScrollView) {
+        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake((kScreenW-30-180)/2, self.userDataView.bottom+15, 180, 25)];
+        _tabScrollView.backgroundColor = kColorThemeeee;
+        _tabScrollView.layer.cornerRadius = 12.5;
+        _tabScrollView.layer.masksToBounds = YES;
+        _tabScrollView.btnCornerRadius = 12.5;
+        _tabScrollView.itemSpace = 0;
+        _tabScrollView.itemWidthType = ItemWidthTypeFixed;
+        _tabScrollView.itemSelectedColor = kColorThemefff;
+        _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
+        _tabScrollView.itemSelectedBackgroundColor = kColorTheme707070;
+        _tabScrollView.itemUnselectedBackgroundColor = kColorThemeeee;
+        _tabScrollView.textFont = kFontTheme12;
+        WEAKSELF
+        _tabScrollView.clickTagBlock = ^(NSInteger index) {
+            weakSelf.userDataView.dataArray = weakSelf.dataArray[index][@"groupList"];
+        };
+    }
+    return _tabScrollView;
 }
 
 @end

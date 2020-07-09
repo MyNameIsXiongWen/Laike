@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
+//    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

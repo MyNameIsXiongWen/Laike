@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QHWActivityTableViewCell : UITableViewCell
+@interface QHWActivityTableViewCell : UITableViewCell <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) UIImageView *coverImgView;
 @property (nonatomic, strong) UILabel *dayLabel;

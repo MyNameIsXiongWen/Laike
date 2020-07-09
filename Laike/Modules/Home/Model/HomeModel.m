@@ -10,4 +10,12 @@
 
 @implementation HomeModel
 
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"clientData": HomeClientModel.class};
+}
+
+@end
+
+@implementation HomeClientModel
+
 @end

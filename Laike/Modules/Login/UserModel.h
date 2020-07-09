@@ -87,6 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger distributionCount;
 ///访客总量
 @property (nonatomic, assign) NSInteger userCount;
+@property (nonatomic, assign) NSInteger crmCount;
 ///去海外咨询总量
 @property (nonatomic, assign) NSInteger clueCount;
 

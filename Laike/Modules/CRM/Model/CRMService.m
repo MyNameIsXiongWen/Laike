@@ -10,6 +10,17 @@
 
 @implementation CRMService
 
+- (void)getHomeReportCountDataWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kHomeReportCount parameters:@{} success:^(id responseObject) {
+        self.crmCount = [responseObject[@"data"][@"crmCount"] integerValue];
+        self.clueCount = [responseObject[@"data"][@"clueCount"] integerValue];
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
 - (void)getCRMFilterDataRequestWithComplete:(void (^)(id _Nullable))complete {
     [QHWHttpManager.sharedInstance QHW_POST:kCRMFilter parameters:@{} success:^(id responseObject) {
         self.clientSourceList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"clientSourceList"]];

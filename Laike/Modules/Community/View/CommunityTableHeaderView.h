@@ -10,12 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CommunityTableHeaderView : UIView
-
-///社区类型 1:头条  2:圈子
-@property (nonatomic, assign) NSInteger communityType;
-@property (nonatomic, strong) NSArray *bannerArray;
-@property (nonatomic, strong) NSArray *consultantArray;
+@interface CommunityTableHeaderView : UIView <QHWBaseCellProtocol>
 
 @end
 

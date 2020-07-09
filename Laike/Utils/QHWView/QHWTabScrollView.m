@@ -11,7 +11,7 @@
 @interface QHWTabScrollView () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIView *tagIndicatorView;
-@property (nonatomic, strong) NSMutableArray *tagBtnArray;
+@property (nonatomic, strong, readwrite) NSMutableArray *tagBtnArray;
 
 @end
 
@@ -38,6 +38,7 @@
         self.itemUnselectedBackgroundColor = kColorThemef5f5f5;
         self.textFont = kFontTheme16;
         self.currentIndex = 0;
+        self.btnCornerRadius = 2;
     }
     return self;
 }
@@ -73,13 +74,7 @@
         } else if (self.itemWidthType == ItemWidthTypeAdaptive) {
             itemWidth = [dataArray[i] getWidthWithFont:self.textFont constrainedToSize:CGSizeMake(CGFLOAT_MAX, 25)] + self.labelSpace;
         }
-        //设置itemspace说明是根据总宽来算的
-//        if (self.itemSpace != 10) {
-//            itemWidth = (self.width-(dataArray.count-1)*self.itemSpace)/dataArray.count;
-//        } else {
-//            itemWidth = [dataArray[i] getWidthWithFont:self.textFont constrainedToSize:CGSizeMake(CGFLOAT_MAX, 25)] + self.labelSpace;
-//        }
-        UIButton *btn = UIButton.btnFrame(CGRectMake(originX, 0, itemWidth, self.height)).btnTitle(dataArray[i]).btnFont(self.textFont).btnTitleColor(i==0 ? self.itemSelectedColor : self.itemUnselectedColor).btnBkgColor(i==0 ? self.itemSelectedBackgroundColor : self.itemUnselectedBackgroundColor).btnCornerRadius(2);
+        UIButton *btn = UIButton.btnFrame(CGRectMake(originX, 0, itemWidth, self.height)).btnTitle(dataArray[i]).btnFont(self.textFont).btnTitleColor(i==0 ? self.itemSelectedColor : self.itemUnselectedColor).btnBkgColor(i==0 ? self.itemSelectedBackgroundColor : self.itemUnselectedBackgroundColor).btnCornerRadius(self.btnCornerRadius);
         btn.tag = i;
         [btn addTarget:self action:@selector(clickTagBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self insertSubview:btn belowSubview:self.tagIndicatorView];

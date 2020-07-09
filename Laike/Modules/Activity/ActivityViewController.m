@@ -71,7 +71,7 @@
 - (QHWPageContentView *)pageContentView {
     if (!_pageContentView) {
         NSMutableArray *contentVCs = [NSMutableArray array];
-        NSArray *statusArray = @[@(2), @(1)];
+        NSArray *statusArray = @[@(1), @(2)];
         for (int i=0; i<2; i++) {
             ActivityScrollContentViewController *vc = [[ActivityScrollContentViewController alloc] init];
             vc.registerStatus = [statusArray[i] integerValue];
@@ -93,7 +93,7 @@
         _tabScrollView.itemUnselectedColor = kColorThemea4abb3;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.dataArray = @[@"未报名", @"已报名"];
+        _tabScrollView.dataArray = @[@"进行中", @"已结束"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;

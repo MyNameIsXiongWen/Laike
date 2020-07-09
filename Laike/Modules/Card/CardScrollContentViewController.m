@@ -29,7 +29,7 @@
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-80-48) Style:UITableViewStylePlain Object:self];
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-90-48) Style:UITableViewStylePlain Object:self];
     self.tableView.rowHeight = 80;
     [self.tableView registerClass:QHWGeneralTableViewCell.class forCellReuseIdentifier:NSStringFromClass(QHWGeneralTableViewCell.class)];
     [self.tableView registerClass:VisitorTableViewCell.class forCellReuseIdentifier:NSStringFromClass(VisitorTableViewCell.class)];

@@ -21,12 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat headerViewTableHeight;
 @property (nonatomic, strong) NSArray *consultantArray;
 @property (nonatomic, strong) NSArray *schoolArray;
-@property (nonatomic, strong) NSArray *reportArray;
+@property (nonatomic, strong) NSMutableArray *reportArray;
 ///1: 首页  2:分销
 @property (nonatomic, assign) NSInteger pageType;
 
 - (void)handleHomeData;
 - (void)getHomeReportDataWithComplete:(void (^)(void))complete;
+- (void)getHomeReportCountDataWithComplete:(void (^)(void))complete;
 - (void)getHomeConsultantDataWithComplete:(void (^)(void))complete;
 
 - (void)getHomePageProductListRequestWithIdentifier:(NSString *)identifier Complete:(void (^)(void))complete;

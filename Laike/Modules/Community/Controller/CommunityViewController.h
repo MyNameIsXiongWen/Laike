@@ -12,9 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CommunityViewController : UIViewController
 
-///社区类型 1:头条  2:圈子
-@property (nonatomic, assign) NSInteger communityType;
-
 @end
 
 NS_ASSUME_NONNULL_END

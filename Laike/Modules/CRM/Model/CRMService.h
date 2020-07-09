@@ -26,12 +26,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *intentionCountryArray;
 @property (nonatomic, assign) CGFloat tableHeaderViewHeight;
 @property (nonatomic, assign) CGFloat intentionCountryHeight;
+@property (nonatomic, assign) NSInteger crmCount;
+@property (nonatomic, assign) NSInteger clueCount;
 
 @property (nonatomic, strong) NSArray <FilterCellModel *>*clientSourceList;
 @property (nonatomic, strong) NSArray <FilterCellModel *>*industryList;
 @property (nonatomic, strong) NSArray <FilterCellModel *>*intentionLevelList;
 @property (nonatomic, strong) NSArray <FilterCellModel *>*followStatusList;
 
+- (void)getHomeReportCountDataWithComplete:(void (^)(void))complete;
 - (void)getCRMFilterDataRequestWithComplete:(void (^)(_Nullable id responseObject))complete;
 - (void)getCRMListDataRequestWithCondition:(NSDictionary *)condition Complete:(void (^)(void))complete;
 - (void)getClueListDataRequestWithComplete:(void (^)(void))complete;

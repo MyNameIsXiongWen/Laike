@@ -19,6 +19,7 @@
                               @"mobileNumber": user.mobileNumber ?: @"",
                               @"userCount": @(user.userCount),
                               @"clueCount": @(user.clueCount),
+                              @"crmCount": @(user.crmCount),
                               @"distributionCount": @(user.distributionCount)};
         
         [UserModel clearUser];

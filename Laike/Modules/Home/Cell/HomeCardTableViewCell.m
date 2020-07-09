@@ -42,17 +42,18 @@
 }
 
 - (void)configCellData:(id)data {
-    NSArray *array = (NSArray *)data;
-    self.dataArray = array.firstObject;
+    NSDictionary *cellDic = (NSDictionary *)data;
+    self.dataArray = cellDic[@"data"];
     NSMutableArray *tempArray = NSMutableArray.array;
     for (NSDictionary *dic in self.dataArray) {
         [tempArray addObject:dic[@"groupName"]];
     }
     self.tabScrollView.dataArray = tempArray;
     [self.tabScrollView scrollToIndex:1];
+    self.headerView.titleLabel.text = cellDic[@"title"];
     self.userDataView.dataArray = self.dataArray[self.tabScrollView.currentIndex][@"groupList"];
-    if ([array.lastObject length] > 0) {
-        [self.headerView.moreBtn setTitle:array.lastObject forState:0];
+    if ([cellDic[@"tip"] length] > 0) {
+        [self.headerView.moreBtn setTitle:cellDic[@"tip"] forState:0];
     }
 }
 
@@ -82,6 +83,11 @@
 - (QHWTabScrollView *)tabScrollView {
     if (!_tabScrollView) {
         _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake((kScreenW-30-180)/2, self.userDataView.bottom+15, 180, 25)];
+        _tabScrollView.backgroundColor = kColorThemeeee;
+        _tabScrollView.layer.cornerRadius = 12.5;
+        _tabScrollView.layer.masksToBounds = YES;
+        _tabScrollView.btnCornerRadius = 12.5;
+        _tabScrollView.itemSpace = 0;
         _tabScrollView.itemWidthType = ItemWidthTypeFixed;
         _tabScrollView.itemSelectedColor = kColorThemefff;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;

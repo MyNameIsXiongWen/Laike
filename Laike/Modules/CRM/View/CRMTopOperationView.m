@@ -36,8 +36,13 @@
         
         [self addSubview:UIView.viewFrame(CGRectMake(self.leftOperationView.right, 10, 0.5, 50)).bkgColor(kColorThemeeee)];
         
-        self.cornerRadius(10).bkgColor(kColorThemef5f5f5);
+        self.cornerRadius(10).bkgColor(kColorThemefff);
 //        [self addShadowWithRadius:10 Opacity:0.2];
+        self.layer.shadowColor = [UIColor colorWithWhite:0 alpha:0.2].CGColor;
+        self.layer.shadowOffset = CGSizeMake(0, 0);
+        self.layer.shadowOpacity = 0.5;
+        self.layer.shadowRadius = 10;
+        self.clipsToBounds = NO;
     }
     return self;
 }

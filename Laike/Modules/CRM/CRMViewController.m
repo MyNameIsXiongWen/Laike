@@ -25,6 +25,10 @@
 
 @implementation CRMViewController
 
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -44,7 +48,9 @@
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
-    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
+    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom-0.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
+    [self getFilterData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,6 +71,12 @@
 }
 
 - (void)getMainData {
+    [self.crmService getHomeReportCountDataWithComplete:^{
+        self.tabScrollView.dataArray = @[kFormat(@"CRM %ld", self.crmService.crmCount), kFormat(@"获客 %ld", self.crmService.clueCount)];
+    }];
+}
+
+- (void)getFilterData {
     [self.crmService getCRMFilterDataRequestWithComplete:^(id  _Nullable responseObject) {
         CRMScrollContentViewController *vc = self.pageContentView.childsVCs.firstObject;
         vc.filterDataArray = self.crmService.filterDataArray;
@@ -107,7 +119,7 @@
 
 - (QHWTabScrollView *)tabScrollView {
     if (!_tabScrollView) {
-        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom, kScreenW, 48)];
+        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom+10, kScreenW, 48)];
         _tabScrollView.itemWidthType = ItemWidthTypeFixed;
         _tabScrollView.hideIndicatorView = NO;
         _tabScrollView.tagIndicatorColor = kColorThemea4abb3;

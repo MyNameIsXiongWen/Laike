@@ -95,6 +95,7 @@
         user.qrCode = self.homeModel.qrCode;
         user.mobileNumber = self.homeModel.mobileNumber;
         user.userCount = self.homeModel.userCount;
+        user.crmCount = self.homeModel.clientData.crmCount;
         user.clueCount = self.homeModel.clueCount;
         user.distributionCount = self.homeModel.distributionCount;
         [user keyArchiveUserModel];
@@ -107,7 +108,24 @@
 - (void)getHomeReportDataWithComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kHomeReport parameters:@{} success:^(id responseObject) {
-        self.reportArray = responseObject[@"data"][@"report1"][@"reportList"];
+        self.reportArray = [responseObject[@"data"][@"report1"][@"reportList"] mutableCopy];
+        for (int i=0; i<self.reportArray.count; i++) {
+            NSMutableDictionary *dic = [self.reportArray[i] mutableCopy];
+            NSMutableArray *array = [dic[@"groupList"] mutableCopy];
+            [array removeObjectAtIndex:1];
+            dic[@"groupList"] = array;
+            self.reportArray[i] = dic;
+        }
+        complete();
+    } failure:^(NSError *error) {
+        complete();
+    }];
+}
+
+- (void)getHomeReportCountDataWithComplete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kHomeReportCount parameters:@{} success:^(id responseObject) {
+        
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -167,13 +185,15 @@
     if (self.reportArray.count > 0) {
         QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCardTableViewCell"
                                                                            Height:175
-                                                                             Data:@[self.reportArray, self.homeModel.visitTip ?: @""]];
+                                                                             Data:@{@"data": self.reportArray,
+                                                                                    @"tip": self.homeModel.visitTip ?: @"",
+                                                                                    @"title": @"名片数据"}];
         [self.tableViewDataArray addObject:cardDataModel];
     }
     
     QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCustomerTableViewCell"
                                                                       Height:140
-                                                                        Data:@[@{@"value": @(self.homeModel.userCount), @"title": @"CRM"},
+                                                                        Data:@[@{@"value": @(self.homeModel.clientData.crmCount), @"title": @"CRM"},
                                                                                @{@"value": @(self.homeModel.clueCount), @"title": @"获客"}]];
     [self.tableViewDataArray addObject:crmDataModel];
     

@@ -42,7 +42,7 @@
 
 - (void)addTableView {
     CGFloat headerHeight = self.crmType == 1 ? 40 : 0;
-    CGFloat tableHeight = self.interval ? (kScreenH-kTopBarHeight-128-headerHeight) : (kScreenH-kTopBarHeight-128-headerHeight-kBottomBarHeight);
+    CGFloat tableHeight = self.interval ? (kScreenH-kTopBarHeight-138-headerHeight) : (kScreenH-kTopBarHeight-138-headerHeight-kBottomBarHeight);
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, headerHeight, kScreenW, tableHeight) Style:UITableViewStylePlain Object:self];
     self.tableView.rowHeight = 80;
     [self.tableView registerClass:CRMTableViewCell.class forCellReuseIdentifier:NSStringFromClass(CRMTableViewCell.class)];
@@ -104,9 +104,8 @@
         [cell.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(cell.contentView);
         }];
-    } else {
-        [cell.tagView setTagWithTagArray:model.industryNameArray];
     }
+    [cell.tagView setTagWithTagArray:model.industryNameArray];
     NSString *countStr = kFormat(@"咨询%ld次", model.actionCount);
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:countStr];
     [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[countStr rangeOfString:kFormat(@"%ld", model.actionCount)]];

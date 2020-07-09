@@ -73,22 +73,22 @@
     return self;
 }
 
-- (void)setActivityModel:(QHWActivityModel *)activityModel {
-    _activityModel = activityModel;
-    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(activityModel.coverPath)] placeholderImage:kPlaceHolderImage_Banner];
-    self.nameLabel.text = activityModel.name;
-    self.addressLabel.text = activityModel.addres;
-    self.timeLabel.text = activityModel.startEnd;
-    self.statusLabel.text = activityModel.activityStatusName;
-    if (activityModel.activityStatus == 3) {
+- (void)configCellData:(id)data {
+    _activityModel = (QHWActivityModel *)data;
+    [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(_activityModel.coverPath)] placeholderImage:kPlaceHolderImage_Banner];
+    self.nameLabel.text = _activityModel.name;
+    self.addressLabel.text = _activityModel.addres;
+    self.timeLabel.text = _activityModel.startEnd;
+    self.statusLabel.text = _activityModel.activityStatusName;
+    if (_activityModel.activityStatus == 3) {
         self.statusLabel.textColor = kColorThemea4abb3;
         self.statusLabel.labelBorderColor(kColorThemefff);
     } else {
         self.statusLabel.textColor = kColorThemef2a12f;
         self.statusLabel.labelBorderColor(kColorThemef2a12f);
     }
-    if (activityModel.startEnd.length > 11) {
-        self.dayLabel.text = [activityModel.startEnd substringWithRange:NSMakeRange(5, 6)];
+    if (_activityModel.startEnd.length > 11) {
+        self.dayLabel.text = [_activityModel.startEnd substringWithRange:NSMakeRange(5, 6)];
     }
 }
 

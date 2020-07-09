@@ -44,6 +44,7 @@
         [self.tableView.mj_footer endRefreshing];
         [self.tableView reloadData];
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.service.itemPageModel];
+        [self.tableView showNodataView:self.service.activityArray.count == 0 offsetY:0 button:nil];
     }];
 }
 

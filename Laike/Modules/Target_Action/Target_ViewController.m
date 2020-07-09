@@ -73,9 +73,7 @@
 }
 
 - (void)Action_nativeCommunityViewController:(NSDictionary *)params {
-    NSInteger communityType = [params[@"communityType"] integerValue];
     CommunityViewController *vc = CommunityViewController.new;
-    vc.communityType = communityType;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

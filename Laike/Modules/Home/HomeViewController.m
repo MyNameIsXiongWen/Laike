@@ -31,11 +31,16 @@
 
 @implementation HomeViewController
 
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.canScroll = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatusNotification) name:@"HomeSwipeLeaveTop" object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

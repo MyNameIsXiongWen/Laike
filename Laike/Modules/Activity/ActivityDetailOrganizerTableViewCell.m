@@ -8,7 +8,7 @@
 
 #import "ActivityDetailOrganizerTableViewCell.h"
 
-@interface ActivityDetailOrganizerTableViewCell ()
+@interface ActivityDetailOrganizerTableViewCell () <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) UIImageView *avatarImgView;
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -49,11 +49,11 @@
     return self;
 }
 
-- (void)setActivityModel:(QHWActivityModel *)activityModel {
-    _activityModel = activityModel;
-    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(activityModel.mainHead)]];
-    self.nameLabel.text = activityModel.mainName;
-    self.infoLabel.text = activityModel.mainDescribe;
+- (void)configCellData:(id)data {
+    _activityModel = (QHWActivityModel *)data;
+    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(_activityModel.mainHead)]];
+    self.nameLabel.text = _activityModel.mainName;
+    self.infoLabel.text = _activityModel.mainDescribe;
 }
 
 - (UIImageView *)avatarImgView {

@@ -365,7 +365,7 @@
         _contentHeaderView.cycleScrollView.delegate = self;
         WEAKSELF
         _contentHeaderView.autherView.clickLogoBlock = ^{
-            [weakSelf clickAutherViewLogo];
+//            [weakSelf clickAutherViewLogo];
         };
         _contentHeaderView.autherView.clickAttentionBlock = ^{
             [weakSelf clickAttentionWithButton:weakSelf.contentHeaderView.autherView.attentionButton];

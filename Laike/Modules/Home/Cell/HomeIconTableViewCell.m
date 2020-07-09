@@ -73,7 +73,6 @@
 }
 
 - (void)click_home_news {
-//    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityWithType:1];
     [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CommunityArticleViewController").new animated:YES];
 }
 
@@ -90,7 +89,7 @@
 }
 
 - (void)click_home_article {
-    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityWithType:2];
+    [CTMediator.sharedInstance CTMediator_viewControllerForCommunity];
 }
 
 - (void)click_home_card {

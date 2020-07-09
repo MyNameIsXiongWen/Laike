@@ -29,7 +29,7 @@
     if (self.pageType == 1) {
         height = kScreenH-kBottomBarHeight-kStatusBarHeight-32;
     } else {
-        height = kScreenH-kBottomBarHeight-kTopBarHeight-128;
+        height = kScreenH-kBottomBarHeight-kTopBarHeight-138;
     }
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, height) Style:UITableViewStylePlain Object:self];
     [self.view addSubview:self.tableView];
