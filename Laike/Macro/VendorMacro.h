@@ -12,21 +12,15 @@
 
 #define kAppStoreAppId @"1489900641"
 
-//腾讯云滑块
-#define kTCWebCodeAppId @"2025386513"
-#define kTCWebCodeAppSecret @"0e0B1g3nr5hDv0YgLC-eDDA**"
-
 //微信开放平台
-#define kWechatAppKey @"wxeafa3dc7d4e3bc6d"//微信key
-#define kWechatSecret @"a41bdad2ddb1f025a9397ca17b6826af"
+#define kWechatAppKey @"wx6fcdb76c2ad98bb6"//微信key
+#define kWechatSecret @"7207dd2285ca9acaa1eda89b230c11b8"
 #define kWXMini @"gh_6bc4aab841b4"//微信小程序username
 
 //友盟
-#define kUMKey @"5df847ab3fc195740f000993"
+#define kUMKey @"5f067684167edd6937000028"
 
 //环信
 #define kHXKey @"1133190930046414#qhiwi"
-
-#define kSYAppId @"rXDCTJUl"//闪验
 
 #endif /* VendorMacro_h */

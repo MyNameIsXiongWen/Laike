@@ -46,10 +46,10 @@
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-40-200) Style:UITableViewStylePlain Object:self];
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-48-200) Style:UITableViewStylePlain Object:self];
     [self.tableView registerClass:LiveCommentListCell.class forCellReuseIdentifier:NSStringFromClass(LiveCommentListCell.class)];
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.bottomView];
+//    [self.view addSubview:self.bottomView];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
         self.service.itemPageModel.pagination.currentPage++;
         [self getCommentListRequest];

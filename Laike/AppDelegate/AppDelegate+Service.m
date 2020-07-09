@@ -21,7 +21,6 @@
 #import "CTMediator+ViewController.h"
 
 #import <HyphenateLite/HyphenateLite.h>
-#import <CL_ShanYanSDK/CL_ShanYanSDK.h>
 
 @interface AppDelegate ()
 
@@ -105,12 +104,6 @@
 
 - (void)initWX {
     [WXApi registerApp:kWechatAppKey universalLink:kHomeIndex];
-}
-
-- (void)initShanYan {
-    [CLShanYanSDKManager initWithAppId:kSYAppId complete:^(CLCompleteResult * _Nonnull completeResult) {
-        
-    }];
 }
 
 - (void)configUSharePlatforms {

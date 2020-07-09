@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
     LoginTypePhone,
     LoginTypeWechat,
-    LoginTypeShanYan,
 } LoginType;
 
 @interface LoginService : NSObject

@@ -121,6 +121,9 @@
         _btmView.clickLeftBtnBlock = ^{
             
         };
+        _btmView.clickRightBtnBlock = ^{
+            
+        };
     }
     return _btmView;
 }

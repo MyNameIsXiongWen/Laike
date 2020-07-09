@@ -72,7 +72,6 @@
 		185EC83224A08FD800DCAB2C /* LaikeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC83124A08FD800DCAB2C /* LaikeTests.m */; };
 		185EC83D24A08FD800DCAB2C /* LaikeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC83C24A08FD800DCAB2C /* LaikeUITests.m */; };
 		185EC94124A091BE00DCAB2C /* ThirdLoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC85624A091BC00DCAB2C /* ThirdLoginHelper.m */; };
-		185EC94224A091BE00DCAB2C /* TCWebCodesSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185EC85924A091BC00DCAB2C /* TCWebCodesSDK.framework */; };
 		185EC94324A091BE00DCAB2C /* QHWRefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC85B24A091BC00DCAB2C /* QHWRefreshManager.m */; };
 		185EC94424A091BE00DCAB2C /* QHWHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC85E24A091BC00DCAB2C /* QHWHttpManager.m */; };
 		185EC94524A091BE00DCAB2C /* QHWHttpLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC86124A091BC00DCAB2C /* QHWHttpLoading.m */; };
@@ -304,6 +303,7 @@
 		185A62FE24A9922800E7E75D /* RichTextWithTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextWithTitleTableViewCell.h; sourceTree = "<group>"; };
 		185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichTextWithTitleTableViewCell.m; sourceTree = "<group>"; };
 		185A630024A9922800E7E75D /* RichTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichTextTableViewCell.h; sourceTree = "<group>"; };
+		185CC97F24B6B5B30004A20E /* 来客.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "来客.entitlements"; sourceTree = "<group>"; };
 		185D448724AC84DE00CD3A00 /* CRMAddCustomerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMAddCustomerViewController.h; sourceTree = "<group>"; };
 		185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMAddCustomerViewController.m; sourceTree = "<group>"; };
 		185D448B24AC973400CD3A00 /* MineTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTableHeaderView.h; sourceTree = "<group>"; };
@@ -421,7 +421,6 @@
 		185EC85324A0911C00DCAB2C /* AppMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		185EC85624A091BC00DCAB2C /* ThirdLoginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdLoginHelper.m; sourceTree = "<group>"; };
 		185EC85724A091BC00DCAB2C /* ThirdLoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdLoginHelper.h; sourceTree = "<group>"; };
-		185EC85924A091BC00DCAB2C /* TCWebCodesSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TCWebCodesSDK.framework; sourceTree = "<group>"; };
 		185EC85B24A091BC00DCAB2C /* QHWRefreshManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWRefreshManager.m; sourceTree = "<group>"; };
 		185EC85C24A091BC00DCAB2C /* QHWRefreshManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWRefreshManager.h; sourceTree = "<group>"; };
 		185EC85E24A091BC00DCAB2C /* QHWHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWHttpManager.m; sourceTree = "<group>"; };
@@ -809,7 +808,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				185EC94224A091BE00DCAB2C /* TCWebCodesSDK.framework in Frameworks */,
 				A0C3E6E2448D5DA157C22A78 /* libPods-Laike.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -944,6 +942,7 @@
 		185EC81424A08FD700DCAB2C /* Laike */ = {
 			isa = PBXGroup;
 			children = (
+				185CC97F24B6B5B30004A20E /* 来客.entitlements */,
 				185EC84A24A0902A00DCAB2C /* AppDelegate */,
 				185EC84C24A0911C00DCAB2C /* Macro */,
 				185EC86224A091BC00DCAB2C /* Modules */,
@@ -1017,7 +1016,6 @@
 			isa = PBXGroup;
 			children = (
 				185EC85524A091BC00DCAB2C /* ThirdLogin */,
-				185EC85824A091BC00DCAB2C /* TCWebCode */,
 				185EC85A24A091BC00DCAB2C /* QHWRefreshManager */,
 				185EC85D24A091BC00DCAB2C /* QHWHttpManager */,
 			);
@@ -1031,14 +1029,6 @@
 				185EC85724A091BC00DCAB2C /* ThirdLoginHelper.h */,
 			);
 			path = ThirdLogin;
-			sourceTree = "<group>";
-		};
-		185EC85824A091BC00DCAB2C /* TCWebCode */ = {
-			isa = PBXGroup;
-			children = (
-				185EC85924A091BC00DCAB2C /* TCWebCodesSDK.framework */,
-			);
-			path = TCWebCode;
 			sourceTree = "<group>";
 		};
 		185EC85A24A091BC00DCAB2C /* QHWRefreshManager */ = {
@@ -2518,6 +2508,7 @@
 			baseConfigurationReference = 53005641986DE0440E436C60 /* Pods-Laike.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Laike/来客.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6RWP9GSXML;
@@ -2531,9 +2522,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.like;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "来客";
-				PROVISIONING_PROFILE_SPECIFIER = like_profile_dev;
+				PROVISIONING_PROFILE_SPECIFIER = manager_dev_profile;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2543,6 +2534,7 @@
 			baseConfigurationReference = B84EEBC2926E775366657C66 /* Pods-Laike.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Laike/来客.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6RWP9GSXML;
@@ -2556,9 +2548,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.like;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "来客";
-				PROVISIONING_PROFILE_SPECIFIER = like_profile_dev;
+				PROVISIONING_PROFILE_SPECIFIER = manager_dev_profile;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

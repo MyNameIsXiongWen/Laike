@@ -44,8 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)initWX;
 
-- (void)initShanYan;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -177,7 +177,9 @@
 }
 
 - (void)clickContactBtn {
-    
+    if (self.clickRightBtnBlock) {
+        self.clickRightBtnBlock();
+    }
 }
 
 @end

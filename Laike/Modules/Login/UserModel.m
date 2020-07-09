@@ -10,7 +10,6 @@
 #import "CTMediator+ViewController.h"
 #import "AppDelegate.h"
 #import <HyphenateLite/HyphenateLite.h>
-#import <CL_ShanYanSDK/CL_ShanYanSDK.h>
 
 static UserModel *user = nil;
 static dispatch_once_t onceToken;
@@ -122,9 +121,6 @@ static dispatch_once_t onceToken;
     [kUserDefault removeObjectForKey:kConstToken];
     [UserModel clearUser];
     [EMClient.sharedClient logout:YES completion:^(EMError *aError) {
-        
-    }];
-    [CLShanYanSDKManager initWithAppId:kSYAppId complete:^(CLCompleteResult * _Nonnull completeResult) {
         
     }];
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

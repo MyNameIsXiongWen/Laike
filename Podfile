@@ -25,6 +25,5 @@ pod 'UMCAnalytics'
 
 pod "Qiniu"
 pod 'HyphenateLite'
-pod 'CL_ShanYanSDK'
  
 end

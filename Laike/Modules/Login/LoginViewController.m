@@ -10,7 +10,6 @@
 #import "ThirdLoginHelper.h"
 #import "LoginService.h"
 #import "CTMediator+ViewController.h"
-#import <CL_ShanYanSDK/CL_ShanYanSDK.h>
 
 @interface LoginViewController ()
 
@@ -24,7 +23,6 @@
 @property (nonatomic, strong) UILabel *userProtocolLabel;
 @property (nonatomic, strong) UILabel *userPrivacyLabel;
 @property (nonatomic, strong) UIButton *wechatBtn;
-@property (nonatomic, strong) UIButton *phoneBtn;
 @property (nonatomic, strong) UIButton *loginBtn;
 
 @property (nonatomic, assign) NSInteger codeTime;
@@ -53,7 +51,6 @@ static NSInteger const CodeCountTime = 60;
     
     self.codeTime = CodeCountTime;
     [self configUI];
-    [CLShanYanSDKManager preGetPhonenumber:nil];
 }
 
 
@@ -65,7 +62,6 @@ static NSInteger const CodeCountTime = 60;
     [self.view addSubview:self.codeLabel];
     [self.view addSubview:self.loginBtn];
     [self.view addSubview:self.wechatBtn];
-    [self.view addSubview:self.phoneBtn];
     [self.view addSubview:self.userProtocolLabel];
     [self.view addSubview:self.userPrivacyLabel];
     if ([kUserDefault objectForKey:kConstPhoneNumber]) {
@@ -102,62 +98,6 @@ static NSInteger const CodeCountTime = 60;
 
 - (void)clickWechatBtn {
     [ThirdLoginHelper.sharedInstance getUserInfoForPlatform:UMSocialPlatformType_WechatSession isBind:NO];
-}
-
-- (void)clickPhoneBtn {
-    CLUIConfigure * baseUIConfigure = CLUIConfigure.new;
-    baseUIConfigure.viewController = self;
-    baseUIConfigure.clLogoImage = kImageMake(@"login_phone");
-    baseUIConfigure.clNavigationBackBtnImage = kImageMake(@"global_back");
-    baseUIConfigure.clLoginBtnBgColor = kColorThemefb4d56;
-    baseUIConfigure.clLoginBtnTextColor = kColorThemefff;
-    baseUIConfigure.clLoginBtnCornerRadius = @(7);
-    CLOrientationLayOut *logoLayout = CLOrientationLayOut.new;
-    logoLayout.clLayoutLogoTop = @(kTopBarHeight+20);
-    logoLayout.clLayoutPhoneTop = @(kTopBarHeight+100);
-    logoLayout.clLayoutAppPrivacyTop = @(kTopBarHeight+140);
-    logoLayout.clLayoutLoginBtnTop = @(kTopBarHeight+180);
-    logoLayout.clLayoutLogoCenterX = @(0);
-    logoLayout.clLayoutPhoneCenterX = @(0);
-    logoLayout.clLayoutAppPrivacyCenterX = @(0);
-    logoLayout.clLayoutLoginBtnCenterX = @(0);
-    logoLayout.clLayoutLoginBtnWidth = @(kScreenW-80);
-    logoLayout.clLayoutLoginBtnHeight = @(50);
-    baseUIConfigure.clOrientationLayOutPortrait = logoLayout;
-    
-    [QHWHttpLoading show];
-    [CLShanYanSDKManager quickAuthLoginWithConfigure:baseUIConfigure openLoginAuthListener:^(CLCompleteResult * _Nonnull completeResult) {
-        [QHWHttpLoading dismiss];
-        if (completeResult.error) {
-            //拉起授权页失败
-            NSLog(@"openLoginAuthListener:%@",completeResult.error.userInfo);
-            [SVProgressHUD showInfoWithStatus:@"登录失败"];
-        } else {
-           //拉起授权页成功
-            NSLog(@"openLoginAuthListener:%@",completeResult.yy_modelToJSONObject);
-        }
-    } oneKeyLoginListener:^(CLCompleteResult * _Nonnull completeResult) {
-        if (completeResult.error) {
-            //一键登录失败
-            NSLog(@"oneKeyLoginListener:%@",completeResult.error.description);
-            
-            //提示：错误无需提示给用户，可以在用户无感知的状态下直接切换登录方式
-            if (completeResult.code == 1011){
-                //用户取消登录（点返回）
-                //处理建议：如无特殊需求可不做处理，仅作为交互状态回调，此时已经回到当前用户自己的页面
-                //点击sdk自带的返回，无论是否设置手动销毁，授权页面都会强制关闭
-            } else {
-                //处理建议：其他错误代码表示闪验通道无法继续，可以统一走开发者自己的其他登录方式，也可以对不同的错误单独处理
-                //关闭授权页，如果授权页还未拉起，此调用不会关闭当前用户vc，即不执行任何代码
-                [CLShanYanSDKManager finishAuthControllerCompletion:nil];
-            }
-        } else {
-            //一键登录获取Token成功
-            NSLog(@"oneKeyLoginListener:%@",completeResult.yy_modelDescription);
-            NSString *token = completeResult.data[@"token"];
-            [self.loginService loginRequestWithSYToken:token];
-        }
-    }];
 }
 
 - (void)tapUserProtocol {
@@ -221,7 +161,7 @@ static NSInteger const CodeCountTime = 60;
         UIView *line = UIView.viewFrame(CGRectMake(15, _codeTextField.bottom, kScreenW-30, 0.5)).bkgColor(kColorThemeeee);
         [self.view addSubview:line];
         
-        self.tipLabel = UILabel.labelFrame(CGRectMake(15, _codeTextField.bottom+18, kScreenW-30, 17)).labelText(@"点击注册登录表示您已阅读并同意去海外").labelFont(kFontTheme12).labelTitleColor(kColorTheme999);
+        self.tipLabel = UILabel.labelFrame(CGRectMake(15, _codeTextField.bottom+18, kScreenW-30, 17)).labelText(@"点击注册登录表示您已阅读并同意来客").labelFont(kFontTheme12).labelTitleColor(kColorTheme999);
         [self.view addSubview:self.tipLabel];
     }
     return _codeTextField;
@@ -279,20 +219,10 @@ static NSInteger const CodeCountTime = 60;
 
 - (UIButton *)wechatBtn {
     if (!_wechatBtn) {
-        _wechatBtn = UIButton.btnFrame(CGRectMake((kScreenW-140)/2, self.loginBtn.bottom+85, 42, 42)).btnImage(kImageMake(@"login_wechat"));
-        _wechatBtn.hidden = NO;
+        _wechatBtn = UIButton.btnFrame(CGRectMake((kScreenW-42)/2, self.loginBtn.bottom+85, 42, 42)).btnImage(kImageMake(@"login_wechat"));
         [_wechatBtn addTarget:self action:@selector(clickWechatBtn) forControlEvents:UIControlEventTouchUpInside];
     }
     return _wechatBtn;
-}
-
-- (UIButton *)phoneBtn {
-    if (!_phoneBtn) {
-        _phoneBtn = UIButton.btnFrame(CGRectMake(self.wechatBtn.right+55, self.wechatBtn.top, 42, 42)).btnImage(kImageMake(@"login_phone"));
-        _phoneBtn.hidden = NO;
-        [_phoneBtn addTarget:self action:@selector(clickPhoneBtn) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _phoneBtn;
 }
 
 - (LoginService *)loginService {

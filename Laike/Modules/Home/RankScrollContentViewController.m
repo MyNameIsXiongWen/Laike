@@ -8,6 +8,7 @@
 
 #import "RankScrollContentViewController.h"
 #import "QHWSystemService.h"
+#import "UserModel.h"
 
 @interface RankScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -52,17 +53,39 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.rankType == 1) {
+        return self.systemService.consultantArray.count + 1;
+    }
     return self.systemService.consultantArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RankTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(RankTableViewCell.class)];
-    QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row];
-    cell.rankImgView.image = [UIImage imageWithColor:kColorThemea4abb3 size:CGSizeMake(20, 30) text:kFormat(@"%ld", indexPath.row+1) textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
-    [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
-    cell.nameLabel.text = model.name;
-    cell.sloganLabel.text = model.slogan;
-    cell.rankLabel.text = kFormat(@"%ld", model.likeCount);
+    if (self.rankType == 1) {
+        if (indexPath.row == 0) {
+            UserModel *user = UserModel.shareUser;
+            cell.rankImgView.image = [UIImage imageWithColor:kColorThemea4abb3 size:CGSizeMake(20, 30) text:kFormat(@"%ld", indexPath.row) textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+            [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
+            cell.nameLabel.text = user.realName;
+            cell.sloganLabel.text = user.slogan ?: @"暂无";
+            cell.rankLabel.text = kFormat(@"%ld", user.likeCount);
+            cell.contentView.backgroundColor = kColorThemef5f5f5;
+        } else {
+            QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row-1];
+            cell.rankImgView.image = [UIImage imageWithColor:kColorThemea4abb3 size:CGSizeMake(20, 30) text:kFormat(@"%ld", indexPath.row) textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+            [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+            cell.nameLabel.text = model.name;
+            cell.sloganLabel.text = model.slogan ?: @"暂无";
+            cell.rankLabel.text = kFormat(@"%ld", model.likeCount);
+        }
+    } else {
+        QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row];
+        cell.rankImgView.image = [UIImage imageWithColor:kColorThemea4abb3 size:CGSizeMake(20, 30) text:kFormat(@"%ld", indexPath.row+1) textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+        [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+        cell.nameLabel.text = model.name;
+        cell.sloganLabel.text = model.slogan ?: @"暂无";
+        cell.rankLabel.text = kFormat(@"%ld", model.likeCount);
+    }
     return cell;
 }
 

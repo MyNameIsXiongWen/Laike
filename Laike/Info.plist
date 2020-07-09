@@ -37,7 +37,7 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>laike</string>
+				<string>qhiwi-manager</string>
 			</array>
 		</dict>
 	</array>

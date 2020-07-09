@@ -25,7 +25,6 @@
     [self initAvoidCrash];
     [self initUM];
     [self initWX];
-    [self initShanYan];
     return YES;
 }
 

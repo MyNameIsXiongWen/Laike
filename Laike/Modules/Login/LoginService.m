@@ -84,24 +84,7 @@
             };
         } else if ([responseObject[@"code"] integerValue] == 101004) { // 滑块验证码
             self.imageCode = self.uuid = @"";
-            [TCWebCodesBridge.sharedBridge loadTencentCaptcha:self.getCurrentMethodCallerVC.view appid:kTCWebCodeAppId callback:^(NSDictionary *resultJSON) {
-                if ([resultJSON[@"ret"] integerValue] == 0) {
-                    self.ticket = resultJSON[@"ticket"];
-                    self.randstr = resultJSON[@"randstr"];
-                    self.verifyType = @"2";
-                    [self sendCodeRequestWithPhone:phone Complete:complete TimerHandler:timerHandler];
-                } else {
-                    /**
-                    验证失败
-                    返回内容：
-                    ret=-1001为验证码js加载错误
-                    ret=-1002一般为网络错误
-                    ret=-1为返回票据数据解析错误，业务可根据需要重试处理
-                    ret的其他返回值，为验证失败，比如用户主动关闭了验证码弹框
-                    */
-                    [SVProgressHUD showInfoWithStatus:@"验证失败"];
-                }
-            }];
+            
         }
     } failure:^(NSError *error) {
         

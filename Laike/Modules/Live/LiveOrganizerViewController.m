@@ -31,7 +31,7 @@
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH - kTopBarHeight - kBottomDangerHeight - self.bottomView.height - 40 - 200) Style:UITableViewStyleGrouped Object:self];
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH - kTopBarHeight - kBottomDangerHeight - self.bottomView.height - 48 - 200) Style:UITableViewStyleGrouped Object:self];
     for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
         [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
     }
