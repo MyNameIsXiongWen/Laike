@@ -8,7 +8,6 @@
 
 #import "LoginService.h"
 #import "UserModel.h"
-#import <TCWebCodesSDK/TCWebCodesBridge.h>
 #import "AppDelegate.h"
 #import "LoginImageCodeView.h"
 #import <HyphenateLite/HyphenateLite.h>
@@ -23,10 +22,6 @@
 @property (nonatomic, copy) NSString *imageCode;
 @property (nonatomic, copy) NSString *uuid;
 
-//滑块验证码票据
-@property (nonatomic, copy) NSString *ticket;
-//滑块验证码随机串
-@property (nonatomic, copy) NSString *randstr;
 @property (nonatomic, copy) NSString *verifyType;
 
 @end
@@ -44,10 +39,6 @@
     }
     self.phone = phone;
     NSMutableDictionary *params = @{@"mobileNumber": phone, @"type": @"401", @"verifyType": self.verifyType ?: @""}.mutableCopy;
-    if (self.ticket.length > 0 && self.randstr.length > 0) {
-        params[@"ticket"] = self.ticket;
-        params[@"randstr"] = self.randstr;
-    }
     if (self.imageCode.length > 0 && self.uuid.length > 0) {
         params[@"codeBase64"] = self.imageCode;
         params[@"uuid"] = self.uuid;
@@ -64,7 +55,6 @@
                 self.imageCode = @"";
             }
         } else if ([responseObject[@"code"] integerValue] == 101001) { // 图片验证码
-            self.ticket = self.randstr = @"";
             self.verifyType = @"1";
             self.uuid = responseObject[@"data"][@"uuid"];
             if (self.imageCode.length > 0) {
