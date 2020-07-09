@@ -11,7 +11,7 @@
 #import "QSchoolOrganizerViewController.h"
 #import "QSchoolCommentViewController.h"
 #import "QSchoolService.h"
-//#import "QHWShareView.h"
+#import "QHWShareView.h"
 #import "QHWVideoPlayerView.h"
 #import "QHWTabScrollView.h"
 #import "QHWPageContentView.h"
@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
+    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -41,8 +41,8 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-//    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":self.service.liveDetailModel, @"shareType": @(ShareTypeLive)}];
-//    [shareView show];
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":self.service.schoolModel, @"shareType": @(ShareTypeSchool)}];
+    [shareView show];
 }
 
 - (void)getMainData {

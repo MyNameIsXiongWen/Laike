@@ -17,11 +17,13 @@
 #import "MerchantShareView.h"
 #import "GalleryShareView.h"
 #import "RateShareView.h"
+#import "QSchoolShareView.h"
 #import "QHWMainBusinessDetailBaseModel.h"
 #import "CommunityDetailService.h"
 #import "UserModel.h"
 #import "LiveModel.h"
 #import "QHWMigrationModel.h"
+#import "QHWSchoolModel.h"
 #import "QHWShareBottomViewProtocol.h"
 
 @interface QHWShareView () <UICollectionViewDelegate, UICollectionViewDataSource, QHWShareBottomViewProtocol>
@@ -35,6 +37,7 @@
 @property (nonatomic, strong) CommunityDetailModel *communityDetailModel;
 @property (nonatomic, strong) UserModel *userModel;
 @property (nonatomic, strong) LiveModel *liveModel;
+@property (nonatomic, strong) QHWSchoolModel *schoolModel;
 @property (nonatomic, strong) UIImage *certificateImage;
 @property (nonatomic, strong) id galleryImg;
 @property (nonatomic, strong) NSArray *rateArray;
@@ -45,6 +48,7 @@
 @property (nonatomic, strong) MerchantShareView *merchantShareView;
 @property (nonatomic, strong) GalleryShareView *galleryShareView;
 @property (nonatomic, strong) RateShareView *rateShareView;
+@property (nonatomic, strong) QSchoolShareView *schoolShareView;
 @property (nonatomic, assign) ShareType shareType;
 
 @end
@@ -87,6 +91,8 @@
             self.galleryImg = dict[@"coverImg"];
         } else if (self.shareType == ShareTypeRate) {
             self.rateArray = dict[@"rateData"];
+        } else if (self.shareType == ShareTypeSchool) {
+            self.schoolModel = dict[@"detailModel"];
         }
         self.popType = PopTypeBottom;
         [self addSubview:self.collectionView];
@@ -169,6 +175,12 @@
         self.rateShareView.rateArray = self.rateArray;
         self.rateShareView.delegate = self;
         [self.rateShareView show];
+        return;
+    } else if (self.shareType == ShareTypeSchool) {
+        self.schoolShareView = [[QSchoolShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 650)];
+        self.schoolShareView.schoolModel = self.schoolModel;
+        self.schoolShareView.delegate = self;
+        [self.schoolShareView show];
         return;
     }
     [QHWSystemService.new getShareMiniCodeRequestWithBusinessType:type BusinessId:idString Completed:^(NSString * _Nonnull miniCodePath) {
