@@ -61,7 +61,7 @@ static NSInteger const CodeCountTime = 60;
     [self.view addSubview:self.codeBtn];
     [self.view addSubview:self.codeLabel];
     [self.view addSubview:self.loginBtn];
-    [self.view addSubview:self.wechatBtn];
+//    [self.view addSubview:self.wechatBtn];
     [self.view addSubview:self.userProtocolLabel];
     [self.view addSubview:self.userPrivacyLabel];
     if ([kUserDefault objectForKey:kConstPhoneNumber]) {
@@ -189,12 +189,12 @@ static NSInteger const CodeCountTime = 60;
         _loginBtn = UIButton.btnFrame(CGRectMake(15, self.userProtocolLabel.bottom+50, kScreenW-30, 50)).btnTitle(@"注册登录").btnTitleColor(kColorThemefff).btnFont(kFontTheme18).btnCornerRadius(4).btnBkgColor(kColorTheme21a8ff);
         [_loginBtn addTarget:self action:@selector(clickLoginBtn) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *label = UILabel.labelFrame(CGRectMake((kScreenW-90)/2, _loginBtn.bottom+38, 90, 20)).labelText(@"其他登录方式").labelFont(kFontTheme14).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);
-        [self.view addSubview:label];
-        UIView *line1 = UIView.viewFrame(CGRectMake(label.left-35-70, label.y+10, 70, 0.5)).bkgColor(kColorThemeeee);
-        [self.view addSubview:line1];
-        UIView *line2 = UIView.viewFrame(CGRectMake(label.right+35, line1.y, 70, 0.5)).bkgColor(kColorThemeeee);
-        [self.view addSubview:line2];
+//        UILabel *label = UILabel.labelFrame(CGRectMake((kScreenW-90)/2, _loginBtn.bottom+38, 90, 20)).labelText(@"其他登录方式").labelFont(kFontTheme14).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);
+//        [self.view addSubview:label];
+//        UIView *line1 = UIView.viewFrame(CGRectMake(label.left-35-70, label.y+10, 70, 0.5)).bkgColor(kColorThemeeee);
+//        [self.view addSubview:line1];
+//        UIView *line2 = UIView.viewFrame(CGRectMake(label.right+35, line1.y, 70, 0.5)).bkgColor(kColorThemeeee);
+//        [self.view addSubview:line2];
     }
     return _loginBtn;
 }

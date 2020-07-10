@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 ///学习类型：1-专业课堂；2-产品学习
 @property (nonatomic, assign) NSInteger learnType;
 @property (nonatomic, assign) NSInteger browseCount;
+///咨询量
+@property (nonatomic, assign) NSInteger consultCount;
 ///视频状态：1-横向；2-竖向(fileType=2 必填)
 @property (nonatomic, assign) NSInteger videoStatus;
 ///文件List

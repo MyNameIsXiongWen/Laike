@@ -11,7 +11,7 @@
 #import "MainBusinessDetailBottomView.h"
 #import "QHWSystemService.h"
 #import "QHWBaseCellProtocol.h"
-//#import "QHWShareView.h"
+#import "QHWShareView.h"
 
 @interface ActivityDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -37,8 +37,8 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-//    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":self.activityService.activityDetailModel, @"shareType": @(ShareTypeMainBusiness)}];
-//    [shareView show];
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":self.activityService.activityDetailModel, @"shareType": @(ShareTypeMainBusiness)}];
+    [shareView show];
 }
 
 - (void)getDetailInfoRequest {
@@ -52,15 +52,10 @@
             self.tableHeaderView.height = self.activityService.activityDetailHeaderHeight;
             self.bottomView.businessType = 17;
             self.bottomView.detailModel = self.activityService.activityDetailModel;
-            if (self.activityService.activityDetailModel.entryStatus == 1) {
-                self.bottomView.onlineButton.enabled = YES;
-                [self.bottomView.onlineButton setTitle:@"报名" forState:0];
-                self.bottomView.onlineButton.backgroundColor = kColorTheme3cb584;
-            } else {
-                self.bottomView.onlineButton.enabled = NO;
-                [self.bottomView.onlineButton setTitle:@"已结束" forState:0];
-                self.bottomView.onlineButton.backgroundColor = kColorThemeeee;
-                [self.bottomView.onlineButton setTitleColor:kColorThemea4abb3 forState:0];
+            if (self.activityService.activityDetailModel.entryStatus == 2) {
+                self.bottomView.rightOperationButton.enabled = NO;
+                self.bottomView.rightOperationButton.btnTitle(@"已结束").btnBkgColor(kColorThemeeee).btnTitleColor(kColorThemea4abb3);
+                self.kNavigationView.rightBtn.hidden = YES;
             }
             [self.tableView reloadData];
         }
@@ -153,6 +148,10 @@
 - (MainBusinessDetailBottomView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
+        WEAKSELF
+        _bottomView.rightOperationBlock = ^{
+            [weakSelf rightNavBtnAction:nil];
+        };
         [self.view addSubview:_bottomView];
     }
     return _bottomView;

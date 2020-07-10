@@ -7,11 +7,14 @@
 //
 
 #import "QHWBaseScrollContentViewController.h"
+#import "MainBusinessDetailBottomView.h"
 #import "QSchoolService.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QSchoolOrganizerViewController : QHWBaseScrollContentViewController
+
+@property (nonatomic, strong, readonly) MainBusinessDetailBottomView *bottomView;
 
 @property (nonatomic, strong) QSchoolService *service;
 

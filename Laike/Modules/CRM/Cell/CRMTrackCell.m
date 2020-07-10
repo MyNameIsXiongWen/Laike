@@ -34,9 +34,15 @@
         }];
         [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.titleLabel.mas_left);
-//            make.right.mas_equalTo(-20);
             make.width.mas_lessThanOrEqualTo(kScreenW-40-20);
             make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        }];
+        [self.contentLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.titleLabel.mas_left);
+            make.right.mas_equalTo(-20);
+            make.top.equalTo(self.contentLabel.mas_top);
+            make.bottom.equalTo(self.contentLabel.mas_bottom);
+            make.height.mas_greaterThanOrEqualTo(15);
         }];
         [self.topLine mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(19);
@@ -61,7 +67,6 @@
 
 - (void)setShowArrowImgView:(BOOL)showArrowImgView {
     [self.contentLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.right.mas_equalTo(-37);
         make.width.mas_lessThanOrEqualTo(kScreenW-40-37);
     }];
     [self.arrowImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -70,6 +75,12 @@
         make.height.mas_equalTo(15);
         make.top.equalTo(self.contentLabel.mas_top);
     }];
+}
+
+- (void)clickContentLabel {
+    if (self.clickContentBlock) {
+        self.clickContentBlock();
+    }
 }
 
 - (UILabel *)titleLabel {
@@ -95,6 +106,16 @@
         [self.contentView addSubview:_contentLabel];
     }
     return _contentLabel;
+}
+
+- (UIView *)contentLabelView {
+    if (!_contentLabelView) {
+        _contentLabelView = UIView.viewInit();
+        _contentLabelView.userInteractionEnabled = YES;
+        [_contentLabelView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickContentLabel)]];
+        [self addSubview:_contentLabelView];
+    }
+    return _contentLabelView;
 }
 
 - (UIView *)circle {

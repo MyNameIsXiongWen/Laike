@@ -95,8 +95,15 @@
             self.schoolModel = dict[@"detailModel"];
         }
         self.popType = PopTypeBottom;
-        [self addSubview:self.collectionView];
-        [self addSubview:self.cancelBtn];
+        
+        if (self.shareType == ShareTypeGallery || self.shareType == ShareTypeRate || self.shareType == ShareTypeSchool) {
+            self.backgroundView.hidden = YES;
+            self.frame = CGRectZero;
+            [self generatePoster];
+        } else {
+            [self addSubview:self.collectionView];
+            [self addSubview:self.cancelBtn];
+        }
     }
     return self;
 }

@@ -18,9 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) UIView *contentLabelView;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIImageView *arrowImgView;
 @property (nonatomic, assign) BOOL showArrowImgView;
+@property (nonatomic, copy) void (^ clickContentBlock)(void);
 
 @end
 

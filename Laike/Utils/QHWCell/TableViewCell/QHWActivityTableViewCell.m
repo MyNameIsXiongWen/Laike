@@ -7,6 +7,7 @@
 //
 
 #import "QHWActivityTableViewCell.h"
+#import "QHWShareView.h"
 
 @implementation QHWActivityTableViewCell
 
@@ -50,24 +51,19 @@
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.top.equalTo(self.timeLabel.mas_bottom).offset(15);
-            make.right.mas_equalTo(-80);
+            make.right.mas_equalTo(-105);
         }];
-        [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.nameLabel.mas_right).offset(5);
+        [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-15);
-            make.top.equalTo(self.timeLabel.mas_bottom).offset(17);
-            make.height.mas_equalTo(25);
+            make.height.mas_equalTo(22);
+            make.width.mas_equalTo(80);
+            make.top.equalTo(self.nameLabel.mas_top);
         }];
         [self.line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
             make.height.mas_equalTo(0.5);
             make.bottom.mas_equalTo(0);
-        }];
-        [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.height.mas_equalTo(22);
-            make.bottom.equalTo(self.line.mas_top).offset(-10);
         }];
     }
     return self;
@@ -79,17 +75,20 @@
     self.nameLabel.text = _activityModel.name;
     self.addressLabel.text = _activityModel.addres;
     self.timeLabel.text = _activityModel.startEnd;
-    self.statusLabel.text = _activityModel.activityStatusName;
-    if (_activityModel.activityStatus == 3) {
-        self.statusLabel.textColor = kColorThemea4abb3;
-        self.statusLabel.labelBorderColor(kColorThemefff);
-    } else {
-        self.statusLabel.textColor = kColorThemef2a12f;
-        self.statusLabel.labelBorderColor(kColorThemef2a12f);
-    }
     if (_activityModel.startEnd.length > 11) {
         self.dayLabel.text = [_activityModel.startEnd substringWithRange:NSMakeRange(5, 6)];
     }
+    self.shareBtn.hidden = _activityModel.activityStatus == 3;
+    if (_activityModel.activityStatus == 3) {
+        [self.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-15);
+        }];
+    }
+}
+
+- (void)clickShareBtn {
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":self.activityModel, @"shareType": @(ShareTypeMainBusiness)}];
+    [shareView show];
 }
 
 #pragma mark ------------UI-------------
@@ -151,14 +150,6 @@
     return _nameLabel;
 }
 
-- (UILabel *)statusLabel {
-    if (!_statusLabel) {
-        _statusLabel = UILabel.labelInit().labelFont(kFontTheme12).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter).labelCornerRadius(12.5);
-        [self.contentView addSubview:_statusLabel];
-    }
-    return _statusLabel;
-}
-
 - (UIView *)line {
     if (!_line) {
         _line = UIView.viewInit().bkgColor(kColorThemeeee);
@@ -167,12 +158,12 @@
     return _line;
 }
 
-- (QHWCellBottomShareView *)shareView {
-    if (!_shareView) {
-        _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];
-        [self.contentView addSubview:_shareView];
+- (UIButton *)shareBtn {
+    if (!_shareBtn) {
+        _shareBtn = UIButton.btnInit().btnCornerRadius(11).btnTitle(@"微信推广").btnFont(kFontTheme11).btnTitleColor(kColorTheme444).btnImage(kImageMake(@"")).btnBorderColor(kColorTheme444).btnAction(self, @selector(clickShareBtn));
+        [self addSubview:_shareBtn];
     }
-    return _shareView;
+    return _shareBtn;
 }
 
 @end

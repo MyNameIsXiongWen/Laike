@@ -61,7 +61,7 @@
 }
 
 - (void)getMainData {
-    [self.crmService getClueActionAllListDataRequestWithComplete:^{
+    [self.crmService getClueActionListDataRequestWithComplete:^{
         self.tableHeaderView.crmModel = self.crmService.crmModel;
         [self.tableView reloadData];
         if ([self.tableView.mj_header isRefreshing]) {

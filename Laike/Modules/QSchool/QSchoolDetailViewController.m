@@ -108,7 +108,12 @@
         NSMutableArray *contentVCs = [NSMutableArray array];
         QSchoolOrganizerViewController *organizerVC = QSchoolOrganizerViewController.new;
         organizerVC.service = self.service;
+        WEAKSELF
+        organizerVC.bottomView.rightOperationBlock = ^{
+            [weakSelf rightNavBtnAction:nil];
+        };
         [contentVCs addObject:organizerVC];
+        
         QSchoolCommentViewController *commentVC = QSchoolCommentViewController.new;
         commentVC.schoolModel = self.service.schoolModel;
         [contentVCs addObject:commentVC];

@@ -7,13 +7,12 @@
 //
 
 #import "LiveOrganizerViewController.h"
-#import "MainBusinessDetailBottomView.h"
 #import "QHWBaseCellProtocol.h"
 #import "ActivityDetailViewController.h"
 
 @interface LiveOrganizerViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) MainBusinessDetailBottomView *bottomView;
+@property (nonatomic, strong, readwrite) MainBusinessDetailBottomView *bottomView;
 
 @end
 
@@ -122,9 +121,7 @@
     if (!_bottomView) {
         _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kTopBarHeight-200-40-kBottomDangerHeight-75, kScreenW, 75)];
         _bottomView.businessType = 103001;
-        _bottomView.onlineButton.enabled = YES;
-        [_bottomView.onlineButton setTitle:@"报名" forState:0];
-        _bottomView.onlineButton.backgroundColor = kColorTheme3cb584;
+        [_bottomView.rightOperationButton setTitle:@"邀请看直播视频" forState:0];
     }
     return _bottomView;
 }

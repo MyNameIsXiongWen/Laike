@@ -10,6 +10,8 @@
 #import "VistorDetailHeaderView.h"
 #import "CardService.h"
 #import "CRMTrackCell.h"
+#import "UserModel.h"
+#import "CTMediator+ViewController.h"
 
 @interface VisitorDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -55,11 +57,34 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CardModel *model = (CardModel *)self.cardService.tableViewDataArray[indexPath.row];
     CRMTrackCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CRMTrackCell.class)];
-    cell.titleLabel.text = kFormat(@"访问了你的%@", model.businessName);
+    if (model.businessType == 15) {
+        cell.titleLabel.text = @"访问了您的名片";
+        cell.contentLabel.text = kFormat(@"%@的名片", UserModel.shareUser.realName);
+    } else {
+        cell.titleLabel.text = kFormat(@"访问了您的%@", model.businessName);
+        cell.contentLabel.text = model.title;
+    }
     cell.timeLabel.text = model.createTime;
-    cell.contentLabel.text = model.title;
     cell.topLine.hidden = indexPath.row == 0;
     cell.showArrowImgView = YES;
+    cell.clickContentBlock = ^{
+        switch (model.businessType) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 102001:
+                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:model.businessType BusinessId:model.businessId IsDistribution:NO];
+                break;
+
+            case 18:
+                [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:model.businessId CommunityType:2];
+                break;
+                
+            default:
+                break;
+        }
+    };
     return cell;
 }
 

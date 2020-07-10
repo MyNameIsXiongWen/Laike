@@ -97,12 +97,23 @@
     }];
 }
 
-- (void)getClueActionAllListDataRequestWithComplete:(void (^)(void))complete {
-    [QHWHttpLoading showWithMaskTypeBlack];
+- (void)getClueActionListDataRequestWithComplete:(void (^)(void))complete {
     NSDictionary *params = @{@"userId": self.customerId ?: @"",
                              @"currentPage": @(self.itemPageModel.pagination.currentPage),
                              @"pageSize": @(self.itemPageModel.pagination.pageSize)};
-    [QHWHttpManager.sharedInstance QHW_POST:kClueActionList parameters:params success:^(id responseObject) {
+    [self getActionClueListWithParams:params Url:kClueActionList Complete:complete];
+}
+
+- (void)getClueActionAllListDataRequestWithComplete:(void (^)(void))complete {
+    NSDictionary *params = @{@"id": self.customerId ?: @"",
+                             @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                             @"pageSize": @(self.itemPageModel.pagination.pageSize)};
+    [self getActionClueListWithParams:params Url:kClueActionAllList Complete:complete];
+}
+
+- (void)getActionClueListWithParams:(NSDictionary *)params Url:(NSString *)url Complete:(void (^)(void))complete {
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:url parameters:params success:^(id responseObject) {
         self.crmModel = [CRMModel yy_modelWithJSON:responseObject[@"data"]];
         self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
         if (self.itemPageModel.pagination.currentPage == 1) {

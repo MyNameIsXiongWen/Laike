@@ -8,8 +8,11 @@
 
 #import "QSchoolOrganizerViewController.h"
 #import "QHWBaseCellProtocol.h"
+#import <UIButton+WebCache.h>
 
 @interface QSchoolOrganizerViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong, readwrite) MainBusinessDetailBottomView *bottomView;
 
 @end
 
@@ -22,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.view addSubview:self.bottomView];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(reloadRichTextCellNotification:) name:kNotificationReloadRichText object:nil];
 }
 
@@ -31,6 +35,10 @@
         [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
     }
     [self.view addSubview:self.tableView];
+    
+    [self.bottomView.subjectButton sd_setImageWithURL:[NSURL URLWithString:kFilePath(self.service.schoolModel.headPath)] forState:0];
+    self.bottomView.nameLabel.text = self.service.schoolModel.name;
+    self.bottomView.consultationLabel.text = kFormat(@"咨询量：%ld", (long)self.service.schoolModel.consultCount);
 }
 
 #pragma mark ------------Notification-------------
@@ -79,5 +87,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (MainBusinessDetailBottomView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kTopBarHeight-200-40-kBottomDangerHeight-75, kScreenW, 75)];
+        [_bottomView.rightOperationButton setTitle:@"邀请好友一起学" forState:0];
+    }
+    return _bottomView;
+}
 
 @end

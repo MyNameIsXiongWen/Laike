@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)getCRMFilterDataRequestWithComplete:(void (^)(_Nullable id responseObject))complete;
 - (void)getCRMListDataRequestWithCondition:(NSDictionary *)condition Complete:(void (^)(void))complete;
 - (void)getClueListDataRequestWithComplete:(void (^)(void))complete;
+- (void)getClueActionListDataRequestWithComplete:(void (^)(void))complete;
 - (void)getClueActionAllListDataRequestWithComplete:(void (^)(void))complete;
 
 

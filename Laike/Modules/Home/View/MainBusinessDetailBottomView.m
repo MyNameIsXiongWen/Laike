@@ -19,12 +19,7 @@
 @interface MainBusinessDetailBottomView ()
 
 @property (nonatomic, strong) UIView *lineView;
-@property (nonatomic, strong) UIButton *subjectButton;//主体按钮
-@property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UILabel *consultationLabel;
-
-@property (nonatomic, strong, readwrite) UIButton *onlineButton;
-@property (nonatomic, strong, readwrite) UIButton *rightOperationButton;
+@property (nonatomic, strong) UIButton *onlineButton;
 @property (nonatomic, strong) UIButton *phoneButton;
 @property (nonatomic, strong) ActivityRegisterView *activityView;
 

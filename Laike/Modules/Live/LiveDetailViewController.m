@@ -11,7 +11,7 @@
 #import "LiveOrganizerViewController.h"
 #import "LiveCommentViewController.h"
 #import "LiveService.h"
-//#import "QHWShareView.h"
+#import "QHWShareView.h"
 #import "QHWVideoPlayerView.h"
 #import "QHWTabScrollView.h"
 #import "QHWPageContentView.h"
@@ -45,8 +45,8 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-//    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":self.service.liveDetailModel, @"shareType": @(ShareTypeLive)}];
-//    [shareView show];
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":self.service.liveDetailModel, @"shareType": @(ShareTypeLive)}];
+    [shareView show];
 }
 
 - (void)getMainData {
@@ -108,6 +108,10 @@
         NSMutableArray *contentVCs = [NSMutableArray array];
         LiveOrganizerViewController *organizerVC = LiveOrganizerViewController.new;
         organizerVC.service = self.service;
+        WEAKSELF
+        organizerVC.bottomView.rightOperationBlock = ^{
+            [weakSelf rightNavBtnAction:nil];
+        };
         [contentVCs addObject:organizerVC];
 //        LiveCommentViewController *commentVC = LiveCommentViewController.new;
 //        commentVC.liveModel = self.service.liveDetailModel;
