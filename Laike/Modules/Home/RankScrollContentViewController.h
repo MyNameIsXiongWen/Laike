@@ -21,10 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIImageView *rankImgView;
 @property (nonatomic, strong) UIImageView *avatarImgView;
+@property (nonatomic, strong) UILabel *rankLabel;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *sloganLabel;
-@property (nonatomic, strong) UILabel *rankLabel;
-@property (nonatomic, strong) UILabel *rankNameLabel;
+@property (nonatomic, strong) UILabel *likeLabel;
+@property (nonatomic, strong) UILabel *likeNameLabel;
 
 @end
 

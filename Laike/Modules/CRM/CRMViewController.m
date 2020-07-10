@@ -72,7 +72,7 @@
 
 - (void)getMainData {
     [self.crmService getHomeReportCountDataWithComplete:^{
-        self.tabScrollView.dataArray = @[kFormat(@"CRM %ld", self.crmService.crmCount), kFormat(@"获客 %ld", self.crmService.clueCount)];
+        self.tabScrollView.dataArray = @[kFormat(@"CRM（%ld）", self.crmService.crmCount), kFormat(@"获客（%ld）", self.crmService.clueCount)];
     }];
 }
 
@@ -104,11 +104,11 @@
 - (CRMTopOperationView *)topOperationView {
     if (!_topOperationView) {
         _topOperationView = [[CRMTopOperationView alloc] initWithFrame:CGRectMake(10, kTopBarHeight+10, kScreenW-20, 70)];
-        _topOperationView.dataArray = @[@{@"logo": @"home_live",
+        _topOperationView.dataArray = @[@{@"logo": @"home_article",
                                           @"title": @"分享获客",
                                           @"subTitle": @"发布海外圈 免费获客",
                                           @"identifier": @"shareArticle"},
-                                        @{@"logo": @"home_live",
+                                        @{@"logo": @"home_news",
                                           @"title": @"获客资讯",
                                           @"subTitle": @"每日转发 获客利器",
                                           @"identifier": @"communityArticle"}

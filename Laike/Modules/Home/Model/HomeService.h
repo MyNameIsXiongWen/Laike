@@ -27,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)handleHomeData;
 - (void)getHomeReportDataWithComplete:(void (^)(void))complete;
-- (void)getHomeReportCountDataWithComplete:(void (^)(void))complete;
 - (void)getHomeConsultantDataWithComplete:(void (^)(void))complete;
 
 - (void)getHomePageProductListRequestWithIdentifier:(NSString *)identifier Complete:(void (^)(void))complete;

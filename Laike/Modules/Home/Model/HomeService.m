@@ -99,6 +99,7 @@
         user.clueCount = self.homeModel.clueCount;
         user.distributionCount = self.homeModel.distributionCount;
         [user keyArchiveUserModel];
+        [self getHomeReportCountDataRequest];
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -122,13 +123,12 @@
     }];
 }
 
-- (void)getHomeReportCountDataWithComplete:(void (^)(void))complete {
+- (void)getHomeReportCountDataRequest {
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kHomeReportCount parameters:@{} success:^(id responseObject) {
-        
-        complete();
+        UserModel.shareUser.likeCount = [responseObject[@"data"][@"likeCount"] integerValue];
     } failure:^(NSError *error) {
-        complete();
+        
     }];
 }
 

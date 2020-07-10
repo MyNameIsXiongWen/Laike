@@ -58,7 +58,7 @@
 
 -(void)addChildViewControllers {
     NSArray *controllers = @[@"HomeViewController", @"MessageViewController", @"CRMViewController", @"DistributionViewController", @"MineViewController"];
-    NSArray *icon = @[@"tabbar_home", @"tabbar_community", @"tabbar_message", @"tabbar_message", @"tabbar_mine"];
+    NSArray *icon = @[@"tabbar_home", @"tabbar_message", @"", @"tabbar_community", @"tabbar_mine"];
     NSArray *titleArray = @[@"首页", @"消息", @"客户", @"分销", @"我的"];
     for (int i = 0; i < controllers.count; i++) {
         id vc = [NSClassFromString(controllers[i]) new];
@@ -80,9 +80,14 @@
     
 }
 
+- (void)centerTabbarAction:(UIButton *)btn {
+    self.selectedIndex = 2;
+}
+
 - (QHWTabBar *)centerTabbar {
     if (!_centerTabbar) {
         _centerTabbar = [[QHWTabBar alloc] init];
+        [_centerTabbar.centerBtn addTarget:self action:@selector(centerTabbarAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _centerTabbar;
 }

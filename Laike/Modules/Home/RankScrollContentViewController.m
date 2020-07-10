@@ -61,30 +61,40 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RankTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(RankTableViewCell.class)];
+    cell.contentView.backgroundColor = kColorThemefff;
     if (self.rankType == 1) {
         if (indexPath.row == 0) {
             UserModel *user = UserModel.shareUser;
-            cell.rankImgView.image = [UIImage imageWithColor:kColorThemea4abb3 size:CGSizeMake(20, 30) text:kFormat(@"%ld", indexPath.row) textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+            cell.rankLabel.hidden = self.systemService.myRanking < 3;
+            cell.rankImgView.hidden = self.systemService.myRanking >= 3;
+            cell.rankLabel.text = kFormat(@"%ld", self.systemService.myRanking);
+            cell.rankImgView.image = kImageMake(kFormat(@"rank_%ld", self.systemService.myRanking));
             [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
             cell.nameLabel.text = user.realName;
             cell.sloganLabel.text = user.slogan ?: @"暂无";
-            cell.rankLabel.text = kFormat(@"%ld", user.likeCount);
+            cell.likeLabel.text = kFormat(@"%ld", user.likeCount);
             cell.contentView.backgroundColor = kColorThemef5f5f5;
         } else {
             QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row-1];
-            cell.rankImgView.image = [UIImage imageWithColor:kColorThemea4abb3 size:CGSizeMake(20, 30) text:kFormat(@"%ld", indexPath.row) textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+            cell.rankLabel.hidden = indexPath.row < 4;
+            cell.rankImgView.hidden = indexPath.row >= 4;
+            cell.rankLabel.text = kFormat(@"%ld", indexPath.row);
+            cell.rankImgView.image = kImageMake(kFormat(@"rank_%ld", indexPath.row));
             [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
             cell.nameLabel.text = model.name;
             cell.sloganLabel.text = model.slogan ?: @"暂无";
-            cell.rankLabel.text = kFormat(@"%ld", model.likeCount);
+            cell.likeLabel.text = kFormat(@"%ld", model.likeCount);
         }
     } else {
         QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row];
-        cell.rankImgView.image = [UIImage imageWithColor:kColorThemea4abb3 size:CGSizeMake(20, 30) text:kFormat(@"%ld", indexPath.row+1) textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+        cell.rankLabel.hidden = indexPath.row < 3;
+        cell.rankImgView.hidden = indexPath.row >= 3;
+        cell.rankLabel.text = kFormat(@"%ld", indexPath.row+1);
+        cell.rankImgView.image = kImageMake(kFormat(@"rank_%ld", indexPath.row+1));
         [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
         cell.nameLabel.text = model.name;
         cell.sloganLabel.text = model.slogan ?: @"暂无";
-        cell.rankLabel.text = kFormat(@"%ld", model.likeCount);
+        cell.likeLabel.text = kFormat(@"%ld", model.likeCount);
     }
     return cell;
 }
@@ -115,30 +125,35 @@
         [self.rankImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.centerY.equalTo(self.contentView);
-            make.size.mas_equalTo(CGSizeMake(20, 30));
+            make.size.mas_equalTo(CGSizeMake(25, 25));
+        }];
+        [self.rankLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.centerY.equalTo(self.contentView);
+            make.size.mas_equalTo(CGSizeMake(25, 25));
         }];
         [self.avatarImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.rankImgView.mas_right).offset(15);
             make.centerY.equalTo(self.contentView);
             make.size.mas_equalTo(CGSizeMake(50, 50));
         }];
-        [self.rankNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.likeNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-15);
             make.centerY.equalTo(self.contentView);
         }];
-        [self.rankLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.rankNameLabel.mas_left);
+        [self.likeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.likeNameLabel.mas_left);
             make.centerY.equalTo(self.contentView);
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.avatarImgView.mas_right).offset(15);
             make.top.equalTo(self.avatarImgView.mas_top).offset(5);
-            make.right.equalTo(self.rankLabel.mas_left).offset(5);
+            make.right.equalTo(self.likeLabel.mas_left).offset(5);
         }];
         [self.sloganLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.nameLabel.mas_left);
             make.top.equalTo(self.nameLabel.mas_bottom).offset(2);
-            make.right.equalTo(self.rankLabel.mas_left).offset(-5);
+            make.right.equalTo(self.likeLabel.mas_left).offset(-5);
         }];
     }
     return self;
@@ -161,6 +176,14 @@
     return _avatarImgView;
 }
 
+- (UILabel *)rankLabel {
+    if (!_rankLabel) {
+        _rankLabel = UILabel.labelInit().labelFont(kFontTheme16).labelTitleColor(kColorTheme21a8ff).labelBkgColor(kColorFromHexString(@"bee6ff")).labelTextAlignment(NSTextAlignmentCenter).labelCornerRadius(12.5);
+        [self.contentView addSubview:_rankLabel];
+    }
+    return _rankLabel;
+}
+
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme21a8ff);
@@ -177,21 +200,21 @@
     return _sloganLabel;
 }
 
-- (UILabel *)rankNameLabel {
-    if (!_rankNameLabel) {
-        _rankNameLabel = UILabel.labelInit().labelFont(kFontTheme12).labelText(@"人气").labelTitleColor(kColorThemea4abb3);
-        [_rankNameLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
-        [self.contentView addSubview:_rankNameLabel];
+- (UILabel *)likeNameLabel {
+    if (!_likeNameLabel) {
+        _likeNameLabel = UILabel.labelInit().labelFont(kFontTheme12).labelText(@"人气").labelTitleColor(kColorThemea4abb3);
+        [_likeNameLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+        [self.contentView addSubview:_likeNameLabel];
     }
-    return _rankNameLabel;
+    return _likeNameLabel;
 }
 
-- (UILabel *)rankLabel {
-    if (!_rankLabel) {
-        _rankLabel = UILabel.labelInit().labelFont(kMediumFontTheme18).labelTitleColor(kColorThemeff7919).labelTextAlignment(NSTextAlignmentRight);
-        [self.contentView addSubview:_rankLabel];
+- (UILabel *)likeLabel {
+    if (!_likeLabel) {
+        _likeLabel = UILabel.labelInit().labelFont(kMediumFontTheme18).labelTitleColor(kColorThemeff7919).labelTextAlignment(NSTextAlignmentRight);
+        [self.contentView addSubview:_likeLabel];
     }
-    return _rankLabel;
+    return _likeLabel;
 }
 
 @end

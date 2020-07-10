@@ -25,6 +25,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"排行榜";
+    self.kNavigationView.titleLabel.textColor = kColorThemefff;
+    [self.kNavigationView.leftBtn setImage:kImageMake(@"global_back_white") forState:0];
     self.kNavigationView.backgroundColor = UIColor.clearColor;
     [self.view addSubview:self.topImgView];
     [self.view addSubview:self.tabScrollView];

@@ -20,7 +20,7 @@
 
 - (instancetype)init {
     if (self == [super init]) {
-//        [self addSubview:self.centerBtn];
+        [self addSubview:self.centerBtn];
 //        [self addSubview:self.msgView];
     }
     return self;
@@ -39,13 +39,10 @@
 
 - (UIButton *)centerBtn {
     if (!_centerBtn) {
-        _centerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_centerBtn setImage:kImageMake(@"tabbar_add_new") forState:0];
-        _centerBtn.backgroundColor = UIColor.whiteColor;
-        _centerBtn.layer.cornerRadius = 25;
+        _centerBtn = UIButton.btnFrame(CGRectMake((kScreenW-50)/2.0, -50/3.0, 50, 50)).btnCornerRadius(25).btnBkgColor(kColorThemefff);
         _centerBtn.adjustsImageWhenHighlighted = NO;
-        _centerBtn.frame = CGRectMake((kScreenW-50)/2.0, -50/3, 50, 50);
-        _centerBtn.imageEdgeInsets = UIEdgeInsetsMake(3, 0, -3, 0);
+        UIImageView *imgView = UIImageView.ivFrame(CGRectMake(5, 5, 40, 40)).ivCornerRadius(20).ivImage(kImageMake(@"tabbar_crm"));
+        [_centerBtn addSubview:imgView];
     }
     return _centerBtn;
 }

@@ -187,20 +187,20 @@
     [self.tableViewDataArray addObject:facilityModel];
     
     
-    NSDictionary *airDic = @{@"img": @"house_aircondition", @"title": @"空调设施", @"data": houseModel.airConditionerConfigList};
-    NSDictionary *kitchenDic = @{@"img": @"house_kitchen", @"title": @"厨房配置", @"data": houseModel.kitchenConfigList};
-    NSDictionary *bathRoomDic = @{@"img": @"house_bathroom", @"title": @"卫浴配置", @"data": houseModel.bathroomConfigList};
-    NSDictionary *parkingDic = @{@"img": @"house_parking", @"title": @"停车场", @"data": houseModel.parkConfigList};
-    NSDictionary *gardenDic = @{@"img": @"house_garden", @"title": @"花园配置", @"data": houseModel.gardenConfigList};
+    NSDictionary *airDic = @{@"img": @"house_aircondition", @"title": @"空调设施", @"data": houseModel.airConditionerConfigList ?: @[]};
+    NSDictionary *kitchenDic = @{@"img": @"house_kitchen", @"title": @"厨房配置", @"data": houseModel.kitchenConfigList ?: @[]};
+    NSDictionary *bathRoomDic = @{@"img": @"house_bathroom", @"title": @"卫浴配置", @"data": houseModel.bathroomConfigList ?: @[]};
+    NSDictionary *parkingDic = @{@"img": @"house_parking", @"title": @"停车场", @"data": houseModel.parkConfigList ?: @[]};
+    NSDictionary *gardenDic = @{@"img": @"house_garden", @"title": @"花园配置", @"data": houseModel.gardenConfigList ?: @[]};
     QHWBaseModel *propertyFeeModel = [[QHWBaseModel alloc] configModelIdentifier:@"HouseDetailConfigTableViewCell" Height:[self getHouseConfigHeight:houseModel] Data:@[@[airDic, kitchenDic, bathRoomDic, parkingDic, gardenDic]]];
     propertyFeeModel.headerTitle = @"物业配套";
     propertyFeeModel.footerTitle = @"咨询物业费用情况";
     [self.tableViewDataArray addObject:propertyFeeModel];
     
     
-    QHWBaseModel *likeHouseModel = [[QHWBaseModel alloc] configModelIdentifier:@"QHWHouseTableViewCell" Height:110 Data:houseModel.alikeList];
-    likeHouseModel.headerTitle = @"相似房源";
-    [self.tableViewDataArray addObject:likeHouseModel];
+//    QHWBaseModel *likeHouseModel = [[QHWBaseModel alloc] configModelIdentifier:@"QHWHouseTableViewCell" Height:110 Data:houseModel.alikeList];
+//    likeHouseModel.headerTitle = @"相似房源";
+//    [self.tableViewDataArray addObject:likeHouseModel];
 }
 
 - (void)handleStudyDetailCellData:(QHWStudyModel *)studyModel {

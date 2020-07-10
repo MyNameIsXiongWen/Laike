@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray <SearchContentModel *>*searchResultArray;
 @property (nonatomic, strong) NSArray <FilterCellModel *>*countryArray;
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
+///人气榜我的名次
+@property (nonatomic, assign) NSInteger myRanking;
 
 @property (nonatomic, strong) QHWActivityModel *activityDetailModel;
 @property (nonatomic, assign) CGFloat activityDetailHeaderHeight;

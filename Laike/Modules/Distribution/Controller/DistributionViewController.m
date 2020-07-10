@@ -59,11 +59,11 @@
 - (CRMTopOperationView *)topOperationView {
     if (!_topOperationView) {
         _topOperationView = [[CRMTopOperationView alloc] initWithFrame:CGRectMake(10, kTopBarHeight+10, kScreenW-20, 70)];
-        _topOperationView.dataArray = @[@{@"logo": @"home_live",
+        _topOperationView.dataArray = @[@{@"logo": @"home_article",
                                           @"title": @"客户进度",
                                           @"subTitle": @"进度实时反馈",
                                           @"identifier": @"customerProcess"},
-                                        @{@"logo": @"home_live",
+                                        @{@"logo": @"home_news",
                                           @"title": @"预约签单",
                                           @"subTitle": @"客户盘活 高拥结算",
                                           @"identifier": @"bookAppointment"}

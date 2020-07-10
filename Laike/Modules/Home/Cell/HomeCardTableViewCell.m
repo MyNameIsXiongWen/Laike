@@ -61,6 +61,8 @@
 - (QHWTableSectionHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
+        _headerView.tagImgView.image = kImageMake(@"home_card_data");
+        _headerView.tagImgWidth = 20;
         _headerView.titleLabel.text = @"名片数据";
         _headerView.moreBtn.hidden = NO;
         _headerView.moreBtn.userInteractionEnabled = NO;

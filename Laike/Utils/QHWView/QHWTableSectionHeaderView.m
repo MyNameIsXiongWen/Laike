@@ -58,7 +58,7 @@
 }
 
 - (void)setTagImgWidth:(CGFloat)tagImgWidth {
-    self.tagImgView.frame = CGRectMake(0, (self.height-tagImgWidth)/2, tagImgWidth, tagImgWidth);
+    self.tagImgView.frame = CGRectMake(15, (self.height-tagImgWidth)/2, tagImgWidth, tagImgWidth);
     self.titleLabel.x = self.tagImgView.right+5;
 }
 

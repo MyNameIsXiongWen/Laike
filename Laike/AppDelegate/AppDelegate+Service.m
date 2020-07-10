@@ -93,9 +93,9 @@
 - (void)initHXIMWithApplication:(UIApplication *)application Options:(NSDictionary *)launchOptions {
     EMOptions *options = [EMOptions optionsWithAppkey:kHXKey];
 #ifdef DEBUG
-    options.apnsCertName = @"dev_apns";
+    options.apnsCertName = @"manager_dev_apns";
 #else
-    options.apnsCertName = @"dis_apns";
+    options.apnsCertName = @"manager_dis_apns";
 #endif
     options.enableConsoleLog = YES;
     [EMClient.sharedClient initializeSDKWithOptions:options];

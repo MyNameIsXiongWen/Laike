@@ -115,7 +115,7 @@
 
 - (UIImageView *)typeImgView {
     if (!_typeImgView) {
-        _typeImgView = UIImageView.ivInit().ivImage(kImageMake(@"home_screen"));
+        _typeImgView = UIImageView.ivInit().ivImage(kImageMake(@"global_file"));
         [self.shadowView addSubview:_typeImgView];
     }
     return _typeImgView;
