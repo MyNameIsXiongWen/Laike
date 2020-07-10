@@ -318,7 +318,7 @@
 }
 + (NSString *)getCurrentTime {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
     return [formatter stringFromDate:NSDate.date];
 }

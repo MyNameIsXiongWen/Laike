@@ -56,7 +56,10 @@
     UIButton *closeBtn = UIButton.btnFrame(CGRectMake(self.bkgView.width-50, 0, 50, 50)).btnImage(kImageMake(@"publish_close")).btnAction(self, @selector(dismiss));
     [self.bkgView addSubview:closeBtn];
     CGFloat rateViewHeight = 410;
-    [self.bkgView addSubview:UIView.viewFrame(CGRectMake(0, rateViewHeight, self.bkgView.width, 1)).bkgColor(kColorThemeeee)];
+    
+    NSString *time = kFormat(@"%@ 今日汇率", [NSString getCurrentTime]);
+    UILabel *label = UILabel.labelFrame(CGRectMake(10, rateViewHeight, self.bkgView.width-20, 17)).labelText(time).labelTitleColor(kColorThemea4abb3).labelFont(kFontTheme12).labelTextAlignment(NSTextAlignmentRight);
+    [self.bkgView addSubview:label];
     
     self.avatarImgView = UIImageView.ivFrame(CGRectMake(10, rateViewHeight+25, 40, 40)).ivCornerRadius(20);
     [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(userModel.headPath)]];
@@ -68,7 +71,7 @@
     [self.bkgView addSubview:self.phoneLabel];
     [self.bkgView addSubview:self.sloganLabel];
     
-    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-80, rateViewHeight+10, 70, 70)).ivCornerRadius(35);
+    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-80, self.avatarImgView.y, 70, 70)).ivCornerRadius(35);
     [self.miniCodeImgView sd_setImageWithURL:[NSURL URLWithString:kMiniCodePath(userModel.qrCode)]];
     [self.bkgView addSubview:self.miniCodeImgView];
     self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
