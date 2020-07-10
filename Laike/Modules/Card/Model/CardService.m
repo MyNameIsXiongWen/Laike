@@ -74,7 +74,7 @@
 
 - (CGFloat)businessHeight {
     if (!_businessHeight) {
-        _businessHeight = 10 + 20 + 10 + 10 + MAX(20, [self.businessName getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-80, CGFLOAT_MAX)]);
+        _businessHeight = 10 + 20 + 10 + 10 + MAX(20, [self.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-80, CGFLOAT_MAX)]);
     }
     return _businessHeight;
 }

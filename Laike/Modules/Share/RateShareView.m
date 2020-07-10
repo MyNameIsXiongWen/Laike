@@ -88,12 +88,14 @@
 - (void)setRateArray:(NSArray *)rateArray {
     _rateArray = rateArray;
     CGFloat width = (kScreenW-80-80)/2.0;
+    __block NSArray *imgArray = @[@"country_meiguo", @"country_riben", @"country_aozhou", @"country_yingguo", @"country_xinxilan", @"country_taiguo", @"country_oumeng", @"country_jianada"];
     [rateArray enumerateObjectsUsingBlock:^(RateModel *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx > 0 && idx < 9) {
             UIView *countryView = UIView.viewFrame(CGRectMake((idx-1) % 2 == 0 ? 40 : (40+width), 10 + (idx-1) / 2 * 100, width, 100));
-            UIImageView *imgView = UIImageView.ivFrame(CGRectMake((width-50)/2, 0, 50, 50)).ivCornerRadius(25).ivBkgColor(kColorThemef5f5f5).ivBorderColor(kColorThemeeee);
+            UIImageView *imgView = UIImageView.ivFrame(CGRectMake((width-50)/2, 0, 50, 50)).ivImage(kImageMake(imgArray[idx-1])).ivCornerRadius(25).ivBkgColor(kColorThemef5f5f5).ivBorderColor(kColorThemeeee);
             UILabel *nameLabel = UILabel.labelFrame(CGRectMake(0, imgView.bottom, width, 25)).labelText(obj.currencyName).labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);
-            UILabel *rateLabel = UILabel.labelFrame(CGRectMake(0, nameLabel.bottom, width, 20)).labelText(obj.rate).labelFont(kMediumFontTheme14).labelTitleColor(kColorThemefb4d56).labelTextAlignment(NSTextAlignmentCenter);
+            NSString *rateStr = [NSString formatterWithValue:1.0/obj.rate.doubleValue];
+            UILabel *rateLabel = UILabel.labelFrame(CGRectMake(0, nameLabel.bottom, width, 20)).labelText(rateStr).labelFont(kMediumFontTheme14).labelTitleColor(kColorThemefb4d56).labelTextAlignment(NSTextAlignmentCenter);
             [countryView addSubview:imgView];
             [countryView addSubview:nameLabel];
             [countryView addSubview:rateLabel];

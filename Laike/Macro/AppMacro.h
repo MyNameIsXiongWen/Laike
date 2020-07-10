@@ -24,6 +24,7 @@
 
 
 #define kFontTheme24 [UIFont systemFontOfSize:24]
+#define kFontTheme22 [UIFont systemFontOfSize:22]
 #define kFontTheme20 [UIFont systemFontOfSize:20]
 #define kFontTheme18 [UIFont systemFontOfSize:18]
 #define kFontTheme16 [UIFont systemFontOfSize:16]

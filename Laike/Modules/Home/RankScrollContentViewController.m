@@ -13,6 +13,7 @@
 @interface RankScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) QHWSystemService *systemService;
+@property (nonatomic, strong) RankTableHeaderView *rankTableHeaderView;
 
 @end
 
@@ -27,14 +28,22 @@
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-180-48) Style:UITableViewStylePlain Object:self];
     self.tableView.rowHeight = 70;
     [self.tableView registerClass:RankTableViewCell.class forCellReuseIdentifier:NSStringFromClass(RankTableViewCell.class)];
+    if (self.rankType == 1) {
+        self.tableView.tableHeaderView = self.rankTableHeaderView;
+        UserModel *user = UserModel.shareUser;
+        self.rankTableHeaderView.rankValueLabel.text = kFormat(@"%ld", self.systemService.myRanking);
+        [self.rankTableHeaderView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
+        self.rankTableHeaderView.nameLabel.text = user.realName;
+        self.rankTableHeaderView.likeLabel.text = kFormat(@"%ld", user.likeCount);
+    }
     [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
         self.systemService.itemPageModel.pagination.currentPage = 1;
         [self getMainData];
     }];
-    [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
-        self.systemService.itemPageModel.pagination.currentPage++;
-        [self getMainData];
-    }];
+//    [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
+//        self.systemService.itemPageModel.pagination.currentPage++;
+//        [self getMainData];
+//    }];
     [self.view addSubview:self.tableView];
 }
 
@@ -53,50 +62,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.rankType == 1) {
-        return self.systemService.consultantArray.count + 1;
-    }
     return self.systemService.consultantArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     RankTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(RankTableViewCell.class)];
-    cell.contentView.backgroundColor = kColorThemefff;
-    if (self.rankType == 1) {
-        if (indexPath.row == 0) {
-            UserModel *user = UserModel.shareUser;
-            cell.rankLabel.hidden = self.systemService.myRanking < 3;
-            cell.rankImgView.hidden = self.systemService.myRanking >= 3;
-            cell.rankLabel.text = kFormat(@"%ld", self.systemService.myRanking);
-            cell.rankImgView.image = kImageMake(kFormat(@"rank_%ld", self.systemService.myRanking));
-            [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
-            cell.nameLabel.text = user.realName;
-            cell.sloganLabel.text = user.slogan ?: @"暂无";
-            cell.likeLabel.text = kFormat(@"%ld", user.likeCount);
-            cell.contentView.backgroundColor = kColorThemef5f5f5;
-        } else {
-            QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row-1];
-            cell.rankLabel.hidden = indexPath.row < 4;
-            cell.rankImgView.hidden = indexPath.row >= 4;
-            cell.rankLabel.text = kFormat(@"%ld", indexPath.row);
-            cell.rankImgView.image = kImageMake(kFormat(@"rank_%ld", indexPath.row));
-            [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
-            cell.nameLabel.text = model.name;
-            cell.sloganLabel.text = model.slogan ?: @"暂无";
-            cell.likeLabel.text = kFormat(@"%ld", model.likeCount);
-        }
-    } else {
-        QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row];
-        cell.rankLabel.hidden = indexPath.row < 3;
-        cell.rankImgView.hidden = indexPath.row >= 3;
-        cell.rankLabel.text = kFormat(@"%ld", indexPath.row+1);
-        cell.rankImgView.image = kImageMake(kFormat(@"rank_%ld", indexPath.row+1));
-        [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
-        cell.nameLabel.text = model.name;
-        cell.sloganLabel.text = model.slogan ?: @"暂无";
-        cell.likeLabel.text = kFormat(@"%ld", model.likeCount);
-    }
+    QHWConsultantModel *model = self.systemService.consultantArray[indexPath.row];
+    cell.rankLabel.hidden = indexPath.row < 3;
+    cell.rankImgView.hidden = indexPath.row >= 3;
+    cell.rankLabel.text = kFormat(@"%ld", indexPath.row+1);
+    cell.rankImgView.image = kImageMake(kFormat(@"rank_%ld", indexPath.row+1));
+    [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+    cell.nameLabel.text = model.name;
+    cell.sloganLabel.text = model.slogan ?: @"暂无";
+    cell.likeLabel.text = kFormat(@"%ld", model.likeCount);
     return cell;
+}
+
+- (RankTableHeaderView *)rankTableHeaderView {
+    if (!_rankTableHeaderView) {
+        _rankTableHeaderView = [[RankTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 100)];
+    }
+    return _rankTableHeaderView;
 }
 
 - (QHWSystemService *)systemService {
@@ -115,6 +102,31 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+@end
+
+@implementation RankTableHeaderView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self == [super initWithFrame:frame]) {
+        self.rankKeyLabel = UILabel.labelFrame(CGRectMake(0, 25, (self.width-100)/2.0, 20)).labelText(@"排名").labelFont(kFontTheme14).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);
+        [self addSubview:self.rankKeyLabel];
+        self.rankValueLabel = UILabel.labelFrame(CGRectMake(0, self.rankKeyLabel.bottom+5, self.rankKeyLabel.width, 25)).labelFont(kMediumFontTheme18).labelTitleColor(kColorThemeff7919).labelTextAlignment(NSTextAlignmentCenter);
+        [self addSubview:self.rankValueLabel];
+        
+        
+        _avatarImgView = UIImageView.ivFrame(CGRectMake(self.rankKeyLabel.right + 30, 20, 40, 40)).ivCornerRadius(20).ivBorderColor(kColorThemeeee);
+        [self addSubview:_avatarImgView];
+        _nameLabel = UILabel.labelFrame(CGRectMake(self.rankKeyLabel.right, _avatarImgView.bottom+5, 100, 20)).labelFont(kFontTheme14).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);
+        [self addSubview:_nameLabel];
+        
+        self.likeNameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+30, self.rankKeyLabel.y, self.rankKeyLabel.width, 20)).labelText(@"人气").labelFont(kFontTheme14).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);
+        [self addSubview:self.likeNameLabel];
+        self.likeLabel = UILabel.labelFrame(CGRectMake(self.likeNameLabel.left, self.rankValueLabel.y, self.rankKeyLabel.width, 25)).labelFont(kMediumFontTheme18).labelTitleColor(kColorThemeff7919).labelTextAlignment(NSTextAlignmentCenter);
+        [self addSubview:self.likeLabel];
+    }
+    return self;
+}
 
 @end
 
