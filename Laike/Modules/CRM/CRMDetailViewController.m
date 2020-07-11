@@ -73,6 +73,7 @@
         self.kNavigationView.title = self.crmService.crmModel.realName;
         self.tableHeaderView.crmModel = self.crmService.crmModel;
         self.tableHeaderView.height = self.crmService.tableHeaderViewHeight;
+        self.btmView.mobilePhone = self.crmService.crmModel.mobileNumber;
         [self.tableView reloadData];
     }];
 }
@@ -282,7 +283,7 @@
 }
 
 - (void)clickContactBtn {
-    
+    kCallTel(self.mobilePhone);
 }
 
 @end

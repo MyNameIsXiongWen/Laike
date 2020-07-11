@@ -296,6 +296,10 @@
 - (MainBusinessDetailBottomView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
+        WEAKSELF
+        _bottomView.rightOperationBlock = ^{
+            [weakSelf rightNavBtnAction:nil];
+        };
         [self.view addSubview:_bottomView];
     }
     return _bottomView;

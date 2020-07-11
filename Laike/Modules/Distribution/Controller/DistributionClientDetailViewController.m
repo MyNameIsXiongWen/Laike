@@ -122,7 +122,7 @@
             
         };
         _btmView.clickRightBtnBlock = ^{
-            
+            kCallTel(weakSelf.distributionService.clientDetailModel.mobileNumber);
         };
     }
     return _btmView;

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VisitorDetailBottomView : UIView
 
 @property (nonatomic, strong) UIButton *contactBtn;
-@property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, copy) NSString *mobilePhone;
 
 @end
 

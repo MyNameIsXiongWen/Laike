@@ -7,7 +7,7 @@
 //
 
 #import "CommunityDetailViewController.h"
-#import "CommunityDetailBottomView.h"
+#import "MainBusinessDetailBottomView.h"
 #import "CommentListCell.h"
 #import "CommunityDetailRecommendTableViewCell.h"
 #import "CommunityDetailService.h"
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CommunityArticleDetailHeaderView *articlelHeaderView;
 @property (nonatomic, strong) CommunityContentDetailHeaderView *contentHeaderView;
-@property (nonatomic, strong) CommunityDetailBottomView *bottomView;
+@property (nonatomic, strong) MainBusinessDetailBottomView *bottomView;
 
 @property (nonatomic, strong) dispatch_group_t group;
 @property (nonatomic, strong) CommunityDetailService *service;
@@ -107,24 +107,24 @@
             self.articlelHeaderView.autherView.tagImgView.image = kImageMake(@"v_agency");
             self.articlelHeaderView.autherView.tagImgView.hidden = NO;
             [self.articlelHeaderView.wkWebView loadHTMLString:self.service.detailModel.content baseURL:nil];
-            self.articlelHeaderView.autherView.attentionButton.selected = self.service.detailModel.concernStatus == 2;
-            self.articlelHeaderView.autherView.attentionButton.hidden = [self.service.detailModel.bottomData.subjectId isEqualToString:UserModel.shareUser.id];
-            if (self.articlelHeaderView.autherView.attentionButton.selected) {
-                self.articlelHeaderView.autherView.attentionButton.backgroundColor = kColorTheme999;
-            } else {
-                self.articlelHeaderView.autherView.attentionButton.backgroundColor = kColorThemefb4d56;
-            }
+//            self.articlelHeaderView.autherView.attentionButton.selected = self.service.detailModel.concernStatus == 2;
+//            self.articlelHeaderView.autherView.attentionButton.hidden = [self.service.detailModel.bottomData.subjectId isEqualToString:UserModel.shareUser.id];
+//            if (self.articlelHeaderView.autherView.attentionButton.selected) {
+//                self.articlelHeaderView.autherView.attentionButton.backgroundColor = kColorTheme999;
+//            } else {
+//                self.articlelHeaderView.autherView.attentionButton.backgroundColor = kColorThemefb4d56;
+//            }
         } else {
             self.kNavigationView.title = self.service.detailModel.title ?: @"海外圈";
             self.contentHeaderView.autherView.nameLabel.text = self.service.detailModel.subjectData.subjectName;
             [self.contentHeaderView.autherView.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(self.service.detailModel.subjectData.subjectHead)]];
-            self.contentHeaderView.autherView.attentionButton.selected = self.service.detailModel.concernStatus == 2;
-            self.contentHeaderView.autherView.attentionButton.hidden = [self.service.detailModel.subjectData.subjectId isEqualToString:UserModel.shareUser.id];
-            if (self.contentHeaderView.autherView.attentionButton.selected) {
-                self.contentHeaderView.autherView.attentionButton.backgroundColor = kColorTheme999;
-            } else {
-                self.contentHeaderView.autherView.attentionButton.backgroundColor = kColorThemefb4d56;
-            }
+//            self.contentHeaderView.autherView.attentionButton.selected = self.service.detailModel.concernStatus == 2;
+//            self.contentHeaderView.autherView.attentionButton.hidden = [self.service.detailModel.subjectData.subjectId isEqualToString:UserModel.shareUser.id];
+//            if (self.contentHeaderView.autherView.attentionButton.selected) {
+//                self.contentHeaderView.autherView.attentionButton.backgroundColor = kColorTheme999;
+//            } else {
+//                self.contentHeaderView.autherView.attentionButton.backgroundColor = kColorThemefb4d56;
+//            }
             self.contentHeaderView.autherView.tagImgView.image = kImageMake(@"v_expert");
             self.contentHeaderView.autherView.tagImgView.hidden = self.service.detailModel.subjectData.subjectType != 1;
             if (self.service.detailModel.title.length > 0) {
@@ -142,11 +142,12 @@
                 self.contentHeaderView.cycleScrollView.imgArray = self.service.detailModel.filePathList;
             }
         }
-        self.bottomView.commentBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.commentCount);
-        self.bottomView.praiseBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.likeCount);
-        self.bottomView.collectBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.collectionCount);
-        self.bottomView.collectBtn.selected = self.service.detailModel.collectionStatus == 2;
-        self.bottomView.praiseBtn.selected = self.service.detailModel.likeStatus == 2;
+        self.bottomView.detailModel = self.service.detailModel;
+//        self.bottomView.commentBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.commentCount);
+//        self.bottomView.praiseBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.likeCount);
+//        self.bottomView.collectBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.collectionCount);
+//        self.bottomView.collectBtn.selected = self.service.detailModel.collectionStatus == 2;
+//        self.bottomView.praiseBtn.selected = self.service.detailModel.likeStatus == 2;
         dispatch_group_leave(self.group);
     }];
 }
@@ -155,7 +156,7 @@
     dispatch_group_enter(self.group);
     [self.commentService getCommentListRequestComplete:^{
         dispatch_group_leave(self.group);
-        self.bottomView.commentBtn.btnBadgeLabel.text = kFormat(@"%ld", self.commentService.itemPageModel.pagination.total);
+//        self.bottomView.commentBtn.btnBadgeLabel.text = kFormat(@"%ld", self.commentService.itemPageModel.pagination.total);
         [self.tableView.mj_footer endRefreshing];
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.commentService.itemPageModel];
         for (QHWCommentModel *model in self.commentService.dataArray) {
@@ -298,7 +299,7 @@
 #pragma mark ------------UI-------------
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight-50-kBottomDangerHeight) Style:UITableViewStyleGrouped Object:self];
+        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight-kBottomDangerHeight-self.bottomView.height) Style:UITableViewStyleGrouped Object:self];
         if (self.communityType == 1) {
             _tableView.tableHeaderView = self.articlelHeaderView;
         } else {
@@ -321,10 +322,13 @@
         _articlelHeaderView.wkWebView.navigationDelegate = self;
         WEAKSELF
         _articlelHeaderView.autherView.clickLogoBlock = ^{
-            [weakSelf clickAutherViewLogo];
+//            [weakSelf clickAutherViewLogo];
         };
         _articlelHeaderView.autherView.clickAttentionBlock = ^{
             [weakSelf clickAttentionWithButton:weakSelf.articlelHeaderView.autherView.attentionButton];
+        };
+        _articlelHeaderView.autherView.clickShareBlock = ^{
+            [weakSelf rightNavBtnAction:nil];
         };
     }
     return _articlelHeaderView;
@@ -370,39 +374,54 @@
         _contentHeaderView.autherView.clickAttentionBlock = ^{
             [weakSelf clickAttentionWithButton:weakSelf.contentHeaderView.autherView.attentionButton];
         };
+        _contentHeaderView.autherView.clickShareBlock = ^{
+            [weakSelf rightNavBtnAction:nil];
+        };
     }
     return _contentHeaderView;
 }
 
-- (CommunityDetailBottomView *)bottomView {
+- (MainBusinessDetailBottomView *)bottomView {
     if (!_bottomView) {
-        _bottomView = [[CommunityDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-50, kScreenW, 50)];
+        _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
         WEAKSELF
-        _bottomView.clickCommentBlock = ^{
-            if (weakSelf.communityType == 1) {
-                weakSelf.commentService.commentType = CommentTypeArticleAdd;
-            } else {
-                weakSelf.commentService.commentType = CommentTypeContentAdd;
-            }
-            [weakSelf.commentService showCommentKeyBoardWithCommentName:@""];
-        };
-        _bottomView.clickAllCommentBlock = ^{
-            AllCommentViewController *vc = AllCommentViewController.new;
-            vc.fileType = weakSelf.service.detailModel.fileType;
-            vc.communityType = weakSelf.communityType;
-            vc.communityId = weakSelf.communityId;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        };
-        _bottomView.clickLikeBlock = ^{
-            [weakSelf clickLikeRequest];
-        };
-        _bottomView.clickCollectBlock = ^{
-            [weakSelf clickCollectRequest];
+        _bottomView.rightOperationBlock = ^{
+            [weakSelf rightNavBtnAction:nil];
         };
         [self.view addSubview:_bottomView];
     }
     return _bottomView;
 }
+
+//- (CommunityDetailBottomView *)bottomView {
+//    if (!_bottomView) {
+//        _bottomView = [[CommunityDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-50, kScreenW, 50)];
+//        WEAKSELF
+//        _bottomView.clickCommentBlock = ^{
+//            if (weakSelf.communityType == 1) {
+//                weakSelf.commentService.commentType = CommentTypeArticleAdd;
+//            } else {
+//                weakSelf.commentService.commentType = CommentTypeContentAdd;
+//            }
+//            [weakSelf.commentService showCommentKeyBoardWithCommentName:@""];
+//        };
+//        _bottomView.clickAllCommentBlock = ^{
+//            AllCommentViewController *vc = AllCommentViewController.new;
+//            vc.fileType = weakSelf.service.detailModel.fileType;
+//            vc.communityType = weakSelf.communityType;
+//            vc.communityId = weakSelf.communityId;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+//        };
+//        _bottomView.clickLikeBlock = ^{
+//            [weakSelf clickLikeRequest];
+//        };
+//        _bottomView.clickCollectBlock = ^{
+//            [weakSelf clickCollectRequest];
+//        };
+//        [self.view addSubview:_bottomView];
+//    }
+//    return _bottomView;
+//}
 
 - (CommunityDetailService *)service {
     if (!_service) {
@@ -432,8 +451,8 @@
             } else {
                 self.service.detailModel.likeCount--;
             }
-            self.bottomView.praiseBtn.selected = (likeStatus == 2);
-            self.bottomView.praiseBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.likeCount);
+//            self.bottomView.praiseBtn.selected = (likeStatus == 2);
+//            self.bottomView.praiseBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.likeCount);
         }
     }];
 }
@@ -448,8 +467,8 @@
             } else {
                 self.service.detailModel.collectionCount--;
             }
-            self.bottomView.collectBtn.selected = (collectStatus == 2);
-            self.bottomView.collectBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.collectionCount);
+//            self.bottomView.collectBtn.selected = (collectStatus == 2);
+//            self.bottomView.collectBtn.btnBadgeLabel.text = kFormat(@"%ld", self.service.detailModel.collectionCount);
         }
     }];
 }
@@ -629,11 +648,17 @@
             make.centerY.equalTo(self.logoImgView);
             make.right.mas_equalTo(-75);
         }];
-        [self.attentionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        [self.attentionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.mas_equalTo(-15);
+//            make.centerY.equalTo(self.logoImgView);
+//            make.width.mas_equalTo(50);
+//            make.height.mas_equalTo(20);
+//        }];
+        [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-15);
             make.centerY.equalTo(self.logoImgView);
-            make.width.mas_equalTo(50);
-            make.height.mas_equalTo(20);
+            make.width.mas_equalTo(80);
+            make.height.mas_equalTo(22);
         }];
     }
     return self;
@@ -648,6 +673,12 @@
 - (void)clickStoreLogo {
     if (self.clickLogoBlock) {
         self.clickLogoBlock();
+    }
+}
+
+- (void)clickShareBtn {
+    if (self.clickShareBlock) {
+        self.clickShareBlock();
     }
 }
 
@@ -685,6 +716,14 @@
         [self addSubview:_attentionButton];
     }
     return _attentionButton;
+}
+
+- (UIButton *)shareBtn {
+    if (!_shareBtn) {
+        _shareBtn = UIButton.btnInit().btnCornerRadius(11).btnTitle(@"微信推广").btnFont(kFontTheme11).btnTitleColor(kColorTheme444).btnImage(kImageMake(@"")).btnBorderColor(kColorTheme444).btnAction(self, @selector(clickShareBtn));
+        [self addSubview:_shareBtn];
+    }
+    return _shareBtn;
 }
 
 @end

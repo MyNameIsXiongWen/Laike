@@ -39,6 +39,7 @@
         if ([self.tableView.mj_footer isRefreshing]) {
             [self.tableView.mj_footer endRefreshing];
         }
+        self.btmView.mobilePhone = self.cardService.cardDetailModel.mobileNumber;
         self.tableHeaderView.cardModel = self.cardService.cardDetailModel;
         [self.tableView reloadData];
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.cardService.itemPageModel];
@@ -127,7 +128,6 @@
 - (VisitorDetailBottomView *)btmView {
     if (!_btmView) {
         _btmView = [[VisitorDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
-        
     }
     return _btmView;
 }
@@ -155,7 +155,7 @@
 }
 
 - (void)clickContactBtn {
-    
+    kCallTel(self.mobilePhone);
 }
 
 @end
