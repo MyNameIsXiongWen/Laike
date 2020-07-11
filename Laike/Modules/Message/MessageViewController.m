@@ -10,11 +10,13 @@
 #import "MessageTableViewCell.h"
 #import <HyphenateLite/HyphenateLite.h>
 #import "UserModel.h"
+#import "MessageModel.h"
 
 @interface MessageViewController () <UITableViewDelegate, UITableViewDataSource, EMChatManagerDelegate>
 
 @property (nonatomic, strong) SearchView *searchView;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *dataArray;
 
 @end
 
@@ -63,20 +65,29 @@
 
 #pragma mark ------------UITableViewDelegate-------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(MessageTableViewCell.class)];
-    cell.nameLabel.text = @"系统消息";
-    cell.contentLabel.text = @"系统消息";
+    MessageModel *model = self.dataArray[indexPath.row];
+    cell.nameLabel.text = model.title;
+    cell.contentLabel.text = model.msg;
     cell.ringImgView.hidden = YES;
-    cell.redView.hidden = UserModel.shareUser.unreadMsgCount == 0;
+    if (indexPath.row == 1) {
+        cell.redView.hidden = UserModel.shareUser.unreadMsgCount == 0;
+    } else {
+        cell.redView.hidden = YES;
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:NSClassFromString(@"SystemMessageViewController").new animated:YES];
+    if (indexPath.row == 1) {
+        [self.navigationController pushViewController:NSClassFromString(@"SystemMessageViewController").new animated:YES];
+    } else {
+        [self.navigationController pushViewController:NSClassFromString(@"OfficialMsgViewController").new animated:YES];
+    }
 }
 
 /*
@@ -109,6 +120,21 @@
         [self.view addSubview:_tableView];
     }
     return _tableView;
+}
+
+- (NSArray *)dataArray {
+    if (!_dataArray) {
+        MessageModel *msgModel1 = MessageModel.new;
+        msgModel1.title = @"官方推荐";
+        msgModel1.msg = @"官方推荐";
+        
+        MessageModel *msgModel2 = MessageModel.new;
+        msgModel2.title = @"系统消息";
+        msgModel2.msg = @"系统消息";
+        
+        _dataArray = @[msgModel1, msgModel2];
+    }
+    return _dataArray;
 }
 
 @end

@@ -19,6 +19,7 @@
 		185A630224A9922800E7E75D /* RichTextWithTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */; };
 		185CC98824B6B7310004A20E /* SearchContentLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 185CC98624B6B7310004A20E /* SearchContentLayout.m */; };
 		185CC98B24B729780004A20E /* QSchoolShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185CC98A24B729780004A20E /* QSchoolShareView.m */; };
+		185CC98E24B991460004A20E /* OfficialMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185CC98D24B991460004A20E /* OfficialMsgViewController.m */; };
 		185D448924AC84DE00CD3A00 /* CRMAddCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */; };
 		185D448D24AC973400CD3A00 /* MineTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D448C24AC973400CD3A00 /* MineTableHeaderView.m */; };
 		185D449424AC9C7A00CD3A00 /* MineDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D449324AC9C7A00CD3A00 /* MineDataTableViewCell.m */; };
@@ -309,6 +310,8 @@
 		185CC98724B6B7310004A20E /* SearchContentLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchContentLayout.h; sourceTree = "<group>"; };
 		185CC98924B729780004A20E /* QSchoolShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QSchoolShareView.h; sourceTree = "<group>"; };
 		185CC98A24B729780004A20E /* QSchoolShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSchoolShareView.m; sourceTree = "<group>"; };
+		185CC98C24B991460004A20E /* OfficialMsgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OfficialMsgViewController.h; sourceTree = "<group>"; };
+		185CC98D24B991460004A20E /* OfficialMsgViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OfficialMsgViewController.m; sourceTree = "<group>"; };
 		185D448724AC84DE00CD3A00 /* CRMAddCustomerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMAddCustomerViewController.h; sourceTree = "<group>"; };
 		185D448824AC84DE00CD3A00 /* CRMAddCustomerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMAddCustomerViewController.m; sourceTree = "<group>"; };
 		185D448B24AC973400CD3A00 /* MineTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineTableHeaderView.h; sourceTree = "<group>"; };
@@ -1126,6 +1129,8 @@
 				185EC9C824A096B600DCAB2C /* RelatedToMeViewController.m */,
 				185EC9BC24A096B400DCAB2C /* SystemMessageViewController.h */,
 				185EC9BB24A096B400DCAB2C /* SystemMessageViewController.m */,
+				185CC98C24B991460004A20E /* OfficialMsgViewController.h */,
+				185CC98D24B991460004A20E /* OfficialMsgViewController.m */,
 				185EC9BD24A096B500DCAB2C /* Cell */,
 				185EC9C324A096B500DCAB2C /* MessageModel.h */,
 				185EC9C224A096B500DCAB2C /* MessageModel.m */,
@@ -1521,8 +1526,8 @@
 			isa = PBXGroup;
 			children = (
 				185EC9BE24A096B500DCAB2C /* MessageTableViewCell.h */,
-				185EC9BF24A096B500DCAB2C /* RelatedToMeTableViewCell.h */,
 				185EC9C024A096B500DCAB2C /* MessageTableViewCell.m */,
+				185EC9BF24A096B500DCAB2C /* RelatedToMeTableViewCell.h */,
 				185EC9C124A096B500DCAB2C /* RelatedToMeTableViewCell.m */,
 			);
 			path = Cell;
@@ -2125,6 +2130,7 @@
 				185EC9CA24A096B600DCAB2C /* MessageTableViewCell.m in Sources */,
 				185E156524AF2D8600F15A90 /* SelectCountryView.m in Sources */,
 				185FDF1224A733130043FF36 /* CommunityPublishService.m in Sources */,
+				185CC98E24B991460004A20E /* OfficialMsgViewController.m in Sources */,
 				185EC9CD24A096B600DCAB2C /* MessageSearchViewController.m in Sources */,
 				185EC96324A091BE00DCAB2C /* QHWCategoryModel.m in Sources */,
 				185EC96F24A091BE00DCAB2C /* QHWPhotoBrowser.m in Sources */,
