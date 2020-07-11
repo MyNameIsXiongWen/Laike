@@ -25,7 +25,7 @@
     if (itemSelected) {
         self.titleBtn.layer.borderColor = kColorTheme21a8ff.CGColor;
         [self.titleBtn setTitleColor:kColorTheme21a8ff forState:UIControlStateSelected];
-        [self.titleBtn setBackgroundColor:[UIColor colorWithRed:33 green:168 blue:255 alpha:0.3]];
+        [self.titleBtn setBackgroundColor:kColor(33, 168, 255, 0.3)];
     } else {
         self.titleBtn.layer.borderColor = kColorTheme707070.CGColor;
         [self.titleBtn setBackgroundColor:kColorThemefff];

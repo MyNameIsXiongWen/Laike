@@ -36,7 +36,7 @@ static NSString *const ServiceHotLine = @"400-877-1008";
 }
 
 - (void)textFieldValueChanged:(UITextField *)textField {
-    self.confirmBtn.backgroundColor = textField.text.length == 0 ? [UIColor colorWithRed:33 green:168 blue:255 alpha:0.3] : kColorTheme21a8ff;
+    self.confirmBtn.backgroundColor = textField.text.length == 0 ? kColor(33, 168, 255, 0.3) : kColorTheme21a8ff;
     self.confirmBtn.userInteractionEnabled = textField.text.length > 0;
 }
 
