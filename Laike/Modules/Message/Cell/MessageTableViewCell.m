@@ -73,7 +73,7 @@
 #pragma mark ------------UI-------------
 - (UIImageView *)logoImgView {
     if (!_logoImgView) {
-        _logoImgView = UIImageView.ivInit().ivCornerRadius(25).ivImage(kImageMake(@"message_notification_system"));
+        _logoImgView = UIImageView.ivInit().ivCornerRadius(25);
         [self.contentView addSubview:_logoImgView];
     }
     return _logoImgView;

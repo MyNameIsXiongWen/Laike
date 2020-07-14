@@ -71,6 +71,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(MessageTableViewCell.class)];
     MessageModel *model = self.dataArray[indexPath.row];
+    cell.logoImgView.image = kImageMake(model.coverPath);
     cell.nameLabel.text = model.title;
     cell.contentLabel.text = model.msg;
     cell.ringImgView.hidden = YES;
@@ -127,10 +128,12 @@
         MessageModel *msgModel1 = MessageModel.new;
         msgModel1.title = @"官方推荐";
         msgModel1.msg = @"官方推荐";
+        msgModel1.coverPath = @"message_official";
         
         MessageModel *msgModel2 = MessageModel.new;
         msgModel2.title = @"系统消息";
         msgModel2.msg = @"系统消息";
+        msgModel2.coverPath = @"message_system";
         
         _dataArray = @[msgModel1, msgModel2];
     }

@@ -409,6 +409,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL selectable = [self.btnDic[@"selectable"] boolValue];
+    if (!selectable) {
+        return;
+    }
     BOOL mutable = [self.btnDic[@"mutable"] boolValue];
     NSArray *array = self.btnDic[@"data"];
     FilterCellModel *model = array[indexPath.row];

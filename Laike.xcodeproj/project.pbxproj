@@ -402,7 +402,7 @@
 		185E15CC24B33E0300F15A90 /* MyServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyServiceViewController.m; sourceTree = "<group>"; };
 		185E15CD24B33E0300F15A90 /* MyServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyServiceViewController.h; sourceTree = "<group>"; };
 		185E15CE24B33E0300F15A90 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
-		185EC81224A08FD700DCAB2C /* 来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		185EC81224A08FD700DCAB2C /* 去海外来客.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "去海外来客.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC81524A08FD700DCAB2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		185EC81624A08FD700DCAB2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		185EC81B24A08FD700DCAB2C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -940,7 +940,7 @@
 		185EC81324A08FD700DCAB2C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				185EC81224A08FD700DCAB2C /* 来客.app */,
+				185EC81224A08FD700DCAB2C /* 去海外来客.app */,
 				185EC82D24A08FD800DCAB2C /* LaikeTests.xctest */,
 				185EC83824A08FD800DCAB2C /* LaikeUITests.xctest */,
 			);
@@ -1927,7 +1927,7 @@
 			);
 			name = Laike;
 			productName = Laike;
-			productReference = 185EC81224A08FD700DCAB2C /* 来客.app */;
+			productReference = 185EC81224A08FD700DCAB2C /* 去海外来客.app */;
 			productType = "com.apple.product-type.application";
 		};
 		185EC82C24A08FD800DCAB2C /* LaikeTests */ = {
@@ -2535,7 +2535,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
-				PRODUCT_NAME = "来客";
+				PRODUCT_NAME = "去海外来客";
 				PROVISIONING_PROFILE_SPECIFIER = manager_dev_profile;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2561,7 +2561,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
-				PRODUCT_NAME = "来客";
+				PRODUCT_NAME = "去海外来客";
 				PROVISIONING_PROFILE_SPECIFIER = manager_dev_profile;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

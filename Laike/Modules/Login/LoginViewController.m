@@ -161,7 +161,7 @@ static NSInteger const CodeCountTime = 60;
         UIView *line = UIView.viewFrame(CGRectMake(15, _codeTextField.bottom, kScreenW-30, 0.5)).bkgColor(kColorThemeeee);
         [self.view addSubview:line];
         
-        self.tipLabel = UILabel.labelFrame(CGRectMake(15, _codeTextField.bottom+18, kScreenW-30, 17)).labelText(@"点击注册登录表示您已阅读并同意来客").labelFont(kFontTheme12).labelTitleColor(kColorTheme999);
+        self.tipLabel = UILabel.labelFrame(CGRectMake(15, _codeTextField.bottom+18, kScreenW-30, 17)).labelText(@"点击注册登录表示您已阅读并同意去海外来客").labelFont(kFontTheme12).labelTitleColor(kColorTheme999);
         [self.view addSubview:self.tipLabel];
     }
     return _codeTextField;

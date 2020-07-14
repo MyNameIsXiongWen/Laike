@@ -10,7 +10,7 @@
 #define VendorMacro_h
 
 
-#define kAppStoreAppId @"1489900641"
+#define kAppStoreAppId @"1523403720"
 
 //微信开放平台
 #define kWechatAppKey @"wx6fcdb76c2ad98bb6"//微信key

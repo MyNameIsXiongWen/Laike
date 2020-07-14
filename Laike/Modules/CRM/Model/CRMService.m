@@ -304,11 +304,13 @@
     [self.tableViewDataArray addObject:genderModel];
     
     BOOL disable = NO;
+    BOOL selectable = YES;
     if (self.customerId.length > 0) {
         disable = YES;
     } else {
         if (self.crmModel.mobileNumber.length > 0) {
             disable = YES;
+            selectable = NO;
         }
     }
     QHWBaseModel *phoneModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerTFViewCell" Height:60 Data:@{@"title": @"* 手机", @"placeholder": @"请输入客户手机号", @"data": self.crmModel, @"identifier": @"mobileNumber", @"disable": @(disable)}];
@@ -320,7 +322,7 @@
     QHWBaseModel *remarkModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerRemarkCell" Height:165 Data:self.crmModel];
     [self.tableViewDataArray addObject:remarkModel];
     
-    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source"}];
+    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source", @"selectable": @(selectable)}];
     [self.tableViewDataArray addObject:sourceModel];
     
     QHWBaseModel *crmLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.followStatusList] Data:@{@"title": @"客户等级", @"mutable": @(NO), @"data": self.followStatusList, @"model": self.crmModel, @"identifier": @"crmLevel"}];
