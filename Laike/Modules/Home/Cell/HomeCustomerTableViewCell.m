@@ -45,7 +45,7 @@
         _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
         _headerView.tagImgView.image = kImageMake(@"home_crm_data");
         _headerView.tagImgWidth = 20;
-        _headerView.titleLabel.text = @"客户管理";
+        _headerView.titleLabel.text = @"CRM";
         _headerView.moreBtn.hidden = NO;
         _headerView.moreBtn.userInteractionEnabled = NO;
     }
@@ -55,11 +55,8 @@
 - (UserDataView *)userDataView {
     if (!_userDataView) {
         _userDataView = [[UserDataView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-30, 45)];
+        _userDataView.countColor = kColorTheme21a8ff;
         _userDataView.userInteractionEnabled = NO;
-        WEAKSELF
-        _userDataView.didSelectedItemBlock = ^(NSInteger index) {
-            
-        };
     }
     return _userDataView;
 }

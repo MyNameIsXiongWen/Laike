@@ -35,13 +35,11 @@
     self.kNavigationView.hidden = YES;
     QHWNavgationView *tempNavigationView = [[QHWNavgationView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTopBarHeight)];
     tempNavigationView.leftBtn.hidden = !self.interval;
-    tempNavigationView.title = @"客户管理";
-    [tempNavigationView.rightBtn setTitle:@"+" forState:0];
-//    [tempNavigationView.rightBtn setImage:kImageMake(@"customize_add") forState:0];
+    tempNavigationView.title = @"CRM";
+    tempNavigationView.rightBtn.btnTitle(@"+").btnFont([UIFont systemFontOfSize:30 weight:UIFontWeightThin]).btnAction(self, @selector(rightNavBtnAction:));
     [tempNavigationView.leftBtn setImage:kImageMake(@"global_back") forState:0];
     [tempNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
     [tempNavigationView.leftBtn addTarget:self action:@selector(leftNavBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [tempNavigationView.rightBtn addTarget:self action:@selector(rightNavBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [tempNavigationView.rightAnotherBtn addTarget:self action:@selector(rightAnthorNavBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:tempNavigationView];
     
@@ -72,7 +70,7 @@
 
 - (void)getMainData {
     [self.crmService getHomeReportCountDataWithComplete:^{
-        self.tabScrollView.dataArray = @[kFormat(@"CRM（%ld）", self.crmService.crmCount), kFormat(@"获客（%ld）", self.crmService.clueCount)];
+        self.tabScrollView.dataArray = @[kFormat(@"客户（%ld）", self.crmService.crmCount), kFormat(@"线索（%ld）", self.crmService.clueCount)];
     }];
 }
 
@@ -127,7 +125,7 @@
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.dataArray = @[@"CRM", @"获客"];
+        _tabScrollView.dataArray = @[@"客户", @"线索"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;

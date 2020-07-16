@@ -10,6 +10,7 @@
 #import "QHWImageViewCell.h"
 #import "QHWImageModel.h"
 #import "QHWCellBottomShareView.h"
+#import "UserModel.h"
 
 #define itemWidth (kScreenW-30-10)/3
 @interface QHWContentTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -115,8 +116,8 @@
     _contentModel = contentModel;
     self.collectionView.hidden = contentModel.filePathList.count == 0;
     
-    self.nameLabel.text = contentModel.consultName;
-    [self.headImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(contentModel.consultHead)] placeholderImage:kPlaceHolderImage_Avatar];
+    self.nameLabel.text = UserModel.shareUser.realName;
+    [self.headImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(UserModel.shareUser.headPath)] placeholderImage:kPlaceHolderImage_Avatar];
     self.contentTitleLabel.text = contentModel.title;
     self.contentSubtitleLabel.text = contentModel.content;
     self.timeLabel.text = contentModel.createTime;

@@ -59,7 +59,7 @@
     [self addSubview:self.bkgView];
     
     self.avatarImgView = UIImageView.ivFrame(CGRectMake(15, 15, 50, 50)).ivCornerRadius(25).ivBorderColor(kColorTheme2a303c);
-    self.nameImgView = UIImageView.ivFrame(CGRectMake(self.avatarImgView.right+15, 25, 110, 30));
+    self.nameImgView = UIImageView.ivFrame(CGRectMake(self.avatarImgView.right-15, 25, 200, 30)).ivImage(kImageMake(@"share_school"));
     [self.bkgView addSubview:self.avatarImgView];
     [self.bkgView addSubview:self.nameImgView];
     UIButton *closeBtn = UIButton.btnFrame(CGRectMake(self.bkgView.width-50, 0, 50, 50)).btnImage(kImageMake(@"publish_close")).btnAction(self, @selector(dismiss));
@@ -132,9 +132,8 @@
     _schoolModel = schoolModel;
     [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(schoolModel.headPath)]];
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(schoolModel.coverPath)]];
-    self.nameImgView.image = kImageMake(@"share_article");
     self.titleLabel.text = schoolModel.title;
-    self.teacherLabel.text = schoolModel.name;
+    self.teacherLabel.text = kFormat(@"主讲导师：%@", schoolModel.name);
     self.courseVlueLabel.text = schoolModel.slogan;
     self.typeLabel.text = kFormat(@" %@ ", schoolModel.industryName);
     [self.titleLabel sizeToFit];

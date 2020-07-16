@@ -52,7 +52,7 @@
         return;
     }
     if (self.publishService.industryId == 0) {
-        [SVProgressHUD showInfoWithStatus:@"请选择分类"];
+        [SVProgressHUD showInfoWithStatus:@"尚未选择关联业务"];
         [self clickBusinessIndustryView];
         return;
     }
@@ -157,6 +157,11 @@
 
 - (void)clickProductIndustryView {
     [self.textView endEditing:YES];
+    if (!self.publishService.industryId) {
+        [SVProgressHUD showInfoWithStatus:@"尚未选择关联业务"];
+        [self clickBusinessIndustryView];
+        return;
+    }
     PublishRelateProductViewController *vc = PublishRelateProductViewController.new;
     [self.navigationController pushViewController:vc animated:YES];
 }

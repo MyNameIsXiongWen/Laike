@@ -79,6 +79,7 @@
 - (UserDataView *)userDataView {
     if (!_userDataView) {
         _userDataView = [[UserDataView alloc] initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-30, 45)];
+        _userDataView.countColor = kColorTheme21a8ff;
         _userDataView.userInteractionEnabled = NO;
     }
     return _userDataView;

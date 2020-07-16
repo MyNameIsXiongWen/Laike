@@ -11,6 +11,7 @@
 #import "CRMTopOperationView.h"
 #import "QHWTabScrollView.h"
 #import "QHWPageContentView.h"
+#import "UserModel.h"
 
 @interface CardViewController () <QHWPageContentViewDelegate>
 
@@ -76,7 +77,8 @@
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.dataArray = @[@"访客", @"获赞", @"粉丝"];
+        UserModel *user = UserModel.shareUser;
+        _tabScrollView.dataArray = @[kFormat(@"访客（%ld）", (long)user.visitCount), kFormat(@"获赞（%ld）", (long)user.likeCount), kFormat(@"粉丝（%ld）", (long)user.fansCount)];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;

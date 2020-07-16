@@ -16,6 +16,7 @@
 - (UIView *(^)(UIColor *bkgColor))bkgColor;
 
 - (void)showNodataView:(BOOL)show offsetY:(CGFloat)offsetY button:(UIButton *)button;
+- (void)showNodataView:(BOOL)show offsetY:(CGFloat)offsetY Text:(NSString *)text;
 - (void)showNoInternetView:(BOOL)show retry:(void (^)(void))retryBlock;
 
 -(void)addShadowColor:(UIColor *)color offset:(CGFloat )offset opacity:(CGFloat)opacity;

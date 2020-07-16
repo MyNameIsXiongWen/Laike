@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "来客开机画面.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "guanbi-2@2x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

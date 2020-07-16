@@ -48,7 +48,7 @@
     [_tableView registerClass:NSClassFromString(@"MineDataTableViewCell") forCellReuseIdentifier:@"MineDataTableViewCell"];
     self.tableViewDataArray = @[[[QHWBaseModel alloc] configModelIdentifier:@"MineDataTableViewCell"
                                                                      Height:100
-                                                                       Data:@[@{@"title": @"访问量", @"value": @(userModel.userCount)},
+                                                                       Data:@[@{@"title": @"访问量", @"value": @(userModel.visitCount)},
                                                                               @{@"title": @"咨询量", @"value": @(userModel.clueCount)},
                                                                               @{@"title": @"客户数", @"value": @(userModel.crmCount)},
                                                                               @{@"title": @"分销报备", @"value": @(userModel.distributionCount)}]]];

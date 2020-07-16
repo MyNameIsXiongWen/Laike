@@ -40,7 +40,7 @@
     WEAKSELF
     moreView.clickBtnBlock = ^(NSString * _Nonnull identifier) {
         if ([identifier isEqualToString:@"convertCRM"]) {
-            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:weakSelf.customerId RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
         } else if ([identifier isEqualToString:@"giveUpFollowUp"]) {
             [weakSelf showAlertLabelView];
         }

@@ -7,6 +7,7 @@
 //
 
 #import "CancelBindCompanyViewController.h"
+#import "QHWLabelAlertView.h"
 
 @interface CancelBindCompanyViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -25,13 +26,21 @@
 }
 
 - (IBAction)clickCancelBtn:(id)sender {
-    [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"2"} success:^(id responseObject) {
-        [SVProgressHUD showInfoWithStatus:@"解绑成功"];
-        [self.navigationController popViewControllerAnimated:YES];
-        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationBindSuccess object:nil];
-    } failure:^(NSError *error) {
-        
-    }];
+    QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+    [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认"];
+    alert.contentString = @"是否解除绑定?";
+    WEAKSELF
+    alert.confirmBlock = ^{
+        [alert dismiss];
+        [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"2"} success:^(id responseObject) {
+            [SVProgressHUD showInfoWithStatus:@"解绑成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+            [NSNotificationCenter.defaultCenter postNotificationName:kNotificationBindSuccess object:nil];
+        } failure:^(NSError *error) {
+            
+        }];
+    };
+    [alert show];
 }
 
 /*

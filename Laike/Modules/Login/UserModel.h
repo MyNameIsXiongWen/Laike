@@ -76,6 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger collectionCount;
 ///点赞数量
 @property (nonatomic, assign) NSInteger likeCount;
+@property (nonatomic, assign) NSInteger visitCount;
 ///关注数量
 @property (nonatomic, assign) NSInteger concernCount;
 ///咨询数量

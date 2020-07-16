@@ -44,7 +44,7 @@
 - (void)addDistributionClientRequestWithParams:(NSDictionary *)params {
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kDistributionClientAdd parameters:params success:^(id responseObject) {
-        [SVProgressHUD showInfoWithStatus:@"预约签单成功"];
+        [SVProgressHUD showInfoWithStatus:@"报备客户成功"];
         [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
     }];

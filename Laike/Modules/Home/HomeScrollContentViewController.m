@@ -53,7 +53,7 @@
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
         [self.tableView reloadData];
-        [self.tableView showNodataView:self.service.tableViewDataArray.count == 0 offsetY:0 button:nil];
+        [self.tableView showNodataView:self.service.tableViewDataArray.count == 0 offsetY:0 Text:@"您所在公司未发布产品"];
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.service.itemPageModel];
     }];
 }

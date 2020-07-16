@@ -409,8 +409,8 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    BOOL selectable = [self.btnDic[@"selectable"] boolValue];
-    if (!selectable) {
+    BOOL unselectable = [self.btnDic[@"unselectable"] boolValue];
+    if (unselectable) {
         return;
     }
     BOOL mutable = [self.btnDic[@"mutable"] boolValue];
@@ -618,12 +618,16 @@
         [self.contentView addSubview:self.nameLabel];
         
         self.deleteBtn = UIButton.btnInit().btnImage(kImageMake(@"global_delete")).btnAction(self, @selector(clickDeleteBtn));
+        self.deleteBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        self.deleteBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+        self.deleteBtn.userInteractionEnabled = NO;
         [self.contentView addSubview:self.deleteBtn];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
         }];
         [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.right.mas_equalTo(0);
+            make.top.mas_equalTo(3);
+            make.right.mas_equalTo(-3);
             make.width.height.mas_equalTo(20);
         }];
     }

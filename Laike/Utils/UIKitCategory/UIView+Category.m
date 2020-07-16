@@ -55,6 +55,21 @@
     }
 }
 
+- (void)showNodataView:(BOOL)show offsetY:(CGFloat)offsetY Text:(NSString *)text {
+    for (UIView *vvv in self.subviews) {
+        if ([vvv isKindOfClass:NoDataView.class]) {
+            [vvv removeFromSuperview];
+            break;
+        }
+    }
+    if (show) {
+        CGFloat height = 150 + 15;
+        NoDataView *nodataView = [[NoDataView alloc] initWithFrame:CGRectMake(0, (self.height-offsetY-height)/2+offsetY, self.width, height) Text:text Image:kImageNothing button:nil];
+        [self addSubview:nodataView];
+        [self bringSubviewToFront:nodataView];
+    }
+}
+
 - (void)showNoInternetView:(BOOL)show retry:(void (^)(void))retryBlock {
     if (retryBlock) {
         self.RetryBlock = retryBlock;

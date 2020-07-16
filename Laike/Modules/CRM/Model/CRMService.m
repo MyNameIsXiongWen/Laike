@@ -7,6 +7,7 @@
 //
 
 #import "CRMService.h"
+#import "UserModel.h"
 
 @implementation CRMService
 
@@ -212,6 +213,10 @@
 }
 
 - (void)CRMGiveUpTrackRequest {
+    if (UserModel.shareUser.bindStatus == 2) {
+        [SVProgressHUD showInfoWithStatus:@"请先绑定公司"];
+        return;
+    }
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kCRMGiveUpTrack parameters:@{@"id": self.customerId ?: @""} success:^(id responseObject) {
         [SVProgressHUD showInfoWithStatus:@"放弃跟进"];
@@ -227,6 +232,10 @@
 }
 
 - (void)advisoryGiveUpTrackRequest {
+    if (UserModel.shareUser.bindStatus == 2) {
+        [SVProgressHUD showInfoWithStatus:@"请先绑定公司"];
+        return;
+    }
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kCRMAdvisoryGiveUpTrack parameters:@{@"id": self.customerId ?: @""} success:^(id responseObject) {
         [SVProgressHUD showInfoWithStatus:@"放弃跟进"];
@@ -304,13 +313,13 @@
     [self.tableViewDataArray addObject:genderModel];
     
     BOOL disable = NO;
-    BOOL selectable = YES;
+    BOOL unselectable = NO;
     if (self.customerId.length > 0) {
         disable = YES;
     } else {
         if (self.crmModel.mobileNumber.length > 0) {
             disable = YES;
-            selectable = NO;
+            unselectable = YES;
         }
     }
     QHWBaseModel *phoneModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerTFViewCell" Height:60 Data:@{@"title": @"* 手机", @"placeholder": @"请输入客户手机号", @"data": self.crmModel, @"identifier": @"mobileNumber", @"disable": @(disable)}];
@@ -322,7 +331,7 @@
     QHWBaseModel *remarkModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerRemarkCell" Height:165 Data:self.crmModel];
     [self.tableViewDataArray addObject:remarkModel];
     
-    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source", @"selectable": @(selectable)}];
+    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source", @"unselectable": @(unselectable)}];
     [self.tableViewDataArray addObject:sourceModel];
     
     QHWBaseModel *crmLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.followStatusList] Data:@{@"title": @"客户等级", @"mutable": @(NO), @"data": self.followStatusList, @"model": self.crmModel, @"identifier": @"crmLevel"}];

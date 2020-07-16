@@ -99,7 +99,7 @@
         user.clueCount = self.homeModel.clueCount;
         user.distributionCount = self.homeModel.distributionCount;
         [user keyArchiveUserModel];
-        [self getHomeReportCountDataRequest];
+//        [self getHomeReportCountDataRequest];
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -116,6 +116,13 @@
             [array removeObjectAtIndex:1];
             dic[@"groupList"] = array;
             self.reportArray[i] = dic;
+            if (i == 2 && self.reportArray.count == 3) {
+                UserModel *user = UserModel.shareUser;
+                user.visitCount = [array[0][@"value"] integerValue];
+                user.likeCount = [array[1][@"value"] integerValue];
+                user.fansCount = [array[2][@"value"] integerValue];
+                [user keyArchiveUserModel];
+            }
         }
         complete();
     } failure:^(NSError *error) {
@@ -193,8 +200,8 @@
     
     QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCustomerTableViewCell"
                                                                       Height:140
-                                                                        Data:@[@{@"value": @(self.homeModel.clientData.crmCount), @"title": @"CRM"},
-                                                                               @{@"value": @(self.homeModel.clueCount), @"title": @"获客"}]];
+                                                                        Data:@[@{@"value": @(self.homeModel.clientData.crmCount), @"title": @"客户"},
+                                                                               @{@"value": @(self.homeModel.clueCount), @"title": @"线索"}]];
     [self.tableViewDataArray addObject:crmDataModel];
     
     QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeIconTableViewCell" Height:160 Data:self.iconArray];
@@ -205,7 +212,7 @@
         [self.tableViewDataArray addObject:schoolDataModel];
     }
     
-    self.headerViewTableHeight = 190-25;
+    self.headerViewTableHeight = 190-25 + 30;
     for (QHWBaseModel *baseModel in self.tableViewDataArray) {
         self.headerViewTableHeight += baseModel.height;
     }

@@ -32,9 +32,9 @@
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"消息";
     self.kNavigationView.titleLabel.textColor = kColorThemefff;
-    self.kNavigationView.backgroundColor = kColorThemefb4d56;
+    self.kNavigationView.backgroundColor = kColorTheme21a8ff;
     self.kNavigationView.leftBtn.hidden = YES;
-    [self.view addSubview:self.searchView];
+//    [self.view addSubview:self.searchView];
     [EMClient.sharedClient.chatManager addDelegate:self delegateQueue:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(loginSuccess) name:kNotificationHXLoginSuccess object:nil];
 }
@@ -114,7 +114,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [UICreateView initWithFrame:CGRectMake(0, self.searchView.bottom, kScreenW, kScreenH-kBottomBarHeight-self.searchView.bottom) Style:UITableViewStylePlain Object:self];
+        _tableView = [UICreateView initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kBottomBarHeight-kTopBarHeight) Style:UITableViewStylePlain Object:self];
         _tableView.rowHeight = 80;
         _tableView.backgroundColor = kColorThemef5f5f5;
         [_tableView registerClass:MessageTableViewCell.class forCellReuseIdentifier:NSStringFromClass(MessageTableViewCell.class)];

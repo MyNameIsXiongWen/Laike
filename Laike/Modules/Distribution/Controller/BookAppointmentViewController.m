@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.kNavigationView.title = @"预约签单";
+    self.kNavigationView.title = @"快速报备";
     [self.view addSubview:self.businessTextFieldView];
     [self.view addSubview:self.productTextFieldView];
     [self.view addSubview:self.nameTextFieldView];

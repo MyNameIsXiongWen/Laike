@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"客户进度";
-    [self.kNavigationView.rightBtn setTitle:@"+" forState:0];
+    self.kNavigationView.rightBtn.btnTitle(@"+").btnFont([UIFont systemFontOfSize:30 weight:UIFontWeightThin]);
 //    [self.kNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
 }
 

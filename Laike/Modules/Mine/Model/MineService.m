@@ -21,6 +21,8 @@
                               @"clueCount": @(user.clueCount),
                               @"crmCount": @(user.crmCount),
                               @"likeCount": @(user.likeCount),
+                              @"fansCount": @(user.fansCount),
+                              @"visitCount": @(user.visitCount),
                               @"distributionCount": @(user.distributionCount)};
         
         [UserModel clearUser];

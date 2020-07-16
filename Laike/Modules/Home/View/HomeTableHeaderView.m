@@ -117,6 +117,11 @@
         _tableView = [UICreateView initWithFrame:CGRectMake(0, 165, kScreenW, 0) Style:UITableViewStylePlain Object:self];
         _tableView.backgroundColor = UIColor.clearColor;
         _tableView.scrollEnabled = NO;
+        
+        UIView *footerView = UIView.viewFrame(CGRectMake(0, 0, kScreenW, 30));
+        [footerView addSubview:UILabel.labelFrame(CGRectMake(15, 10, 200, 20)).labelFont(kMediumFontTheme18).labelTitleColor(kColorTheme2a303c).labelText(@"推广获客")];
+        _tableView.tableFooterView = footerView;
+        
         [self addSubview:_tableView];
     }
     return _tableView;

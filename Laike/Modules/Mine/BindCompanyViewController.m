@@ -31,7 +31,7 @@ static NSString *const ServiceHotLine = @"400-877-1008";
     self.remindLabel.attributedText = attr;
     [self.remindLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:ServiceHotLine action:@selector(clickServiceHotLine)]];
     
-    self.nameTextField.text = @"2002180000";
+//    self.nameTextField.text = @"2002180000";
     [self.nameTextField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 

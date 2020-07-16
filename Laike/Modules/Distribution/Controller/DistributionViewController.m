@@ -64,7 +64,7 @@
                                           @"subTitle": @"进度实时反馈",
                                           @"identifier": @"customerProcess"},
                                         @{@"logo": @"distribution_bookAppointment",
-                                          @"title": @"预约签单",
+                                          @"title": @"报备客户",
                                           @"subTitle": @"客户盘活 高拥结算",
                                           @"identifier": @"bookAppointment"}
         ];

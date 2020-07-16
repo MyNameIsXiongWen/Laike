@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.kNavigationView.title = @"我的大学";
+    self.kNavigationView.title = @"Q大学";
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
     [self.view addSubview:UIView.viewFrame(CGRectMake(0, kTopBarHeight+47.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];

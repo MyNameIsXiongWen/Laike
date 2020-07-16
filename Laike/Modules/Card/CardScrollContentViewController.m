@@ -77,8 +77,8 @@
         vc.userId = model.id;
         [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
     } else if (self.cardType == 2) {
-        CardModel *model = (CardModel *)self.cardService.tableViewDataArray[indexPath.row].data;
-        [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:model.businessId CommunityType:2];
+//        CardModel *model = (CardModel *)self.cardService.tableViewDataArray[indexPath.row].data;
+//        [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:model.businessId CommunityType:2];
     }
 }
 

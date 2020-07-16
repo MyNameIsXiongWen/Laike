@@ -7,6 +7,7 @@
 //
 
 #import "CTMediator+ViewController.h"
+#import "UserModel.h"
 
 NSString * const kCTMediatorTargetViewController = @"ViewController";
 
@@ -151,6 +152,10 @@ NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeA
 }
 
 - (void)CTMediator_viewControllerForAddCustomerWithCustomerId:(NSString *)customerId RealName:(NSString *)realName MobilePhone:(NSString *)mobilePhone {
+    if (UserModel.shareUser.bindStatus == 2) {
+        [SVProgressHUD showInfoWithStatus:@"请先绑定公司"];
+        return;
+    }
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeAddCustomerViewController
                  params:@{@"customerId": customerId ?: @"",
