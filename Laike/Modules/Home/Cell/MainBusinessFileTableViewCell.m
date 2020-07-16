@@ -8,6 +8,7 @@
 
 #import "MainBusinessFileTableViewCell.h"
 #import "PDFDetailViewController.h"
+#import "CTMediator+ViewController.h"
 
 @interface MainBusinessFileTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
 
@@ -52,7 +53,7 @@
     if (indexPath.item < self.dataArray.count) {
         FileCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(FileCollectionViewCell.class) forIndexPath:indexPath];
         NSDictionary *dic = self.dataArray[indexPath.row];
-        cell.titleLabel.text = dic[@"fileName"];
+        cell.titleLabel.text = dic[@"path"];
         return cell;
     }
     return UICollectionViewCell.new;
@@ -61,9 +62,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.dataArray.count) {
         NSDictionary *dic = self.dataArray[indexPath.row];
-        PDFDetailViewController *vc = PDFDetailViewController.new;
-        vc.filePath = dic[@"filePath"];
-        [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+//        PDFDetailViewController *vc = PDFDetailViewController.new;
+//        vc.filePath = kFilePath(dic[@"path"]);
+//        vc.fileName = dic[@"path"];
+//        [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+        [CTMediator.sharedInstance CTMediator_viewControllerForH5WithUrl:kFilePath(dic[@"path"]) TitleName:dic[@"path"]];
     }
 }
 

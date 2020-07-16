@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PDFDetailViewController : QLPreviewController
 
+@property (nonatomic, copy) NSString *fileName;
 @property (nonatomic, copy) NSString *filePath;
 
 @end

@@ -19,6 +19,7 @@
     // Do any additional setup after loading the view.
     self.delegate = self;
     self.dataSource = self;
+    self.kNavigationView.title = self.fileName;
 }
 
 #pragma mark -QLPreviewControllerDataSource

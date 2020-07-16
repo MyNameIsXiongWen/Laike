@@ -127,9 +127,9 @@
     self.phoneInfoView.label.text = userModel.mobileNumber;
     self.wxInfoView.label.text = userModel.wechatNo;
     self.companyInfoView.label.text = userModel.companyName;
-    self.phoneInfoView.imgView.image = kImageMake(@"global_location_gray");
-    self.wxInfoView.imgView.image = kImageMake(@"global_location_gray");
-    self.companyInfoView.imgView.image = kImageMake(@"global_location_gray");
+    self.phoneInfoView.imgView.image = kImageMake(@"icon_phone");
+    self.wxInfoView.imgView.image = kImageMake(@"icon_wechat");
+    self.companyInfoView.imgView.image = kImageMake(@"icon_company");
 }
 
 - (void)setMiniCodePath:(NSString *)miniCodePath {

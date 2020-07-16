@@ -40,7 +40,7 @@
     UserModel *user = UserModel.shareUser;
     [self.bottomView.subjectButton sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)] forState:0];
     self.bottomView.nameLabel.text = user.realName;
-    self.bottomView.consultationLabel.text = kFormat(@"咨询量：%ld", (long)user.consultCount);
+    self.bottomView.consultationLabel.text = kFormat(@"咨询量：%ld", (long)user.clueCount);
 }
 
 #pragma mark ------------Notification-------------
