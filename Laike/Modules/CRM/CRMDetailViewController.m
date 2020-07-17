@@ -299,7 +299,6 @@
 
 - (void)clickContactBtn {
     kCallTel(self.mobilePhone);
-    [kUserDefault setBool:YES forKey:kConstCallTel];
 }
 
 @end
