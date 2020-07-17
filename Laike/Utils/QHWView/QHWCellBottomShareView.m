@@ -30,7 +30,9 @@
 }
 
 - (void)clickShareBtn {
-    
+    if (self.clickShareBlock) {
+        self.clickShareBlock();
+    }
 }
 
 @end

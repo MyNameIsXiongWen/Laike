@@ -47,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///视频状态：1-横向；2-竖向
 @property (nonatomic, assign) NSInteger videoStatus;
 @property (nonatomic, copy) NSString *qrCode;
+@property (nonatomic, copy) NSString *coverPath;
 
 ///头条用
 @property (nonatomic, strong) QHWBottomUserModel *subjectData;

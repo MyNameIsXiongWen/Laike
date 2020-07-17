@@ -11,6 +11,7 @@
 #import "QHWImageModel.h"
 #import "QHWCellBottomShareView.h"
 #import "UserModel.h"
+#import "QHWShareView.h"
 
 #define itemWidth (kScreenW-30-10)/3
 @interface QHWContentTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -140,6 +141,7 @@
                         });
                         NSDictionary *dic = (NSDictionary *)object;
                         [dic[@"path"] thumbnailImageForVideoWithComplete:^(UIImage *img) {
+                            contentModel.videoImg = img;
                             contentModel.filePathList = @[img];
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [self.collectionView reloadData];
@@ -284,6 +286,11 @@
 - (QHWCellBottomShareView *)shareView {
     if (!_shareView) {
         _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];
+        WEAKSELF
+        _shareView.clickShareBlock = ^{
+            QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":weakSelf.contentModel, @"shareType": @(ShareTypeContent)}];
+            [shareView show];
+        };
         [self.contentView addSubview:_shareView];
     }
     return _shareView;

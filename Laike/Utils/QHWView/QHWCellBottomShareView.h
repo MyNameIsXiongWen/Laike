@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *shareBtn;
+@property (nonatomic, copy) void (^ clickShareBlock)(void);
 
 @end
 

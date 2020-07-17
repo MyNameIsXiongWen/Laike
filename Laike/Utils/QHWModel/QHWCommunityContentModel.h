@@ -23,8 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *videoStatus;
 @property (nonatomic, copy) NSString *coverPath;
+@property (nonatomic, copy) NSString *htmlUrl;
 @property (nonatomic, strong) NSArray *filePathList;
 @property (nonatomic, strong) QHWBottomUserModel *subjectData;
+///分享时的截图
+@property (nonatomic, strong) UIImage *videoImg;
 
 @property (nonatomic, assign) NSInteger browseCount;
 @property (nonatomic, assign) NSInteger collectionCount;

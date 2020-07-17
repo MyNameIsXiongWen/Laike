@@ -73,8 +73,15 @@
             if (self.shareType == ShareTypeContent && !self.communityDetailModel.videoImg) {
                 if (self.communityDetailModel.fileType == 1 && self.communityDetailModel.filePathList.count > 0) {
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        NSDictionary *dic = self.communityDetailModel.filePathList.firstObject;
-                        [dic[@"path"] thumbnailImageForVideoWithComplete:^(UIImage *img) {
+                        id file = self.communityDetailModel.filePathList.firstObject;
+                        NSString *filePath = @"";
+                        if ([file isKindOfClass:NSDictionary.class]) {
+                            NSDictionary *fileDic = (NSDictionary *)file;
+                            filePath = fileDic[@"path"];
+                        } else if ([file isKindOfClass:NSString.class]) {
+                            filePath = (NSString *)file;
+                        }
+                        [filePath thumbnailImageForVideoWithComplete:^(UIImage *img) {
                             self.communityDetailModel.videoImg = img;
                         }];
                     });

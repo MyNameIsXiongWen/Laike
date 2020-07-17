@@ -12,6 +12,13 @@
 #import "QHWStudentModel.h"
 #import "QHWMigrationModel.h"
 #import "QHWTreatmentModel.h"
+#import "QHWShareView.h"
+
+@interface QHWMainBusinessTableViewCell ()
+
+@property (nonatomic, strong) QHWMainBusinessDetailBaseModel *detailModel;
+
+@end
 
 @implementation QHWMainBusinessTableViewCell
 
@@ -74,6 +81,7 @@
 
 - (void)configCellData:(id)data {
     QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)data;
+    self.detailModel = model;
     [self.houseImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.coverPath)] placeholderImage:kPlaceHolderImage_Banner];
     self.houseTitleLabel.text = model.name;
     switch (model.businessType) {
@@ -81,9 +89,7 @@
         {
             QHWHouseModel *houseModel = (QHWHouseModel *)model;
             self.houseSubTitleLabel.text = kFormat(@"%@-%@㎡", [NSString formatterWithValue:houseModel.areaMin], [NSString formatterWithValue:houseModel.areaMax]);
-//            self.houseSubTitleLabel.text = kFormat(@"%@-%@㎡ | 首付 %@%%", [NSString formatterWithValue:houseModel.areaMin], [NSString formatterWithValue:houseModel.areaMax], [NSString formatterWithValue:houseModel.firstPaymentRate]);
             self.houseMoneyLabel.text = kFormat(@"¥ %@万起", [NSString formatterWithMoneyValue:houseModel.totalPrice]);
-//            self.addressLabel.text = kFormat(@"%@ • %@", houseModel.countryName, houseModel.cityName);
             self.addressLabel.text = houseModel.countryName;
             [self.tagView setTagWithTagArray:houseModel.labelList];
         }
@@ -107,9 +113,7 @@
         case 4:
         {
             QHWStudentModel *studentModel = (QHWStudentModel *)model;
-//            self.houseSubTitleLabel.text = kFormat(@"%ld天", studentModel.tripDays);
             self.houseMoneyLabel.text = kFormat(@"¥ %@万", [NSString formatterWithMoneyValue:studentModel.serviceFee]);
-//            [self.tagView setTagWithTagArray:@[studentModel.typeName ?: @""]];
             NSMutableArray *tempArray = NSMutableArray.array;
             for (NSDictionary *dic in studentModel.educationList) {
                 [tempArray addObject:dic[@"name"]];
@@ -183,7 +187,11 @@
 
 - (QHWCellBottomShareView *)shareView {
     if (!_shareView) {
-        _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];
+        _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];WEAKSELF
+        _shareView.clickShareBlock = ^{
+            QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":weakSelf.detailModel, @"shareType": @(ShareTypeMainBusiness)}];
+            [shareView show];
+        };
         [self.contentView addSubview:_shareView];
     }
     return _shareView;
