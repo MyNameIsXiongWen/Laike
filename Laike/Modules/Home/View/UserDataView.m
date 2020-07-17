@@ -75,7 +75,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.countLabel = UILabel.labelInit().labelTitleColor(kColorTheme2a303c).labelFont(kMediumFontTheme14).labelTextAlignment(NSTextAlignmentCenter);
+        self.countLabel = UILabel.labelInit().labelTitleColor(kColorTheme2a303c).labelFont(kMediumFontTheme16).labelTextAlignment(NSTextAlignmentCenter);
         [self.contentView addSubview:self.countLabel];
         
         self.nameLabel = UILabel.labelInit().labelTitleColor(kColorTheme9399a5).labelFont(kFontTheme12).labelTextAlignment(NSTextAlignmentCenter);
