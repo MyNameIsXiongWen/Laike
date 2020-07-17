@@ -28,7 +28,7 @@
     // Do any additional setup after loading the view.
     self.kNavigationView.title = self.currentMessage.from.subjectName;
     self.kNavigationView.titleLabel.textColor = kColorThemefff;
-    self.kNavigationView.backgroundColor = kColorThemefb4d56;
+    self.kNavigationView.backgroundColor = kColorTheme21a8ff;
     [self.kNavigationView.leftBtn setImage:kImageMake(@"global_back_white") forState:0];
     [self getNewMessage];
 }
