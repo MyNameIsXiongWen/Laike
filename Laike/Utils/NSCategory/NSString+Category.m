@@ -457,10 +457,12 @@
 
     CGImageRef thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60)actualTime:NULL error:&thumbnailImageGenerationError];
     if (thumbnailImageGenerationError) {
-        NSString *vcName = NSStringFromClass(self.getCurrentMethodCallerVC.class);
-        if ([vcName isEqualToString:@"CommunityDetailViewController"] || [vcName isEqualToString:@"MainBusinessDetailViewController"]) {
-            [SVProgressHUD showInfoWithStatus:@"视频解析失败"];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *vcName = NSStringFromClass(self.getCurrentMethodCallerVC.class);
+            if ([vcName isEqualToString:@"CommunityDetailViewController"] || [vcName isEqualToString:@"MainBusinessDetailViewController"]) {
+                [SVProgressHUD showInfoWithStatus:@"视频解析失败"];
+            }
+        });
         complete(UIImage.new);
         return;
     }
