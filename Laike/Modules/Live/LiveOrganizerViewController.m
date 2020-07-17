@@ -9,6 +9,8 @@
 #import "LiveOrganizerViewController.h"
 #import "QHWBaseCellProtocol.h"
 #import "ActivityDetailViewController.h"
+#import "UserModel.h"
+#import <UIButton+WebCache.h>
 
 @interface LiveOrganizerViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -37,7 +39,10 @@
 
 - (void)setService:(LiveService *)service {
     _service = service;
-    self.bottomView.detailModel = service.liveDetailModel;
+    UserModel *user = UserModel.shareUser;
+    [self.bottomView.subjectButton sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)] forState:0];
+    self.bottomView.nameLabel.text = user.realName;
+    self.bottomView.consultationLabel.text = kFormat(@"咨询量：%ld", (long)user.clueCount);
     for (QHWBaseModel *baseModel in service.tableViewDataArray) {
         [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
     }

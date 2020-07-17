@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *contactBtn;
 @property (nonatomic, copy) NSString *customerId;
 @property (nonatomic, copy) NSString *mobilePhone;
+- (void)clickInfoBtn;
 
 @end
 

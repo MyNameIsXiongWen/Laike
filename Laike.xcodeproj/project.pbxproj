@@ -804,6 +804,7 @@
 		1863953524A32A27007DC26D /* BindCompanyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BindCompanyViewController.xib; sourceTree = "<group>"; };
 		1863953924A35722007DC26D /* CRMService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMService.h; sourceTree = "<group>"; };
 		1863953A24A35722007DC26D /* CRMService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMService.m; sourceTree = "<group>"; };
+		1894D19924C1B3EC0082C26F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		53005641986DE0440E436C60 /* Pods-Laike.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laike.debug.xcconfig"; path = "Target Support Files/Pods-Laike/Pods-Laike.debug.xcconfig"; sourceTree = "<group>"; };
 		6F6E7A9DF59133ED574A4FC3 /* libPods-Laike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Laike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84EEBC2926E775366657C66 /* Pods-Laike.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laike.release.xcconfig"; path = "Target Support Files/Pods-Laike/Pods-Laike.release.xcconfig"; sourceTree = "<group>"; };
@@ -1902,6 +1903,7 @@
 		788C81620570B93C1094C11B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1894D19924C1B3EC0082C26F /* CoreTelephony.framework */,
 				6F6E7A9DF59133ED574A4FC3 /* libPods-Laike.a */,
 			);
 			name = Frameworks;

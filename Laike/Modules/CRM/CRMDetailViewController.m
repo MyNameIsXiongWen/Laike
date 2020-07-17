@@ -14,8 +14,9 @@
 #import "CTMediator+ViewController.h"
 #import "QHWMoreView.h"
 #import "QHWLabelAlertView.h"
+#import <CallKit/CallKit.h>
 
-@interface CRMDetailViewController () <UITableViewDelegate, UITableViewDataSource, QHWPageContentViewDelegate>
+@interface CRMDetailViewController () <UITableViewDelegate, UITableViewDataSource, QHWPageContentViewDelegate, CXCallObserverDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) CRMDetailHeaderView *tableHeaderView;
@@ -25,10 +26,16 @@
 @property (nonatomic, strong) QHWBaseSubContentTableViewCell *contentCell;
 @property (nonatomic, assign) BOOL canScroll;
 @property (nonatomic, strong) CRMService *crmService;
+@property (nonatomic, strong) CXCallObserver *callObserve;
 
 @end
 
 @implementation CRMDetailViewController
+
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:@"CRMDetailSwipeLeaveTop" object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +46,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatusNotification) name:@"CRMDetailSwipeLeaveTop" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
     [self.view addSubview:self.btmView];
+    self.callObserve = CXCallObserver.new;
+    [self.callObserve setDelegate:self queue:dispatch_get_main_queue()];
+}
+
+- (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
+    if (call.hasEnded) {
+        [self.btmView clickInfoBtn];
+    }
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
@@ -284,6 +299,7 @@
 
 - (void)clickContactBtn {
     kCallTel(self.mobilePhone);
+    [kUserDefault setBool:YES forKey:kConstCallTel];
 }
 
 @end

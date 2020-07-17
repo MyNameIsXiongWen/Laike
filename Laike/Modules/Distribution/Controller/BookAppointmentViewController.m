@@ -56,6 +56,7 @@
 
 - (void)clickProductTFView {
     if (!self.selectedIndex) {
+        [SVProgressHUD showInfoWithStatus:@"请选择报备业务"];
         [self clickBusinessTFView];
         return;
     }

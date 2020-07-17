@@ -73,6 +73,7 @@
     if (!_headerView) {
         _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 55)];
         _headerView.titleLabel.text = @"Q大学";
+        _headerView.titleLabel.font = kMediumFontTheme24;
         [_headerView.moreBtn setTitle:@"全部课程" forState:0];
         _headerView.moreBtn.hidden = NO;
         _headerView.moreBtn.userInteractionEnabled = NO;

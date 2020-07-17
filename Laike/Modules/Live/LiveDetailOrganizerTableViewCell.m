@@ -42,14 +42,15 @@
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(70);
+            make.right.mas_equalTo(-15);
             make.centerY.equalTo(self.avatarImgView.mas_centerY);
         }];
-        [self.attentionButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-15);
-            make.centerY.equalTo(self.avatarImgView);
-            make.width.mas_equalTo(50);
-            make.height.mas_equalTo(20);
-        }];
+//        [self.attentionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.mas_equalTo(-15);
+//            make.centerY.equalTo(self.avatarImgView);
+//            make.width.mas_equalTo(50);
+//            make.height.mas_equalTo(20);
+//        }];
     }
     return self;
 }
@@ -58,13 +59,13 @@
     NSArray *array = (NSArray *)data;
     self.liveModel = array.firstObject;
     BOOL hidden = [array.lastObject boolValue];
-    self.attentionButton.hidden = hidden;
-    self.attentionButton.selected = self.liveModel.concernStatus == 2;
-    if (self.attentionButton.selected) {
-        self.attentionButton.backgroundColor = kColorTheme999;
-    } else {
-        self.attentionButton.backgroundColor = kColorThemefb4d56;
-    }
+//    self.attentionButton.hidden = hidden;
+//    self.attentionButton.selected = self.liveModel.concernStatus == 2;
+//    if (self.attentionButton.selected) {
+//        self.attentionButton.backgroundColor = kColorTheme999;
+//    } else {
+//        self.attentionButton.backgroundColor = kColorThemefb4d56;
+//    }
     if (hidden) {
         [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(self.liveModel.mainHead)]];
         self.nameLabel.text = self.liveModel.mainName;

@@ -45,7 +45,10 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1;
+        if (self.service.dataArray.count > 0) {
+            return 1;
+        }
+        return 0;
     }
     return self.service.dataArray.count-1;
 }

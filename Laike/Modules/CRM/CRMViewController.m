@@ -36,7 +36,8 @@
     QHWNavgationView *tempNavigationView = [[QHWNavgationView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kTopBarHeight)];
     tempNavigationView.leftBtn.hidden = !self.interval;
     tempNavigationView.title = @"CRM";
-    tempNavigationView.rightBtn.btnTitle(@"+").btnFont([UIFont systemFontOfSize:30 weight:UIFontWeightThin]).btnAction(self, @selector(rightNavBtnAction:));
+    tempNavigationView.rightBtn.btnTitle(@"+").btnTitleColor(kColorFromHexString(@"a0a0a0")).btnFont([UIFont systemFontOfSize:30 weight:UIFontWeightThin]).btnAction(self, @selector(rightNavBtnAction:));
+    tempNavigationView.rightBtn.y = kStatusBarHeight-2;
     [tempNavigationView.leftBtn setImage:kImageMake(@"global_back") forState:0];
     [tempNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
     [tempNavigationView.leftBtn addTarget:self action:@selector(leftNavBtnAction:) forControlEvents:UIControlEventTouchUpInside];

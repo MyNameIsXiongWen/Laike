@@ -7,12 +7,14 @@
 //
 
 #import "LiveService.h"
+#import "UserModel.h"
 
 @implementation LiveService
 
 - (void)getLiveListRequestWithComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
-    NSMutableDictionary *param = @{@"businessType": @(0),
+    NSMutableDictionary *param = @{@"subjectType": @(14),
+                                   @"subjectId": UserModel.shareUser.merchantId,
                                    @"currentPage": @(self.itemPageModel.pagination.currentPage),
                                    @"pageSize": @(self.itemPageModel.pagination.pageSize)}.mutableCopy;
     [QHWHttpManager.sharedInstance QHW_POST:kLiveList parameters:param success:^(id responseObject) {
