@@ -2540,6 +2540,7 @@
 				PRODUCT_NAME = "去海外来客";
 				PROVISIONING_PROFILE_SPECIFIER = manager_dev_profile;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7s";
 			};
 			name = Debug;
 		};
@@ -2566,6 +2567,7 @@
 				PRODUCT_NAME = "去海外来客";
 				PROVISIONING_PROFILE_SPECIFIER = manager_dev_profile;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7s";
 			};
 			name = Release;
 		};
