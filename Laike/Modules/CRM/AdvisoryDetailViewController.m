@@ -13,13 +13,15 @@
 #import "CTMediator+ViewController.h"
 #import "CRMTrackCell.h"
 #import "QHWLabelAlertView.h"
+#import <CallKit/CallKit.h>
 
-@interface AdvisoryDetailViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface AdvisoryDetailViewController () <UITableViewDelegate, UITableViewDataSource, CXCallObserverDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AdvisoryDetailHeaderView *tableHeaderView;
 @property (nonatomic, strong) AdvisoryDetailBottomView *btmView;
 @property (nonatomic, strong) CRMService *crmService;
+@property (nonatomic, strong) CXCallObserver *callObserve;
 
 @end
 
@@ -31,6 +33,14 @@
     self.kNavigationView.title = @"获客详情";
     [self.kNavigationView.rightBtn setImage:kImageMake(@"global_more") forState:0];
     [self.view addSubview:self.btmView];
+    self.callObserve = CXCallObserver.new;
+    [self.callObserve setDelegate:self queue:dispatch_get_main_queue()];
+}
+
+- (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
+    if (call.hasEnded) {
+        [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:self.crmService.crmModel.realName MobilePhone:self.crmService.crmModel.mobileNumber];
+    }
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {

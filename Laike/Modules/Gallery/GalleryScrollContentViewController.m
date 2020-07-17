@@ -75,7 +75,7 @@
 
 #pragma mark ------------UITableViewDelegate-------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.galleryService.filterArray.count;
+    return self.galleryService.filterArray.count-1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

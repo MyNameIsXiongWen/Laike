@@ -124,7 +124,7 @@
         _tableView.scrollEnabled = NO;
         
         UIView *footerView = UIView.viewFrame(CGRectMake(0, 0, kScreenW, 30));
-        [footerView addSubview:UILabel.labelFrame(CGRectMake(15, 10, 200, 20)).labelFont(kMediumFontTheme24).labelTitleColor(kColorTheme2a303c).labelText(@"推广获客")];
+        [footerView addSubview:UILabel.labelFrame(CGRectMake(15, 8, 200, 22)).labelFont(kMediumFontTheme24).labelTitleColor(kColorTheme2a303c).labelText(@"推广获客")];
         _tableView.tableFooterView = footerView;
         
         [self addSubview:_tableView];
