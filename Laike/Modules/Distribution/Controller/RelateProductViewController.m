@@ -22,14 +22,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.kNavigationView.title = @"预约产品";
+    self.kNavigationView.title = @"报备产品";
     self.kNavigationView.rightBtn.btnTitle(@"确定").btnTitleColor(kColorTheme21a8ff);
     self.selectedIndex = 9999;
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
     if (self.selectedIndex == 9999) {
-        [SVProgressHUD showInfoWithStatus:@"请选择预约产品"];
+        [SVProgressHUD showInfoWithStatus:@"请选择报备产品"];
         return;
     }
     if (self.didSelectProductBlock) {

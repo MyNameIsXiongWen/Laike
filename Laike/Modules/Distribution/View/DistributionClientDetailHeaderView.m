@@ -149,7 +149,7 @@
 
 - (UILabel *)businessKeyLabel {
     if (!_businessKeyLabel) {
-        _businessKeyLabel = UILabel.labelInit().labelText(@"预约业务").labelFont(kFontTheme16).labelTitleColor(kColorTheme000);
+        _businessKeyLabel = UILabel.labelInit().labelText(@"报备业务").labelFont(kFontTheme16).labelTitleColor(kColorTheme000);
         [self addSubview:_businessKeyLabel];
     }
     return _businessKeyLabel;
@@ -165,7 +165,7 @@
 
 - (UILabel *)productKeyLabel {
     if (!_productKeyLabel) {
-        _productKeyLabel = UILabel.labelInit().labelText(@"预约产品").labelFont(kFontTheme16).labelTitleColor(kColorTheme000);
+        _productKeyLabel = UILabel.labelInit().labelText(@"报备产品").labelFont(kFontTheme16).labelTitleColor(kColorTheme000);
         [self addSubview:_productKeyLabel];
     }
     return _productKeyLabel;

@@ -54,7 +54,7 @@
 - (void)configUI {
     self.bkgView = UIView.viewFrame(CGRectMake(10, 0, kScreenW-20, 530)).bkgColor(kColorThemefff);
     self.bkgView.userInteractionEnabled = YES;
-    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBkgView)]];
+    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
     
@@ -62,8 +62,6 @@
     self.nameImgView = UIImageView.ivFrame(CGRectMake(self.avatarImgView.right-15, 25, 200, 30)).ivImage(kImageMake(@"share_school"));
     [self.bkgView addSubview:self.avatarImgView];
     [self.bkgView addSubview:self.nameImgView];
-    UIButton *closeBtn = UIButton.btnFrame(CGRectMake(self.bkgView.width-50, 0, 50, 50)).btnImage(kImageMake(@"publish_close")).btnAction(self, @selector(dismiss));
-    [self.bkgView addSubview:closeBtn];
     
     self.contentBkgView = UIView.viewFrame(CGRectMake(20, self.avatarImgView.bottom+15, self.bkgView.width-40, 360)).bkgColor(kColorThemefff).cornerRadius(5);
     [self.contentBkgView addShadowWithRadius:5 Opacity:0.1];
@@ -97,10 +95,6 @@
         }
     };
     [self addSubview:self.bottomView];
-}
-
-- (void)clickBkgView {
-    
 }
 
 - (void)longPressBkgView:(UILongPressGestureRecognizer *)recognizer {

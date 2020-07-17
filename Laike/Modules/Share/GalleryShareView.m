@@ -12,6 +12,7 @@
 
 @interface GalleryShareView ()
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *bkgView;
 @property (nonatomic, strong) UIImageView *coverImgView;
 @property (nonatomic, strong) UIImageView *avatarImgView;
@@ -38,7 +39,6 @@
     if (self == [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         self.popType = PopTypeBottom;
-        [self configUI];
         self.userInteractionEnabled = YES;
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
     }
@@ -47,13 +47,18 @@
 
 - (void)configUI {
     UserModel *userModel = UserModel.shareUser;
-    self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, 430)).bkgColor(kColorThemefff);
-    self.bkgView.userInteractionEnabled = YES;
-    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBkgView)]];
-    [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
-    [self addSubview:self.bkgView];
     
-    self.coverImgView = UIImageView.ivFrame(CGRectMake(10, 10, self.bkgView.width-20, 300));
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(40, 0, kScreenW-80, MIN(kScreenH-120, self.imgHeight+130))];
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.width, self.imgHeight+130);
+    [self addSubview:self.scrollView];
+    
+    self.bkgView = UIView.viewFrame(CGRectMake(0, 0, self.scrollView.width, self.imgHeight+130)).bkgColor(kColorThemefff);
+    self.bkgView.userInteractionEnabled = YES;
+    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
+    [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
+    [self.scrollView addSubview:self.bkgView];
+    
+    self.coverImgView = UIImageView.ivFrame(CGRectMake(10, 10, self.bkgView.width-20, self.bkgView.height-130));
     [self.bkgView addSubview:self.coverImgView];
     
     self.avatarImgView = UIImageView.ivFrame(CGRectMake(10, self.coverImgView.bottom+25, 40, 40)).ivCornerRadius(20);
@@ -83,10 +88,6 @@
     [self addSubview:self.bottomView];
 }
 
-- (void)clickBkgView {
-    
-}
-
 - (void)longPressBkgView:(UILongPressGestureRecognizer *)recognizer {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         UIImageWriteToSavedPhotosAlbum([self screenShot], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
@@ -110,6 +111,8 @@
 }
 
 - (void)setGalleryImg:(id)galleryImg {
+    _galleryImg = galleryImg;
+    [self configUI];
     if ([galleryImg isKindOfClass:NSString.class]) {
         [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath((NSString *)galleryImg)]];
     } else if ([galleryImg isKindOfClass:UIImage.class]) {

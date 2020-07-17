@@ -16,6 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface QSchoolPDFView : UIView
+
+@property (nonatomic, strong) UIImageView *coverImgView;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, copy) void (^ clickPDFBlock)(void);
+
+@end
+
 
 
 NS_ASSUME_NONNULL_END

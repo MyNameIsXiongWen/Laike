@@ -12,6 +12,7 @@
 #import "CommunityService.h"
 #import "CTMediator+ViewController.h"
 #import "HomeService.h"
+#import "QHWAlertView.h"
 
 @interface CommunityViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -68,12 +69,30 @@
         cell = [[QHWContentTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
     }
     cell.contentModel = self.communityService.dataArray[indexPath.row];
+    WEAKSELF
+    cell.longPressBlock = ^(NSString * _Nonnull contentId) {
+        [weakSelf longPressCell:contentId];
+    };
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QHWCommunityContentModel *model = self.communityService.dataArray[indexPath.row];
     [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:model.id CommunityType:2];
+}
+
+- (void)longPressCell:(NSString *)contentId {
+    __block QHWAlertView *alert = [[QHWAlertView alloc] initWithFrame:CGRectZero];
+    [alert configWithTitle:@"确定删除？" cancleText:@"取消" confirmText:@"删除"];
+    WEAKSELF
+    alert.confirmBlock = ^{
+        [alert dismiss];
+        [weakSelf.communityService deleteCommentRequestWithContentId:contentId Complete:^{
+            weakSelf.communityService.itemPageModel.pagination.currentPage = 1;
+            [weakSelf getMainData];
+        }];
+    };
+    [alert show];
 }
 
 /*

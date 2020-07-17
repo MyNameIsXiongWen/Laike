@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QSchoolTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView *bkgImgView;
+@property (nonatomic, strong) UIImageView *playImageView;//播放按钮
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *countLabel;
 

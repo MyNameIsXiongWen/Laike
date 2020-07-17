@@ -50,7 +50,7 @@
 - (void)configUI {
     self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, 480)).bkgColor(kColorThemefff);
     self.bkgView.userInteractionEnabled = YES;
-    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBkgView)]];
+    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
     
@@ -86,10 +86,6 @@
         }
     };
     [self addSubview:self.bottomView];
-}
-
-- (void)clickBkgView {
-    
 }
 
 - (void)longPressBkgView:(UILongPressGestureRecognizer *)recognizer {

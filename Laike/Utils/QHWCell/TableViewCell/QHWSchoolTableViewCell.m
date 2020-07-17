@@ -76,7 +76,7 @@
 
 - (UILabel *)schoolCNTitleLabel {
     if (!_schoolCNTitleLabel) {
-        _schoolCNTitleLabel = UILabel.labelInit().labelTitleColor(kColorTheme2a303c).labelFont([UIFont systemFontOfSize:14 weight:UIFontWeightMedium]);
+        _schoolCNTitleLabel = UILabel.labelInit().labelTitleColor(kColorTheme2a303c).labelFont(kMediumFontTheme14);
         [self.contentView addSubview:_schoolCNTitleLabel];
     }
     return _schoolCNTitleLabel;

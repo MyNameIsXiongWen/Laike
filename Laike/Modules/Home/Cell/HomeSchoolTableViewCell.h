@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HomeSchoolSubCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *bkgImgView;
+@property (nonatomic, strong) UIImageView *playImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 
 @end

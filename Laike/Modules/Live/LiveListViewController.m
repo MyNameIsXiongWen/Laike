@@ -34,7 +34,7 @@
         [self.collectionView.mj_footer endRefreshing];
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.collectionView PageModel:self.service.itemPageModel];
         [self.collectionView reloadData];
-        [self.collectionView showNodataView:self.service.dataArray.count == 0 offsetY:0 button:nil];
+        [self.collectionView showNodataView:self.service.dataArray.count == 0 offsetY:0 Text:@"您公司尚未发布"];
     }];
 }
 

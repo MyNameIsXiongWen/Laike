@@ -27,14 +27,16 @@
 
 - (IBAction)clickCancelBtn:(id)sender {
     QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-    [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认"];
-    alert.contentString = @"是否解除绑定?";
+    alert.confirmTextColor = kColorTheme21a8ff;
+    [alert configWithTitle:@"" cancleText:@"取消" confirmText:@"确认解绑"];
+    alert.contentString = kFormat(@"请确认解绑【%@】,解绑后您的客户数据将归还公司", self.companyName);
     WEAKSELF
+    __weak typeof(alert) weakAlert = alert;
     alert.confirmBlock = ^{
-        [alert dismiss];
+        [weakAlert dismiss];
         [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"2"} success:^(id responseObject) {
             [SVProgressHUD showInfoWithStatus:@"解绑成功"];
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
             [NSNotificationCenter.defaultCenter postNotificationName:kNotificationBindSuccess object:nil];
         } failure:^(NSError *error) {
             

@@ -55,6 +55,7 @@
         QHWSchoolModel *model = self.dataArray[indexPath.row];
         [cell.bkgImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.coverPath)]];
         cell.titleLabel.text = model.title;
+        cell.playImageView.hidden = model.fileType == 1;
         return cell;
     }
     return UICollectionViewCell.new;
@@ -110,6 +111,10 @@
             make.left.right.mas_equalTo(0);
             make.top.equalTo(self.bkgImgView.mas_bottom).offset(5);
         }];
+        [self.playImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(50, 50));
+            make.center.mas_equalTo(self.bkgImgView);
+        }];
     }
     return self;
 }
@@ -128,6 +133,15 @@
         [self.contentView addSubview:_bkgImgView];
     }
     return _bkgImgView;
+}
+
+- (UIImageView *)playImageView {
+    if (!_playImageView) {
+        _playImageView = UIImageView.ivInit().ivImage(kImageMake(@"video_play"));
+        _playImageView.hidden = YES;
+        [self.bkgImgView addSubview:_playImageView];
+    }
+    return _playImageView;
 }
 
 - (UILabel *)titleLabel {

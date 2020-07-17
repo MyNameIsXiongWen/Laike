@@ -61,7 +61,7 @@
         _topOperationView = [[CRMTopOperationView alloc] initWithFrame:CGRectMake(10, kTopBarHeight+10, kScreenW-20, 70)];
         _topOperationView.dataArray = @[@{@"logo": @"distribution_clientProcess",
                                           @"title": @"客户进度",
-                                          @"subTitle": @"进度实时反馈",
+                                          @"subTitle": @"实时进度 全程跟踪",
                                           @"identifier": @"customerProcess"},
                                         @{@"logo": @"distribution_bookAppointment",
                                           @"title": @"报备客户",

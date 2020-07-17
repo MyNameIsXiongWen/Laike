@@ -67,7 +67,7 @@
     }
     cell.timeLabel.text = model.createTime;
     cell.topLine.hidden = indexPath.row == 0;
-    cell.showArrowImgView = YES;
+//    cell.showArrowImgView = YES;
     cell.clickContentBlock = ^{
         switch (model.businessType) {
             case 1:

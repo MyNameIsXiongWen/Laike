@@ -46,8 +46,8 @@
     QHWBaseModel *contentModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:50 Data:@{@"data": self.schoolModel.content ?: @"", @"identifier": @"contentRichTextTableViewCell"}];
     [self.tableViewDataArray addObject:contentModel];
     
-    QHWBaseModel *fileModel = [[QHWBaseModel alloc] configModelIdentifier:@"MainBusinessFileTableViewCell" Height:65 Data:self.schoolModel.filePathList];
-    [self.tableViewDataArray addObject:fileModel];
+//    QHWBaseModel *fileModel = [[QHWBaseModel alloc] configModelIdentifier:@"MainBusinessFileTableViewCell" Height:65 Data:self.schoolModel.filePathList];
+//    [self.tableViewDataArray addObject:fileModel];
 }
 
 #pragma mark ------------DATA-------------

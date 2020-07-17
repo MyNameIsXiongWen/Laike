@@ -120,7 +120,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GalleryModel *model = (GalleryModel *)self.galleryService.tableViewDataArray[indexPath.row];
-    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"coverImg":model.imgPath, @"shareType": @(ShareTypeGallery)}];
+    QHWImageViewCell *cell = (QHWImageViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"coverImg":cell.imgView.image ?: model.imgPath, @"shareType": @(ShareTypeGallery)}];
     [shareView show];
 }
 

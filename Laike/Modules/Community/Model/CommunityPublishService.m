@@ -75,7 +75,7 @@
 
 - (NSArray *)industryArray {
     if (!_industryArray) {
-        _industryArray = @[@"房产", @"游学", @"移民", @"留学", @"医疗"];
+        _industryArray = @[@"房产", @"游学", @"移民", @"留学", @"海外医疗"];
     }
     return _industryArray;
 }

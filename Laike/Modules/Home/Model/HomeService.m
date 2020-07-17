@@ -188,6 +188,12 @@
         QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];
         [self.tableViewDataArray addObject:userDataModel];
     }
+
+    if (self.bannerArray.count > 0) {
+        QHWBaseModel *bannerModel = QHWBaseModel.new;
+        [bannerModel configModelIdentifier:@"HomeBannerTableViewCell" Height:130 Data:self.bannerArray];
+        [self.tableViewDataArray addObject:bannerModel];
+    }
     
     if (self.reportArray.count > 0) {
         QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCardTableViewCell"

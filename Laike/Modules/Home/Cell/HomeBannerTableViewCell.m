@@ -27,7 +27,7 @@
 
 - (QHWCycleScrollView *)bannerView {
     if (!_bannerView) {
-        _bannerView = [[QHWCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 90)];
+        _bannerView = [[QHWCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 110)];
         _bannerView.imgCornerRadius = 10;
         [self.shadowView addSubview:_bannerView];
     }

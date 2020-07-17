@@ -65,6 +65,7 @@
     [cell.bkgImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.coverPath)]];
     cell.titleLabel.text = model.title;
     cell.countLabel.text = kFormat(@"%ld人观看", model.browseCount);
+    cell.playImageView.hidden = model.fileType == 1;
     return cell;
 }
 
@@ -100,7 +101,11 @@
             make.left.mas_equalTo(10);
             make.top.mas_equalTo(5);
             make.bottom.mas_equalTo(-5);
-            make.width.mas_equalTo(150);
+            make.width.mas_equalTo(160);
+        }];
+        [self.playImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(50, 50));
+            make.center.mas_equalTo(self.bkgImgView);
         }];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.bkgImgView.mas_right).offset(10);
@@ -123,6 +128,15 @@
         [self.contentView addSubview:_bkgImgView];
     }
     return _bkgImgView;
+}
+
+- (UIImageView *)playImageView {
+    if (!_playImageView) {
+        _playImageView = UIImageView.ivInit().ivImage(kImageMake(@"video_play"));
+        _playImageView.hidden = YES;
+        [self.bkgImgView addSubview:_playImageView];
+    }
+    return _playImageView;
 }
 
 - (UILabel *)titleLabel {

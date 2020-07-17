@@ -8,6 +8,7 @@
 
 #import "HomeTableHeaderView.h"
 #import "CTMediator+ViewController.h"
+#import "UserModel.h"
 
 @interface HomeTableHeaderView () <UITableViewDelegate, UITableViewDataSource>
 
@@ -87,6 +88,10 @@
 }
 
 - (void)clickHomeCustomerTableViewCell {
+    if (UserModel.shareUser.bindStatus == 2) {
+        [SVProgressHUD showInfoWithStatus:@"请先绑定公司"];
+        return;
+    }
     [CTMediator.sharedInstance CTMediator_viewControllerForIntervalCRM];
 }
 

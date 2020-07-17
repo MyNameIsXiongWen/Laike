@@ -33,16 +33,16 @@
     self.qrcodeImgView = UIImageView.ivFrame(CGRectMake((kScreenW-150)/2, self.tipLabel1.bottom+30, 150, 150)).ivImage(kImageMake(@"global_service"));
     [self.view addSubview:self.qrcodeImgView];
     
-    self.saveBtn = UIButton.btnFrame(CGRectMake((kScreenW-150)/2, self.qrcodeImgView.bottom+20, 150, 40)).btnTitle(@"保存到相册").btnTitleColor(kColorThemefff).btnFont(kFontTheme13).btnBkgColor(kColorThemefb4d56).btnCornerRadius(20).btnAction(self, @selector(clickSaveBtn));
+    self.saveBtn = UIButton.btnFrame(CGRectMake((kScreenW-150)/2, self.qrcodeImgView.bottom+20, 150, 40)).btnTitle(@"保存到相册").btnTitleColor(kColorThemefff).btnFont(kFontTheme13).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(20).btnAction(self, @selector(clickSaveBtn));
     [self.view addSubview:self.saveBtn];
     
     self.tipLabel2 = UILabel.labelFrame(CGRectMake(0, self.saveBtn.bottom+100, kScreenW, 20)).labelFont(kFontTheme14).labelTitleColor(kColorTheme2a303c).labelText(@"或者添加客服微信号").labelTextAlignment(NSTextAlignmentCenter);
     [self.view addSubview:self.tipLabel2];
     
-    self.wechatLabel = UILabel.labelFrame(CGRectMake(0, self.tipLabel2.bottom+20, kScreenW, 20)).labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelText(@"qhiwi888").labelTextAlignment(NSTextAlignmentCenter);
+    self.wechatLabel = UILabel.labelFrame(CGRectMake(0, self.tipLabel2.bottom+20, kScreenW, 20)).labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelText(@"Qhiwi2018").labelTextAlignment(NSTextAlignmentCenter);
     [self.view addSubview:self.wechatLabel];
     
-    self.coopyBtn = UIButton.btnFrame(CGRectMake((kScreenW-150)/2, self.wechatLabel.bottom+20, 150, 40)).btnTitle(@"复制微信号").btnTitleColor(kColorThemefb4d56).btnFont(kFontTheme13).btnBkgColor(kColorThemefff).btnBorderColor(kColorThemefb4d56).btnCornerRadius(20).btnAction(self, @selector(clickCopyBtn));
+    self.coopyBtn = UIButton.btnFrame(CGRectMake((kScreenW-150)/2, self.wechatLabel.bottom+20, 150, 40)).btnTitle(@"复制微信号").btnTitleColor(kColorTheme21a8ff).btnFont(kFontTheme13).btnBkgColor(kColorThemefff).btnBorderColor(kColorTheme21a8ff).btnCornerRadius(20).btnAction(self, @selector(clickCopyBtn));
     [self.view addSubview:self.coopyBtn];
 }
 

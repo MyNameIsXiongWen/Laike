@@ -46,7 +46,6 @@
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
-    [self.view addSubview:UIView.viewFrame(CGRectMake(0, self.topOperationView.bottom-0.5, kScreenW, 0.5)).bkgColor(kColorThemeeee)];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
     [self getFilterData];
 }
@@ -120,8 +119,8 @@
         _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom+10, kScreenW, 48)];
         _tabScrollView.itemWidthType = ItemWidthTypeFixed;
         _tabScrollView.hideIndicatorView = NO;
-        _tabScrollView.tagIndicatorColor = kColorThemea4abb3;
-        _tabScrollView.itemSelectedColor = kColorThemea4abb3;
+        _tabScrollView.tagIndicatorColor = kColorTheme21a8ff;
+        _tabScrollView.itemSelectedColor = kColorTheme21a8ff;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;

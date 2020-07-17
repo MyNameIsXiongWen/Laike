@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat headerViewTableHeight;
 @property (nonatomic, strong) NSArray *consultantArray;
 @property (nonatomic, strong) NSArray *schoolArray;
+@property (nonatomic, strong) NSArray *bannerArray;
 @property (nonatomic, strong) NSMutableArray *reportArray;
 ///1: 首页  2:分销
 @property (nonatomic, assign) NSInteger pageType;

@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *miniCodePath;
 @property (nonatomic, strong) id galleryImg;
+@property (nonatomic, assign) CGFloat imgHeight;
 
 @end
 

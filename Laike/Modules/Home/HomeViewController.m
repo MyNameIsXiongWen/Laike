@@ -54,8 +54,10 @@
     [self getReportRequest];
     [self getPopularityRequest];
     [self getHomeSchoolRequest];
+    [self getHomeTopBannerDataRequest];
     dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
         self.homeService.consultantArray = self.systemService.consultantArray;
+        self.homeService.bannerArray = self.systemService.bannerArray;
         self.homeService.schoolArray = self.schoolService.tableViewDataArray;
         [self.homeService handleHomeData];
         self.homeTableHeaderView.height = self.homeService.headerViewTableHeight;
@@ -89,6 +91,14 @@
 - (void)getHomeSchoolRequest {
     dispatch_group_enter(self.group);
     [self.schoolService getSchoolDataWithLearnType:1 Complete:^{
+        dispatch_group_leave(self.group);
+    }];
+}
+
+- (void)getHomeTopBannerDataRequest {
+    dispatch_group_enter(self.group);
+    [self.systemService getBannerRequestWithAdvertPage:109001 Complete:^(id  _Nonnull response) {
+        self.systemService.bannerArray = [NSArray yy_modelArrayWithClass:QHWBannerModel.class json:response[@"data"][@"list4"]];
         dispatch_group_leave(self.group);
     }];
 }

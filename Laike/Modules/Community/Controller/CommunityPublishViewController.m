@@ -244,7 +244,7 @@
     if (!_businessIndustryView) {
         _businessIndustryView = [[IndustryView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 40)];
         _businessIndustryView.leftLabel.text = @"关联业务";
-        _businessIndustryView.industryLabel.text = @"请选择预约业务";
+        _businessIndustryView.industryLabel.text = @"请选择关联业务";
         _businessIndustryView.userInteractionEnabled = YES;
         [_businessIndustryView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBusinessIndustryView)]];
     }

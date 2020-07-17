@@ -172,10 +172,24 @@
         type = 103001;
         idString = self.liveModel.id;
     } else if (self.shareType == ShareTypeGallery) {
-        self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 550)];
-        self.galleryShareView.galleryImg = self.galleryImg;
-        self.galleryShareView.delegate = self;
-        [self.galleryShareView show];
+        if ([self.galleryImg isKindOfClass:UIImage.class]) {
+            UIImage *img = (UIImage *)self.galleryImg;
+            CGFloat imgHeight = img.size.height * (kScreenW-80) / img.size.width;
+            self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, MIN(imgHeight+130+120, kScreenH))];
+            self.galleryShareView.imgHeight = imgHeight;
+            self.galleryShareView.galleryImg = self.galleryImg;
+            self.galleryShareView.delegate = self;
+            [self.galleryShareView show];
+        } else if ([self.galleryImg isKindOfClass:NSString.class]) {
+            NSString *imgUrl = (NSString *)self.galleryImg;
+            [imgUrl getImageHeightWithWidth:kScreenW-80 Complete:^(CGFloat height) {
+                self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, height+130+120)];
+                self.galleryShareView.imgHeight = height;
+                self.galleryShareView.galleryImg = self.galleryImg;
+                self.galleryShareView.delegate = self;
+                [self.galleryShareView show];
+            }];
+        }
         return;
     } else if (self.shareType == ShareTypeRate) {
         self.rateShareView = [[RateShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 650)];

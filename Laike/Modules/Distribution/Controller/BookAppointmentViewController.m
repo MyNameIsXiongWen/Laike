@@ -41,7 +41,7 @@
 }
 
 - (void)clickBusinessTFView {
-    NSArray *array = @[@"房产", @"移民", @"留学", @"游学", @"医疗"];
+    NSArray *array = @[@"房产", @"移民", @"留学", @"游学", @"海外医疗"];
     QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*MIN(5, (array.count+1))+7) title:@""];
     sheetView.dataArray = array;
     sheetView.sheetDelegate = self;
@@ -73,12 +73,12 @@
 
 - (void)clickSubmitBtn {
     if (!self.selectedIndex) {
-        [SVProgressHUD showInfoWithStatus:@"请选择预约业务"];
+        [SVProgressHUD showInfoWithStatus:@"请选择报备业务"];
         [self clickBusinessTFView];
         return;
     }
     if (!self.businessId) {
-        [SVProgressHUD showInfoWithStatus:@"请选择预约产品"];
+        [SVProgressHUD showInfoWithStatus:@"请选择报备产品"];
         return;
     }
     if (self.nameTextFieldView.textField.text.length == 0) {
@@ -107,8 +107,8 @@
 - (CRMTextFieldView *)businessTextFieldView {
     if (!_businessTextFieldView) {
         _businessTextFieldView = [[CRMTextFieldView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, 60)];
-        _businessTextFieldView.title = @"预约业务";
-        _businessTextFieldView.textField.placeholder = @"请选择预约业务";
+        _businessTextFieldView.title = @"报备业务";
+        _businessTextFieldView.textField.placeholder = @"请选择报备业务";
         _businessTextFieldView.textField.userInteractionEnabled = NO;
         _businessTextFieldView.rightLabel.hidden = _businessTextFieldView.arrowImgView.hidden = NO;
         WEAKSELF
@@ -122,8 +122,8 @@
 - (CRMTextFieldView *)productTextFieldView {
     if (!_productTextFieldView) {
         _productTextFieldView = [[CRMTextFieldView alloc] initWithFrame:CGRectMake(0, self.businessTextFieldView.bottom, kScreenW, 60)];
-        _productTextFieldView.title = @"预约产品";
-        _productTextFieldView.textField.placeholder = @"请选择预约产品";
+        _productTextFieldView.title = @"报备产品";
+        _productTextFieldView.textField.placeholder = @"请选择报备产品";
         _productTextFieldView.textField.userInteractionEnabled = NO;
         _productTextFieldView.rightLabel.hidden = _productTextFieldView.arrowImgView.hidden = NO;
         WEAKSELF

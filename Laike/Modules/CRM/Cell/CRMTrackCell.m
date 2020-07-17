@@ -34,7 +34,8 @@
         }];
         [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.titleLabel.mas_left);
-            make.width.mas_lessThanOrEqualTo(kScreenW-40-20);
+            make.right.mas_equalTo(-20);
+//            make.width.mas_lessThanOrEqualTo(kScreenW-40-20);
             make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
         }];
         [self.contentLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -78,9 +79,9 @@
 }
 
 - (void)clickContentLabel {
-    if (self.clickContentBlock) {
-        self.clickContentBlock();
-    }
+//    if (self.clickContentBlock) {
+//        self.clickContentBlock();
+//    }
 }
 
 - (UILabel *)titleLabel {

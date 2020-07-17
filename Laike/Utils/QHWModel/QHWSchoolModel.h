@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *videoPath;
 @property (nonatomic, copy) NSString *industryName;
-///文件类型：1-pdf；2-视频；3-图片(暂时不处理)
+///文件类型：1-pdf；2-视频；3-图片
 @property (nonatomic, assign) NSInteger fileType;
 ///学习类型：1-专业课堂；2-产品学习
 @property (nonatomic, assign) NSInteger learnType;
