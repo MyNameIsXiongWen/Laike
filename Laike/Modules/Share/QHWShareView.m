@@ -182,7 +182,7 @@
         if ([self.galleryImg isKindOfClass:UIImage.class]) {
             UIImage *img = (UIImage *)self.galleryImg;
             CGFloat imgHeight = img.size.height * (kScreenW-80) / img.size.width;
-            self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, MIN(imgHeight+130+120, kScreenH))];
+            self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, MIN(imgHeight+120+120, kScreenH))];
             self.galleryShareView.imgHeight = imgHeight;
             self.galleryShareView.galleryImg = self.galleryImg;
             self.galleryShareView.delegate = self;
@@ -194,7 +194,7 @@
                 [kFilePath(imgUrl) getImageHeightWithWidth:kScreenW-80 Complete:^(CGFloat height) {
                     [QHWHttpLoading dismiss];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, height+130+120)];
+                        self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, height+120+120)];
                         self.galleryShareView.imgHeight = height;
                         self.galleryShareView.galleryImg = self.galleryImg;
                         self.galleryShareView.delegate = self;

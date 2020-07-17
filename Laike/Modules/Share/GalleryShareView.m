@@ -48,17 +48,17 @@
 - (void)configUI {
     UserModel *userModel = UserModel.shareUser;
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(40, 0, kScreenW-80, MIN(kScreenH-120, self.imgHeight+130))];
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.width, self.imgHeight+130);
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(40, 0, kScreenW-80, MIN(kScreenH-120, self.imgHeight+120))];
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.width, self.imgHeight+120);
     [self addSubview:self.scrollView];
     
-    self.bkgView = UIView.viewFrame(CGRectMake(0, 0, self.scrollView.width, self.imgHeight+130)).bkgColor(kColorThemefff);
+    self.bkgView = UIView.viewFrame(CGRectMake(0, 0, self.scrollView.width, self.imgHeight+120)).bkgColor(kColorThemefff);
     self.bkgView.userInteractionEnabled = YES;
     [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self.scrollView addSubview:self.bkgView];
     
-    self.coverImgView = UIImageView.ivFrame(CGRectMake(10, 10, self.bkgView.width-20, self.bkgView.height-130));
+    self.coverImgView = UIImageView.ivFrame(CGRectMake(0, 0, self.bkgView.width, self.bkgView.height-120));
     [self.bkgView addSubview:self.coverImgView];
     
     self.avatarImgView = UIImageView.ivFrame(CGRectMake(10, self.coverImgView.bottom+25, 40, 40)).ivCornerRadius(20);
