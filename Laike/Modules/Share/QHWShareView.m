@@ -182,13 +182,19 @@
             [self.galleryShareView show];
         } else if ([self.galleryImg isKindOfClass:NSString.class]) {
             NSString *imgUrl = (NSString *)self.galleryImg;
-            [imgUrl getImageHeightWithWidth:kScreenW-80 Complete:^(CGFloat height) {
-                self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, height+130+120)];
-                self.galleryShareView.imgHeight = height;
-                self.galleryShareView.galleryImg = self.galleryImg;
-                self.galleryShareView.delegate = self;
-                [self.galleryShareView show];
-            }];
+            [QHWHttpLoading showWithMaskTypeBlack];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [kFilePath(imgUrl) getImageHeightWithWidth:kScreenW-80 Complete:^(CGFloat height) {
+                    [QHWHttpLoading dismiss];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.galleryShareView = [[GalleryShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, height+130+120)];
+                        self.galleryShareView.imgHeight = height;
+                        self.galleryShareView.galleryImg = self.galleryImg;
+                        self.galleryShareView.delegate = self;
+                        [self.galleryShareView show];
+                    });
+                }];
+            });
         }
         return;
     } else if (self.shareType == ShareTypeRate) {
