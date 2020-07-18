@@ -31,7 +31,7 @@
     if (self.rankType == 1) {
         self.tableView.tableHeaderView = self.rankTableHeaderView;
         UserModel *user = UserModel.shareUser;
-        self.rankTableHeaderView.rankValueLabel.text = kFormat(@"%ld", self.systemService.myRanking);
+        self.rankTableHeaderView.rankValueLabel.text = self.systemService.myRanking > 200 ? @"未上榜" : kFormat(@"%ld", self.systemService.myRanking);
         [self.rankTableHeaderView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
         self.rankTableHeaderView.nameLabel.text = user.realName;
         self.rankTableHeaderView.likeLabel.text = kFormat(@"%ld", user.likeCount);

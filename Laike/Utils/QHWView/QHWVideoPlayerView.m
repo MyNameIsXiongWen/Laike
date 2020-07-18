@@ -47,6 +47,7 @@
     self.playerVC = [[AVPlayerViewController alloc] init];
     self.playerVC.player = player;
     self.playerVC.view.frame = self.bounds;
+    self.playerVC.videoGravity = AVLayerVideoGravityResizeAspectFill;
     [self addSubview:self.playerVC.view];
 //    [self startDownLoadVedioWithModel:videoPath];
 }
