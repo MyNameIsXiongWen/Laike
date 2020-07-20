@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BookAppointmentViewController : UIViewController
 
+@property (nonatomic, assign) NSInteger businessType;
+@property (nonatomic, copy) NSString *businessId;
+
 @end
 
 NS_ASSUME_NONNULL_END

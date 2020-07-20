@@ -301,7 +301,7 @@
         WEAKSELF
         _bottomView.rightOperationBlock = ^{
             if (weakSelf.isDistribution) {
-                
+                kCallTel(weakSelf.detailService.detailModel.serviceHotline);
             } else {
                 [weakSelf rightNavBtnAction:nil];
             }

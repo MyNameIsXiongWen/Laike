@@ -131,7 +131,7 @@
     self.nameImgView.image = kImageMake(@"share_article");
     self.titleLabel.text = detailModel.name;
     self.timeLabel.text = detailModel.createTime;
-    self.contentLabel.text = detailModel.Html2Text ?: detailModel.content;
+    self.contentLabel.text = detailModel.Html2Text;
     self.typeLabel.text = kFormat(@" %@ ", @"海外头条");
     [self.typeLabel sizeToFit];
     self.typeLabel.height = 20;
