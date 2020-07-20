@@ -18,6 +18,7 @@
 - (UIButton *(^)(UIImage *btnSelectedImage))btnSelectedImage;
 - (UIButton *(^)(UIFont *btnFont))btnFont;
 - (UIButton *(^)(UIColor *btnTitleColor))btnTitleColor;
+- (UIButton *(^)(UIColor *btnSelectedTitleColor))btnSelectedTitleColor;
 - (UIButton *(^)(UIColor *btnBkgColor))btnBkgColor;
 - (UIButton *(^)(CGFloat btnCornerRadius))btnCornerRadius;
 - (UIButton *(^)(UIColor *tfBorderColor))btnBorderColor;

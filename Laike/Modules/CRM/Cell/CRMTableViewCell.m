@@ -24,8 +24,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self.avatarImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(15);
-            make.centerY.equalTo(self.contentView);
+            make.left.top.mas_equalTo(15);
             make.size.mas_equalTo(CGSizeMake(50, 50));
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,10 +40,47 @@
         }];
         [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-15);
-            make.centerY.equalTo(self.contentView);
+            make.height.mas_equalTo(20);
+            make.top.mas_equalTo(30);
         }];
+        [self.contactBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.bottom.mas_equalTo(0);
+            make.size.mas_equalTo(CGSizeMake(100, 40));
+        }];
+        [self.convertBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.contactBtn.mas_centerY);
+            make.right.equalTo(self.contactBtn.mas_left);
+            make.size.equalTo(self.contactBtn);
+        }];
+        UIView *line1 = UIView.viewInit().bkgColor(kColorThemeeee);
+        [self.contentView addSubview:line1];
+        [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.nameLabel.mas_left);
+            make.right.mas_equalTo(0);
+            make.height.mas_equalTo(0.5);
+            make.bottom.mas_equalTo(-40);
+        }];
+        UIView *line2 = UIView.viewInit().bkgColor(kColorThemeeee);
+        [self.contentView addSubview:line2];
+        [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(0);
+            make.height.mas_equalTo(0.5);
+        }];
+        
     }
     return self;
+}
+
+- (void)clickConvertBtn {
+    if (self.clickConvertBlock) {
+        self.clickConvertBlock();
+    }
+}
+
+- (void)clickContactBtn {
+    if (self.clickContactBlock) {
+        self.clickContactBlock();
+    }
 }
 
 #pragma mark ------------UI-------------
@@ -79,6 +115,22 @@
         [self.contentView addSubview:_countLabel];
     }
     return _countLabel;
+}
+
+- (UIButton *)convertBtn {
+    if (!_convertBtn) {
+        _convertBtn = UIButton.btnInit().btnTitleColor(kColorTheme21a8ff).btnSelectedTitle(@"已转客户").btnSelectedTitleColor(kColorThemea4abb3).btnFont(kMediumFontTheme14).btnAction(self, @selector(clickConvertBtn));
+        [self.contentView addSubview:_convertBtn];
+    }
+    return _convertBtn;
+}
+
+- (UIButton *)contactBtn {
+    if (!_contactBtn) {
+        _contactBtn = UIButton.btnInit().btnTitleColor(kColorTheme21a8ff).btnFont(kMediumFontTheme14).btnTitle(@"联系客户").btnAction(self, @selector(clickContactBtn));
+        [self.contentView addSubview:_contactBtn];
+    }
+    return _contactBtn;
 }
 
 @end

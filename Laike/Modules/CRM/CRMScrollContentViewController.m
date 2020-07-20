@@ -12,12 +12,15 @@
 #import "MainBusinessFilterBtnView.h"
 #import "QHWCountryFilterView.h"
 #import "CTMediator+ViewController.h"
+#import <CallKit/CallKit.h>
 
-@interface CRMScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface CRMScrollContentViewController () <UITableViewDelegate, UITableViewDataSource, CXCallObserverDelegate>
 
 @property (nonatomic, strong) MainBusinessFilterBtnView *filterBtnView;
 @property (nonatomic, strong) CRMService *crmService;
 @property (nonatomic, strong) NSMutableDictionary *conditionDic;
+@property (nonatomic, strong) CXCallObserver *callObserve;
+@property (nonatomic, strong) CRMModel *selectedCRMModel;
 
 @end
 
@@ -31,6 +34,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
+    self.callObserve = CXCallObserver.new;
+    [self.callObserve setDelegate:self queue:dispatch_get_main_queue()];
+}
+
+- (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
+    if (call.hasEnded) {
+        if (self.crmType == 2) {
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:self.selectedCRMModel.realName MobilePhone:self.selectedCRMModel.mobileNumber];
+        }
+    }
 }
 
 - (void)setFilterDataArray:(NSMutableArray<FilterBtnViewCellModel *> *)filterDataArray {
@@ -44,7 +57,7 @@
     CGFloat headerHeight = self.crmType == 1 ? 40 : 0;
     CGFloat tableHeight = self.interval ? (kScreenH-kTopBarHeight-138-headerHeight) : (kScreenH-kTopBarHeight-138-headerHeight-kBottomBarHeight);
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, headerHeight, kScreenW, tableHeight) Style:UITableViewStylePlain Object:self];
-    self.tableView.rowHeight = 80;
+    self.tableView.rowHeight = 120;
     [self.tableView registerClass:CRMTableViewCell.class forCellReuseIdentifier:NSStringFromClass(CRMTableViewCell.class)];
     [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
         self.crmService.itemPageModel.pagination.currentPage = 1;
@@ -102,14 +115,34 @@
     cell.nameLabel.text = model.realName;
     if (model.industryNameArray.count == 0) {
         [cell.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(cell.contentView);
+            make.top.equalTo(cell.avatarImgView.mas_top).offset(15);
         }];
     }
     [cell.tagView setTagWithTagArray:model.industryNameArray];
-    NSString *countStr = kFormat(@"咨询%ld次", model.actionCount);
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:countStr];
-    [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[countStr rangeOfString:kFormat(@"%ld", model.actionCount)]];
-    cell.countLabel.attributedText = attr;
+    if (self.crmType == 2) {
+        NSString *countStr = kFormat(@"咨询%ld次", model.actionCount);
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:countStr];
+        [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[countStr rangeOfString:kFormat(@"%ld", model.actionCount)]];
+        cell.countLabel.attributedText = attr;
+        [cell.convertBtn setTitle:@"转到客户" forState:0];
+        [cell.convertBtn setTitle:@"已转客户" forState:UIControlStateSelected];
+        [cell.convertBtn setTitleColor:kColorThemea4abb3 forState:UIControlStateSelected];
+        cell.convertBtn.selected = model.clientStatus == 2;
+    } else {
+        [cell.convertBtn setTitle:@"写跟进" forState:0];
+    }
+    WEAKSELF
+    cell.clickContactBlock = ^{
+        weakSelf.selectedCRMModel = model;
+        kCallTel(model.mobileNumber);
+    };
+    cell.clickConvertBlock = ^{
+        if (weakSelf.crmType == 1) {
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddTrackWithCustomerId:model.id];
+        } else {
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:model.realName MobilePhone:model.mobileNumber];
+        }
+    };
     return cell;
 }
 

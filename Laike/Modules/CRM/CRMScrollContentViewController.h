@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CRMScrollContentViewController : QHWBaseScrollContentViewController
 
-/// 客户类型 1:CRM 2:获客（咨询）
+/// 客户类型 1:客户  2:获客（咨询）
 @property (nonatomic, assign) NSInteger crmType;
 @property (nonatomic, strong) NSMutableArray <FilterBtnViewCellModel *>*filterDataArray;
 

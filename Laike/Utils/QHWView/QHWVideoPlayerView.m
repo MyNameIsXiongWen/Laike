@@ -8,10 +8,6 @@
 
 #import "QHWVideoPlayerView.h"
 
-@interface QHWVideoPlayerView ()
-
-@end
-
 @implementation QHWVideoPlayerView
 
 /*

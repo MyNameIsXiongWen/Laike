@@ -26,6 +26,13 @@ static const NSString *KEY_BTN_BADGELABEL = @"btnBadgeLabel";
     };
 }
 
+- (UIButton *(^)(UIFont *))btnFont {
+    return ^(UIFont *btnFont) {
+        self.titleLabel.font = btnFont;
+        return self;
+    };
+}
+
 - (UIButton *(^)(NSString *))btnTitle {
     return ^(NSString *btnTitle) {
         [self setTitle:btnTitle forState:UIControlStateNormal];
@@ -54,16 +61,16 @@ static const NSString *KEY_BTN_BADGELABEL = @"btnBadgeLabel";
     };
 }
 
-- (UIButton *(^)(UIFont *))btnFont {
-    return ^(UIFont *btnFont) {
-        self.titleLabel.font = btnFont;
+- (UIButton *(^)(UIColor *))btnTitleColor {
+    return ^(UIColor *btnTitleColor) {
+        [self setTitleColor:btnTitleColor forState:UIControlStateNormal];
         return self;
     };
 }
 
-- (UIButton *(^)(UIColor *))btnTitleColor {
-    return ^(UIColor *btnTitleColor) {
-        [self setTitleColor:btnTitleColor forState:UIControlStateNormal];
+- (UIButton *(^)(UIColor *))btnSelectedTitleColor {
+    return ^(UIColor *btnSelectedTitleColor) {
+        [self setTitleColor:btnSelectedTitleColor forState:UIControlStateSelected];
         return self;
     };
 }

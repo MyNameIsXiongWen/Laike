@@ -25,6 +25,7 @@
 - (void)getCRMFilterDataRequestWithComplete:(void (^)(id _Nullable))complete {
     [QHWHttpManager.sharedInstance QHW_POST:kCRMFilter parameters:@{} success:^(id responseObject) {
         self.clientSourceList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"clientSourceList"]];
+        self.clientLevelList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"clientLevelList"]];
         self.industryList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"industryList"]];
         self.intentionLevelList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"intentionLevelList"]];
         self.followStatusList = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:responseObject[@"data"][@"followStatusList"]];
@@ -141,6 +142,13 @@
             [countryArray addObject:@{@"id": model.id}];
         }
     }
+    FilterCellModel *clientLevelModel;
+    for (FilterCellModel *model in self.clientLevelList) {
+        if (model.selected) {
+            clientLevelModel = model;
+            break;
+        }
+    }
     FilterCellModel *intentionModel;
     for (FilterCellModel *model in self.intentionLevelList) {
         if (model.selected) {
@@ -167,6 +175,9 @@
     }
     if (intentionModel) {
         params[@"intentionLevelCode"] = intentionModel.code;
+    }
+    if (clientLevelModel) {
+        params[@"clientLevel"] = clientLevelModel.code;
     }
     NSString *urlString = kCRMAdd;
     NSString *remiderString = @"添加成功";
@@ -334,7 +345,7 @@
     QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source", @"unselectable": @(unselectable)}];
     [self.tableViewDataArray addObject:sourceModel];
     
-    QHWBaseModel *crmLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.followStatusList] Data:@{@"title": @"客户等级", @"mutable": @(NO), @"data": self.followStatusList, @"model": self.crmModel, @"identifier": @"crmLevel"}];
+    QHWBaseModel *crmLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientLevelList] Data:@{@"title": @"客户等级", @"mutable": @(NO), @"data": self.clientLevelList, @"model": self.crmModel, @"identifier": @"crmLevel"}];
     [self.tableViewDataArray addObject:crmLevelModel];
     
     QHWBaseModel *businessModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.industryList] Data:@{@"title": @"意向业务", @"mutable": @(YES), @"data": self.industryList, @"model": self.crmModel, @"identifier": @"business"}];
@@ -347,6 +358,14 @@
         if (self.crmModel.clientSourceCode) {
             for (FilterCellModel *cellModel in self.clientSourceList) {
                 if (cellModel.code.integerValue == self.crmModel.clientSourceCode) {
+                    cellModel.selected = YES;
+                    break;
+                }
+            }
+        }
+        if (self.crmModel.clientLevelCode) {
+            for (FilterCellModel *cellModel in self.clientLevelList) {
+                if (cellModel.code.integerValue == self.crmModel.clientLevelCode) {
                     cellModel.selected = YES;
                     break;
                 }

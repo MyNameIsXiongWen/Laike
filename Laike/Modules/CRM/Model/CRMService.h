@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger clueCount;
 
 @property (nonatomic, strong) NSArray <FilterCellModel *>*clientSourceList;
+@property (nonatomic, strong) NSArray <FilterCellModel *>*clientLevelList;
 @property (nonatomic, strong) NSArray <FilterCellModel *>*industryList;
 @property (nonatomic, strong) NSArray <FilterCellModel *>*intentionLevelList;
 @property (nonatomic, strong) NSArray <FilterCellModel *>*followStatusList;
@@ -74,10 +75,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, assign) NSInteger actionCount;
 
+///客户状态1-未添加；2-已添加，此字段用于判断显示是否已添加到客户
+@property (nonatomic, assign) NSInteger clientStatus;
 ///客户来源：1-网路客；2-自拓客；3-渠道客；4-其它
 @property (nonatomic, assign) NSInteger clientSourceCode;
 @property (nonatomic, copy) NSString *clientSourceName;
-///客户意向等级代码(1-高；2-中；3-低；4-放弃)
+///客户等级：1-A重点关注；2-B日常维护；3-C仅做记录
+@property (nonatomic, assign) NSInteger clientLevelCode;
+@property (nonatomic, copy) NSString *clientLevelName;
+///客户意向等级代码：1-高；2-中；3-低；4-放弃：
 @property (nonatomic, assign) NSInteger intentionLevelCode;
 @property (nonatomic, copy) NSString *intentionLevelName;
 

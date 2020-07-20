@@ -45,7 +45,7 @@
 
 - (void)rightNavBtnAction:(UIButton *)sender {
     QHWMoreView *moreView = [[QHWMoreView alloc] initWithFrame:CGRectMake(kScreenW-125, kTopBarHeight, 105, 85)
-                                                     ViewArray:@[@{@"title":@"转到CRM", @"identifier":@"convertCRM"},
+                                                     ViewArray:@[@{@"title":@"转到客户", @"identifier":@"convertCRM"},
                                                                  @{@"title":@"放弃跟进", @"identifier":@"giveUpFollowUp"}]];
     WEAKSELF
     moreView.clickBtnBlock = ^(NSString * _Nonnull identifier) {
@@ -169,7 +169,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.convertCRMBtn = UIButton.btnFrame(CGRectMake(15, 15, 125, 45)).btnTitle(@"转到CRM").btnFont(kFontTheme18).btnTitleColor(kColorTheme21a8ff).btnBorderColor(kColorTheme21a8ff).btnCornerRadius(5).btnAction(self, @selector(clickConvertCRMBtn));
+        self.convertCRMBtn = UIButton.btnFrame(CGRectMake(15, 15, 125, 45)).btnTitle(@"转到客户").btnFont(kFontTheme18).btnTitleColor(kColorTheme21a8ff).btnBorderColor(kColorTheme21a8ff).btnCornerRadius(5).btnAction(self, @selector(clickConvertCRMBtn));
         [self addSubview:self.convertCRMBtn];
                 
         self.contactBtn = UIButton.btnFrame(CGRectMake(self.convertCRMBtn.right+15, 15, kScreenW-170, 45)).btnTitle(@"联系客户").btnFont(kFontTheme18).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(5).btnAction(self, @selector(clickContactBtn));

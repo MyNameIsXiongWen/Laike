@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) QHWTagView *tagView;
 @property (nonatomic, strong) UILabel *countLabel;
+@property (nonatomic, strong) UIButton *convertBtn;
+@property (nonatomic, strong) UIButton *contactBtn;
+@property (nonatomic, copy) void (^ clickConvertBlock)(void);
+@property (nonatomic, copy) void (^ clickContactBlock)(void);
 
 @end
 
