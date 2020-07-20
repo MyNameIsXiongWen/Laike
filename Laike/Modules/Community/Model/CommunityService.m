@@ -19,7 +19,7 @@
     if (self.communityType == 1) {
         urlStr = kCommunityArticleList;
         modelClass = @"QHWCommunityArticleModel";
-        params[@"industryId"] = @"24";
+        params[@"industryId"] = @(self.businessType);
     } else {
         urlStr = kCommunityContentList;
         modelClass = @"QHWCommunityContentModel";

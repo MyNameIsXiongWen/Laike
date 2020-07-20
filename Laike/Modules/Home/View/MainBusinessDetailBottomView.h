@@ -18,11 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *consultationLabel;
 @property (nonatomic, strong) UIButton *rightOperationButton;
+@property (nonatomic, strong) UIButton *rightAnotherOperationButton;
 
 ///1-房产；2-游学；3-移民；4-留学  17:活动详情  102001:医疗  103001:直播详情
 @property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, strong) QHWMainBusinessDetailBaseModel *detailModel;
 @property (nonatomic, copy) void (^ rightOperationBlock)(void);
+@property (nonatomic, copy) void (^ rightAnotherOperationBlock)(void);
 
 @end
 

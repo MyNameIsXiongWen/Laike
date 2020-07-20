@@ -32,6 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
+    [self.view addSubview:self.bottomView];
     [self getDetailInfoRequest];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(reloadRichTextCellNotification:) name:kNotificationReloadRichText object:nil];
 }
@@ -50,8 +51,6 @@
             self.kNavigationView.title = self.activityService.activityDetailModel.name;
             self.tableHeaderView.activityModel = self.activityService.activityDetailModel;
             self.tableHeaderView.height = self.activityService.activityDetailHeaderHeight;
-            self.bottomView.businessType = 17;
-            self.bottomView.detailModel = self.activityService.activityDetailModel;
             if (self.activityService.activityDetailModel.entryStatus == 2) {
                 self.bottomView.rightOperationButton.enabled = NO;
                 self.bottomView.rightOperationButton.btnTitle(@"已结束").btnBkgColor(kColorThemeeee).btnTitleColor(kColorThemea4abb3);
@@ -152,7 +151,6 @@
         _bottomView.rightOperationBlock = ^{
             [weakSelf rightNavBtnAction:nil];
         };
-        [self.view addSubview:_bottomView];
     }
     return _bottomView;
 }

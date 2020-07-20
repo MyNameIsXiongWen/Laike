@@ -53,16 +53,16 @@
             make.height.mas_equalTo(30);
             make.bottom.equalTo(self.collectionView.mas_top).offset(-15);
         }];
-//        [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.mas_equalTo(15);
-//            make.bottom.equalTo(self.discountView.mas_top).offset(-15);
-//        }];
-//        [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
-////            make.left.equalTo(self.descLabel.mas_right).offset(5);
-//            make.right.mas_equalTo(-15);
-//            make.height.mas_equalTo(16);
-//            make.bottom.equalTo(self.discountView.mas_top).offset(-15);
-//        }];
+        [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(15);
+            make.bottom.equalTo(self.discountView.mas_top).offset(-15);
+        }];
+        [self.tagView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.descLabel.mas_right).offset(5);
+            make.right.mas_equalTo(-15);
+            make.height.mas_equalTo(16);
+            make.bottom.equalTo(self.discountView.mas_top).offset(-15);
+        }];
     }
     return self;
 }

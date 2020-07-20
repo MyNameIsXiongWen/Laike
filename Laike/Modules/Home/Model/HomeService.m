@@ -134,6 +134,7 @@
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kHomeReportCount parameters:@{} success:^(id responseObject) {
         UserModel.shareUser.likeCount = [responseObject[@"data"][@"likeCount"] integerValue];
+        UserModel.shareUser.distributionCount = [responseObject[@"data"][@"distributionCount"] integerValue];
     } failure:^(NSError *error) {
         
     }];

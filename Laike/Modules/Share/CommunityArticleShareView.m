@@ -8,6 +8,7 @@
 
 #import "CommunityArticleShareView.h"
 #import "MainBusinessShareView.h"
+#import "UserModel.h"
 
 @interface CommunityArticleShareView ()
 
@@ -57,7 +58,9 @@
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
     
+    UserModel *user = UserModel.shareUser;
     self.avatarImgView = UIImageView.ivFrame(CGRectMake(15, 15, 50, 50)).ivCornerRadius(25).ivBorderColor(kColorTheme2a303c);
+    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
     self.nameImgView = UIImageView.ivFrame(CGRectMake(self.avatarImgView.right+15, 25, 110, 30));
     [self.bkgView addSubview:self.avatarImgView];
     [self.bkgView addSubview:self.nameImgView];
@@ -73,7 +76,7 @@
     [self.contentBkgView addSubview:self.timeLabel];
     [self.contentBkgView addSubview:self.contentLabel];
     
-    self.sourceLabel = UILabel.labelFrame(CGRectMake(15, self.contentBkgView.height-50, self.contentBkgView.width-100, 50)).labelFont(kFontTheme14).labelTitleColor(kColorTheme6d7278);
+    self.sourceLabel = UILabel.labelFrame(CGRectMake(15, self.contentBkgView.height-50, self.contentBkgView.width-100, 50)).labelFont(kFontTheme14).labelTitleColor(kColorTheme6d7278).labelText(kFormat(@"来源：%@", user.realName));
     self.typeLabel = UILabel.labelFrame(CGRectMake(self.contentBkgView.width-70, self.sourceLabel.y+15, 70, 20)).labelFont(kFontTheme14).labelTitleColor(kColorTheme666).labelBkgColor(kColorThemee4e4e4).labelCornerRadius(3);
     [self.contentBkgView addSubview:self.sourceLabel];
     [self.contentBkgView addSubview:self.typeLabel];
@@ -84,6 +87,7 @@
     [self.bkgView addSubview:self.miniCodeImgView];
     [self.bkgView addSubview:self.sloganImgView];
     self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
+    [self.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
     [self.miniCodeImgView addSubview:self.logoImgView];
     
     self.bottomView = [[ShareBottomView alloc] initWithFrame:CGRectMake(0, self.height-100, kScreenW, 100)];
@@ -122,14 +126,12 @@
 }
 
 - (void)setDetailModel:(CommunityDetailModel *)detailModel {
+//    这个detailModel会有两个类型，一个是CommunityDetailModel 一个是ArticleModel
     _detailModel = detailModel;
-    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(detailModel.bottomData.subjectHead)]];
-    [self.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(detailModel.bottomData.subjectHead)]];
     self.nameImgView.image = kImageMake(@"share_article");
     self.titleLabel.text = detailModel.name;
     self.timeLabel.text = detailModel.createTime;
-    self.contentLabel.text = detailModel.Html2Text;
-    self.sourceLabel.text = kFormat(@"来源：%@", detailModel.bottomData.subjectName);
+    self.contentLabel.text = detailModel.Html2Text ?: detailModel.content;
     self.typeLabel.text = kFormat(@" %@ ", @"海外头条");
     [self.typeLabel sizeToFit];
     self.typeLabel.height = 20;

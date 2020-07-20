@@ -145,7 +145,7 @@
 
 - (UIButton *)advisoryBtn {
     if (!_advisoryBtn) {
-        _advisoryBtn = UIButton.btnInit().btnTitle(@"咨询推荐规则").btnFont(kFontTheme16).btnTitleColor(kColorTheme21a8ff).btnBorderColor(kColorTheme21a8ff).btnCornerRadius(18).btnAction(self, @selector(clickAdvisoryBtn));
+        _advisoryBtn = UIButton.btnInit().btnTitle(@"咨询开单助理").btnFont(kFontTheme16).btnTitleColor(kColorTheme21a8ff).btnBorderColor(kColorTheme21a8ff).btnCornerRadius(18).btnAction(self, @selector(clickAdvisoryBtn));
         [self.contentView addSubview:_advisoryBtn];
     }
     return _advisoryBtn;

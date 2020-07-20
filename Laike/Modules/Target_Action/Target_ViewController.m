@@ -45,7 +45,7 @@
     MainBusinessDetailViewController *vc = MainBusinessDetailViewController.new;
     vc.businessType = businessType;
     vc.businessId = businessId;
-    vc.idDistribution = isDistribution;
+    vc.isDistribution = isDistribution;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

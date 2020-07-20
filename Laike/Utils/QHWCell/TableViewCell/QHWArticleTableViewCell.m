@@ -10,6 +10,7 @@
 #import "QHWImageViewCell.h"
 #import "QHWImageModel.h"
 #import "QHWCellBottomShareView.h"
+#import "QHWShareView.h"
 
 #define itemWidth (kScreenW-30-10)/3
 @interface QHWArticleTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -163,6 +164,11 @@
 - (QHWCellBottomShareView *)shareView {
     if (!_shareView) {
         _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectMake(0, self.headImgView.bottom+10, kScreenW, 22)];
+        WEAKSELF
+        _shareView.clickShareBlock = ^{
+            QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":weakSelf.articleModel, @"shareType": @(ShareTypeArticle)}];
+            [shareView show];
+        };
         [self.contentView addSubview:_shareView];
     }
     return _shareView;

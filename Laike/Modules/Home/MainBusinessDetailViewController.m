@@ -62,6 +62,7 @@
             break;
     }
     [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
+    [self.view addSubview:self.bottomView];
     [self getDetailInfoRequest];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(reloadRichTextCellNotification:) name:kNotificationReloadRichText object:nil];
 }
@@ -77,8 +78,6 @@
             self.tableHeaderView.businessType = self.businessType;
             self.tableHeaderView.detailModel = self.detailService.detailModel;
             self.tableHeaderView.height = self.detailService.headerViewHeight;
-            self.bottomView.businessType = self.businessType;
-            self.bottomView.detailModel = self.detailService.detailModel;
             [self.tableView reloadData];
             self.tabScrollView.dataArray = self.detailService.tabDataArray;
         }
@@ -229,7 +228,7 @@
     QHWBaseModel *baseModel = self.detailService.tableViewDataArray[indexPath.section];
     NSArray *array = (NSArray *)baseModel.data;
     QHWHouseModel *model = array[indexPath.row];
-    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:1 BusinessId:model.id IsDistribution:self.idDistribution];
+    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:1 BusinessId:model.id IsDistribution:self.isDistribution];
 }
 
 /*
@@ -296,11 +295,20 @@
 - (MainBusinessDetailBottomView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
+        _bottomView.rightAnotherOperationButton.hidden = !self.isDistribution;
+        _bottomView.rightOperationButton.width = self.isDistribution ? 100 : 210;
+        _bottomView.rightOperationButton.btnTitle(self.isDistribution ? @"开单助理" : @"微信推广获客").btnFont(self.isDistribution ? kFontTheme14 : kFontTheme18);
         WEAKSELF
         _bottomView.rightOperationBlock = ^{
-            [weakSelf rightNavBtnAction:nil];
+            if (weakSelf.isDistribution) {
+                
+            } else {
+                [weakSelf rightNavBtnAction:nil];
+            }
         };
-        [self.view addSubview:_bottomView];
+        _bottomView.rightAnotherOperationBlock = ^{
+            [weakSelf.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"BookAppointmentViewController").new animated:YES];
+        };
     }
     return _bottomView;
 }

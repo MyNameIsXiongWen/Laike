@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger clientSourceCode;
 @property (nonatomic, copy) NSString *clientSourceName;
 ///客户等级：1-A重点关注；2-B日常维护；3-C仅做记录
-@property (nonatomic, assign) NSInteger clientLevelCode;
+@property (nonatomic, assign) NSInteger clientLevel;
 @property (nonatomic, copy) NSString *clientLevelName;
 ///客户意向等级代码：1-高；2-中；3-低；4-放弃：
 @property (nonatomic, assign) NSInteger intentionLevelCode;

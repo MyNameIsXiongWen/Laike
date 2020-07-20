@@ -93,7 +93,7 @@
 }
 
 - (void)handleDetailModelData {
-    self.headerViewHeight = 220+120;
+    self.headerViewHeight = 220;
     CGFloat collectionViewHeight=0;
     switch (self.businessType) {
         case 1:

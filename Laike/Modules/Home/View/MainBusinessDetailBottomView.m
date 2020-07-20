@@ -19,8 +19,6 @@
 @interface MainBusinessDetailBottomView ()
 
 @property (nonatomic, strong) UIView *lineView;
-@property (nonatomic, strong) UIButton *onlineButton;
-@property (nonatomic, strong) UIButton *phoneButton;
 @property (nonatomic, strong) ActivityRegisterView *activityView;
 
 @end
@@ -32,10 +30,14 @@
         [self addSubview:self.subjectButton];
         [self addSubview:self.nameLabel];
         [self addSubview:self.consultationLabel];
-//        [self addSubview:self.onlineButton];
-//        [self addSubview:self.phoneButton];
         [self addSubview:self.rightOperationButton];
+        [self addSubview:self.rightAnotherOperationButton];
         [self addKeyboardNotification];
+        
+        UserModel *user = UserModel.shareUser;
+        [self.subjectButton sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)] forState:0];
+        self.nameLabel.text = user.realName;
+        self.consultationLabel.text = kFormat(@"咨询量：%ld", (long)user.clueCount);
     }
     return self;
 }
@@ -48,11 +50,7 @@
 }
 
 - (void)subjectButtonClick {
-//    if (self.businessType == 102001 || self.businessType == 103001) {
-//        [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.detailModel.bottomData.subjectId UserType:3 BusinessType:self.businessType];
-//    } else {
-//        [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.detailModel.bottomData.subjectId UserType:self.detailModel.bottomData.subjectType == 1 ? 3 : 2 BusinessType:self.businessType];
-//    }
+    
 }
 
 - (void)rightOperationButtonClick {
@@ -61,27 +59,9 @@
     }
 }
 
-- (void)phoneButtonClick {
-    kCallTel(self.detailModel.bottomData.serviceHotline);
-}
-
-- (void)onlineButtonClick {
-    if (self.businessType == 17) {
-        QHWActivityModel *activityModel = (QHWActivityModel *)self.detailModel;
-        CGFloat viewH = activityModel.registerModeList.count * 50 + 70 + 40;
-        self.activityView = [[ActivityRegisterView alloc] initWithFrame:CGRectMake(40, (kScreenH-viewH)/2.0, kScreenW-80, viewH)];
-        self.activityView.registerModeList = activityModel.registerModeList;
-        self.activityView.confirmBlock = ^(NSArray * _Nonnull columnList) {
-            QHWSystemService *service = QHWSystemService.new;
-            [service registerActivityRequestWithActivityId:activityModel.id ColumnList:columnList];
-        };
-        [self.activityView show];
-    } else {
-        if (self.businessType == 103001) {
-            [QHWSystemService showLabelAlertViewWithTitle:@"报名" Img:@"" MerchantId:self.detailModel.bottomData.subjectId IndustryId:self.businessType BusinessId:self.detailModel.id DescribeCode:12 PositionCode:self.detailModel.bottomData.subjectType == 1 ? 3: 7];
-        } else {
-            [QHWSystemService showLabelAlertViewWithTitle:@"预约咨询" Img:@"" MerchantId:self.detailModel.bottomData.subjectId IndustryId:self.businessType BusinessId:self.detailModel.id DescribeCode:6 PositionCode:self.detailModel.bottomData.subjectType == 1 ? 3: 7];
-        }
+- (void)rightAnotherOperationButtonClick {
+    if (self.rightAnotherOperationBlock) {
+        self.rightAnotherOperationBlock();
     }
 }
 
@@ -136,18 +116,12 @@
     return _consultationLabel;
 }
 
-- (UIButton *)phoneButton {
-    if (!_phoneButton) {
-        _phoneButton = UIButton.btnFrame(CGRectMake(kScreenW-120, 15, 100, 45)).btnTitle(@"打电话").btnFont(kFontTheme14).btnTitleColor(kColorThemefff).btnBkgColor(kColorThemeed2530).btnCornerRadius(4).btnAction(self, @selector(phoneButtonClick));
+- (UIButton *)rightAnotherOperationButton {
+    if (!_rightAnotherOperationButton) {
+        _rightAnotherOperationButton = UIButton.btnFrame(CGRectMake(kScreenW-120, 15, 100, 45)).btnTitle(@"报备客户").btnFont(kFontTheme14).btnTitleColor(kColorThemefff).btnBkgColor(kColorThemefb4d56).btnCornerRadius(4).btnAction(self, @selector(rightAnotherOperationButtonClick));
+        _rightAnotherOperationButton.hidden = YES;
     }
-    return _phoneButton;
-}
-
-- (UIButton *)onlineButton {
-    if (!_onlineButton) {
-        _onlineButton = UIButton.btnFrame(CGRectMake(kScreenW-120-110, 15, 100, 45)).btnTitle(@"在线问").btnFont(kFontTheme14).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme3cb584).btnCornerRadius(4).btnAction(self, @selector(onlineButtonClick));
-    }
-    return _onlineButton;
+    return _rightAnotherOperationButton;
 }
 
 - (UIButton *)rightOperationButton {

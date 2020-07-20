@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *createTime;
 @property (nonatomic, copy) NSString *articleDescribe;
 @property (nonatomic, copy) NSString *coverPath;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *Html2Text;
 @property (nonatomic, strong) NSArray *coverPathList;
 
 @property (nonatomic, assign) CGFloat titleHeight;

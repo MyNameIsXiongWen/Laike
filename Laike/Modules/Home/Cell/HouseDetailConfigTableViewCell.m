@@ -8,7 +8,7 @@
 
 #import "HouseDetailConfigTableViewCell.h"
 
-@interface HouseDetailConfigTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface HouseDetailConfigTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QHWBaseCellProtocol>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
@@ -44,6 +44,11 @@
         }];
     }
     return self;
+}
+
+- (void)configCellData:(id)data {
+    self.dataArray = data;
+    [self.collectionView reloadData];
 }
 
 #pragma mark ------------UICollectionViewDataSource-------------

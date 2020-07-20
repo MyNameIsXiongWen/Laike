@@ -1276,8 +1276,8 @@
 		185EC8B324A091BD00DCAB2C /* CTMediator */ = {
 			isa = PBXGroup;
 			children = (
-				185EC8B424A091BD00DCAB2C /* CTMediator.m */,
 				185EC8B524A091BD00DCAB2C /* CTMediator.h */,
+				185EC8B424A091BD00DCAB2C /* CTMediator.m */,
 			);
 			path = CTMediator;
 			sourceTree = "<group>";
@@ -1382,14 +1382,14 @@
 		185EC8EB24A091BD00DCAB2C /* QHWCycleScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				185EC8EC24A091BD00DCAB2C /* QHWCycleScrollViewFlowLayout.m */,
 				185EC8ED24A091BD00DCAB2C /* QHWCycleScrollView.h */,
-				185EC8EE24A091BD00DCAB2C /* QHWCycleScrollViewCell.h */,
-				185EC8EF24A091BD00DCAB2C /* QHWPageControl.m */,
 				185EC8F024A091BD00DCAB2C /* QHWCycleScrollView.m */,
-				185EC8F124A091BD00DCAB2C /* QHWCycleScrollViewFlowLayout.h */,
+				185EC8EE24A091BD00DCAB2C /* QHWCycleScrollViewCell.h */,
 				185EC8F224A091BD00DCAB2C /* QHWCycleScrollViewCell.m */,
+				185EC8F124A091BD00DCAB2C /* QHWCycleScrollViewFlowLayout.h */,
+				185EC8EC24A091BD00DCAB2C /* QHWCycleScrollViewFlowLayout.m */,
 				185EC8F324A091BD00DCAB2C /* QHWPageControl.h */,
+				185EC8EF24A091BD00DCAB2C /* QHWPageControl.m */,
 			);
 			path = QHWCycleScrollView;
 			sourceTree = "<group>";

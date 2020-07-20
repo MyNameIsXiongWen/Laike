@@ -85,7 +85,7 @@ static NSString *const kCRMEdit = @"client/edit";//crm edit
 static NSString *const kCRMAddTrack = @"client/follow/add";//crm add track
 static NSString *const kCRMGiveUpTrack = @"client/giveUp";//crm giveUp track
 static NSString *const kCRMTrackList = @"client/follow/getList";//crm track list
-static NSString *const kCRMAdvisoryGiveUpTrack = @"client/giveUp";
+static NSString *const kCRMAdvisoryGiveUpTrack = @"action/giveUp";
 
 static NSString *const kClueList = @"clue/getList";//咨询(获客)列表
 static NSString *const kClueActionAllList = @"clue/action/getAllList";//线索模块-行为-客户所有列表

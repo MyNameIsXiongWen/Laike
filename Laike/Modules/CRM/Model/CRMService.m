@@ -363,9 +363,9 @@
                 }
             }
         }
-        if (self.crmModel.clientLevelCode) {
+        if (self.crmModel.clientLevel) {
             for (FilterCellModel *cellModel in self.clientLevelList) {
-                if (cellModel.code.integerValue == self.crmModel.clientLevelCode) {
+                if (cellModel.code.integerValue == self.crmModel.clientLevel) {
                     cellModel.selected = YES;
                     break;
                 }

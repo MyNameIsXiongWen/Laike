@@ -39,10 +39,6 @@
 
 - (void)setService:(LiveService *)service {
     _service = service;
-    UserModel *user = UserModel.shareUser;
-    [self.bottomView.subjectButton sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)] forState:0];
-    self.bottomView.nameLabel.text = user.realName;
-    self.bottomView.consultationLabel.text = kFormat(@"咨询量：%ld", (long)user.clueCount);
     for (QHWBaseModel *baseModel in service.tableViewDataArray) {
         [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
     }

@@ -8,8 +8,6 @@
 
 #import "QSchoolOrganizerViewController.h"
 #import "QHWBaseCellProtocol.h"
-#import <UIButton+WebCache.h>
-#import "UserModel.h"
 
 @interface QSchoolOrganizerViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -36,11 +34,6 @@
         [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
     }
     [self.view addSubview:self.tableView];
-    
-    UserModel *user = UserModel.shareUser;
-    [self.bottomView.subjectButton sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)] forState:0];
-    self.bottomView.nameLabel.text = user.realName;
-    self.bottomView.consultationLabel.text = kFormat(@"咨询量：%ld", (long)user.clueCount);
 }
 
 #pragma mark ------------Notification-------------
