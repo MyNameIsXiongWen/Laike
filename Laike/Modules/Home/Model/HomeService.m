@@ -164,6 +164,9 @@
                              @"pageSize": @(self.itemPageModel.pagination.pageSize)};
     [QHWHttpManager.sharedInstance QHW_POST:urlString parameters:params success:^(id responseObject) {
         self.itemPageModel = [QHWItemPageModel yy_modelWithJSON:responseObject[@"data"]];
+        if (self.itemPageModel.pagination.currentPage == 1) {
+            [self.tableViewDataArray removeAllObjects];
+        }
         [self.requestDataArray removeAllObjects];
         self.requestDataArray = [NSArray yy_modelArrayWithClass:NSClassFromString(modelStr) json:self.itemPageModel.list].mutableCopy;
         for (QHWMainBusinessDetailBaseModel *baseModel in self.requestDataArray) {

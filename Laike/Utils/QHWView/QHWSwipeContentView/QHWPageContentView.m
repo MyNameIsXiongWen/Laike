@@ -139,7 +139,7 @@
 }
 
 - (void)setContentViewCurrentIndex:(NSInteger)contentViewCurrentIndex {
-    if (_contentViewCurrentIndex < 0 || _contentViewCurrentIndex > self.childsVCs.count-1) {
+    if (contentViewCurrentIndex < 0 || contentViewCurrentIndex > self.childsVCs.count-1) {
         return;
     }
     _isSelectBtn = YES;

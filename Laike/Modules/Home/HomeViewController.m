@@ -59,6 +59,10 @@
     [self getHomeSchoolRequest];
     [self getHomeTopBannerDataRequest];
     dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+        if (self.contentCell && self.contentCell.viewControllers.count > 0) {
+            HomeScrollContentViewController *vc = self.contentCell.viewControllers[self.contentCell.pageContentView.contentViewCurrentIndex];
+            [vc getMainData];
+        }
         self.homeService.consultantArray = self.systemService.consultantArray;
         self.homeService.bannerArray = self.systemService.bannerArray;
         self.homeService.schoolArray = self.schoolService.tableViewDataArray;
