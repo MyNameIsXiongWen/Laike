@@ -19,6 +19,7 @@
 #import "QHWStudentModel.h"
 #import "QHWConsultantModel.h"
 #import "QHWShareView.h"
+#import "UserModel.h"
 
 @interface MainBusinessDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -307,6 +308,10 @@
             }
         };
         _bottomView.rightAnotherOperationBlock = ^{
+            if (UserModel.shareUser.bindStatus == 2) {
+                [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
+                return;
+            }
             [CTMediator.sharedInstance CTMediator_viewControllerForBookAppointmentWithBusinessId:weakSelf.businessId BusinessName:weakSelf.detailService.detailModel.name BusinessType:weakSelf.businessType];
         };
     }
