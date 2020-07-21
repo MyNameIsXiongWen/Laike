@@ -11,7 +11,7 @@
 #import "QHWGeneralTableViewCell.h"
 #import <HyphenateLite/HyphenateLite.h>
 #import "CTMediator+ViewController.h"
-//#import "CommentReplyListViewController.h"
+#import "CommentReplyListViewController.h"
 
 @interface RelatedToMeViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -111,20 +111,20 @@
             
         case 101002: //提到我的  头条-评论回复，跳转-评论回复详情；
             {
-//                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-//                vc.commentId = msgModel.create.subjectId;
-//                vc.communityType = 1;
-//                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+                CommentReplyListViewController *vc = CommentReplyListViewController.new;
+                vc.commentId = msgModel.create.subjectId;
+                vc.communityType = 1;
+                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
             }
             break;
             
         case 101004: //提到我的  海外圈-视频-评论回复，跳转-评论回复详情；
         case 101005: //提到我的  海外圈-图文-评论回复，跳转-评论回复详情；
             {
-//                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-//                vc.commentId = msgModel.create.subjectId;
-//                vc.communityType = 2;
-//                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+                CommentReplyListViewController *vc = CommentReplyListViewController.new;
+                vc.commentId = msgModel.create.subjectId;
+                vc.communityType = 2;
+                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
             }
             break;
             
@@ -139,10 +139,10 @@
             
         case 103004: //赞我的  头条-回复，跳转-评论回复详情；
             {
-//                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-//                vc.commentId = msgModel.create.subjectId;
-//                vc.communityType = 1;
-//                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+                CommentReplyListViewController *vc = CommentReplyListViewController.new;
+                vc.commentId = msgModel.create.subjectId;
+                vc.communityType = 1;
+                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
             }
             break;
                 
@@ -154,10 +154,10 @@
         case 103008: //赞我的  海外圈-视频-评论回复，跳转-评论回复详情；
         case 103009: //赞我的  海外圈-图文-评论回复，跳转-评论回复详情；
             {
-//                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-//                vc.commentId = msgModel.create.subjectId;
-//                vc.communityType = 2;
-//                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+                CommentReplyListViewController *vc = CommentReplyListViewController.new;
+                vc.commentId = msgModel.create.subjectId;
+                vc.communityType = 2;
+                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
             }
             break;
         

@@ -45,7 +45,8 @@
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kDistributionClientAdd parameters:params success:^(id responseObject) {
         [SVProgressHUD showInfoWithStatus:@"报备客户成功"];
-        [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
+        [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"DistributionClientViewController").new animated:YES];
+//        [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
     }];
 }

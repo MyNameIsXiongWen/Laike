@@ -47,6 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int unreadMsgCount;
 @property (nonatomic, strong) EMConversation *conversation;
 
+@property (nonatomic, assign) NSInteger businessType;
+@property (nonatomic, copy) NSString *businessId;
+///点击状态：1-原生页面；2-H5地址；3-文本不跳转
+@property (nonatomic, assign) NSInteger clickStatus;
+
 @end
 
 @interface MessageUserModel : NSObject

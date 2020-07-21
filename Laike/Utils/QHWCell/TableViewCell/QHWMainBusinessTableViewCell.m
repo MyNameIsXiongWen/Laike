@@ -189,6 +189,10 @@
     if (!_shareView) {
         _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];WEAKSELF
         _shareView.clickShareBlock = ^{
+//            if (self.isDistribution && UserModel.shareUser.bindStatus == 2) {
+//                [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
+//                return;
+//            }
             QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":weakSelf.detailModel, @"shareType": @(ShareTypeMainBusiness)}];
             [shareView show];
         };

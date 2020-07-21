@@ -12,6 +12,7 @@
 #import "QHWTabScrollView.h"
 #import "QHWPageContentView.h"
 #import "CTMediator+ViewController.h"
+#import "UserModel.h"
 
 @interface DistributionClientViewController () <QHWPageContentViewDelegate>
 
@@ -31,7 +32,15 @@
 //    [self.kNavigationView.rightAnotherBtn setImage:kImageMake(@"global_search") forState:0];
 }
 
+- (void)leftNavBtnAction:(UIButton *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)rightNavBtnAction:(UIButton *)sender {
+    if (UserModel.shareUser.bindStatus == 2) {
+        [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
+        return;
+    }
     [CTMediator.sharedInstance CTMediator_viewControllerForBookAppointmentWithBusinessId:@"" BusinessName:@"" BusinessType:0];
 }
 

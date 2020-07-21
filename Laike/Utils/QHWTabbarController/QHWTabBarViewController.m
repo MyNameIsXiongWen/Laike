@@ -79,7 +79,7 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
     QHWNavigationController *navC = (QHWNavigationController *)viewController;
-    if ([NSStringFromClass(navC.topViewController.class) isEqualToString:@"DistributionViewController"]) {
+    if ([NSStringFromClass(navC.topViewController.class) isEqualToString:@"CRMViewController"]) {
         if (UserModel.shareUser.bindStatus == 2) {
             [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
             return NO;

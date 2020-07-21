@@ -75,6 +75,7 @@ static NSString *const kSchoolCommentList = @"learn/comment/getList";//Q大学�
 static NSString *const kSchoolCommentAdd = @"learn/comment/add";//Q大学添加评论
 
 static NSString *const kMerchantBind = @"merchant/user/bindMerchant";//绑定公司
+static NSString *const kMerchantGetCompanyName = @"merchant/user/getBindMerchant";//
 
 
 static NSString *const kCRMFilter = @"client/getVariable";//crm筛选条件

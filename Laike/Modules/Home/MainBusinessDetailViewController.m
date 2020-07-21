@@ -69,6 +69,10 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
+    if (self.isDistribution && UserModel.shareUser.bindStatus == 2) {
+        [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
+        return;
+    }
     QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel": self.detailService.detailModel, @"shareType": @(ShareTypeMainBusiness)}];
     [shareView show];
 }

@@ -50,13 +50,24 @@ static NSString *const ServiceHotLine = @"400-877-1008";
         return;
     }
     [self.nameTextField endEditing:YES];
+    
+    [QHWHttpLoading showWithMaskTypeBlack];
+    [QHWHttpManager.sharedInstance QHW_POST:kMerchantGetCompanyName parameters:@{@"merchantNumber": self.nameTextField.text} success:^(id responseObject) {
+        [self showConfirmViewWithName:responseObject[@"data"][@"companyName"]];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)showConfirmViewWithName:(NSString *)name {
     QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
     alert.confirmTextColor = kColorTheme21a8ff;
     [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认绑定"];
-    alert.contentString = kFormat(@"请确认绑定%@", self.nameTextField.text);
+    alert.contentString = kFormat(@"请确认绑定【%@】成为其专属顾问，绑定后您将获得更多权限", name);
     WEAKSELF
     alert.confirmBlock = ^{
         [alert dismiss];
+        [QHWHttpLoading showWithMaskTypeBlack];
         [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"1", @"merchantNumber": weakSelf.nameTextField.text} success:^(id responseObject) {
             [SVProgressHUD showInfoWithStatus:@"绑定成功"];
             [weakSelf.navigationController popViewControllerAnimated:YES];

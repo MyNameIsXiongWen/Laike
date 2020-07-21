@@ -81,6 +81,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *gardenConfigList;
 @property (nonatomic, strong) NSArray *kitchenConfigList;
 
+///distributionStatus 分销状态 1-不是分销；2-分销产品 
+@property (nonatomic, assign) NSInteger distributionStatus;
+
 @end
 
 NS_ASSUME_NONNULL_END
