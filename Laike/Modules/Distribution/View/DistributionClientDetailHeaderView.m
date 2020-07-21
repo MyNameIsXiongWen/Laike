@@ -111,7 +111,8 @@
     [self.tagView setTagWithTagArray:@[clientDetailModel.followName ?: @""]];
     self.businessValueLabel.text = clientDetailModel.businessName;
     self.productValueLabel.text = clientDetailModel.name;
-    self.infoValueLabel.text = clientDetailModel.note;
+    self.infoValueLabel.text = kFormat(@"保护期：截止到%@", clientDetailModel.endTime);
+    self.processView.currentProcess = clientDetailModel.followStatus;
 }
 
 #pragma mark ------------UI-------------
@@ -226,7 +227,7 @@
         NSArray *array = @[@"报备", @"预定", @"成交", @"结佣"];
         for (int i=0; i<array.count; i++) {
             UIImageView *imgView = UIImageView.ivFrame((CGRectMake(originX+(perWidth-22)/2.0, 0, 22, 22))).ivCornerRadius(11);
-            imgView.backgroundColor = kColorThemea4abb3;
+            imgView.backgroundColor = kColorThemefff;
             
             UILabel *label = UILabel.labelFrame(CGRectMake(originX, imgView.bottom+6, perWidth, 22)).labelFont(kFontTheme14).labelTextAlignment(NSTextAlignmentCenter).labelText(array[i]);
             
@@ -241,7 +242,7 @@
 
 - (void)setCurrentProcess:(NSInteger)currentProcess {
     _currentProcess = currentProcess;
-    CGFloat perWidth = (kScreenW-60)/4;
+//    CGFloat perWidth = (kScreenW-60)/4;
 //    self.leftSelectedView.width = 40+(currentProcess-1)*perWidth;
 //    self.rightUnselectedView.width = kScreenW-84-self.leftSelectedView.width;
 //    self.rightUnselectedView.x = self.leftSelectedView.right;
@@ -252,22 +253,10 @@
 //    }
     for (int i=1; i<=self.circleArray.count; i++) {
         UIImageView *imgView = self.circleArray[i-1];
-        if (i < currentProcess) {
-            if (self.orderStatus == 3) {
-                imgView.image = kImageMake(@"crm_task_before_terminate");//灰色的勾
-            } else {
-                imgView.image = kImageMake(@"crm_task_before_ing");//橙色的勾
-            }
-        } else if (i == currentProcess) {
-            if (self.orderStatus == 3) {
-                imgView.image = kImageMake(@"crm_task_current_terminate");//灰色的叹号
-            } else if (self.orderStatus == 2) {
-                imgView.image = kImageMake(@"crm_task_before_ing");//橙色的勾
-            } else {
-                imgView.image = kImageMake(@"crm_task_current_ing");//橙色的圈
-            }
+        if (i <= currentProcess) {
+            imgView.image = kImageMake(@"product_selected");
         } else {
-            imgView.image = kImageMake(@"crm_task_after");//灰色的圈
+            imgView.image = kImageMake(@"product_unselected");
         }
     }
 }

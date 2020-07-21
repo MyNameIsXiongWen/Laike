@@ -99,6 +99,28 @@
 
 @implementation ClientModel
 
+- (NSString *)followName {
+    if (!_followName) {
+        switch (self.followStatus) {
+            case 1:
+                _followName = @"预约成功";
+                break;
+            case 2:
+                _followName = @"已预定";
+            break;
+                
+            case 3:
+                _followName = @"已成交";
+            break;
+                
+            default:
+                _followName = @"已结拥";
+                break;
+        }
+    }
+    return _followName;
+}
+
 - (CGFloat)businessHeight {
     if (!_businessHeight) {
         _businessHeight = MAX(20, [self.businessName getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-40, CGFLOAT_MAX)]);

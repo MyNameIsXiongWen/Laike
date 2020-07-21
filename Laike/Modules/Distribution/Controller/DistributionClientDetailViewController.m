@@ -119,7 +119,7 @@
         [_btmView.convertCRMBtn setTitle:@"客服" forState:0];
         WEAKSELF
         _btmView.clickLeftBtnBlock = ^{
-            
+            kCallTel(weakSelf.distributionService.clientDetailModel.serviceHotline);
         };
         _btmView.clickRightBtnBlock = ^{
             kCallTel(weakSelf.distributionService.clientDetailModel.mobileNumber);

@@ -37,14 +37,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *headPath;
 @property (nonatomic, copy) NSString *realName;
 @property (nonatomic, copy) NSString *mobileNumber;
+@property (nonatomic, copy) NSString *serviceHotline;
 @property (nonatomic, copy) NSString *idNumber;
 @property (nonatomic, copy) NSString *passportNumber;
 @property (nonatomic, copy) NSString *note;
+@property (nonatomic, copy) NSString *endTime;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *businessId;
 @property (nonatomic, copy) NSString *businessName;
 @property (nonatomic, copy) NSString *modifyTime;
 @property (nonatomic, copy) NSString *followName;
+///1-预约成功；2-已预定；3-已成交；4-已结拥；
 @property (nonatomic, assign) NSInteger followStatus;
 @property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, assign) CGFloat businessHeight;
