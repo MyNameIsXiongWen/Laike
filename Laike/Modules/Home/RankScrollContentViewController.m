@@ -28,14 +28,6 @@
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-180-48) Style:UITableViewStylePlain Object:self];
     self.tableView.rowHeight = 70;
     [self.tableView registerClass:RankTableViewCell.class forCellReuseIdentifier:NSStringFromClass(RankTableViewCell.class)];
-    if (self.rankType == 1) {
-        self.tableView.tableHeaderView = self.rankTableHeaderView;
-        UserModel *user = UserModel.shareUser;
-        self.rankTableHeaderView.rankValueLabel.text = self.systemService.myRanking > 200 ? @"未上榜" : kFormat(@"%ld", self.systemService.myRanking);
-        [self.rankTableHeaderView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
-        self.rankTableHeaderView.nameLabel.text = user.realName;
-        self.rankTableHeaderView.likeLabel.text = kFormat(@"%ld", user.likeCount);
-    }
     [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
         self.systemService.itemPageModel.pagination.currentPage = 1;
         [self getMainData];
@@ -49,6 +41,15 @@
 
 - (void)getMainData {
     [self.systemService getLikeRankRequestWithSubjectType:self.rankType Complete: ^{
+        if (self.rankType == 1) {
+            self.tableView.tableHeaderView = self.rankTableHeaderView;
+            UserModel *user = UserModel.shareUser;
+            self.rankTableHeaderView.rankValueLabel.text = self.systemService.myRanking > 100 ? @"未上榜" : kFormat(@"%ld", self.systemService.myRanking);
+            [self.rankTableHeaderView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
+            self.rankTableHeaderView.nameLabel.text = user.realName;
+            self.rankTableHeaderView.likeLabel.text = kFormat(@"%ld", user.likeCount);
+        }
+        
         [self.tableView reloadData];
         if ([self.tableView.mj_header isRefreshing]) {
             [self.tableView.mj_header endRefreshing];

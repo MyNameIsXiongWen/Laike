@@ -212,6 +212,7 @@
 @property (nonatomic, strong) UIView *leftSelectedView;
 @property (nonatomic, strong) UIView *rightUnselectedView;
 @property (nonatomic, strong) NSMutableArray *circleArray;
+@property (nonatomic, strong) NSMutableArray *labelArray;
 
 @end
 
@@ -229,10 +230,11 @@
             UIImageView *imgView = UIImageView.ivFrame((CGRectMake(originX+(perWidth-22)/2.0, 0, 22, 22))).ivCornerRadius(11);
             imgView.backgroundColor = kColorThemefff;
             
-            UILabel *label = UILabel.labelFrame(CGRectMake(originX, imgView.bottom+6, perWidth, 22)).labelFont(kFontTheme14).labelTextAlignment(NSTextAlignmentCenter).labelText(array[i]);
+            UILabel *label = UILabel.labelFrame(CGRectMake(originX, imgView.bottom+6, perWidth, 22)).labelTitleColor(kColorThemea4abb3).labelFont(kFontTheme14).labelTextAlignment(NSTextAlignmentCenter).labelText(array[i]);
             
             [self addSubview:label];
             [self addSubview:imgView];
+            [self.labelArray addObject:label];
             [self.circleArray addObject:imgView];
             originX += perWidth;
         }
@@ -253,9 +255,12 @@
 //    }
     for (int i=1; i<=self.circleArray.count; i++) {
         UIImageView *imgView = self.circleArray[i-1];
+        UILabel *label = self.labelArray[i-1];
         if (i <= currentProcess) {
+            label.textColor = kColorTheme21a8ff;
             imgView.image = kImageMake(@"product_selected");
         } else {
+            label.textColor = kColorThemea4abb3;
             imgView.image = kImageMake(@"product_unselected");
         }
     }
@@ -280,6 +285,13 @@
         _circleArray = NSMutableArray.array;
     }
     return _circleArray;
+}
+
+- (NSMutableArray *)labelArray {
+    if (!_labelArray) {
+        _labelArray = NSMutableArray.array;
+    }
+    return _labelArray;
 }
 
 @end

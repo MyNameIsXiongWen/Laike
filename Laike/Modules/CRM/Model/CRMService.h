@@ -99,6 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *followName;
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *createTime;
+@property (nonatomic, copy) NSString *note;
 @property (nonatomic, assign) CGFloat trackHeight;
 
 @end

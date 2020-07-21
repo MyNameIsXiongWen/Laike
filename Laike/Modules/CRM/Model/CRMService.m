@@ -583,7 +583,7 @@
 
 - (CGFloat)trackHeight {
     if (!_trackHeight) {
-        _trackHeight = 10 + 20 + 10 + 10 + MAX(20, [self.content getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-60, CGFLOAT_MAX)]);
+        _trackHeight = 10 + 20 + 10 + 10 + MAX(20, [self.content ?: self.note getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-60, CGFLOAT_MAX)]);
     }
     return _trackHeight;
 }

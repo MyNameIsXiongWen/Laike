@@ -71,7 +71,7 @@
     CRMTrackCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CRMTrackCell.class)];
     cell.titleLabel.text = model.followName;
     cell.timeLabel.text = model.createTime;
-    cell.contentLabel.text = model.content;
+    cell.contentLabel.text = model.note;
     cell.topLine.hidden = indexPath.row == 0;
     return cell;
 }
