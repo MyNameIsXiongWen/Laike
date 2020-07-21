@@ -116,7 +116,7 @@
     if (!_btmView) {
         _btmView = [[AdvisoryDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
         _btmView.customerId = self.customerId;
-        [_btmView.convertCRMBtn setTitle:@"客服" forState:0];
+        [_btmView.convertCRMBtn setTitle:@"助理" forState:0];
         WEAKSELF
         _btmView.clickLeftBtnBlock = ^{
             kCallTel(weakSelf.distributionService.clientDetailModel.serviceHotline);
