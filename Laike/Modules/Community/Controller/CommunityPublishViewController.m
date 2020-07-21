@@ -56,10 +56,6 @@
         [SVProgressHUD showInfoWithStatus:@"尚未选择关联业务"];
         return;
     }
-    if (self.publishService.selectedProductArray.count == 0) {
-        [SVProgressHUD showInfoWithStatus:@"尚未选择关联产品"];
-        return;
-    }
     [self.publishService uploadImageWithContent:self.textView.text Completed:^{
         [NSNotificationCenter.defaultCenter postNotificationName:kNotificationPublishSuccess object:nil];
         [CTMediator.sharedInstance CTMediator_viewControllerForPublishViewController];

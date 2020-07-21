@@ -23,11 +23,13 @@
     NSMutableDictionary *params = @{@"content": content,
                                     @"filePathList": array,
                                     @"industryId": @(self.industryId),
-                                    @"businessList": businessIdArray,
                                     @"coverPath": coverImg,
                                     @"fileType": @(self.fileType)}.mutableCopy;
     if (self.fileType == 1) {
         params[@"videoSatus"] = @"2";
+    }
+    if (businessIdArray.count > 0) {
+        params[@"businessList"] = businessIdArray;
     }
     [QHWHttpManager.sharedInstance QHW_POST:kCommunityAdd parameters:params success:^(id responseObject) {
         completed();
