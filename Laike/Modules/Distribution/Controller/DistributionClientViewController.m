@@ -11,6 +11,7 @@
 #import "DistributionService.h"
 #import "QHWTabScrollView.h"
 #import "QHWPageContentView.h"
+#import "CTMediator+ViewController.h"
 
 @interface DistributionClientViewController () <QHWPageContentViewDelegate>
 
@@ -31,7 +32,7 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"BookAppointmentViewController").new animated:YES];
+    [CTMediator.sharedInstance CTMediator_viewControllerForBookAppointmentWithBusinessId:@"" BusinessName:@"" BusinessType:0];
 }
 
 - (void)rightAnthorNavBtnAction:(UIButton *)sender {

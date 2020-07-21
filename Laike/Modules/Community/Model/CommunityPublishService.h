@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *imageArray;
 @property (nonatomic, assign) NSInteger industryId;
 @property (nonatomic, strong) NSArray *industryArray;
+@property (nonatomic, strong) NSMutableArray *selectedProductArray;
 
 @end
 

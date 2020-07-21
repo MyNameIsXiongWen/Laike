@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IndustryView *businessIndustryView;
 @property (nonatomic, strong) IndustryView *productIndustryView;
 @property (nonatomic, strong) CommunityPublishService *publishService;
+@property (nonatomic, assign) NSInteger typeSelectedIndex;
 
 @end
 
@@ -53,7 +54,10 @@
     }
     if (self.publishService.industryId == 0) {
         [SVProgressHUD showInfoWithStatus:@"尚未选择关联业务"];
-        [self clickBusinessIndustryView];
+        return;
+    }
+    if (self.publishService.selectedProductArray.count == 0) {
+        [SVProgressHUD showInfoWithStatus:@"尚未选择关联产品"];
         return;
     }
     [self.publishService uploadImageWithContent:self.textView.text Completed:^{
@@ -150,7 +154,7 @@
 - (void)clickBusinessIndustryView {
     [self.textView endEditing:YES];
     QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*(self.publishService.industryArray.count+1)+7) title:@""];
-    sheetView.dataArray = self.publishService.industryArray;
+    sheetView.dataArray = [self.publishService.industryArray convertToTitleArrayWithKeyName:@"businessName"];
     sheetView.sheetDelegate = self;
     [sheetView show];
 }
@@ -163,17 +167,27 @@
         return;
     }
     PublishRelateProductViewController *vc = PublishRelateProductViewController.new;
+    NSDictionary *dic = self.publishService.industryArray[self.typeSelectedIndex];
+    vc.identifier = dic[@"identifier"];
+    vc.selectedArray = self.publishService.selectedProductArray;
+    WEAKSELF
+    vc.selectProductBlock = ^(NSMutableArray * _Nonnull productArray) {
+        weakSelf.publishService.selectedProductArray = productArray;
+        NSString *countStr = kFormat(@"%ld", productArray.count);
+        NSString *str = kFormat(@"已关联%@个产品", countStr);
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:str];
+        [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[str rangeOfString:countStr]];
+        weakSelf.productIndustryView.industryLabel.attributedText = attr;
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark ------------QHWActionSheetViewDelegate-------------
 - (void)actionSheetViewSelectedIndex:(NSInteger)index WithActionSheetView:(QHWActionSheetView *)actionsheetView {
-    if (index == self.publishService.industryArray.count-1) {
-        self.publishService.industryId = 102001;
-    } else {
-        self.publishService.industryId = index+1;
-    }
-    self.businessIndustryView.industryLabel.text = self.publishService.industryArray[index];
+    self.typeSelectedIndex = index;
+    NSDictionary *dic = self.publishService.industryArray[index];
+    self.publishService.industryId = [dic[@"businessType"] integerValue];
+    self.businessIndustryView.industryLabel.text = dic[@"businessName"];
     self.businessIndustryView.industryLabel.textColor = kColorTheme2a303c;
 }
 

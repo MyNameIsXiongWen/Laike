@@ -230,11 +230,11 @@
                 dispatch_group_leave(group);
                 [tempArray addObject:@{@"path": key}];
             } option:nil];
-            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-                [QHWHttpLoading dismiss];
-                completed(tempArray);
-            });
         }
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            [QHWHttpLoading dismiss];
+            completed(tempArray);
+        });
     } failure:^(NSError *error) {
         completed(NSMutableArray.array);
     }];

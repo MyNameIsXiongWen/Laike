@@ -136,7 +136,7 @@
             [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(filePath)]];
         }
     }
-    self.titleLabel.text = detailModel.title;
+    self.titleLabel.text = detailModel.title ?: detailModel.content;
 }
 
 - (void)setMiniCodePath:(NSString *)miniCodePath {

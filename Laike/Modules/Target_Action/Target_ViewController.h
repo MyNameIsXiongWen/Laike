@@ -48,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeAdvisoryDetailViewController:(NSDictionary *)params;
 
+- (void)Action_nativeBookAppointmentViewController:(NSDictionary *)params;
+
 @end
 
 NS_ASSUME_NONNULL_END

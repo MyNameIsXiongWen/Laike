@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PublishRelateProductViewController : UIViewController
 
-@property (nonatomic, copy) void (^ selectProductBlock)(void);
+@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, strong) NSMutableArray *selectedArray;
+@property (nonatomic, copy) void (^ selectProductBlock)(NSMutableArray *productArray);
 
 @end
 

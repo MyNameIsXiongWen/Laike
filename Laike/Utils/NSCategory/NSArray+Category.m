@@ -50,10 +50,19 @@
 - (NSMutableArray *)convertToTitleArrayWithKeyName:(NSString *)keyName {
     NSMutableArray *titleArray = @[].mutableCopy;
     for (NSObject *model in self) {
-        if ([model containsProperty:keyName]) {
-            [titleArray addObject:[model valueForKey:keyName]];
+        if ([model isKindOfClass:NSDictionary.class]) {
+            NSDictionary *modelDic = (NSDictionary *)model;
+            if ([modelDic.allKeys containsObject:keyName]) {
+                [titleArray addObject:modelDic[keyName]];
+            } else {
+                [titleArray addObject:@""];
+            }
         } else {
-            [titleArray addObject:@""];
+            if ([model containsProperty:keyName]) {
+                [titleArray addObject:[model valueForKey:keyName]];
+            } else {
+                [titleArray addObject:@""];
+            }
         }
     }
     return titleArray;

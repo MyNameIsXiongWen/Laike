@@ -16,9 +16,14 @@
 - (void)publishRequestWithContent:(NSString *)content Image:(NSArray *)array CoverImage:(NSString *)coverImg Completed:(void (^)(void))completed {
     [QHWHttpLoading showWithMaskTypeBlack];
     //fileType: 文件类型：1--视频；2-图片
+    NSMutableArray *businessIdArray = NSMutableArray.array;
+    for (QHWMainBusinessDetailBaseModel *model in self.selectedProductArray) {
+        [businessIdArray addObject:@{@"businessId": model.id ?: @""}];
+    }
     NSMutableDictionary *params = @{@"content": content,
                                     @"filePathList": array,
                                     @"industryId": @(self.industryId),
+                                    @"businessList": businessIdArray,
                                     @"coverPath": coverImg,
                                     @"fileType": @(self.fileType)}.mutableCopy;
     if (self.fileType == 1) {
@@ -75,9 +80,21 @@
 
 - (NSArray *)industryArray {
     if (!_industryArray) {
-        _industryArray = @[@"房产", @"游学", @"移民", @"留学", @"海外医疗"];
+//        _industryArray = @[@"房产", @"游学", @"移民", @"留学", @"海外医疗"];
+        _industryArray = @[@{@"businessType": @(1), @"identifier": @"house", @"businessName": @"房产"},
+                           @{@"businessType": @(3), @"identifier": @"migration", @"businessName": @"移民"},
+                           @{@"businessType": @(4), @"identifier": @"student", @"businessName": @"留学"},
+                           @{@"businessType": @(2), @"identifier": @"study", @"businessName": @"游学"},
+                           @{@"businessType": @(102001), @"identifier": @"treatment", @"businessName": @"海外医疗"}];
     }
     return _industryArray;
+}
+
+- (NSMutableArray *)selectedProductArray {
+    if (!_selectedProductArray) {
+        _selectedProductArray = NSMutableArray.array;
+    }
+    return _selectedProductArray;
 }
 
 @end

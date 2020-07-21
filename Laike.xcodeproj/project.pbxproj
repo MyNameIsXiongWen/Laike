@@ -104,8 +104,6 @@
 		185EC95F24A091BE00DCAB2C /* QHWItemPageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC89B24A091BD00DCAB2C /* QHWItemPageModel.m */; };
 		185EC96024A091BE00DCAB2C /* QHWActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC89D24A091BD00DCAB2C /* QHWActivityModel.m */; };
 		185EC96124A091BE00DCAB2C /* QHWConsultantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC89E24A091BD00DCAB2C /* QHWConsultantModel.m */; };
-		185EC96224A091BE00DCAB2C /* QHWOptionBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC8A124A091BD00DCAB2C /* QHWOptionBaseModel.m */; };
-		185EC96324A091BE00DCAB2C /* QHWCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC8A224A091BD00DCAB2C /* QHWCategoryModel.m */; };
 		185EC96424A091BE00DCAB2C /* QHWBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC8A924A091BD00DCAB2C /* QHWBannerModel.m */; };
 		185EC96524A091BE00DCAB2C /* QHWTreatmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC8AA24A091BD00DCAB2C /* QHWTreatmentModel.m */; };
 		185EC96624A091BE00DCAB2C /* QHWBottomUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC8AD24A091BD00DCAB2C /* QHWBottomUserModel.m */; };
@@ -461,8 +459,6 @@
 		185EC88624A091BD00DCAB2C /* NSArray+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Category.h"; sourceTree = "<group>"; };
 		185EC88724A091BD00DCAB2C /* NSDictionary+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Category.m"; sourceTree = "<group>"; };
 		185EC88824A091BD00DCAB2C /* NSObject+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Category.m"; sourceTree = "<group>"; };
-		185EC88A24A091BD00DCAB2C /* QHWCategoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWCategoryModel.h; sourceTree = "<group>"; };
-		185EC88B24A091BD00DCAB2C /* QHWOptionBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWOptionBaseModel.h; sourceTree = "<group>"; };
 		185EC88C24A091BD00DCAB2C /* QHWHouseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWHouseModel.m; sourceTree = "<group>"; };
 		185EC88D24A091BD00DCAB2C /* QHWMigrationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWMigrationModel.m; sourceTree = "<group>"; };
 		185EC88E24A091BD00DCAB2C /* QHWConsultantModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWConsultantModel.h; sourceTree = "<group>"; };
@@ -484,8 +480,6 @@
 		185EC89E24A091BD00DCAB2C /* QHWConsultantModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWConsultantModel.m; sourceTree = "<group>"; };
 		185EC89F24A091BD00DCAB2C /* QHWHouseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWHouseModel.h; sourceTree = "<group>"; };
 		185EC8A024A091BD00DCAB2C /* QHWMigrationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWMigrationModel.h; sourceTree = "<group>"; };
-		185EC8A124A091BD00DCAB2C /* QHWOptionBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWOptionBaseModel.m; sourceTree = "<group>"; };
-		185EC8A224A091BD00DCAB2C /* QHWCategoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWCategoryModel.m; sourceTree = "<group>"; };
 		185EC8A324A091BD00DCAB2C /* QHWStudentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWStudentModel.h; sourceTree = "<group>"; };
 		185EC8A424A091BD00DCAB2C /* QHWBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWBaseModel.h; sourceTree = "<group>"; };
 		185EC8A524A091BD00DCAB2C /* QHWMainBusinessDetailBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWMainBusinessDetailBaseModel.h; sourceTree = "<group>"; };
@@ -1228,47 +1222,43 @@
 		185EC88924A091BD00DCAB2C /* QHWModel */ = {
 			isa = PBXGroup;
 			children = (
-				185EC88A24A091BD00DCAB2C /* QHWCategoryModel.h */,
-				185EC88B24A091BD00DCAB2C /* QHWOptionBaseModel.h */,
+				185EC8AF24A091BD00DCAB2C /* QHWBaseCellProtocol.h */,
+				185EC8A424A091BD00DCAB2C /* QHWBaseModel.h */,
+				185EC89124A091BD00DCAB2C /* QHWBaseModel.m */,
+				185EC8B124A091BD00DCAB2C /* QHWItemPageModel.h */,
+				185EC89B24A091BD00DCAB2C /* QHWItemPageModel.m */,
+				185EC89F24A091BD00DCAB2C /* QHWHouseModel.h */,
 				185EC88C24A091BD00DCAB2C /* QHWHouseModel.m */,
-				185EC88D24A091BD00DCAB2C /* QHWMigrationModel.m */,
-				185EC88E24A091BD00DCAB2C /* QHWConsultantModel.h */,
+				185EC8A624A091BD00DCAB2C /* QHWImageModel.h */,
 				185EC88F24A091BD00DCAB2C /* QHWImageModel.m */,
 				185EC8A524A091BD00DCAB2C /* QHWMainBusinessDetailBaseModel.h */,
 				185EC89024A091BD00DCAB2C /* QHWMainBusinessDetailBaseModel.m */,
-				185EC89124A091BD00DCAB2C /* QHWBaseModel.m */,
+				185EC8A324A091BD00DCAB2C /* QHWStudentModel.h */,
 				185EC89224A091BD00DCAB2C /* QHWStudentModel.m */,
-				185EC89324A091BD00DCAB2C /* QHWBottomUserModel.h */,
-				185EC89424A091BD00DCAB2C /* QHWTagListModel.m */,
 				185EC8AB24A091BD00DCAB2C /* QHWCommunityArticleModel.h */,
 				185EC89524A091BD00DCAB2C /* QHWCommunityArticleModel.m */,
 				185EC89624A091BD00DCAB2C /* QHWTreatmentModel.h */,
+				185EC8AA24A091BD00DCAB2C /* QHWTreatmentModel.m */,
 				185EC89724A091BD00DCAB2C /* QHWBannerModel.h */,
 				185EC89824A091BD00DCAB2C /* QHWShareModel.m */,
 				185EC89A24A091BD00DCAB2C /* QHWCommunityContentModel.h */,
 				185EC8B224A091BD00DCAB2C /* QHWCommunityContentModel.m */,
-				185EC89B24A091BD00DCAB2C /* QHWItemPageModel.m */,
 				185EC89C24A091BD00DCAB2C /* QHWStudyModel.h */,
+				185EC8B024A091BD00DCAB2C /* QHWStudyModel.m */,
+				185EC8AE24A091BD00DCAB2C /* QHWActivityModel.h */,
 				185EC89D24A091BD00DCAB2C /* QHWActivityModel.m */,
+				185EC88E24A091BD00DCAB2C /* QHWConsultantModel.h */,
 				185EC89E24A091BD00DCAB2C /* QHWConsultantModel.m */,
-				185EC89F24A091BD00DCAB2C /* QHWHouseModel.h */,
 				185EC8A024A091BD00DCAB2C /* QHWMigrationModel.h */,
-				185EC8A124A091BD00DCAB2C /* QHWOptionBaseModel.m */,
-				185EC8A224A091BD00DCAB2C /* QHWCategoryModel.m */,
-				185EC8A324A091BD00DCAB2C /* QHWStudentModel.h */,
-				185EC8A424A091BD00DCAB2C /* QHWBaseModel.h */,
-				185EC8A624A091BD00DCAB2C /* QHWImageModel.h */,
+				185EC88D24A091BD00DCAB2C /* QHWMigrationModel.m */,
 				185EC8A724A091BD00DCAB2C /* QHWSchoolModel.h */,
 				185EC89924A091BD00DCAB2C /* QHWSchoolModel.m */,
 				185EC8A824A091BD00DCAB2C /* QHWShareModel.h */,
 				185EC8A924A091BD00DCAB2C /* QHWBannerModel.m */,
-				185EC8AA24A091BD00DCAB2C /* QHWTreatmentModel.m */,
 				185EC8AC24A091BD00DCAB2C /* QHWTagListModel.h */,
+				185EC89424A091BD00DCAB2C /* QHWTagListModel.m */,
+				185EC89324A091BD00DCAB2C /* QHWBottomUserModel.h */,
 				185EC8AD24A091BD00DCAB2C /* QHWBottomUserModel.m */,
-				185EC8AE24A091BD00DCAB2C /* QHWActivityModel.h */,
-				185EC8AF24A091BD00DCAB2C /* QHWBaseCellProtocol.h */,
-				185EC8B024A091BD00DCAB2C /* QHWStudyModel.m */,
-				185EC8B124A091BD00DCAB2C /* QHWItemPageModel.h */,
 			);
 			path = QHWModel;
 			sourceTree = "<group>";
@@ -1583,10 +1573,10 @@
 				185A62FD24A9922800E7E75D /* RichTextTableViewCell.m */,
 				185A62FE24A9922800E7E75D /* RichTextWithTitleTableViewCell.h */,
 				185A62FF24A9922800E7E75D /* RichTextWithTitleTableViewCell.m */,
-				185E15B724B2C70600F15A90 /* MainBusinessFileTableViewCell.h */,
-				185E15B824B2C70600F15A90 /* MainBusinessFileTableViewCell.m */,
 				185E15BA24B2C71300F15A90 /* MainBusinessRulesTableViewCell.h */,
 				185E15BB24B2C71300F15A90 /* MainBusinessRulesTableViewCell.m */,
+				185E15B724B2C70600F15A90 /* MainBusinessFileTableViewCell.h */,
+				185E15B824B2C70600F15A90 /* MainBusinessFileTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2134,7 +2124,6 @@
 				185FDF1224A733130043FF36 /* CommunityPublishService.m in Sources */,
 				185CC98E24B991460004A20E /* OfficialMsgViewController.m in Sources */,
 				185EC9CD24A096B600DCAB2C /* MessageSearchViewController.m in Sources */,
-				185EC96324A091BE00DCAB2C /* QHWCategoryModel.m in Sources */,
 				185EC96F24A091BE00DCAB2C /* QHWPhotoBrowser.m in Sources */,
 				185E15B024B0830000F15A90 /* GalleryScrollContentViewController.m in Sources */,
 				185EC96724A091BE00DCAB2C /* QHWStudyModel.m in Sources */,
@@ -2277,7 +2266,6 @@
 				185E157224B0281B00F15A90 /* DistributionClientViewController.m in Sources */,
 				185EC9A924A091BE00DCAB2C /* UITextField+Category.m in Sources */,
 				1863953B24A35722007DC26D /* CRMService.m in Sources */,
-				185EC96224A091BE00DCAB2C /* QHWOptionBaseModel.m in Sources */,
 				185A62F624A988DD00E7E75D /* QSchoolDetailViewController.m in Sources */,
 				185EC9A124A091BE00DCAB2C /* UINavigationBar+Category.m in Sources */,
 				186394FE24A1B0E4007DC26D /* CRMViewController.m in Sources */,

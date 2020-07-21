@@ -49,6 +49,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForAdvisoryDetailWithCustomerId:(NSString *)customerId;
 
+- (void)CTMediator_viewControllerForBookAppointmentWithBusinessId:(NSString *)businessId BusinessName:(NSString *)businessName BusinessType:(NSInteger)businessType;
+
 @end
 
 NS_ASSUME_NONNULL_END

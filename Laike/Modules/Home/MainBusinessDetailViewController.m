@@ -194,16 +194,16 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    QHWBaseModel *baseModel = self.detailService.tableViewDataArray[section];
-    if (baseModel.footerTitle) {
-        MainBusinessDetailSectionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(MainBusinessDetailSectionFooterView.class)];
-        [footerView.btn setTitle:baseModel.footerTitle forState:0];
-        WEAKSELF
-        footerView.clickBtnBlock = ^{
-            [QHWSystemService showLabelAlertViewWithTitle:@"预约咨询" Img:@"" MerchantId:self.detailService.detailModel.merchantId IndustryId:weakSelf.businessType BusinessId:weakSelf.businessId DescribeCode:6 PositionCode:5];
-        };
-        return footerView;
-    }
+//    QHWBaseModel *baseModel = self.detailService.tableViewDataArray[section];
+//    if (baseModel.footerTitle) {
+//        MainBusinessDetailSectionFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(MainBusinessDetailSectionFooterView.class)];
+//        [footerView.btn setTitle:baseModel.footerTitle forState:0];
+//        WEAKSELF
+//        footerView.clickBtnBlock = ^{
+//            [QHWSystemService showLabelAlertViewWithTitle:@"预约咨询" Img:@"" MerchantId:self.detailService.detailModel.merchantId IndustryId:weakSelf.businessType BusinessId:weakSelf.businessId DescribeCode:6 PositionCode:5];
+//        };
+//        return footerView;
+//    }
     return UIView.new;
 }
 
@@ -307,7 +307,7 @@
             }
         };
         _bottomView.rightAnotherOperationBlock = ^{
-            [weakSelf.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"BookAppointmentViewController").new animated:YES];
+            [CTMediator.sharedInstance CTMediator_viewControllerForBookAppointmentWithBusinessId:weakSelf.businessId BusinessName:weakSelf.detailService.detailModel.name BusinessType:weakSelf.businessType];
         };
     }
     return _bottomView;
@@ -318,6 +318,7 @@
         _detailService = MainBusinessDetailService.new;
         _detailService.businessType = self.businessType;
         _detailService.businessId = self.businessId;
+        _detailService.isDistribution = self.isDistribution;
     }
     return _detailService;
 }

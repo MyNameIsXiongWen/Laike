@@ -57,34 +57,34 @@
         self.allReplyButton.hidden = commentModel.answerCount == 0;
         [self.allReplyButton setTitle:kFormat(@"%ld条回复 >", commentModel.answerCount) forState:0];
     }
-    self.likeButton.btnImage(kImageMake(commentModel.likeStatus == 1 ? @"big_like_white" : @"big_like_white_orange"));
+    self.likeButton.btnImage(kImageMake(commentModel.likeStatus == 2 ? @"big_like_white_orange" : @"big_like_white"));
     self.likeButton.btnBadgeLabel.text = kFormat(@"%ld", commentModel.likeCount);
 }
 
 #pragma mark ------------Action-------------
 - (void)clickAvatar {
-    [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.commentModel.releaseId UserType:1 BusinessType:0];
+//    [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.commentModel.releaseId UserType:1 BusinessType:0];
 }
 
 - (void)replyComment {
-    self.commentService.commentId = self.commentModel.commentId;
-    [self.commentService showCommentKeyBoardWithCommentName:self.commentModel.releaseName];
+//    self.commentService.commentId = self.commentModel.commentId;
+//    [self.commentService showCommentKeyBoardWithCommentName:self.commentModel.releaseName];
 }
 
 - (void)likeButtonClick:(UIButton *)btn {
-    NSInteger likeStatus = self.commentModel.likeStatus == 1 ? 2 : 1;
-    [QHWSystemService.new clickLikeRequestWithBusinessType:self.commentModel.businessType BusinessId:self.commentModel.commentId LikeStatus:likeStatus  Complete:^(BOOL status) {
-        if (status) {
-            self.commentModel.likeStatus = likeStatus;
-            if (likeStatus == 2) {
-                self.commentModel.likeCount++;
-            } else {
-                self.commentModel.likeCount--;
-            }
-            self.likeButton.selected = (likeStatus == 2);
-            self.likeButton.btnBadgeLabel.text = kFormat(@"%ld", self.commentModel.likeCount);
-        }
-    }];
+//    NSInteger likeStatus = self.commentModel.likeStatus == 1 ? 2 : 1;
+//    [QHWSystemService.new clickLikeRequestWithBusinessType:self.commentModel.businessType BusinessId:self.commentModel.commentId LikeStatus:likeStatus  Complete:^(BOOL status) {
+//        if (status) {
+//            self.commentModel.likeStatus = likeStatus;
+//            if (likeStatus == 2) {
+//                self.commentModel.likeCount++;
+//            } else {
+//                self.commentModel.likeCount--;
+//            }
+//            self.likeButton.selected = (likeStatus == 2);
+//            self.likeButton.btnBadgeLabel.text = kFormat(@"%ld", self.commentModel.likeCount);
+//        }
+//    }];
 }
 
 - (void)allReplyButtonClick:(UIButton *)btn {

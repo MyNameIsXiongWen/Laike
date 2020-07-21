@@ -7,7 +7,7 @@
 //
 
 #import "CRMTopOperationView.h"
-#import "CTMediator.h"
+#import "CTMediator+ViewController.h"
 
 @interface CRMTopOperationView ()
 
@@ -110,7 +110,7 @@
 }
 
 - (void)click_bookAppointment {
-    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"BookAppointmentViewController").new animated:YES];
+    [CTMediator.sharedInstance CTMediator_viewControllerForBookAppointmentWithBusinessId:@"" BusinessName:@"" BusinessType:0];
 }
 
 @end

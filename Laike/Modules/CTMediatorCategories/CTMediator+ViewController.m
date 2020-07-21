@@ -31,6 +31,7 @@ NSString * const kCTMediatorActionNativeAddCustomerViewController = @"nativeAddC
 NSString * const kCTMediatorActionNativeAddTrackViewController = @"nativeAddTrackViewController";
 NSString * const kCTMediatorActionNativeCRMDetailViewController = @"nativeCRMDetailViewController";
 NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeAdvisoryDetailViewController";
+NSString * const kCTMediatorActionNativeBookAppointmentViewController = @"nativeBookAppointmentViewController";
 
 @implementation CTMediator (Login)
 
@@ -182,6 +183,15 @@ NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeA
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeAdvisoryDetailViewController
                  params:@{@"customerId": customerId ?: @""}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForBookAppointmentWithBusinessId:(NSString *)businessId BusinessName:(NSString *)businessName BusinessType:(NSInteger)businessType {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeBookAppointmentViewController
+                 params:@{@"businessId": businessId ?: @"",
+                          @"businessName": businessName ?: @"",
+                          @"businessType": @(businessType)}
     shouldCacheTarget:NO];
 }
 

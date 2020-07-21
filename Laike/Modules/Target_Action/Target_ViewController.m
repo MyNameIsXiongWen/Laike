@@ -13,7 +13,6 @@
 #import "MainBusinessDetailViewController.h"
 #import "ActivityViewController.h"
 #import "ActivityDetailViewController.h"
-//#import "UserDetailViewController.h"
 #import "CommunityViewController.h"
 #import "CommunityDetailViewController.h"
 #import "QHWH5ViewController.h"
@@ -28,6 +27,7 @@
 #import "CRMAddTrackViewController.h"
 #import "CRMDetailViewController.h"
 #import "AdvisoryDetailViewController.h"
+#import "BookAppointmentViewController.h"
 
 @implementation Target_ViewController
 
@@ -161,6 +161,17 @@
     NSString *customerId = params[@"customerId"];
     AdvisoryDetailViewController *vc = AdvisoryDetailViewController.new;
     vc.customerId = customerId;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeBookAppointmentViewController:(NSDictionary *)params {
+    NSString *businessId = params[@"businessId"];
+    NSString *businessName = params[@"businessName"];
+    NSInteger businessType = [params[@"businessType"] integerValue];
+    BookAppointmentViewController *vc = BookAppointmentViewController.new;
+    vc.businessId = businessId;
+    vc.businessName = businessName;
+    vc.businessType = businessType;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

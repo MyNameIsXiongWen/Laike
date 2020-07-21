@@ -9,12 +9,12 @@
 #import "PublishRelateProductViewController.h"
 #import "QHWItemPageModel.h"
 #import "QHWMainBusinessDetailBaseModel.h"
+#import "HomeService.h"
 
 @interface PublishRelateProductViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) QHWItemPageModel *itemPageModel;
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) HomeService *homeService;
 
 @end
 
@@ -27,26 +27,75 @@
     self.kNavigationView.rightBtn.btnTitle(@"确定").btnTitleColor(kColorTheme21a8ff);
 }
 
+- (void)rightNavBtnAction:(UIButton *)sender {
+    if (self.selectedArray.count == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请选择关联产品"];
+        return;
+    }
+    if (self.selectProductBlock) {
+        self.selectProductBlock(self.selectedArray);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)getMainData {
-    [QHWHttpManager.sharedInstance QHW_POST:kCommunityRelateProdect parameters:@{@"currentPage": @(self.itemPageModel.pagination.currentPage),
-                                                                                 @"pageSize": @(self.itemPageModel.pagination.pageSize)} success:^(id responseObject) {
-        if (self.itemPageModel.pagination.currentPage == 1) {
-            [self.dataArray removeAllObjects];
+    [self.homeService getHomePageProductListRequestWithIdentifier:self.identifier Complete:^{
+        for (QHWBaseModel *baseModel in self.homeService.tableViewDataArray) {
+            [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
+            QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)baseModel.data;
+            if ([[self getSelectedIdArray] containsObject:model.id]) {
+                model.selected = YES;
+            }
         }
-        [self.dataArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:QHWMainBusinessDetailBaseModel.class json:self.itemPageModel.list]];
+        self.tableView.separatorStyle = self.homeService.tableViewDataArray.count > 0 ? UITableViewCellSeparatorStyleSingleLine : UITableViewCellSeparatorStyleNone;
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         [self.tableView reloadData];
-    } failure:^(NSError *error) {
-        
+        [self.tableView showNodataView:self.homeService.tableViewDataArray.count == 0 offsetY:0 button:nil];
+        [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.homeService.itemPageModel];
     }];
 }
 
+- (NSMutableArray *)getSelectedIdArray {
+    NSMutableArray *tempArray = NSMutableArray.array;
+    for (QHWMainBusinessDetailBaseModel *model in self.selectedArray) {
+        [tempArray addObject:model.id];
+    }
+    return tempArray;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return self.homeService.tableViewDataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(UITableViewCell.class)];
+    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)self.homeService.tableViewDataArray[indexPath.row].data;
+    cell.textLabel.text = model.name;
+    cell.imageView.image = model.selected ? kImageMake(@"product_selected") : kImageMake(@"product_unselected");
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)self.homeService.tableViewDataArray[indexPath.row].data;
+    if (model.selected) {
+        model.selected = !model.selected;
+        for (QHWMainBusinessDetailBaseModel *tempModel in self.selectedArray) {
+            if ([model.id isEqualToString:tempModel.id]) {
+                [self.selectedArray removeObject:tempModel];
+                break;
+            }
+        }
+    } else {
+        if (self.selectedArray.count < 5) {
+            model.selected = !model.selected;
+            [self.selectedArray addObject:model];
+        } else {
+            [SVProgressHUD showInfoWithStatus:@"最多关联5个产品"];
+            return;
+        }
+    }
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 /*
@@ -69,18 +118,12 @@
     return _tableView;
 }
 
-- (QHWItemPageModel *)itemPageModel {
-    if (!_itemPageModel) {
-        _itemPageModel = QHWItemPageModel.new;
+- (HomeService *)homeService {
+    if (!_homeService) {
+        _homeService = HomeService.new;
+        _homeService.pageType = 1;
     }
-    return _itemPageModel;
-}
-
-- (NSMutableArray *)dataArray {
-    if (!_dataArray) {
-        _dataArray = NSMutableArray.array;
-    }
-    return _dataArray;
+    return _homeService;
 }
 
 @end

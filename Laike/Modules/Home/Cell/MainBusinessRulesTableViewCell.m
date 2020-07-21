@@ -8,6 +8,8 @@
 
 #import "MainBusinessRulesTableViewCell.h"
 #import "QHWTabScrollView.h"
+#import "QHWShareView.h"
+#import "QHWHouseModel.h"
 
 @interface MainBusinessRulesTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QHWBaseCellProtocol>
 
@@ -35,7 +37,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self.tabScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.right.mas_equalTo(0);
+            make.top.left.right.mas_equalTo(0);
             make.height.mas_equalTo(30);
         }];
         [self.advisoryBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,10 +45,10 @@
             make.height.mas_equalTo(36);
             make.bottom.mas_equalTo(-15);
         }];
-        [self.advisoryBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.advisoryBtn.mas_right);
-            make.width.equalTo(self.advisoryBtn);
-            make.height.mas_equalTo(36);
+        [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.advisoryBtn.mas_right).offset(20);
+            make.size.equalTo(self.advisoryBtn);
+//            make.height.equalTo(self.advisoryBtn.mas_width);
             make.bottom.right.mas_equalTo(-15);
         }];
         [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,7 +68,7 @@
 #pragma mark ------------UIScrollViewDelegate-------------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (!self.dataArray.count) return;
-    NSInteger currentPage = [self currentIndex] % self.dataArray.count;
+    NSInteger currentPage = [self currentIndex] % (self.dataArray.count-1);
     [self.tabScrollView scrollToIndex:currentPage];
 }
 
@@ -80,12 +82,12 @@
 
 #pragma mark ------------UICollectionViewDataSource-------------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return self.dataArray.count-1;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = self.dataArray[indexPath.row];
-    return CGSizeMake(kScreenW, [dic[@"height"] floatValue]);
+    return CGSizeMake(kScreenW, [dic[@"height"] floatValue] + 20);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,7 +103,7 @@
 #pragma mark ------------UI-------------
 - (QHWTabScrollView *)tabScrollView {
     if (!_tabScrollView) {
-        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectZero];
+        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 30)];
         _tabScrollView.itemWidthType = ItemWidthTypeAdaptive;
         _tabScrollView.hideIndicatorView = NO;
         _tabScrollView.itemSelectedColor = kColorThemefb4d56;
@@ -128,7 +130,7 @@
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _collectionView = [UICreateView initWithFrame:CGRectZero Layout:layout Object:self];
-        _collectionView.scrollEnabled = NO;
+        _collectionView.pagingEnabled = YES;
         [_collectionView registerClass:RulesCollectionViewCell.class forCellWithReuseIdentifier:NSStringFromClass(RulesCollectionViewCell.class)];
         [self.contentView addSubview:_collectionView];
     }
@@ -136,11 +138,13 @@
 }
 
 - (void)clickAdvisoryBtn {
-    
+    QHWHouseModel *model = (QHWHouseModel *)self.dataArray.lastObject;
+    kCallTel(model.serviceHotline);
 }
 
 - (void)clickShareBtn {
-    
+    QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel": self.dataArray.lastObject, @"shareType": @(ShareTypeMainBusiness)}];
+    [shareView show];
 }
 
 - (UIButton *)advisoryBtn {
@@ -165,13 +169,12 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.contentLabel = UILabel.labelInit().labelFont(kFontTheme12).labelTitleColor(kColorTheme9399a5).labelNumberOfLines(0);
+        self.contentLabel = UILabel.labelInit().labelFont(kFontTheme13).labelTitleColor(kColorTheme9399a5).labelNumberOfLines(0);
         [self.contentView addSubview:self.contentLabel];
         [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.right.mas_equalTo(-15);
-            make.top.mas_equalTo(10);
-            make.bottom.mas_equalTo(-10);
+            make.centerY.equalTo(self.contentView.mas_centerY);
         }];
     }
     return self;

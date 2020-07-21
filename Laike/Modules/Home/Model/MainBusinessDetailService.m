@@ -158,6 +158,25 @@
 }
 
 - (void)handleHouseDetailCellData:(QHWHouseModel *)houseModel {
+    if (self.isDistribution) {
+        NSString *commissionStr = houseModel.commissionRate;
+        NSString *ruleStr = houseModel.distributionRules;
+        CGFloat commissionHeight = [commissionStr getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)];
+        CGFloat ruleHeight = [ruleStr getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)];
+        QHWBaseModel *recommendModel = [[QHWBaseModel alloc] configModelIdentifier:@"MainBusinessRulesTableViewCell"
+                                                                            Height:106+MAX(commissionHeight, ruleHeight)
+                                                                              Data:@[@[@{@"content": commissionStr ?: @"", @"height": @(commissionHeight)},@{@"content": houseModel.distributionRules ?: @"", @"height": @(ruleHeight)}, houseModel]]];
+        recommendModel.headerTitle = @"推荐成交";
+        [self.tableViewDataArray addObject:recommendModel];
+        
+        if (houseModel.distributionManual.length > 0) {
+            QHWBaseModel *fileModel = [[QHWBaseModel alloc] configModelIdentifier:@"MainBusinessFileTableViewCell" Height:75 Data:@[@[houseModel.distributionManual]]];
+            fileModel.headerTitle = @"项目资料";
+            [self.tableViewDataArray addObject:fileModel];
+        }
+    }
+    
+    
     QHWBaseModel *introModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": houseModel.intro ?: @"", @"identifier": @"ProjectIntro"}]];
     introModel.headerTitle = @"项目简介";
     introModel.footerTitle = @"咨询楼盘更多信息";

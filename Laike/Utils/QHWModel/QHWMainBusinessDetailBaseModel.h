@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) QHWBottomUserModel *bottomData;
 
 @property (nonatomic, assign) CGFloat mainBusinessCellHeight;
+@property (nonatomic, assign) BOOL selected;
 
 @end
 

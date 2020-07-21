@@ -52,8 +52,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.dataArray.count) {
         FileCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(FileCollectionViewCell.class) forIndexPath:indexPath];
-        NSDictionary *dic = self.dataArray[indexPath.row];
-        cell.titleLabel.text = dic[@"path"];
         return cell;
     }
     return UICollectionViewCell.new;
@@ -61,12 +59,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.dataArray.count) {
-        NSDictionary *dic = self.dataArray[indexPath.row];
-//        PDFDetailViewController *vc = PDFDetailViewController.new;
-//        vc.filePath = kFilePath(dic[@"path"]);
-//        vc.fileName = dic[@"path"];
-//        [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-        [CTMediator.sharedInstance CTMediator_viewControllerForH5WithUrl:kFilePath(dic[@"path"]) TitleName:dic[@"path"]];
+        NSString *filePath = self.dataArray[indexPath.row];
+        [CTMediator.sharedInstance CTMediator_viewControllerForH5WithUrl:kFilePath(filePath) TitleName:@"产品手册"];
     }
 }
 
@@ -95,14 +89,16 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         [self.typeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(8);
-            make.bottom.right.mas_equalTo(-8);
+            make.top.mas_equalTo(13);
+            make.bottom.mas_equalTo(-13);
+            make.right.mas_equalTo(-15);
             make.width.mas_equalTo(30);
         }];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.mas_equalTo(8);
-            make.bottom.mas_equalTo(-8);
-            make.right.equalTo(self.typeImgView.mas_left).offset(-8);
+            make.left.mas_equalTo(15);
+            make.top.mas_equalTo(13);
+            make.bottom.mas_equalTo(-13);
+            make.right.equalTo(self.typeImgView.mas_left).offset(-10);
         }];
     }
     return self;
@@ -110,7 +106,7 @@
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = UILabel.labelInit().labelFont(kFontTheme12).labelTitleColor(kColorTheme000);
+        _titleLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme000).labelText(@"产品手册").labelTextAlignment(NSTextAlignmentCenter);
         [self.shadowView addSubview:_titleLabel];
     }
     return _titleLabel;

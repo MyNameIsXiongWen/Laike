@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, copy) NSString *businessId;
+@property (nonatomic, copy) NSString *businessName;
 
 @end
 

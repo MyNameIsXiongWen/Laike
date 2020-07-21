@@ -67,6 +67,10 @@
     }];
 }
 
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    
+}
+
 - (void)resetWebViewFrameWithHeight:(CGFloat)height {
     //如果是新高度，那就重置
     if (height != webContentHeight) {

@@ -23,7 +23,6 @@
 @property (nonatomic, strong) NSArray *businessArray;
 @property (nonatomic, strong) UIButton *submitBtn;
 @property (nonatomic, assign) NSInteger selectedIndex;
-@property (nonatomic, copy) NSString *businessId;
 
 @end
 
@@ -41,7 +40,10 @@
 }
 
 - (void)clickBusinessTFView {
-    NSArray *array = @[@"房产", @"移民", @"留学", @"游学", @"海外医疗"];
+    if (self.businessType) {
+        return;
+    }
+    NSArray *array = [self.businessArray convertToTitleArrayWithKeyName:@"businessName"];
     QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*MIN(5, (array.count+1))+7) title:@""];
     sheetView.dataArray = array;
     sheetView.sheetDelegate = self;
@@ -55,6 +57,9 @@
 }
 
 - (void)clickProductTFView {
+    if (self.businessType) {
+        return;
+    }
     if (!self.selectedIndex) {
         [SVProgressHUD showInfoWithStatus:@"请选择报备业务"];
         [self clickBusinessTFView];
@@ -109,9 +114,20 @@
     if (!_businessTextFieldView) {
         _businessTextFieldView = [[CRMTextFieldView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, 60)];
         _businessTextFieldView.title = @"报备业务";
-        _businessTextFieldView.textField.placeholder = @"请选择报备业务";
+        if (self.businessType) {
+            for (NSDictionary *dic in self.businessArray) {
+                if ([dic[@"businessType"] integerValue] == self.businessType) {
+                    _businessTextFieldView.rightLabel.text = dic[@"businessName"];
+                    break;
+                }
+            }
+            _businessTextFieldView.textField.placeholder = @"";
+        } else {
+            _businessTextFieldView.textField.placeholder = @"请选择报备业务";
+        }
         _businessTextFieldView.textField.userInteractionEnabled = NO;
-        _businessTextFieldView.rightLabel.hidden = _businessTextFieldView.arrowImgView.hidden = NO;
+        _businessTextFieldView.rightLabel.hidden = NO;
+        _businessTextFieldView.arrowImgView.hidden = self.businessType;
         WEAKSELF
         _businessTextFieldView.clickTFViewBlock = ^{
             [weakSelf clickBusinessTFView];
@@ -124,9 +140,15 @@
     if (!_productTextFieldView) {
         _productTextFieldView = [[CRMTextFieldView alloc] initWithFrame:CGRectMake(0, self.businessTextFieldView.bottom, kScreenW, 60)];
         _productTextFieldView.title = @"报备产品";
-        _productTextFieldView.textField.placeholder = @"请选择报备产品";
+        if (self.businessType) {
+            _productTextFieldView.rightLabel.text = self.businessName;
+            _productTextFieldView.textField.placeholder = @"";
+        } else {
+            _productTextFieldView.textField.placeholder = @"请选择报备产品";
+        }
         _productTextFieldView.textField.userInteractionEnabled = NO;
-        _productTextFieldView.rightLabel.hidden = _productTextFieldView.arrowImgView.hidden = NO;
+        _productTextFieldView.rightLabel.hidden = NO;
+        _productTextFieldView.arrowImgView.hidden = self.businessType;
         WEAKSELF
         _productTextFieldView.clickTFViewBlock = ^{
             [weakSelf clickProductTFView];
@@ -169,11 +191,11 @@
 
 - (NSArray *)businessArray {
     if (!_businessArray) {
-        _businessArray = @[@{@"businessType": @(1), @"identifier": @"house"},
-                           @{@"businessType": @(3), @"identifier": @"migration"},
-                           @{@"businessType": @(4), @"identifier": @"student"},
-                           @{@"businessType": @(2), @"identifier": @"study"},
-                           @{@"businessType": @(102001), @"identifier": @"treatment"}];
+        _businessArray = @[@{@"businessType": @(1), @"identifier": @"house", @"businessName": @"房产"},
+                           @{@"businessType": @(3), @"identifier": @"migration", @"businessName": @"移民"},
+                           @{@"businessType": @(4), @"identifier": @"student", @"businessName": @"留学"},
+                           @{@"businessType": @(2), @"identifier": @"study", @"businessName": @"游学"},
+                           @{@"businessType": @(102001), @"identifier": @"treatment", @"businessName": @"海外医疗"}];
     }
     return _businessArray;
 }
