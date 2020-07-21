@@ -47,7 +47,7 @@
             self.rankTableHeaderView.rankValueLabel.text = self.systemService.myRanking > 100 ? @"未上榜" : kFormat(@"%ld", self.systemService.myRanking);
             [self.rankTableHeaderView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
             self.rankTableHeaderView.nameLabel.text = user.realName;
-            self.rankTableHeaderView.likeLabel.text = kFormat(@"%ld", user.likeCount);
+            self.rankTableHeaderView.likeLabel.text = kFormat(@"%ld", self.systemService.likeCount);
         }
         
         [self.tableView reloadData];

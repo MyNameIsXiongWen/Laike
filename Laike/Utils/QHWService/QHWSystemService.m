@@ -70,6 +70,7 @@
         }
         [self.consultantArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:QHWConsultantModel.class json:responseObject[@"data"][@"list"]]];
         self.myRanking = [responseObject[@"data"][@"myRanking"] integerValue];
+        self.likeCount = [responseObject[@"data"][@"likeCount"] integerValue];
         complete();
     } failure:^(NSError *error) {
         complete();

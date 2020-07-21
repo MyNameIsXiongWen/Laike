@@ -265,10 +265,14 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.infoBtn = UIButton.btnFrame(CGRectMake(15, 15, 50, 45)).btnTitle(@"完善信息").btnFont(kFontTheme10).btnTitleColor(kColorTheme666).btnAction(self, @selector(clickInfoBtn));
+        self.infoBtn = UIButton.btnFrame(CGRectMake(15, 12, 50, 55)).btnImage(kImageMake(@"crm_info")).btnAction(self, @selector(clickInfoBtn));
+        self.infoBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+        [self.infoBtn addSubview:UILabel.labelFrame(CGRectMake(0, 40, 50, 15)).labelText(@"完善信息").labelFont(kFontTheme10).labelTitleColor(kColorTheme666).labelTextAlignment(NSTextAlignmentCenter)];
         [self addSubview:self.infoBtn];
         
-        self.trackBtn = UIButton.btnFrame(CGRectMake(self.infoBtn.right+10, 15, 50, 45)).btnTitle(@"跟进记录").btnFont(kFontTheme10).btnTitleColor(kColorTheme666).btnAction(self, @selector(clickTrackBtn));
+        self.trackBtn = UIButton.btnFrame(CGRectMake(self.infoBtn.right+10, 15, 50, 55)).btnImage(kImageMake(@"crm_record")).btnAction(self, @selector(clickTrackBtn));
+        self.trackBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+        [self.trackBtn addSubview:UILabel.labelFrame(CGRectMake(0, 37, 50, 15)).labelText(@"跟进记录").labelFont(kFontTheme10).labelTitleColor(kColorTheme666).labelTextAlignment(NSTextAlignmentCenter)];
         [self addSubview:self.trackBtn];
         
         self.contactBtn = UIButton.btnFrame(CGRectMake(self.trackBtn.right+25, 15, kScreenW-170, 45)).btnTitle(@"联系客户").btnFont(kFontTheme18).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(5).btnAction(self, @selector(clickContactBtn));
