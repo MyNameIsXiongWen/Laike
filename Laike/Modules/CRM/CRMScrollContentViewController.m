@@ -128,6 +128,7 @@
         [cell.convertBtn setTitle:@"已转客户" forState:UIControlStateSelected];
         [cell.convertBtn setTitleColor:kColorThemea4abb3 forState:UIControlStateSelected];
         cell.convertBtn.selected = model.clientStatus == 2;
+        cell.convertBtn.userInteractionEnabled = model.clientStatus != 2;
     } else {
         [cell.convertBtn setTitle:@"写跟进" forState:0];
     }

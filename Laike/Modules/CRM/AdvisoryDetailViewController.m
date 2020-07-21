@@ -78,6 +78,9 @@
 - (void)getMainData {
     [self.crmService getClueActionListDataRequestWithComplete:^{
         self.tableHeaderView.crmModel = self.crmService.crmModel;
+        self.btmView.convertCRMBtn.selected = self.crmService.crmModel.clientStatus == 2;
+        self.btmView.convertCRMBtn.userInteractionEnabled = self.crmService.crmModel.clientStatus != 2;
+        self.btmView.convertCRMBtn.btnBorderColor(self.crmService.crmModel.clientStatus == 2 ? kColorThemea4abb3 : kColorTheme21a8ff);
         [self.tableView reloadData];
         if ([self.tableView.mj_header isRefreshing]) {
             [self.tableView.mj_header endRefreshing];
@@ -175,6 +178,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.convertCRMBtn = UIButton.btnFrame(CGRectMake(15, 15, 125, 45)).btnTitle(@"转到客户").btnFont(kFontTheme18).btnTitleColor(kColorTheme21a8ff).btnBorderColor(kColorTheme21a8ff).btnCornerRadius(5).btnAction(self, @selector(clickConvertCRMBtn));
+        [self.convertCRMBtn setTitle:@"已转客户" forState:UIControlStateSelected];
+        [self.convertCRMBtn setTitleColor:kColorThemea4abb3 forState:UIControlStateSelected];
         [self addSubview:self.convertCRMBtn];
                 
         self.contactBtn = UIButton.btnFrame(CGRectMake(self.convertCRMBtn.right+15, 15, kScreenW-170, 45)).btnTitle(@"联系客户").btnFont(kFontTheme18).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(5).btnAction(self, @selector(clickContactBtn));
