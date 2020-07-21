@@ -78,14 +78,16 @@
 }
 
 - (void)clickSubmitBtn {
-    if (!self.selectedIndex) {
-        [SVProgressHUD showInfoWithStatus:@"请选择报备业务"];
-        [self clickBusinessTFView];
-        return;
-    }
-    if (!self.businessId) {
-        [SVProgressHUD showInfoWithStatus:@"请选择报备产品"];
-        return;
+    if (!self.businessType) {
+        if (!self.selectedIndex) {
+            [SVProgressHUD showInfoWithStatus:@"请选择报备业务"];
+            [self clickBusinessTFView];
+            return;
+        }
+        if (!self.businessId) {
+            [SVProgressHUD showInfoWithStatus:@"请选择报备产品"];
+            return;
+        }
     }
     if (self.nameTextFieldView.textField.text.length == 0) {
         [SVProgressHUD showInfoWithStatus:@"请输入客户姓名"];
@@ -98,6 +100,13 @@
     [self.disService addDistributionClientRequestWithParams:@{@"id": self.businessId ?: @"",
                                                               @"realName": self.nameTextFieldView.textField.text ?: @"",
                                                               @"mobileNumber": self.phoneTextFieldView.textField.text ?: @""}];
+}
+
+- (void)textFieldValueChanged:(UITextField *)textField {
+    if (textField.text.length > 11) {
+        textField.text = [textField.text substringToIndex:11];
+        return;
+    }
 }
 
 /*
@@ -171,6 +180,7 @@
         _phoneTextFieldView = [[CRMTextFieldView alloc] initWithFrame:CGRectMake(0, self.nameTextFieldView.bottom, kScreenW, 60)];
         _phoneTextFieldView.title = @"手机号";
         _phoneTextFieldView.textField.placeholder = @"请输入客户手机号";
+        [_phoneTextFieldView.textField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _phoneTextFieldView;
 }
