@@ -13,6 +13,7 @@
 #import "QHWStudentModel.h"
 #import "QHWTreatmentModel.h"
 #import "QHWActivityModel.h"
+#import "UserModel.h"
 
 @interface MainBusinessShareView ()
 
@@ -208,11 +209,11 @@
         default:
             break;
     }
-    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(mainBusinessDetailModel.bottomData.subjectHead)]];
-    [self.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(mainBusinessDetailModel.bottomData.subjectHead)]];
+    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(UserModel.shareUser.headPath)]];
+    [self.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(UserModel.shareUser.headPath)]];
     self.nameImgView.image = kImageMake(topImgPath);
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(mainBusinessDetailModel.coverPath)]];
-    self.sourceLabel.text = kFormat(@"来源：%@", mainBusinessDetailModel.bottomData.subjectName);
+    self.sourceLabel.text = kFormat(@"来源：%@", mainBusinessDetailModel.merchantName);
     self.typeLabel.text = kFormat(@" %@ ", title);
     [self.typeLabel sizeToFit];
     self.typeLabel.height = 20;
