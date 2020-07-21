@@ -33,6 +33,8 @@
 
 - (void)dealloc {
     [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationBindSuccess object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:@"HomeSwipeLeaveTop" object:nil];
 }
 
 - (void)viewDidLoad {
@@ -41,6 +43,7 @@
     self.canScroll = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatusNotification) name:@"HomeSwipeLeaveTop" object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationBindSuccess object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

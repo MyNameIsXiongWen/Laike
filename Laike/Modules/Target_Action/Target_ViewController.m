@@ -28,6 +28,7 @@
 #import "CRMDetailViewController.h"
 #import "AdvisoryDetailViewController.h"
 #import "BookAppointmentViewController.h"
+#import "BindCompanyViewController.h"
 
 @implementation Target_ViewController
 
@@ -172,6 +173,11 @@
     vc.businessId = businessId;
     vc.businessName = businessName;
     vc.businessType = businessType;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeBindCompanyViewController:(NSDictionary *)params {
+    BindCompanyViewController *vc = BindCompanyViewController.new;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

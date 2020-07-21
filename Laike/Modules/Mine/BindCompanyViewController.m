@@ -49,7 +49,9 @@ static NSString *const ServiceHotLine = @"400-877-1008";
         [SVProgressHUD showInfoWithStatus:@"请输入公司代码"];
         return;
     }
+    [self.nameTextField endEditing:YES];
     QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+    alert.confirmTextColor = kColorTheme21a8ff;
     [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认绑定"];
     alert.contentString = kFormat(@"请确认绑定%@", self.nameTextField.text);
     WEAKSELF

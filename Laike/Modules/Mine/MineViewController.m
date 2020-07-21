@@ -11,7 +11,6 @@
 #import "QHWGeneralTableViewCell.h"
 #import "MineService.h"
 #import "CTMediator+ViewController.h"
-#import "BindCompanyViewController.h"
 #import "CancelBindCompanyViewController.h"
 
 @interface MineViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -86,8 +85,7 @@
         vc.companyName = self.service.userModel.companyName;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        BindCompanyViewController *vc = BindCompanyViewController.new;
-        [self.navigationController pushViewController:vc animated:YES];
+        [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
     }
 }
 

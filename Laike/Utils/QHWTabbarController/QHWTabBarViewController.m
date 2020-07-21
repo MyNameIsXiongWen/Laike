@@ -10,6 +10,7 @@
 #import "QHWNavigationController.h"
 #import "AppDelegate.h"
 #import "UserModel.h"
+#import "CTMediator+ViewController.h"
 
 @interface QHWTabBarViewController () <UITabBarControllerDelegate>
 
@@ -76,8 +77,15 @@
 //    self.selectedIndex = 1;
 }
 
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    QHWNavigationController *navC = (QHWNavigationController *)viewController;
+    if ([NSStringFromClass(navC.topViewController.class) isEqualToString:@"DistributionViewController"]) {
+        if (UserModel.shareUser.bindStatus == 2) {
+            [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
+            return NO;
+        }
+    }
+    return YES;
 }
 
 - (void)centerTabbarAction:(UIButton *)btn {

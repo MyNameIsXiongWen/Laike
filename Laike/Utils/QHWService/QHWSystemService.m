@@ -89,7 +89,8 @@
 ///activityStatus 1:进行中  2:已结束
 - (void)getActivityListRequestWithIndustryId:(NSInteger)industryId RegisterStatus:(NSInteger)registerStatus Complete:(void (^)(void))complete {
     NSMutableDictionary *params = @{@"currentPage": @(self.itemPageModel.pagination.currentPage),
-                                    @"pageSize": @(self.itemPageModel.pagination.pageSize)}.mutableCopy;
+                                    @"pageSize": @(self.itemPageModel.pagination.pageSize),
+                                    @"merchantId": UserModel.shareUser.merchantId ?: @""}.mutableCopy;
     if (registerStatus) {
         params[@"activityStatus"] = @(registerStatus);
     } else {

@@ -27,6 +27,10 @@
 
 @implementation AdvisoryDetailViewController
 
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -35,6 +39,7 @@
     [self.view addSubview:self.btmView];
     self.callObserve = CXCallObserver.new;
     [self.callObserve setDelegate:self queue:dispatch_get_main_queue()];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
 }
 
 - (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {

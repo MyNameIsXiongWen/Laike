@@ -98,6 +98,7 @@
         user.crmCount = self.homeModel.clientData.crmCount;
         user.clueCount = self.homeModel.clueCount;
         user.distributionCount = self.homeModel.distributionCount;
+        user.bindStatus = self.homeModel.bindStatus;
         [user keyArchiveUserModel];
 //        [self getHomeReportCountDataRequest];
         complete();

@@ -34,6 +34,7 @@
     __weak typeof(alert) weakAlert = alert;
     alert.confirmBlock = ^{
         [weakAlert dismiss];
+        [QHWHttpLoading showWithMaskTypeBlack];
         [QHWHttpManager.sharedInstance QHW_POST:kMerchantBind parameters:@{@"bindStatus": @"2"} success:^(id responseObject) {
             [SVProgressHUD showInfoWithStatus:@"解绑成功"];
             [weakSelf.navigationController popViewControllerAnimated:YES];

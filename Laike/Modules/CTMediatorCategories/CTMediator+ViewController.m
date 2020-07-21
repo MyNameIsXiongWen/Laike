@@ -32,6 +32,7 @@ NSString * const kCTMediatorActionNativeAddTrackViewController = @"nativeAddTrac
 NSString * const kCTMediatorActionNativeCRMDetailViewController = @"nativeCRMDetailViewController";
 NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeAdvisoryDetailViewController";
 NSString * const kCTMediatorActionNativeBookAppointmentViewController = @"nativeBookAppointmentViewController";
+NSString * const kCTMediatorActionNativeBindCompanyViewController = @"nativeBindCompanyViewController";
 
 @implementation CTMediator (Login)
 
@@ -154,7 +155,7 @@ NSString * const kCTMediatorActionNativeBookAppointmentViewController = @"native
 
 - (void)CTMediator_viewControllerForAddCustomerWithCustomerId:(NSString *)customerId RealName:(NSString *)realName MobilePhone:(NSString *)mobilePhone {
     if (UserModel.shareUser.bindStatus == 2) {
-        [SVProgressHUD showInfoWithStatus:@"请先绑定公司"];
+        [self CTMediator_viewControllerForBindCompany];
         return;
     }
     [self performTarget:kCTMediatorTargetViewController
@@ -192,6 +193,13 @@ NSString * const kCTMediatorActionNativeBookAppointmentViewController = @"native
                  params:@{@"businessId": businessId ?: @"",
                           @"businessName": businessName ?: @"",
                           @"businessType": @(businessType)}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForBindCompany {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeBindCompanyViewController
+                 params:@{}
     shouldCacheTarget:NO];
 }
 

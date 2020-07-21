@@ -8,6 +8,7 @@
 
 #import "CRMService.h"
 #import "UserModel.h"
+#import "CTMediator+ViewController.h"
 
 @implementation CRMService
 
@@ -225,7 +226,7 @@
 
 - (void)CRMGiveUpTrackRequest {
     if (UserModel.shareUser.bindStatus == 2) {
-        [SVProgressHUD showInfoWithStatus:@"请先绑定公司"];
+        [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
         return;
     }
     [QHWHttpLoading showWithMaskTypeBlack];
@@ -244,7 +245,7 @@
 
 - (void)advisoryGiveUpTrackRequest {
     if (UserModel.shareUser.bindStatus == 2) {
-        [SVProgressHUD showInfoWithStatus:@"请先绑定公司"];
+        [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
         return;
     }
     [QHWHttpLoading showWithMaskTypeBlack];
@@ -405,6 +406,10 @@
                 }
             }
         }
+    }
+    if (unselectable) {
+        self.clientSourceList.firstObject.selected = YES;
+        self.crmModel.clientSourceCode = self.clientSourceList.firstObject.code.integerValue;
     }
     
     QHWBaseModel *countryModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerCountryCell" Height:self.intentionCountryHeight Data:@{@"title": @"意向国家", @"placeholder": @"请选择意向国家", @"data": self, @"identifier": @"country", @"selection": @(YES)}];

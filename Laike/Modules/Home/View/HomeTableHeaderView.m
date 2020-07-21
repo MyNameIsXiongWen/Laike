@@ -89,7 +89,7 @@
 
 - (void)clickHomeCustomerTableViewCell {
     if (UserModel.shareUser.bindStatus == 2) {
-        [SVProgressHUD showInfoWithStatus:@"请先绑定公司"];
+        [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
         return;
     }
     [CTMediator.sharedInstance CTMediator_viewControllerForIntervalCRM];
