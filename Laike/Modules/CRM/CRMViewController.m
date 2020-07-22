@@ -95,12 +95,15 @@
 }
 
 - (void)configCRMContentVCCallObserveWithIndex:(NSInteger)index {
-    CRMScrollContentViewController *vc = (CRMScrollContentViewController *)self.pageContentView.childsVCs[1];
+    CRMScrollContentViewController *vc0 = (CRMScrollContentViewController *)self.pageContentView.childsVCs[0];
+    vc0.selectedIndex = index;
+    CRMScrollContentViewController *vc1 = (CRMScrollContentViewController *)self.pageContentView.childsVCs[1];
+    vc1.selectedIndex = index;
     if (index == 1) {
-        vc.callObserve = CXCallObserver.new;
-        [vc.callObserve setDelegate:vc queue:nil];
+        vc1.callObserve = CXCallObserver.new;
+        [vc1.callObserve setDelegate:vc1 queue:nil];
     } else {
-        vc.callObserve = nil;
+        vc1.callObserve = nil;
     }
 }
 

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 客户类型 1:客户  2:获客（咨询）
 @property (nonatomic, assign) NSInteger crmType;
+@property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, strong) NSMutableArray <FilterBtnViewCellModel *>*filterDataArray;
 
 @property (nonatomic, assign) BOOL interval;
