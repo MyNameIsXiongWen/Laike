@@ -27,7 +27,6 @@
 
 - (IBAction)clickCancelBtn:(id)sender {
     QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-    alert.confirmTextColor = kColorTheme21a8ff;
     [alert configWithTitle:@"" cancleText:@"取消" confirmText:@"确认解绑"];
     alert.contentString = kFormat(@"请确认解绑【%@】,解绑后您的客户数据将归还公司", self.companyName);
     WEAKSELF

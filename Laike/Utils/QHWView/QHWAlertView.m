@@ -168,7 +168,7 @@ static const float selfWidth = 280;
 
 - (UIButton *)confirmBtn {
     if (!_confirmBtn) {
-        _confirmBtn = UIButton.btnInit().btnFont(kFontTheme18).btnTitleColor(kColorThemefb4d56).btnAction(self, @selector(confirmBtnAction));
+        _confirmBtn = UIButton.btnInit().btnFont(kFontTheme18).btnTitleColor(kColorTheme21a8ff).btnAction(self, @selector(confirmBtnAction));
         [self addSubview:_confirmBtn];
     }
     return _confirmBtn;

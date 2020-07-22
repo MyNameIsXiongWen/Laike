@@ -46,6 +46,18 @@
     [self.view addSubview:self.btmView];
 }
 
+- (void)leftNavBtnAction:(UIButton *)sender {
+    NSArray *vcArray = self.getCurrentMethodCallerVC.navigationController.childViewControllers;
+    for (NSInteger i=vcArray.count-1; i>=0; i--) {
+        UIViewController *vc = vcArray[i];
+        NSString *classString = NSStringFromClass(vc.class);
+        if ([classString containsString:@"CRMViewController"] || [classString isEqualToString:@"CRMSearchViewController"]) {
+            [self.getCurrentMethodCallerVC.navigationController popToViewController:vc animated:YES];
+            return;
+        }
+    }
+}
+
 - (void)rightNavBtnAction:(UIButton *)sender {
     QHWMoreView *moreView = [[QHWMoreView alloc] initWithFrame:CGRectMake(kScreenW-125, kTopBarHeight, 105, 85)
                                                      ViewArray:@[@{@"title":@"完善信息", @"identifier":@"completeInfomation"},
@@ -64,7 +76,7 @@
 - (void)showAlertLabelView {
     QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
     [alert configWithTitle:@"提醒" cancleText:@"取消" confirmText:@"确认"];
-    alert.contentString = @"是否放弃跟进?";
+    alert.contentString = @"放弃跟进，您的客户将会转回到公司公客";
     WEAKSELF
     alert.confirmBlock = ^{
         [alert dismiss];

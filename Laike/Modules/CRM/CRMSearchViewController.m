@@ -60,11 +60,17 @@
     cell.nameLabel.text = model.realName;
     if (model.industryNameArray.count == 0) {
         [cell.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(cell.contentView);
+            make.top.equalTo(cell.avatarImgView.mas_top).offset(15);
         }];
-    } else {
-        [cell.tagView setTagWithTagArray:model.industryNameArray];
     }
+    [cell.tagView setTagWithTagArray:model.industryNameArray];
+    [cell.convertBtn setTitle:@"写跟进" forState:0];
+    cell.clickContactBlock = ^{
+        kCallTel(model.mobileNumber);
+    };
+    cell.clickConvertBlock = ^{
+        [CTMediator.sharedInstance CTMediator_viewControllerForAddTrackWithCustomerId:model.id];
+    };
     return cell;
 }
 
@@ -110,7 +116,7 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [UICreateView initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight) Style:UITableViewStylePlain Object:self];
-        _tableView.rowHeight = 80;
+        _tableView.rowHeight = 120;
         [_tableView registerClass:CRMTableViewCell.class forCellReuseIdentifier:NSStringFromClass(CRMTableViewCell.class)];
         [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
             self.crmService.itemPageModel.pagination.currentPage = 1;

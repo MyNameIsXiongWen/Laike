@@ -28,7 +28,7 @@
 @implementation AdvisoryDetailViewController
 
 - (void)dealloc {
-    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -42,9 +42,17 @@
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
 }
 
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    if (!parent) {
+        [NSNotificationCenter.defaultCenter removeObserver:self];
+    }
+}
+
 - (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
     if (call.hasEnded) {
-        [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:self.crmService.crmModel.realName MobilePhone:self.crmService.crmModel.mobileNumber];
+        if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
+            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:self.crmService.crmModel.realName MobilePhone:self.crmService.crmModel.mobileNumber];
+        }
     }
 }
 
@@ -66,7 +74,7 @@
 - (void)showAlertLabelView {
     QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
     [alert configWithTitle:@"放弃跟进" cancleText:@"取消" confirmText:@"确认放弃"];
-    alert.contentString = @"您的客户将会转回到公司公客";
+    alert.contentString = @"放弃跟进，您的客户将会转回到公司公客";
     WEAKSELF
     alert.confirmBlock = ^{
         [alert dismiss];

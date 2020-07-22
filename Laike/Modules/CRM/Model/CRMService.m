@@ -216,8 +216,15 @@
                              @"content": remark};
     [QHWHttpManager.sharedInstance QHW_POST:kCRMAddTrack parameters:params success:^(id responseObject) {
         [SVProgressHUD showInfoWithStatus:@"跟进成功"];
-        [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
+//        [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
         [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddTrackSuccess object:nil];
+        for (UIViewController *vc in self.getCurrentMethodCallerVC.navigationController.childViewControllers) {
+            if ([NSStringFromClass(vc.class) isEqualToString:@"CRMDetailViewController"]) {
+                [self.getCurrentMethodCallerVC.navigationController popToViewController:vc animated:YES];
+                return;
+            }
+        }
+        [CTMediator.sharedInstance CTMediator_viewControllerForCRMDetailWithCustomerId:self.customerId];
         complete();
     } failure:^(NSError *error) {
         complete();

@@ -27,7 +27,8 @@
 @implementation CRMScrollContentViewController
 
 - (void)dealloc {
-    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+//    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -41,7 +42,9 @@
 - (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
     if (call.hasEnded) {
         if (self.crmType == 2) {
-            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:self.selectedCRMModel.realName MobilePhone:self.selectedCRMModel.mobileNumber];
+            if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
+                [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:self.selectedCRMModel.realName MobilePhone:self.selectedCRMModel.mobileNumber];
+            }
         }
     }
 }

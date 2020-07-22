@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.kNavigationView.title = self.customerId.length > 0 ? @"完善信息" : @"新增客户";
+    self.kNavigationView.title = (self.customerId.length > 0 || self.realName.length > 0) ? @"完善客户" : @"新增客户";
     self.kNavigationView.rightBtn.btnTitle(@"保存").btnFont(kMediumFontTheme16).btnTitleColor(kColorTheme21a8ff);
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(reloadTableViewHeight:) name:@"reloadTableViewHeight" object:nil];
 }
