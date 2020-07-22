@@ -9,6 +9,9 @@
 #import "OfficialMsgViewController.h"
 #import <HyphenateLite/HyphenateLite.h>
 #import "MessageModel.h"
+#import "CTMediator+ViewController.h"
+#import "CommentReplyListViewController.h"
+#import "LiveDetailViewController.h"
 
 @interface OfficialMsgViewController () <UITableViewDelegate, UITableViewDataSource, EMChatManagerDelegate>
 
@@ -85,7 +88,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageModel *msgModel = self.dataArray[indexPath.row];
-    return 80 + MAX(17, [msgModel.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-30, kCGFontIndexMax)]);
+    if (msgModel.clickStatus == 3) {
+        return 40 + MAX(17, [msgModel.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)]);
+    }
+    return 80 + MAX(17, [msgModel.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)]);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -94,96 +100,67 @@
     cell.titleLabel.text = msgModel.title;
     cell.timeLabel.text = msgModel.createTime;
     cell.redView.hidden = msgModel.unreadMsgCount == 0;
+    cell.moreBtn.hidden = cell.btmLine.hidden = msgModel.clickStatus == 3;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    MessageModel *msgModel = self.dataArray[indexPath.row];
-//    switch (self.currentMessage.type) {
-//        case 000000: //行业号消息
-//            [CTMediator.sharedInstance CTMediator_viewControllerForH5WithUrl:msgModel.url TitleName:msgModel.title];
-//            break;
-//
-//        case 100000: //系统通知
-//            break;
-//
-//        case 101002: //提到我的  头条-评论回复，跳转-评论回复详情；
-//            {
-//                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-//                vc.commentId = msgModel.create.subjectId;
-//                vc.communityType = 1;
-//                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-//            }
-//            break;
-//
-//        case 101004: //提到我的  海外圈-视频-评论回复，跳转-评论回复详情；
-//        case 101005: //提到我的  海外圈-图文-评论回复，跳转-评论回复详情；
-//            {
-//                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-//                vc.commentId = msgModel.create.subjectId;
-//                vc.communityType = 2;
-//                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-//            }
-//            break;
-//
-//        case 102002: //评论我的  海外圈-视频-评论，跳转-海外圈详情；
-//        case 102003: //评论我的  海外圈-图文-评论，跳转-海外圈详情；
-//            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:2];
-//            break;
-//
-//        case 103003: //赞我的  头条-评论，跳转-头条详情；
-//            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:1];
-//            break;
-//
-//        case 103004: //赞我的  头条-回复，跳转-评论回复详情；
-//            {
-//                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-//                vc.commentId = msgModel.create.subjectId;
-//                vc.communityType = 1;
-//                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-//            }
-//            break;
-//
-//        case 103006: //赞我的  海外圈-视频-评论，跳转-海外圈详情；
-//        case 103007: //赞我的  海外圈-图文-评论，跳转-海外圈详情；
-//            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:2];
-//            break;
-//
-//        case 103008: //赞我的  海外圈-视频-评论回复，跳转-评论回复详情；
-//        case 103009: //赞我的  海外圈-图文-评论回复，跳转-评论回复详情；
-//            {
-//                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-//                vc.commentId = msgModel.create.subjectId;
-//                vc.communityType = 2;
-//                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-//            }
-//            break;
-//
-//        case 104001: //关注我的
-//            [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:msgModel.create.subjectId UserType:msgModel.create.subject BusinessType:0];
-//            break;
-//
-//        case 105003: //分享我的  用户-详情，跳转-用户详情；
-//            [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:msgModel.create.subjectId UserType:1 BusinessType:0];
-//            break;
-//
-//        case 105004: //分享我的  顾问-详情，跳转-顾问详情；
-//            [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:msgModel.create.subjectId UserType:2 BusinessType:0];
-//            break;
-//
-//        case 105006: //分享我的  海外圈-视频-评论，跳转-海外圈详情；
-//        case 105007: //分享我的  海外圈-图文-评论，跳转-海外圈详情；
-//            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:2];
-//            break;
-//
-//        case 106003: //收藏我的  海外圈-视频-评论，跳转-海外圈详情；
-//        case 106004: //收藏我的  海外圈-图文-评论，跳转-海外圈详情；
-//            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:2];
-//            break;
-//
-//        default:
-//            break;
-//    }
+    MessageModel *msgModel = self.dataArray[indexPath.row];
+    switch (msgModel.clickStatus) {
+        case 1: //原生页面
+        {
+            switch (msgModel.businessType) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 102001: //产品详情
+                    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:msgModel.businessType BusinessId:msgModel.businessId IsDistribution:YES];
+                    break;
+                
+                case 5: //海外头条
+                    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.businessId CommunityType:1];
+                    break;
+
+                case 1821: //海外圈
+                    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.businessId CommunityType:2];
+                    break;
+                
+                case 24: //Q大学专业课堂
+                case 27: //Q大学产品学习
+                    [CTMediator.sharedInstance CTMediator_viewControllerForQSchoolDetailWithSchoolId:msgModel.businessId];
+                    break;
+
+                case 103001: //视频
+                {
+                    LiveDetailViewController *detailVC = LiveDetailViewController.new;
+                    detailVC.liveId = msgModel.businessId;
+                    [self.navigationController pushViewController:detailVC animated:YES];
+                }
+                    break;
+
+                case 17: //活动
+                    [CTMediator.sharedInstance CTMediator_viewControllerForActivityDetailWithActivityId:msgModel.businessId];
+                    break;
+                    
+                case 101003: //霸屏海报列表-页面
+                    [CTMediator.sharedInstance CTMediator_viewControllerForGallery];
+                    break;
+
+                default:
+                    break;
+            }
+        }
+            break;
+        
+        case 2: //H5
+            [CTMediator.sharedInstance CTMediator_viewControllerForH5WithUrl:msgModel.url TitleName:msgModel.title];
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 /*
