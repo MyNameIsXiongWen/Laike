@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @class EMConversation;
 @class MessageUserModel;
+@class EMMessage;
 @interface MessageModel : NSObject
 
 /*000000-行业号消息 (对应之前 type=1),标题、封面图、点击跳转-htmlUrl
@@ -46,11 +47,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) MessageUserModel *from;
 @property (nonatomic, assign) int unreadMsgCount;
 @property (nonatomic, strong) EMConversation *conversation;
+@property (nonatomic, strong) EMMessage *message;
 
 @property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, copy) NSString *businessId;
 ///点击状态：1-原生页面；2-H5地址；3-文本不跳转
 @property (nonatomic, assign) NSInteger clickStatus;
+@property (nonatomic, assign) BOOL isRead;
 
 @end
 

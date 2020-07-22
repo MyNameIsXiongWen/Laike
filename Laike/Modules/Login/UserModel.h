@@ -101,6 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property (nonatomic, assign) NSInteger unreadMsgCount;
+@property (nonatomic, assign) NSInteger officialUnreadMsgCount;
 @property (nonatomic, strong) UIImage *snapShotImage;
 @property (nonatomic, assign) NSInteger businessType;
 

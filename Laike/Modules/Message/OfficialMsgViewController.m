@@ -10,13 +10,14 @@
 #import <HyphenateLite/HyphenateLite.h>
 #import "MessageModel.h"
 #import "CTMediator+ViewController.h"
-#import "CommentReplyListViewController.h"
 #import "LiveDetailViewController.h"
+#import "UserModel.h"
 
 @interface OfficialMsgViewController () <UITableViewDelegate, UITableViewDataSource, EMChatManagerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) EMConversation *currentConversation;
 
 @end
 
@@ -43,37 +44,43 @@
 - (void)getIMUnreadCount {
     NSArray *conversationArray = [EMClient.sharedClient.chatManager getAllConversations];
     NSInteger count = 0;
+    NSInteger officialCount = 0;
     for (EMConversation *conversation in conversationArray) {
         count += conversation.unreadMessagesCount;
         EMMessage *msg = conversation.latestMessage;
         if (msg.ext) {
             MessageModel *msgModel = [MessageModel yy_modelWithDictionary:msg.ext];
             if (msgModel.type == 100000) {
-                msgModel.unreadMsgCount = conversation.unreadMessagesCount;
-                msgModel.conversation = conversation;
-                for (MessageModel *tempModel in self.dataArray) {
-                    if (tempModel.type == msgModel.type) {
-                        [self.dataArray removeObject:tempModel];
-                        break;
+                officialCount += conversation.unreadMessagesCount;
+                self.currentConversation = conversation;
+                [self.dataArray removeAllObjects];
+                [conversation loadMessagesStartFromId:nil count:1000 searchDirection:EMMessageSearchDirectionUp completion:^(NSArray *aMessages, EMError *aError) {
+                    for (EMMessage *tempEMMsg in aMessages) {
+                        if (tempEMMsg.ext) {
+                            MessageModel *tempEMMsgModel = [MessageModel yy_modelWithDictionary:tempEMMsg.ext];
+                            tempEMMsgModel.message = tempEMMsg;
+                            tempEMMsgModel.isRead = tempEMMsg.isRead;
+                            tempEMMsgModel.unreadMsgCount = tempEMMsg.isRead ? 0 : 1;
+                            [self.dataArray insertObject:tempEMMsgModel atIndex:0];
+                        }
                     }
-                }
-                [self.dataArray insertObject:msgModel atIndex:0];
+                    [self.tableView reloadData];
+                    [self.tableView showNodataView:self.dataArray.count == 0 offsetY:0 button:nil];
+                }];
             }
         }
     }
+    UserModel.shareUser.officialUnreadMsgCount = officialCount;
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsg object:@(count)];
-    [self.tableView reloadData];
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-    NSArray *conversationArray = [EMClient.sharedClient.chatManager getAllConversations];
-    for (EMConversation *conversation in conversationArray) {
-        EMError *error;
-        [conversation markAllMessagesAsRead:&error];
-    }
     for (MessageModel *msgModel in self.dataArray) {
+        msgModel.isRead = YES;
         msgModel.unreadMsgCount = 0;
     }
+    EMError *error;
+    [self.currentConversation markAllMessagesAsRead:&error];
     [self.tableView reloadData];
 }
 
@@ -89,9 +96,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageModel *msgModel = self.dataArray[indexPath.row];
     if (msgModel.clickStatus == 3) {
-        return 40 + MAX(17, [msgModel.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)]);
+        return 45 + MAX(17, [msgModel.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)]);
     }
-    return 80 + MAX(17, [msgModel.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)]);
+    return 85 + MAX(17, [msgModel.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)]);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,13 +106,19 @@
     MessageModel *msgModel = self.dataArray[indexPath.row];
     cell.titleLabel.text = msgModel.title;
     cell.timeLabel.text = msgModel.createTime;
-    cell.redView.hidden = msgModel.unreadMsgCount == 0;
+    cell.redView.hidden = msgModel.isRead;
     cell.moreBtn.hidden = cell.btmLine.hidden = msgModel.clickStatus == 3;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageModel *msgModel = self.dataArray[indexPath.row];
+    msgModel.isRead = YES;
+    EMError *error;
+    [self.currentConversation markMessageAsReadWithId:msgModel.message.messageId error:&error];
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsg object:@(UserModel.shareUser.unreadMsgCount - msgModel.unreadMsgCount)];
+    msgModel.unreadMsgCount = 0;
     switch (msgModel.clickStatus) {
         case 1: //原生页面
         {
@@ -180,6 +193,7 @@
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [UICreateView initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight) Style:UITableViewStylePlain Object:self];
+        _tableView.backgroundColor = kColorThemef5f5f5;
         [_tableView registerClass:OfficialMsgTableViewCell.class forCellReuseIdentifier:NSStringFromClass(OfficialMsgTableViewCell.class)];
         [self.view addSubview:_tableView];
     }

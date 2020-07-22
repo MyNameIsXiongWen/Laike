@@ -50,7 +50,7 @@
 - (UIView *)msgView {
     if (!_msgView) {
         CGFloat perWidth = kScreenW/5;
-        _msgView = [UICreateView initWithFrame:CGRectMake(perWidth*3+(perWidth-25)/2+25-4, 3, 8, 8) BackgroundColor:UIColor.redColor CornerRadius:4];
+        _msgView = [UICreateView initWithFrame:CGRectMake(perWidth*1+(perWidth-25)/2+25-4, 3, 8, 8) BackgroundColor:UIColor.redColor CornerRadius:4];
         _msgView.hidden = YES;
     }
     return _msgView;
@@ -58,8 +58,8 @@
 
 - (UILabel *)msgCountLabel {
     if (!_msgCountLabel) {
-        CGFloat perWidth = kScreenW/4;
-        _msgCountLabel = UILabel.labelFrame(CGRectMake(perWidth*2+(perWidth-25)/2+25-9, 2, 15, 15)).labelFont(kFontTheme12).labelTitleColor(kColorThemefff).labelBkgColor(kColorThemefb4d56).labelTextAlignment(NSTextAlignmentCenter).labelCornerRadius(7.5);
+        CGFloat perWidth = kScreenW/5;
+        _msgCountLabel = UILabel.labelFrame(CGRectMake(perWidth*1+(perWidth-25)/2+25-9, 2, 15, 15)).labelFont(kFontTheme12).labelTitleColor(kColorThemefff).labelBkgColor(kColorThemefb4d56).labelTextAlignment(NSTextAlignmentCenter).labelCornerRadius(7.5);
         _msgCountLabel.layer.zPosition = 999;
         [self addSubview:_msgCountLabel];
     }

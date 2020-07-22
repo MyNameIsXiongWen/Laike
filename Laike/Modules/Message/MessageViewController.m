@@ -55,11 +55,20 @@
 
 - (void)getIMUnreadCount {
     NSArray *conversationArray = [EMClient.sharedClient.chatManager getAllConversations];
-    NSInteger count = 0;
+    NSInteger totalCount = 0;
+    NSInteger officialCount = 0;
     for (EMConversation *conversation in conversationArray) {
-        count += conversation.unreadMessagesCount;
+        totalCount += conversation.unreadMessagesCount;
+        EMMessage *msg = conversation.latestMessage;
+        if (msg.ext) {
+            MessageModel *msgModel = [MessageModel yy_modelWithDictionary:msg.ext];
+            if (msgModel.type == 100000) {
+                officialCount += conversation.unreadMessagesCount;
+            }
+        }
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsg object:@(count)];
+    UserModel.shareUser.officialUnreadMsgCount = officialCount;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsg object:@(totalCount)];
     [self.tableView reloadData];
 }
 
@@ -76,9 +85,9 @@
     cell.contentLabel.text = model.msg;
     cell.ringImgView.hidden = YES;
     if (indexPath.row == 1) {
-        cell.redView.hidden = UserModel.shareUser.unreadMsgCount == 0;
+        cell.redView.hidden = (UserModel.shareUser.unreadMsgCount-UserModel.shareUser.officialUnreadMsgCount) == 0;
     } else {
-        cell.redView.hidden = YES;
+        cell.redView.hidden = UserModel.shareUser.officialUnreadMsgCount == 0;
     }
     return cell;
 }

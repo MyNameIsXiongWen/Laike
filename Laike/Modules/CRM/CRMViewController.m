@@ -73,7 +73,9 @@
 
 - (void)getMainData {
     [self.crmService getHomeReportCountDataWithComplete:^{
+        NSInteger index = self.tabScrollView.currentIndex;
         self.tabScrollView.dataArray = @[kFormat(@"客户（%ld）", self.crmService.crmCount), kFormat(@"线索（%ld）", self.crmService.clueCount)];
+        [self.tabScrollView scrollToIndex:index];
     }];
 }
 

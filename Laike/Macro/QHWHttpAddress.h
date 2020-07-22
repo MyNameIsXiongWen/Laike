@@ -13,8 +13,8 @@ static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1/";
 //static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1test/";
 
 #pragma mark ------------协议相关-------------
-static NSString *const kServiceProtocol = @"http://file.qhiwi.com/agreement/service.html";
-static NSString *const kPrivacyProtocol = @"http://file.qhiwi.com/agreement/private.html";
+static NSString *const kServiceProtocol = @"https://m.qhiwi.com/site/app/lk/service.html";
+static NSString *const kPrivacyProtocol = @"https://m.qhiwi.com/site/app/lk/private.html";
 
 static NSString *const kExpertCertification = @"http://file.qhiwi.com/manager_intro.png";
 static NSString *const kAgencyCertification = @"http://file.qhiwi.com/merchant_intro.png";
