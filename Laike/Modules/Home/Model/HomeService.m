@@ -97,6 +97,7 @@
         user.clueCount = self.homeModel.clueCount;
         user.distributionCount = self.homeModel.distributionCount;
         user.bindStatus = self.homeModel.bindStatus;
+        user.distributionStatus = self.homeModel.distributionStatus;
         [user keyArchiveUserModel];
 //        [self getHomeReportCountDataRequest];
         complete();

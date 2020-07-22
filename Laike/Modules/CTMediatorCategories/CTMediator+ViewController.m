@@ -192,7 +192,7 @@ NSString * const kCTMediatorActionNativeBindCompanyViewController = @"nativeBind
         [self CTMediator_viewControllerForBindCompany];
         return;
     }
-    if (UserModel.shareUser.agentStatus == 2) {
+    if (UserModel.shareUser.distributionStatus == 1) {
         [SVProgressHUD showInfoWithStatus:@"您公司尚未开通分销业务"];
         return;
     }

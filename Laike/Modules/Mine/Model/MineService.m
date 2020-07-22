@@ -23,7 +23,8 @@
                               @"likeCount": @(user.likeCount),
                               @"fansCount": @(user.fansCount),
                               @"visitCount": @(user.visitCount),
-                              @"distributionCount": @(user.distributionCount)};
+                              @"distributionCount": @(user.distributionCount),
+                              @"distributionStatus": @(user.distributionStatus)};
         
         [UserModel clearUser];
         self.userModel = [UserModel yy_modelWithJSON:responseObject[@"data"]];

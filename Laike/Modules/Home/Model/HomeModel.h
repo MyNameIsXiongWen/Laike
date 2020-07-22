@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger userCount;
 ///近7日访客
 @property (nonatomic, assign) NSInteger userDays;
+///分销状态：1-未代理分销；2-已代理分销
+@property (nonatomic, assign) NSInteger distributionStatus;
 
 @end
 
