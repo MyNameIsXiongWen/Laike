@@ -50,9 +50,22 @@
 
 - (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
     if (call.hasEnded) {
-        if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
-            [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:self.crmService.crmModel.realName MobilePhone:self.crmService.crmModel.mobileNumber];
-        }
+        QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+        alert.dismissAlert = YES;
+        [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
+        alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
+        WEAKSELF
+        alert.cancelBlock = ^{
+            [alert dismiss];
+            [weakSelf showAlertLabelView];
+        };
+        alert.confirmBlock = ^{
+            [alert dismiss];
+            if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
+                [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
+            }
+        };
+        [alert show];
     }
 }
 

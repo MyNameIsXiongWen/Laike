@@ -13,6 +13,7 @@
 #import "QHWCountryFilterView.h"
 #import "CTMediator+ViewController.h"
 #import <CallKit/CallKit.h>
+#import "QHWLabelAlertView.h"
 
 @interface CRMScrollContentViewController () <UITableViewDelegate, UITableViewDataSource, CXCallObserverDelegate>
 
@@ -42,11 +43,37 @@
 - (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
     if (call.hasEnded) {
         if (self.crmType == 2) {
-            if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
-                [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:self.selectedCRMModel.realName MobilePhone:self.selectedCRMModel.mobileNumber];
-            }
+            QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+            alert.dismissAlert = YES;
+            [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
+            alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
+            WEAKSELF
+            alert.cancelBlock = ^{
+                [alert dismiss];
+                [weakSelf showAlertLabelView];
+            };
+            alert.confirmBlock = ^{
+                [alert dismiss];
+                if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
+                    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.selectedCRMModel.realName MobilePhone:weakSelf.selectedCRMModel.mobileNumber];
+                }
+            };
+            [alert show];
         }
     }
+}
+
+- (void)showAlertLabelView {
+    QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+    [alert configWithTitle:@"放弃跟进" cancleText:@"取消" confirmText:@"确认放弃"];
+    alert.contentString = @"放弃跟进，您的客户将会转回到公司公客";
+    WEAKSELF
+    alert.confirmBlock = ^{
+        [alert dismiss];
+        weakSelf.crmService.customerId = weakSelf.selectedCRMModel.id;
+        [weakSelf.crmService advisoryGiveUpTrackRequest];
+    };
+    [alert show];
 }
 
 - (void)setFilterDataArray:(NSMutableArray<FilterBtnViewCellModel *> *)filterDataArray {
