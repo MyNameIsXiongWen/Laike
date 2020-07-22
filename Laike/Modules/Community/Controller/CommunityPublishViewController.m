@@ -59,7 +59,6 @@
     [self.publishService uploadImageWithContent:self.textView.text Completed:^{
         [NSNotificationCenter.defaultCenter postNotificationName:kNotificationPublishSuccess object:nil];
         [self.navigationController popViewControllerAnimated:YES];
-//        [CTMediator.sharedInstance CTMediator_viewControllerForPublishViewController];
     }];
 }
 

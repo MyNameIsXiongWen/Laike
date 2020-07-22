@@ -115,7 +115,7 @@
                 case 3:
                 case 4:
                 case 102001: //产品详情
-                    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:msgModel.businessType BusinessId:msgModel.businessId IsDistribution:YES];
+                    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:msgModel.businessType BusinessId:msgModel.businessId IsDistribution:NO];
                     break;
                 
                 case 5: //海外头条
@@ -145,6 +145,10 @@
                     
                 case 101003: //霸屏海报列表-页面
                     [CTMediator.sharedInstance CTMediator_viewControllerForGallery];
+                    break;
+                    
+                case 101002: //发布海外圈
+                    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CommunityPublishViewController").new animated:YES];
                     break;
 
                 default:
