@@ -46,6 +46,7 @@
 - (void)willMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         [NSNotificationCenter.defaultCenter removeObserver:self];
+        [self.callObserve setDelegate:nil queue:nil];
         self.callObserve = nil;
     }
 }

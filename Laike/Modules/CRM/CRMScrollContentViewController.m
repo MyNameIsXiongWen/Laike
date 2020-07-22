@@ -50,12 +50,14 @@
         self.callObserve = CXCallObserver.new;
         [self.callObserve setDelegate:self queue:nil];
     } else {
+        [self.callObserve setDelegate:nil queue:nil];
         self.callObserve = nil;
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.callObserve setDelegate:nil queue:nil];
     self.callObserve = nil;
 }
 

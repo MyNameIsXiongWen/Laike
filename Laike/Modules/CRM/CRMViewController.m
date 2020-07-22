@@ -103,6 +103,7 @@
         vc1.callObserve = CXCallObserver.new;
         [vc1.callObserve setDelegate:vc1 queue:nil];
     } else {
+        [vc1.callObserve setDelegate:nil queue:nil];
         vc1.callObserve = nil;
     }
 }
