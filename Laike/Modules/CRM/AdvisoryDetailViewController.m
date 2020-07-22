@@ -22,6 +22,7 @@
 @property (nonatomic, strong) AdvisoryDetailBottomView *btmView;
 @property (nonatomic, strong) CRMService *crmService;
 @property (nonatomic, strong) CXCallObserver *callObserve;
+@property (nonatomic, assign) BOOL showCallAlertView;
 
 @end
 
@@ -45,27 +46,38 @@
 - (void)willMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         [NSNotificationCenter.defaultCenter removeObserver:self];
+        self.callObserve = nil;
     }
 }
 
 - (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
+    if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:NSStringFromClass(self.class)]) {
+        return;
+    }
     if (call.hasEnded) {
-        QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-        alert.dismissAlert = YES;
-        [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
-        alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
-        WEAKSELF
-        alert.cancelBlock = ^{
-            [alert dismiss];
-            [weakSelf showAlertLabelView];
-        };
-        alert.confirmBlock = ^{
-            [alert dismiss];
-            if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
-                [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
-            }
-        };
-        [alert show];
+        if (!self.showCallAlertView) {
+            self.showCallAlertView = YES;
+            QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+            alert.closeBtn.hidden = NO;
+            [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
+            alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
+            WEAKSELF
+            alert.closeBlock = ^{
+                weakSelf.showCallAlertView = NO;
+            };
+            alert.cancelBlock = ^{
+                weakSelf.showCallAlertView = NO;
+                [weakSelf showAlertLabelView];
+            };
+            alert.confirmBlock = ^{
+                weakSelf.showCallAlertView = NO;
+                [alert dismiss];
+                if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
+                    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
+                }
+            };
+            [alert show];
+        }
     }
 }
 

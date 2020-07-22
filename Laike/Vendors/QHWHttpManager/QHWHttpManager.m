@@ -23,7 +23,7 @@
 
         NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         currentVersion = [currentVersion stringByReplacingOccurrencesOfString:@"." withString:@""];
-        [manager.requestSerializer setValue:@"6" forHTTPHeaderField:@"pass"];
+        [manager.requestSerializer setValue:@"102002" forHTTPHeaderField:@"pass"];
         [manager.requestSerializer setValue:currentVersion forHTTPHeaderField:@"version"];
         [manager.requestSerializer setValue:manager.getDeviceId forHTTPHeaderField:@"deviceId"];
         [manager.requestSerializer setValue:@"AppStore" forHTTPHeaderField:@"channel"];

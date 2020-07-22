@@ -12,16 +12,17 @@
 #import "MainBusinessFilterBtnView.h"
 #import "QHWCountryFilterView.h"
 #import "CTMediator+ViewController.h"
-#import <CallKit/CallKit.h>
+//#import <CallKit/CallKit.h>
 #import "QHWLabelAlertView.h"
 
-@interface CRMScrollContentViewController () <UITableViewDelegate, UITableViewDataSource, CXCallObserverDelegate>
+@interface CRMScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MainBusinessFilterBtnView *filterBtnView;
 @property (nonatomic, strong) CRMService *crmService;
 @property (nonatomic, strong) NSMutableDictionary *conditionDic;
-@property (nonatomic, strong) CXCallObserver *callObserve;
+//@property (nonatomic, strong) CXCallObserver *callObserve;
 @property (nonatomic, strong) CRMModel *selectedCRMModel;
+@property (nonatomic, assign) BOOL showCallAlertView;
 
 @end
 
@@ -36,23 +37,37 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
-    self.callObserve = CXCallObserver.new;
-    [self.callObserve setDelegate:self queue:dispatch_get_main_queue()];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationBindSuccess object:nil];
+//    if (self.crmType == 2) {
+//        self.callObserve = CXCallObserver.new;
+//        [self.callObserve setDelegate:self queue:nil];
+//    }
 }
 
 - (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
+    if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:@"CRMViewController"]) {
+        return;
+    }
+    if (self.crmType == 1) {
+        return;
+    }
     if (call.hasEnded) {
-        if (self.crmType == 2) {
+        if (!self.showCallAlertView) {
+            self.showCallAlertView = YES;
             QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-            alert.dismissAlert = YES;
+            alert.closeBtn.hidden = NO;
             [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
             alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
             WEAKSELF
+            alert.closeBlock = ^{
+                weakSelf.showCallAlertView = NO;
+            };
             alert.cancelBlock = ^{
-                [alert dismiss];
+                weakSelf.showCallAlertView = NO;
                 [weakSelf showAlertLabelView];
             };
             alert.confirmBlock = ^{
+                weakSelf.showCallAlertView = NO;
                 [alert dismiss];
                 if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
                     [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.selectedCRMModel.realName MobilePhone:weakSelf.selectedCRMModel.mobileNumber];

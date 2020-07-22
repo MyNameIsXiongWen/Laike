@@ -14,6 +14,7 @@
 @property (nonatomic, strong, readwrite) UIView *lineView;
 @property (nonatomic, strong, readwrite) UIButton *cancelBtn;
 @property (nonatomic, strong, readwrite) UIButton *confirmBtn;
+@property (nonatomic, strong, readwrite) UIButton *closeBtn;
 @property (nonatomic, strong) UIView *midLine;
 @property (nonatomic, assign, readwrite) CGFloat selfHeight;
 
@@ -42,6 +43,11 @@ static const float selfWidth = 280;
             make.top.mas_equalTo(25);
             make.width.mas_equalTo(selfWidth - 30);
             make.height.mas_equalTo(25);
+        }];
+        
+        [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.mas_equalTo(0);
+            make.width.height.mas_equalTo(40);
         }];
         
         [self.cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,6 +119,13 @@ static const float selfWidth = 280;
     }
 }
 
+- (void)closeBtnAction {
+    [self dismiss];
+    if (self.closeBlock) {
+        self.closeBlock();
+    }
+}
+
 - (void)cancelBtnAction {
     [self dismiss];
     if (self.cancelBlock) {
@@ -156,6 +169,15 @@ static const float selfWidth = 280;
         [self addSubview:_lineView];
     }
     return _lineView;
+}
+
+- (UIButton *)closeBtn {
+    if (!_closeBtn) {
+        _closeBtn = UIButton.btnInit().btnImage(kImageMake(@"publish_close")).btnAction(self, @selector(closeBtnAction));
+        _closeBtn.hidden = YES;
+        [self addSubview:_closeBtn];
+    }
+    return _closeBtn;
 }
 
 - (UIButton *)cancelBtn {

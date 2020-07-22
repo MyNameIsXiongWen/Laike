@@ -26,7 +26,7 @@
 @implementation CRMViewController
 
 - (void)dealloc {
-    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+//    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
 }
 
 - (void)viewDidLoad {
@@ -47,13 +47,16 @@
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
-    [self getFilterData];
+//    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+    [self getMainData];
+    if (self.crmService.filterDataArray.count == 0) {
+        [self getFilterData];
+    }
 }
 
 - (void)leftNavBtnAction:(UIButton *)sender {
@@ -88,6 +91,17 @@
 
 - (void)QHWContentViewDidEndDecelerating:(QHWPageContentView *)contentView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex {
     [self.tabScrollView scrollToIndex:endIndex];
+    [self configCRMContentVCCallObserveWithIndex:endIndex];
+}
+
+- (void)configCRMContentVCCallObserveWithIndex:(NSInteger)index {
+    CRMScrollContentViewController *vc = (CRMScrollContentViewController *)self.pageContentView.childsVCs[1];
+    if (index == 1) {
+        vc.callObserve = CXCallObserver.new;
+        [vc.callObserve setDelegate:vc queue:nil];
+    } else {
+        vc.callObserve = nil;
+    }
 }
 
 /*
@@ -129,6 +143,7 @@
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;
+            [weakSelf configCRMContentVCCallObserveWithIndex:index];
         };
     }
     return _tabScrollView;
