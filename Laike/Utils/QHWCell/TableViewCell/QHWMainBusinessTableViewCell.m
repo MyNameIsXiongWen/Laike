@@ -13,10 +13,14 @@
 #import "QHWMigrationModel.h"
 #import "QHWTreatmentModel.h"
 #import "QHWShareView.h"
+#import "UserModel.h"
+#import "CTMediator+ViewController.h"
 
 @interface QHWMainBusinessTableViewCell ()
 
 @property (nonatomic, strong) QHWMainBusinessDetailBaseModel *detailModel;
+///1: 首页  2:分销
+@property (nonatomic, assign) NSInteger pageType;
 
 @end
 
@@ -80,7 +84,9 @@
 }
 
 - (void)configCellData:(id)data {
-    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)data;
+    NSArray *array = (NSArray *)data;
+    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)array.firstObject;
+    self.pageType = [array.lastObject integerValue];
     self.detailModel = model;
     [self.houseImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.coverPath)] placeholderImage:kPlaceHolderImage_Banner];
     self.houseTitleLabel.text = model.name;
@@ -187,12 +193,13 @@
 
 - (QHWCellBottomShareView *)shareView {
     if (!_shareView) {
-        _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];WEAKSELF
+        _shareView = [[QHWCellBottomShareView alloc] initWithFrame:CGRectZero];
+        WEAKSELF
         _shareView.clickShareBlock = ^{
-//            if (self.isDistribution && UserModel.shareUser.bindStatus == 2) {
-//                [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
-//                return;
-//            }
+            if (weakSelf.pageType == 2 && UserModel.shareUser.bindStatus == 2) {
+                [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
+                return;
+            }
             QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel":weakSelf.detailModel, @"shareType": @(ShareTypeMainBusiness)}];
             [shareView show];
         };

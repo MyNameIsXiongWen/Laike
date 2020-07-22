@@ -86,17 +86,12 @@
         }];
     } else if ([identifier isEqualToString:@"gender"]) {
         NSArray *array = @[@"女士", @"先生"];
-//        if ([identifier isEqualToString:@"headPath"]) {
-//            array = @[@"拍摄", @"从相册选择"];
-//        } else if ([identifier isEqualToString:@"gender"]) {
-//            array = @[@"女士", @"先生"];
-//        }
         QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*(array.count+1)+7) title:@""];
         sheetView.dataArray = array;
         sheetView.sheetDelegate = self;
         sheetView.identifier = identifier;
         [sheetView show];
-    } else if ([identifier isEqualToString:@"realName"] || [identifier isEqualToString:@"slogan"]) {
+    } else {
         MineUpdateNameViewController *updateVC = MineUpdateNameViewController.new;
         updateVC.identifier = identifier;
         updateVC.placeholder = cellDic[@"title"];
@@ -125,27 +120,7 @@
 
 #pragma mark ------------QHWActionSheetViewDelegate-------------
 - (void)actionSheetViewSelectedIndex:(NSInteger)index WithActionSheetView:(QHWActionSheetView *)actionsheetView {
-    if ([actionsheetView.identifier isEqualToString:@"headPath"]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.modalPresentationStyle = UIModalPresentationFullScreen;
-        if (index == 0) {
-            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            [QHWPermissionManager openCaptureDeviceService:^(BOOL isOpen) {
-                if (isOpen) {
-                    [self presentViewController:picker animated:YES completion:nil];
-                }
-            }];
-        } else {
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [QHWPermissionManager openAlbumService:^(BOOL isOpen) {
-                if (isOpen) {
-                    [self presentViewController:picker animated:YES completion:nil];
-                }
-            }];
-        }
-    } else if ([actionsheetView.identifier isEqualToString:@"gender"]) {
+    if ([actionsheetView.identifier isEqualToString:@"gender"]) {
         [self updateUserInfoWithKey:@"gender" Value:@(index == 0 ? 2 : 1)];
     }
 }

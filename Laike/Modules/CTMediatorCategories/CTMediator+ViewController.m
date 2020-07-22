@@ -188,6 +188,14 @@ NSString * const kCTMediatorActionNativeBindCompanyViewController = @"nativeBind
 }
 
 - (void)CTMediator_viewControllerForBookAppointmentWithBusinessId:(NSString *)businessId BusinessName:(NSString *)businessName BusinessType:(NSInteger)businessType {
+    if (UserModel.shareUser.bindStatus == 2) {
+        [self CTMediator_viewControllerForBindCompany];
+        return;
+    }
+    if (UserModel.shareUser.agentStatus == 2) {
+        [SVProgressHUD showInfoWithStatus:@"您公司尚未开通分销业务"];
+        return;
+    }
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeBookAppointmentViewController
                  params:@{@"businessId": businessId ?: @"",

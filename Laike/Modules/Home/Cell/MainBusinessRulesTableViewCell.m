@@ -10,6 +10,8 @@
 #import "QHWTabScrollView.h"
 #import "QHWShareView.h"
 #import "QHWHouseModel.h"
+#import "UserModel.h"
+#import "CTMediator+ViewController.h"
 
 @interface MainBusinessRulesTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QHWBaseCellProtocol>
 
@@ -143,6 +145,10 @@
 }
 
 - (void)clickShareBtn {
+    if (UserModel.shareUser.bindStatus == 2) {
+        [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
+        return;
+    }
     QHWShareView *shareView = [[QHWShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 220) dict:@{@"detailModel": self.dataArray.lastObject, @"shareType": @(ShareTypeMainBusiness)}];
     [shareView show];
 }

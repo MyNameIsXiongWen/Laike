@@ -55,7 +55,7 @@
 
 - (UIImageView *)topImgView {
     if (!_topImgView) {
-        _topImgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 180)).ivBkgColor(kColorFromHexString(@"bdb5b5")).ivImage(kImageMake(@"rank_bkg"));
+        _topImgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 180)).ivImage(kImageMake(@"rank_bkg"));
         UILabel *label1 = UILabel.labelFrame(CGRectMake(40, kTopBarHeight + 20, kScreenW-80, 25)).labelText(@"人气排行榜").labelTitleColor(kColorThemefff).labelFont(kFontTheme22);
         UILabel *label2 = UILabel.labelFrame(CGRectMake(40, label1.bottom + 5, kScreenW-80, 20)).labelText(@"继续努力，你也会成为榜单第1人！").labelTitleColor(kColorThemefff).labelFont(kFontTheme14);
         [_topImgView addSubview:label1];

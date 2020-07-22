@@ -80,7 +80,8 @@
 #pragma mark ------------UI-------------
 - (UIView *)bkgView {
     if (!_bkgView) {
-        _bkgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 190)).ivBkgColor(kColorFromHexString(@"bdb5b5"));
+        _bkgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 190));
+        [_bkgView addSubview:UIImageView.ivFrame(_bkgView.bounds).ivImage(kImageMake(@"mine_bkg"))];
     }
     return _bkgView;
 }

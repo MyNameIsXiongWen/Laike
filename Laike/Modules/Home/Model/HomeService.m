@@ -12,8 +12,6 @@
 
 @interface HomeService ()
 
-@property (nonatomic, strong) NSMutableArray *requestDataArray;//数据源
-
 @end
 
 @implementation HomeService
@@ -167,24 +165,16 @@
         if (self.itemPageModel.pagination.currentPage == 1) {
             [self.tableViewDataArray removeAllObjects];
         }
-        [self.requestDataArray removeAllObjects];
-        self.requestDataArray = [NSArray yy_modelArrayWithClass:NSClassFromString(modelStr) json:self.itemPageModel.list].mutableCopy;
-        for (QHWMainBusinessDetailBaseModel *baseModel in self.requestDataArray) {
-            baseModel.businessType = businessType;
+        NSArray *tempArray = [NSArray yy_modelArrayWithClass:NSClassFromString(modelStr) json:self.itemPageModel.list];
+        for (QHWMainBusinessDetailBaseModel *tempModel in tempArray) {
+            tempModel.businessType = businessType;
+            QHWBaseModel *baseModel = [[QHWBaseModel alloc] configModelIdentifier:@"QHWMainBusinessTableViewCell" Height:140 Data:@[tempModel, @(self.pageType)]];
+            [self.tableViewDataArray addObject:baseModel];
         }
-        [self handleRequestDataArrayWithBusinessType:businessType];
         complete();
     } failure:^(NSError *error) {
-        [self handleRequestDataArrayWithBusinessType:businessType];
         complete();
     }];
-}
-
-- (void)handleRequestDataArrayWithBusinessType:(NSInteger)businessType {
-    for (NSObject *obj in self.requestDataArray) {
-        QHWBaseModel *baseModel = [[QHWBaseModel alloc] configModelIdentifier:@"QHWMainBusinessTableViewCell" Height:140 Data:obj];
-        [self.tableViewDataArray addObject:baseModel];
-    }
 }
 
 - (void)handleHomeData {
@@ -235,13 +225,6 @@
         _itemPageModel = QHWItemPageModel.new;
     }
     return _itemPageModel;
-}
-
-- (NSMutableArray *)requestDataArray {
-    if (!_requestDataArray) {
-        _requestDataArray = NSMutableArray.array;
-    }
-    return _requestDataArray;
 }
 
 - (NSMutableArray *)iconArray {

@@ -45,8 +45,13 @@
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kDistributionClientAdd parameters:params success:^(id responseObject) {
         [SVProgressHUD showInfoWithStatus:@"报备客户成功"];
+        for (UIViewController *vc in self.getCurrentMethodCallerVC.navigationController.childViewControllers) {
+            if ([NSStringFromClass(vc.class) isEqualToString:@"DistributionClientViewController"]) {
+                [self.getCurrentMethodCallerVC.navigationController popToViewController:vc animated:YES];
+                return;
+            }
+        }
         [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"DistributionClientViewController").new animated:YES];
-//        [self.getCurrentMethodCallerVC.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
     }];
 }

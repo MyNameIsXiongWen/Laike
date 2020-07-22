@@ -46,8 +46,6 @@
 }
 
 - (void)configUI {
-    UserModel *userModel = UserModel.shareUser;
-    
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(40, 0, kScreenW-80, MIN(kScreenH-120, self.imgHeight+120))];
     self.scrollView.contentSize = CGSizeMake(self.scrollView.width, self.imgHeight+120);
     [self addSubview:self.scrollView];
@@ -61,6 +59,7 @@
     self.coverImgView = UIImageView.ivFrame(CGRectMake(0, 0, self.bkgView.width, self.bkgView.height-120));
     [self.bkgView addSubview:self.coverImgView];
     
+    UserModel *userModel = UserModel.shareUser;
     self.avatarImgView = UIImageView.ivFrame(CGRectMake(10, self.coverImgView.bottom+25, 40, 40)).ivCornerRadius(20);
     [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(userModel.headPath)]];
     self.nameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+10, self.avatarImgView.top, self.coverImgView.width-140, 20)).labelFont(kMediumFontTheme18).labelTitleColor(kColorTheme2a303c).labelText(userModel.realName);

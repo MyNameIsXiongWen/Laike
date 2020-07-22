@@ -209,11 +209,12 @@
         default:
             break;
     }
-    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(UserModel.shareUser.headPath)]];
-    [self.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(UserModel.shareUser.headPath)]];
+    UserModel *user = UserModel.shareUser;
+    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
+    [self.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
     self.nameImgView.image = kImageMake(topImgPath);
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(mainBusinessDetailModel.coverPath)]];
-    self.sourceLabel.text = kFormat(@"来源：%@", mainBusinessDetailModel.merchantName);
+    self.sourceLabel.text = kFormat(@"来源：%@", user.merchantName);
     self.typeLabel.text = kFormat(@" %@ ", title);
     [self.typeLabel sizeToFit];
     self.typeLabel.height = 20;

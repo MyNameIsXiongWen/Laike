@@ -76,7 +76,7 @@
     [self.contentBkgView addSubview:self.timeLabel];
     [self.contentBkgView addSubview:self.contentLabel];
     
-    self.sourceLabel = UILabel.labelFrame(CGRectMake(15, self.contentBkgView.height-50, self.contentBkgView.width-100, 50)).labelFont(kFontTheme14).labelTitleColor(kColorTheme6d7278).labelText(kFormat(@"来源：%@", user.realName));
+    self.sourceLabel = UILabel.labelFrame(CGRectMake(15, self.contentBkgView.height-50, self.contentBkgView.width-100, 50)).labelFont(kFontTheme14).labelTitleColor(kColorTheme6d7278).labelText(kFormat(@"来源：%@", user.merchantName));
     self.typeLabel = UILabel.labelFrame(CGRectMake(self.contentBkgView.width-70, self.sourceLabel.y+15, 70, 20)).labelFont(kFontTheme14).labelTitleColor(kColorTheme666).labelBkgColor(kColorThemee4e4e4).labelCornerRadius(3);
     [self.contentBkgView addSubview:self.sourceLabel];
     [self.contentBkgView addSubview:self.typeLabel];

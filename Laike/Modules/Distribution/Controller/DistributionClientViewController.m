@@ -37,10 +37,6 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-    if (UserModel.shareUser.bindStatus == 2) {
-        [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
-        return;
-    }
     [CTMediator.sharedInstance CTMediator_viewControllerForBookAppointmentWithBusinessId:@"" BusinessName:@"" BusinessType:0];
 }
 

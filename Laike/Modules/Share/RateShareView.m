@@ -46,7 +46,6 @@
 }
 
 - (void)configUI {
-    UserModel *userModel = UserModel.shareUser;
     self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, 530)).bkgColor(kColorThemefff);
     self.bkgView.userInteractionEnabled = YES;
     [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
@@ -59,6 +58,7 @@
     UILabel *label = UILabel.labelFrame(CGRectMake(10, rateViewHeight, self.bkgView.width-20, 17)).labelText(time).labelTitleColor(kColorThemea4abb3).labelFont(kFontTheme12).labelTextAlignment(NSTextAlignmentRight);
     [self.bkgView addSubview:label];
     
+    UserModel *userModel = UserModel.shareUser;
     self.avatarImgView = UIImageView.ivFrame(CGRectMake(10, rateViewHeight+25, 40, 40)).ivCornerRadius(20);
     [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(userModel.headPath)]];
     self.nameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+10, self.avatarImgView.top, self.bkgView.width-20-140, 20)).labelFont(kMediumFontTheme18).labelTitleColor(kColorTheme2a303c).labelText(userModel.realName);

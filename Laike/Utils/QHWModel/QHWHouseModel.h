@@ -70,8 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *distributionRules;
 ///分销手册
 @property (nonatomic, copy) NSString *distributionManual;
-///客服电话
-//@property (nonatomic, copy) NSString *serviceHotline;
 
 @property (nonatomic, strong) NSArray <QHWHouseModel *>*alikeList;
 
@@ -80,9 +78,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *parkConfigList;
 @property (nonatomic, strong) NSArray *gardenConfigList;
 @property (nonatomic, strong) NSArray *kitchenConfigList;
-
-///distributionStatus 分销状态 1-不是分销；2-分销产品 
-@property (nonatomic, assign) NSInteger distributionStatus;
 
 @end
 

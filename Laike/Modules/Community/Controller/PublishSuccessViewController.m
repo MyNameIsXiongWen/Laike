@@ -22,7 +22,7 @@
     [self.view addSubview:imgView];
     UILabel *label = UILabel.labelFrame(CGRectMake(15, imgView.bottom+30, kScreenW-30, 30)).labelTitleColor(kColorTheme2a303c).labelText(@"发布成功").labelFont(kMediumFontTheme18).labelTextAlignment(NSTextAlignmentCenter);
     [self.view addSubview:label];
-    UIButton *backBtn = UIButton.btnFrame(CGRectMake(15, label.bottom+50, kScreenW-30, 50)).btnTitle(@"返回").btnTitleColor(kColorThemefff).btnBkgColor(kColorThemefb4d56).btnFont(kMediumFontTheme18).btnCornerRadius(5).btnAction(self, @selector(leftNavBtnAction:));
+    UIButton *backBtn = UIButton.btnFrame(CGRectMake(15, label.bottom+50, kScreenW-30, 50)).btnTitle(@"返回").btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnFont(kMediumFontTheme18).btnCornerRadius(5).btnAction(self, @selector(leftNavBtnAction:));
     [self.view addSubview:backBtn];
 }
 

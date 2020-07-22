@@ -378,7 +378,11 @@
 
 - (void)configCellData:(id)data {
     self.btnDic = (NSDictionary *)data;
-    self.titleLabel.text = self.btnDic[@"title"];
+    NSString *title = self.btnDic[@"title"];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+    [attr addAttributes:@{NSForegroundColorAttributeName: UIColor.redColor} range:[title rangeOfString:@"*"]];
+    self.titleLabel.attributedText = attr;
+    
     self.crmModel = self.btnDic[@"model"];
     [self.collectionView reloadData];
 }

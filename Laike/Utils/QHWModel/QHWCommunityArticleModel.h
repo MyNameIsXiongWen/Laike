@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) CGFloat titleHeight;
 @property (nonatomic, assign) CGFloat cellHeight;
+@property (nonatomic, strong) UIImage *snapShotImage;
 
 @end
 

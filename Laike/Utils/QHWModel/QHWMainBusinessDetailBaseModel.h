@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *discounts;
 @property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, strong) UIImage *snapShotImage;
+///分销状态 1-不是分销；2-分销产品
+@property (nonatomic, assign) NSInteger distributionStatus;
 
 ///收藏状态：1-未收藏；2-已收藏
 @property (nonatomic, assign) NSInteger collectionStatus;

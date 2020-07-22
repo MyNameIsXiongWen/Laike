@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///商户绑定状态:1-已绑定；2未绑定
 @property (nonatomic, assign) NSInteger bindStatus;
+///商户代理状态:1-已代理；2未代理
+@property (nonatomic, assign) NSInteger agentStatus;
 ///1-账户存在登录；2-新账户注册登录
 @property (nonatomic, assign) NSInteger loginStatus;
 ///用户性别（默认为0）：0-无；1-男；2-女

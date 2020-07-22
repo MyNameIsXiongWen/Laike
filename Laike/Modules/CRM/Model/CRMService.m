@@ -343,7 +343,7 @@
     QHWBaseModel *remarkModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerRemarkCell" Height:165 Data:self.crmModel];
     [self.tableViewDataArray addObject:remarkModel];
     
-    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source", @"unselectable": @(unselectable)}];
+    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"* 客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source", @"unselectable": @(unselectable)}];
     [self.tableViewDataArray addObject:sourceModel];
     
     QHWBaseModel *crmLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientLevelList] Data:@{@"title": @"客户等级", @"mutable": @(NO), @"data": self.clientLevelList, @"model": self.crmModel, @"identifier": @"crmLevel"}];

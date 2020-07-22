@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
     self.kNavigationView.title = self.placeholder;
     [self.kNavigationView.rightBtn setTitle:@"保存" forState:0];
-    [self.kNavigationView.rightBtn setTitleColor:kColorThemefb4d56 forState:0];
+    [self.kNavigationView.rightBtn setTitleColor:kColorTheme21a8ff forState:0];
     if ([self.identifier isEqualToString:@"slogan"]) {
         [self.view addSubview:self.bkgView];
         self.textView.text = self.content;
