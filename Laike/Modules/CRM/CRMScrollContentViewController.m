@@ -66,7 +66,7 @@
     if (self.crmType == 1) {
         return;
     }
-    if (call.hasEnded) {
+    if (call.outgoing && call.hasEnded) {
         if (!self.showCallAlertView) {
             self.showCallAlertView = YES;
             QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];

@@ -54,7 +54,7 @@
     if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:NSStringFromClass(self.class)]) {
         return;
     }
-    if (call.hasEnded) {
+    if (call.outgoing && call.hasEnded) {
         if (!self.showCallAlertView) {
             self.showCallAlertView = YES;
             QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
