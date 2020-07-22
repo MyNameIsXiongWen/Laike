@@ -68,6 +68,7 @@
     NSDictionary *dic = self.businessArray[self.selectedIndex-100];
     RelateProductViewController *vc = RelateProductViewController.new;
     vc.identifier = dic[@"identifier"];
+    vc.businessId = self.businessId;
     WEAKSELF
     vc.didSelectProductBlock = ^(NSString * _Nonnull businessId, NSString * _Nonnull businessName) {
          weakSelf.businessId = businessId;

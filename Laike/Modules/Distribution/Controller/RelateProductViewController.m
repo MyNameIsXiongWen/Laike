@@ -42,9 +42,14 @@
 
 - (void)getMainData {
     [self.homeService getHomePageProductListRequestWithIdentifier:self.identifier Complete:^{
-        for (QHWBaseModel *baseModel in self.homeService.tableViewDataArray) {
+        [self.homeService.tableViewDataArray enumerateObjectsUsingBlock:^(QHWBaseModel * _Nonnull baseModel, NSUInteger idx, BOOL * _Nonnull stop) {
             [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
-        }
+            NSArray *array = (NSArray *)baseModel.data;
+            QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)array.firstObject;
+            if ([self.businessId isEqualToString:model.id]) {
+                self.selectedIndex = idx;
+            }
+        }];
         self.tableView.separatorStyle = self.homeService.tableViewDataArray.count > 0 ? UITableViewCellSeparatorStyleSingleLine : UITableViewCellSeparatorStyleNone;
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
