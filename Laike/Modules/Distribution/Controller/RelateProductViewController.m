@@ -33,7 +33,8 @@
         return;
     }
     if (self.didSelectProductBlock) {
-        QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)self.homeService.tableViewDataArray[self.selectedIndex].data;
+        NSArray *array = (NSArray *)self.homeService.tableViewDataArray[self.selectedIndex].data;
+        QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)array.firstObject;
         self.didSelectProductBlock(model.id, model.name);
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -60,7 +61,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(UITableViewCell.class)];
-    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)self.homeService.tableViewDataArray[indexPath.row].data;
+    NSArray *array = (NSArray *)self.homeService.tableViewDataArray[indexPath.row].data;
+    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)array.firstObject;
     cell.textLabel.text = model.name;
     cell.imageView.image = indexPath.row == self.selectedIndex ? kImageMake(@"product_selected") : kImageMake(@"product_unselected");
     return cell;

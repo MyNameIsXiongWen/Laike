@@ -42,7 +42,8 @@
     [self.homeService getHomePageProductListRequestWithIdentifier:self.identifier Complete:^{
         for (QHWBaseModel *baseModel in self.homeService.tableViewDataArray) {
             [self.tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
-            QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)baseModel.data;
+            NSArray *array = (NSArray *)baseModel.data;
+            QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)array.firstObject;
             if ([[self getSelectedIdArray] containsObject:model.id]) {
                 model.selected = YES;
             }
@@ -70,14 +71,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(UITableViewCell.class)];
-    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)self.homeService.tableViewDataArray[indexPath.row].data;
+    NSArray *array = (NSArray *)self.homeService.tableViewDataArray[indexPath.row].data;
+    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)array.firstObject;
     cell.textLabel.text = model.name;
     cell.imageView.image = model.selected ? kImageMake(@"product_selected") : kImageMake(@"product_unselected");
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)self.homeService.tableViewDataArray[indexPath.row].data;
+    NSArray *array = (NSArray *)self.homeService.tableViewDataArray[indexPath.row].data;
+    QHWMainBusinessDetailBaseModel *model = (QHWMainBusinessDetailBaseModel *)array.firstObject;
     if (model.selected) {
         model.selected = !model.selected;
         for (QHWMainBusinessDetailBaseModel *tempModel in self.selectedArray) {
