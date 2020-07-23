@@ -31,7 +31,10 @@
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"官方推荐";
     self.kNavigationView.rightBtn.frame = CGRectMake(kScreenW-90, kStatusBarHeight, 70, 44);
-    self.kNavigationView.rightBtn.btnTitle(@"一键已读").btnFont(kFontTheme14).btnTitleColor(kColorTheme21a8ff);
+    self.kNavigationView.rightBtn.btnTitle(@"一键已读").btnFont(kFontTheme14).btnTitleColor(kColorThemefff);
+    self.kNavigationView.titleLabel.textColor = kColorThemefff;
+    self.kNavigationView.backgroundColor = kColorTheme21a8ff;
+    [self.kNavigationView.leftBtn setImage:kImageMake(@"global_back_white") forState:0];
     [EMClient.sharedClient.chatManager addDelegate:self delegateQueue:nil];
     [self getIMUnreadCount];
 }
@@ -42,35 +45,40 @@
 
 - (void)getIMUnreadCount {
     NSArray *conversationArray = [EMClient.sharedClient.chatManager getAllConversations];
-    NSInteger count = 0;
-    NSInteger officialCount = 0;
-    for (EMConversation *conversation in conversationArray) {
-        count += conversation.unreadMessagesCount;
-        EMMessage *msg = conversation.latestMessage;
-        if (msg.ext) {
-            MessageModel *msgModel = [MessageModel yy_modelWithDictionary:msg.ext];
-            if (msgModel.type == 100000) {
-                officialCount += conversation.unreadMessagesCount;
-                self.currentConversation = conversation;
-                [self.dataArray removeAllObjects];
-                [conversation loadMessagesStartFromId:nil count:1000 searchDirection:EMMessageSearchDirectionUp completion:^(NSArray *aMessages, EMError *aError) {
-                    for (EMMessage *tempEMMsg in aMessages) {
-                        if (tempEMMsg.ext) {
-                            MessageModel *tempEMMsgModel = [MessageModel yy_modelWithDictionary:tempEMMsg.ext];
-                            tempEMMsgModel.message = tempEMMsg;
-                            tempEMMsgModel.isRead = tempEMMsg.isRead;
-                            tempEMMsgModel.unreadMsgCount = tempEMMsg.isRead ? 0 : 1;
-                            [self.dataArray insertObject:tempEMMsgModel atIndex:0];
+    if (conversationArray.count > 0) {
+        NSInteger count = 0;
+        NSInteger officialCount = 0;
+        for (EMConversation *conversation in conversationArray) {
+            count += conversation.unreadMessagesCount;
+            EMMessage *msg = conversation.latestMessage;
+            if (msg.ext) {
+                MessageModel *msgModel = [MessageModel yy_modelWithDictionary:msg.ext];
+                if (msgModel.type == 100000) {
+                    officialCount += conversation.unreadMessagesCount;
+                    self.currentConversation = conversation;
+                    [self.dataArray removeAllObjects];
+                    [conversation loadMessagesStartFromId:nil count:1000 searchDirection:EMMessageSearchDirectionUp completion:^(NSArray *aMessages, EMError *aError) {
+                        for (EMMessage *tempEMMsg in aMessages) {
+                            if (tempEMMsg.ext) {
+                                MessageModel *tempEMMsgModel = [MessageModel yy_modelWithDictionary:tempEMMsg.ext];
+                                tempEMMsgModel.message = tempEMMsg;
+                                tempEMMsgModel.isRead = tempEMMsg.isRead;
+                                tempEMMsgModel.unreadMsgCount = tempEMMsg.isRead ? 0 : 1;
+                                [self.dataArray insertObject:tempEMMsgModel atIndex:0];
+                            }
                         }
-                    }
-                    [self.tableView reloadData];
-                    [self.tableView showNodataView:self.dataArray.count == 0 offsetY:0 button:nil];
-                }];
+                        [self.tableView reloadData];
+                        [self.tableView showNodataView:self.dataArray.count == 0 offsetY:0 button:nil];
+                    }];
+                }
             }
         }
+        UserModel.shareUser.officialUnreadMsgCount = officialCount;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsg object:@(count)];
+    } else {
+        [self.tableView reloadData];
+        [self.tableView showNodataView:self.dataArray.count == 0 offsetY:0 button:nil];
     }
-    UserModel.shareUser.officialUnreadMsgCount = officialCount;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsg object:@(count)];
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {

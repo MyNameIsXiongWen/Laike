@@ -23,6 +23,7 @@
                               @"likeCount": @(user.likeCount),
                               @"fansCount": @(user.fansCount),
                               @"visitCount": @(user.visitCount),
+                              @"consultCount": @(user.consultCount),
                               @"distributionCount": @(user.distributionCount),
                               @"distributionStatus": @(user.distributionStatus)};
         

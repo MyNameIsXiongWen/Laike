@@ -49,7 +49,7 @@
     self.tableViewDataArray = @[[[QHWBaseModel alloc] configModelIdentifier:@"MineDataTableViewCell"
                                                                      Height:100
                                                                        Data:@[@{@"title": @"访问", @"value": @(userModel.visitCount)},
-                                                                              @{@"title": @"咨询", @"value": @(userModel.clueCount)},
+                                                                              @{@"title": @"线索", @"value": @(userModel.consultCount)},
                                                                               @{@"title": @"客户", @"value": @(userModel.crmCount)},
                                                                               @{@"title": @"报备客户", @"value": @(userModel.distributionCount)}]]];
     
