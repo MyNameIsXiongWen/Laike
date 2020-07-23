@@ -181,6 +181,7 @@
         _phoneTextFieldView = [[CRMTextFieldView alloc] initWithFrame:CGRectMake(0, self.nameTextFieldView.bottom, kScreenW, 60)];
         _phoneTextFieldView.title = @"手机号";
         _phoneTextFieldView.textField.placeholder = @"请输入客户手机号";
+        _phoneTextFieldView.textField.keyboardType = UIKeyboardTypePhonePad;
         [_phoneTextFieldView.textField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     }
     return _phoneTextFieldView;

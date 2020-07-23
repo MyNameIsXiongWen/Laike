@@ -33,6 +33,7 @@
 
 - (void)dealloc {
     [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationBookAppointmentSuccess object:nil];
     [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationBindSuccess object:nil];
     [NSNotificationCenter.defaultCenter removeObserver:self name:@"HomeSwipeLeaveTop" object:nil];
 }
@@ -43,6 +44,7 @@
     self.canScroll = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatusNotification) name:@"HomeSwipeLeaveTop" object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getDistributionData) name:kNotificationBookAppointmentSuccess object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationBindSuccess object:nil];
 }
 
@@ -106,6 +108,12 @@
     dispatch_group_enter(self.group);
     [self.systemService getBannerRequestWithAdvertPage:201001 Complete:^(id  _Nonnull response) {
         dispatch_group_leave(self.group);
+    }];
+}
+
+- (void)getDistributionData {
+    [self.homeService getHomeReportCountDataRequestWithComplete:^{
+        
     }];
 }
 

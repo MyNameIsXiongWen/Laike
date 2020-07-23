@@ -15,6 +15,8 @@ static NSString *const kNotificationAddTrackSuccess = @"kNotificationAddTrackSuc
 static NSString *const kNotificationPublishSuccess = @"kNotificationPublishSuccess";//发布成功
 static NSString *const kNotificationBindSuccess = @"kNotificationBindSuccess";//绑定成功
 
+static NSString *const kNotificationBookAppointmentSuccess = @"kNotificationBookAppointmentSuccess";//报备客户成功
+
 static NSString *const kNotificationLikeSuccess = @"kNotificationLikeSuccess";//评论详情页点赞成功
 static NSString *const kNotificationAddCommentSuccess = @"kNotificationAddCommentSuccess";//新增评论成功
 

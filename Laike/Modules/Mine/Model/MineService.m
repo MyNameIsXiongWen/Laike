@@ -12,7 +12,7 @@
 
 - (void)getMineInfoRequestComplete:(void (^)(void))complete {
     [QHWHttpManager.sharedInstance QHW_POST:kMineInfo parameters:@{} success:^(id responseObject) {
-        UserModel *user = self.userModel;
+        UserModel *user = UserModel.shareUser;
         NSDictionary *dic = @{@"merchantName": user.merchantName ?: @"",
                               @"merchantInfo": user.merchantInfo ?: @"",
                               @"qrCode": user.qrCode ?: @"",

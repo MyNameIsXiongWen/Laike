@@ -18,9 +18,14 @@
 
 @implementation DistributionClientScrollContentViewController
 
+- (void)dealloc {
+    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationBookAppointmentSuccess object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationBookAppointmentSuccess object:nil];
 }
 
 - (void)addTableView {

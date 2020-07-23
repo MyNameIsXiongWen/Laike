@@ -8,6 +8,7 @@
 
 #import "CancelBindCompanyViewController.h"
 #import "QHWLabelAlertView.h"
+#import "UserModel.h"
 
 @interface CancelBindCompanyViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;

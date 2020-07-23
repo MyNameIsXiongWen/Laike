@@ -45,6 +45,7 @@
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kDistributionClientAdd parameters:params success:^(id responseObject) {
         [SVProgressHUD showInfoWithStatus:@"报备客户成功"];
+        [NSNotificationCenter.defaultCenter postNotificationName:kNotificationBookAppointmentSuccess object:nil];
         for (UIViewController *vc in self.getCurrentMethodCallerVC.navigationController.childViewControllers) {
             if ([NSStringFromClass(vc.class) isEqualToString:@"DistributionClientViewController"]) {
                 [self.getCurrentMethodCallerVC.navigationController popToViewController:vc animated:YES];
