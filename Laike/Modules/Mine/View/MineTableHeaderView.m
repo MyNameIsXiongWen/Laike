@@ -51,7 +51,7 @@
                                                                        Data:@[@{@"title": @"访问", @"value": @(userModel.visitCount)},
                                                                               @{@"title": @"咨询", @"value": @(userModel.clueCount)},
                                                                               @{@"title": @"客户", @"value": @(userModel.crmCount)},
-                                                                              @{@"title": @"分销报备", @"value": @(userModel.distributionCount)}]]];
+                                                                              @{@"title": @"报备客户", @"value": @(userModel.distributionCount)}]]];
     
     [self.tableView reloadData];
 }
