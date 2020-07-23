@@ -70,6 +70,7 @@
                         [self.tableView reloadData];
                         [self.tableView showNodataView:self.dataArray.count == 0 offsetY:0 button:nil];
                     }];
+                    break;
                 }
             }
         }
