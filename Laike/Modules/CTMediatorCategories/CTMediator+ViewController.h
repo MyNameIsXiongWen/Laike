@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForActivityDetailWithActivityId:(NSString *)activityId;
 
-- (void)CTMediator_viewControllerForMainBusinessDetailWithBusinessType:(NSInteger)businessType BusinessId:(NSString *)businessId IsDistribution:(BOOL)isDistribution;
+- (void)CTMediator_viewControllerForMainBusinessDetailWithBusinessType:(NSInteger)businessType BusinessId:(NSString *)businessId;
 
 - (void)CTMediator_viewControllerForUserDetailWithUserId:(NSString *)userId UserType:(NSInteger)userType BusinessType:(NSInteger)businessType;
 
@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)CTMediator_viewControllerForQSchoolDetailWithSchoolId:(NSString *)schoolId;
 
 - (void)CTMediator_viewControllerForLive;
+- (void)CTMediator_viewControllerForLiveDetailWithLiveId:(NSString *)liveId;
 
 - (void)CTMediator_viewControllerForGallery;
 

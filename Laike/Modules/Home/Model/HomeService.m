@@ -93,14 +93,14 @@
         user.qrCode = self.homeModel.qrCode;
         user.mobileNumber = self.homeModel.mobileNumber;
         user.userCount = self.homeModel.userCount;
-        user.crmCount = self.homeModel.clientData.crmCount;
-        user.clueCount = self.homeModel.clueCount;
-        user.distributionCount = self.homeModel.distributionCount;
+//        user.crmCount = self.homeModel.clientData.crmCount;
+//        user.clueCount = self.homeModel.clueCount;
+//        user.distributionCount = self.homeModel.distributionCount;
         user.bindStatus = self.homeModel.bindStatus;
         user.distributionStatus = self.homeModel.distributionStatus;
         [user keyArchiveUserModel];
-//        [self getHomeReportCountDataRequest];
-        complete();
+        [self getHomeReportCountDataRequestWithComplete:complete];
+//        complete();
     } failure:^(NSError *error) {
         complete();
     }];
@@ -130,13 +130,17 @@
     }];
 }
 
-- (void)getHomeReportCountDataRequest {
+- (void)getHomeReportCountDataRequestWithComplete:(void (^)(void))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
     [QHWHttpManager.sharedInstance QHW_POST:kHomeReportCount parameters:@{} success:^(id responseObject) {
-        UserModel.shareUser.likeCount = [responseObject[@"data"][@"likeCount"] integerValue];
-        UserModel.shareUser.distributionCount = [responseObject[@"data"][@"distributionCount"] integerValue];
+        UserModel *user = UserModel.shareUser;
+        user.likeCount = [responseObject[@"data"][@"likeCount"] integerValue];
+        user.distributionCount = [responseObject[@"data"][@"distributionCount"] integerValue];
+        user.crmCount = [responseObject[@"data"][@"crmCount"] integerValue];
+        user.clueCount = [responseObject[@"data"][@"clueCount"] integerValue];
+        complete();
     } failure:^(NSError *error) {
-        
+        complete();
     }];
 }
 

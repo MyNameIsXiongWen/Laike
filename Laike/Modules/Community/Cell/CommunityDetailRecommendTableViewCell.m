@@ -60,7 +60,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     BusinessListModel *model = self.dataArray[indexPath.row];
-    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:model.businessType BusinessId:model.businessId IsDistribution:NO];
+    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:model.businessType BusinessId:model.businessId];
 }
 
 - (UICollectionView *)collectionView {

@@ -10,7 +10,6 @@
 #import <HyphenateLite/HyphenateLite.h>
 #import "MessageModel.h"
 #import "CTMediator+ViewController.h"
-#import "LiveDetailViewController.h"
 #import "UserModel.h"
 
 @interface OfficialMsgViewController () <UITableViewDelegate, UITableViewDataSource, EMChatManagerDelegate>
@@ -128,7 +127,7 @@
                 case 3:
                 case 4:
                 case 102001: //产品详情
-                    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:msgModel.businessType BusinessId:msgModel.businessId IsDistribution:NO];
+                    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:msgModel.businessType BusinessId:msgModel.businessId];
                     break;
                 
                 case 5: //海外头条
@@ -145,11 +144,7 @@
                     break;
 
                 case 103001: //视频
-                {
-                    LiveDetailViewController *detailVC = LiveDetailViewController.new;
-                    detailVC.liveId = msgModel.businessId;
-                    [self.navigationController pushViewController:detailVC animated:YES];
-                }
+                    [CTMediator.sharedInstance CTMediator_viewControllerForLiveDetailWithLiveId:msgModel.businessId];
                     break;
 
                 case 17: //活动

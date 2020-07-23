@@ -8,6 +8,7 @@
 
 #import "QHWBannerModel.h"
 #import "CTMediator+ViewController.h"
+#import "AppDelegate.h"
 
 @implementation QHWBannerModel
 
@@ -22,27 +23,48 @@
             case 2:
             case 3:
             case 4:
-                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:self.businessType BusinessId:self.businessId IsDistribution:NO];
+            case 102001: //产品详情
+                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:self.businessType BusinessId:self.businessId];
                 break;
-                
-            case 5:
+            
+            case 5: //海外头条
                 [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:self.businessId CommunityType:1];
                 break;
-                
+
             case 18:
             case 21:
+            case 1821: //海外圈
                 [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:self.businessId CommunityType:2];
                 break;
-                
-            case 14:
-                [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.businessId UserType:3 BusinessType:0];
+            
+            case 24: //Q大学专业课堂
+            case 27: //Q大学产品学习
+                [CTMediator.sharedInstance CTMediator_viewControllerForQSchoolDetailWithSchoolId:self.businessId];
                 break;
-            case 15:
-                [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.businessId UserType:2 BusinessType:0];
+
+            case 17: //活动
+                [CTMediator.sharedInstance CTMediator_viewControllerForActivityDetailWithActivityId:self.businessId];
                 break;
-            case 16:
-                [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:self.businessId UserType:1 BusinessType:0];
+            
+            case 101001: //分销产品列表
+            {
+                AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                delegate.tabBarVC.selectedIndex = 3;
+            }
+                break;
                 
+            case 101002: //发布海外圈
+                [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CommunityPublishViewController").new animated:YES];
+                break;
+                    
+            case 101003: //霸屏海报列表
+                [CTMediator.sharedInstance CTMediator_viewControllerForGallery];
+                break;
+
+            case 103001: //视频
+                [CTMediator.sharedInstance CTMediator_viewControllerForLiveDetailWithLiveId:self.businessId];
+                break;
+
             default:
                 break;
         }

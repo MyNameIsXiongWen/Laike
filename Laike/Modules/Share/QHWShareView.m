@@ -301,7 +301,7 @@
         name = self.communityDetailModel.title;
         urlPath = self.communityDetailModel.htmlUrl;
     } else if (self.shareType == ShareTypeConsultant) {
-        name = kFormat(@"%@（%@）", self.userModel.realName, self.userModel.merchantName);
+        name = kFormat(@"您好！我是%@专属顾问%@，这是我的电子名片", self.userModel.merchantName, self.userModel.realName);
         coverPath = self.userModel.headPath;
         urlPath = self.userModel.html;
     } else if (self.shareType == ShareTypeMerchant) {
@@ -325,37 +325,38 @@
     imageData = UIImageJPEGRepresentation(img, 0.7);
     if (platformType == UMSocialPlatformType_WechatSession) {
         NSString *sharePath;
+        NSString *userId = UserModel.shareUser.id;
         if (self.shareType == ShareTypeMainBusiness) {
             switch (self.mainBusinessDetailModel.businessType) {
                 case 1:
-                    sharePath = kHouseDetailPath(self.mainBusinessDetailModel.id);
+                    sharePath = kHouseDetailPath(self.mainBusinessDetailModel.id, userId);
                     break;
                 case 2:
-                    sharePath = kStudyDetailPath(self.mainBusinessDetailModel.id);
+                    sharePath = kStudyDetailPath(self.mainBusinessDetailModel.id, userId);
                     break;
                 case 3:
-                    sharePath = kMigrationDetailPath(self.mainBusinessDetailModel.id);
+                    sharePath = kMigrationDetailPath(self.mainBusinessDetailModel.id, userId);
                     break;
                 case 4:
-                    sharePath = kStudentDetailPath(self.mainBusinessDetailModel.id);
+                    sharePath = kStudentDetailPath(self.mainBusinessDetailModel.id, userId);
                     break;
                 case 102001:
-                    sharePath = kTreatmentDetailPath(self.mainBusinessDetailModel.id);
+                    sharePath = kTreatmentDetailPath(self.mainBusinessDetailModel.id, userId);
                     break;
                 default:
-                    sharePath = kActivityDetailPath(self.mainBusinessDetailModel.id);
+                    sharePath = kActivityDetailPath(self.mainBusinessDetailModel.id, userId);
                     break;
             }
         } else if (self.shareType == ShareTypeArticle) {
-            sharePath = kArticleDetailPath(self.communityDetailModel.id);
+            sharePath = kArticleDetailPath(self.communityDetailModel.id, userId);
         } else if (self.shareType == ShareTypeContent) {
-            sharePath = kConsultantDetailPath(self.communityDetailModel.subjectData.subjectId);
+            sharePath = kConsultantDetailPath(self.communityDetailModel.subjectData.subjectId, userId);
         } else if (self.shareType == ShareTypeConsultant) {
-            sharePath = kConsultantDetailPath(self.userModel.id);
+            sharePath = kConsultantDetailPath(self.userModel.id, userId);
         } else if (self.shareType == ShareTypeMerchant) {
-            sharePath = kMerchantDetailPath(self.userModel.id);
+            sharePath = kMerchantDetailPath(self.userModel.id, userId);
         } else if (self.shareType == ShareTypeLive) {
-            sharePath = kLiveDetailPath(self.liveModel.id);
+            sharePath = kLiveDetailPath(self.liveModel.id, userId);
         }
         UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:name ?: @"" descr:@"" thumImage:imageData];
         shareObject.userName = kWXMini;

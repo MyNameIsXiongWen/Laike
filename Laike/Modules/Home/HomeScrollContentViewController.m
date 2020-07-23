@@ -112,7 +112,7 @@
         QHWMainBusinessDetailBaseModel *baseModel = (QHWMainBusinessDetailBaseModel *)array.firstObject;
         for (NSDictionary *dic in self.service.tableViewCellArray) {
             if ([self.identifier isEqualToString:dic[@"identifier"]]) {
-                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:[dic[@"businessType"] integerValue] BusinessId:baseModel.id IsDistribution:self.pageType == 2];
+                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:[dic[@"businessType"] integerValue] BusinessId:baseModel.id];
                 break;
             }
         }

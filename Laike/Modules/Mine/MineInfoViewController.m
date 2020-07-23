@@ -277,7 +277,7 @@
 
 - (UIButton *)confirmBtn {
     if (!_confirmBtn) {
-        _confirmBtn = [UICreateView initWithFrame:CGRectMake(kScreenW-58, 0, 48, 45) Title:@"确定" Image:nil SelectedImage:nil Font:kFontTheme15 TitleColor:kColorThemefb4d56 BackgroundColor:UIColor.whiteColor CornerRadius:0];
+        _confirmBtn = [UICreateView initWithFrame:CGRectMake(kScreenW-58, 0, 48, 45) Title:@"确定" Image:nil SelectedImage:nil Font:kFontTheme15 TitleColor:kColorTheme21a8ff BackgroundColor:UIColor.whiteColor CornerRadius:0];
         [_confirmBtn addTarget:self action:@selector(clickConfirmBtn) forControlEvents:UIControlEventTouchUpInside];
     }
     return _confirmBtn;

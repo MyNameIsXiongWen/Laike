@@ -95,7 +95,7 @@
     if (!_numberLabel) {
         UILabel *label = UILabel.labelFrame(CGRectMake(kScreenW-55, self.bkgView.bottom, 40, 30)).labelTitleColor(kColorThemea4abb3).labelFont(kFontTheme16).labelText(@"/500");
         [self.view addSubview:label];
-        _numberLabel = UILabel.labelFrame(CGRectMake(label.left-100, self.bkgView.bottom, 100, 30)).labelTextAlignment(NSTextAlignmentRight).labelTitleColor(kColorThemefb4d56).labelFont(kFontTheme16).labelText(@"0");
+        _numberLabel = UILabel.labelFrame(CGRectMake(label.left-100, self.bkgView.bottom, 100, 30)).labelTextAlignment(NSTextAlignmentRight).labelTitleColor(kColorTheme21a8ff).labelFont(kFontTheme16).labelText(@"0");
         
     }
     return _numberLabel;

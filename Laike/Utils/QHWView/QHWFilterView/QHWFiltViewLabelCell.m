@@ -22,9 +22,9 @@
 - (void)setModel:(FilterCellModel *)model {
     _model = model;
     _nameLabel.text = model.name;
-    _bgView.layer.borderColor = model.selected ? kColorThemefb4d56.CGColor : kColorThemeeee.CGColor;
+    _bgView.layer.borderColor = model.selected ? kColorTheme21a8ff.CGColor : kColorThemeeee.CGColor;
     _bgView.backgroundColor = model.selected ? kColorThemefff : kColorThemeeee;
-    _nameLabel.textColor = model.selected ? kColorThemefb4d56 : kColorTheme666;
+    _nameLabel.textColor = model.selected ? kColorTheme21a8ff : kColorTheme666;
 }
 
 @end

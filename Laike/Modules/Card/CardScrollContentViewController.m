@@ -144,7 +144,7 @@
         self.subTitleLabel.text = model.lastTime;
         NSString *browse = kFormat(@"访问%ld次", model.browseCount);
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:browse];
-        [attr addAttributes:@{NSForegroundColorAttributeName: kColorThemefb4d56} range:[browse rangeOfString:kFormat(@"%ld", model.browseCount)]];
+        [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[browse rangeOfString:kFormat(@"%ld", model.browseCount)]];
         self.detailLabel.attributedText = attr;
     } else {
         self.subTitleLabel.text = model.modifyTime;

@@ -91,7 +91,7 @@
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     if (tableView == self.leftTableView) {
         if (indexPath.row == self.selectedLeftIndex) {
-            cell.textLabel.textColor = kColorThemefb4d56;
+            cell.textLabel.textColor = kColorTheme21a8ff;
             cell.contentView.backgroundColor = kColorThemefff;
         } else {
             cell.textLabel.textColor = kColorTheme666;
@@ -101,7 +101,7 @@
     } else {
         FilterCellModel *countryModel = self.dataArray[self.selectedLeftIndex];
         if (indexPath.row == self.selectedRightIndex) {
-            cell.textLabel.textColor = kColorThemefb4d56;
+            cell.textLabel.textColor = kColorTheme21a8ff;
         } else {
             cell.textLabel.textColor = kColorTheme666;
         }

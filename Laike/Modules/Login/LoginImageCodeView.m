@@ -91,7 +91,7 @@
 
 - (UIButton *)submitBtn {
     if (!_submitBtn) {
-        _submitBtn = UIButton.btnFrame(CGRectMake(15, self.codeTextField.bottom+30, self.width-30, 50)).btnTitle(@"提交").btnTitleColor(kColorThemefff).btnFont(kFontTheme15).btnCornerRadius(2).btnBkgColor(kColorThemefb4d56);
+        _submitBtn = UIButton.btnFrame(CGRectMake(15, self.codeTextField.bottom+30, self.width-30, 50)).btnTitle(@"提交").btnTitleColor(kColorThemefff).btnFont(kFontTheme15).btnCornerRadius(2).btnBkgColor(kColorTheme21a8ff);
         [_submitBtn addTarget:self action:@selector(clickSubmitBtn) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitBtn;

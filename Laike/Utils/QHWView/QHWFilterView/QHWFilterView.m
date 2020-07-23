@@ -260,7 +260,7 @@
     if (!_buttonBgView) {
         _buttonBgView = UIView.viewFrame(CGRectMake(0, self.height-60, kScreenW, 60));
         UIButton *resetButton = UIButton.btnFrame(CGRectMake(15, 10, (kScreenW-60)/2.0, 40)).btnTitle(@"重置筛选").btnTitleColor(kColorTheme666).btnBkgColor(kColorThemeeee).btnCornerRadius(20).btnAction(self, @selector(clickResetButton));
-        UIButton *confirmButton = UIButton.btnFrame(CGRectMake(resetButton.right+30, 10, (kScreenW-60)/2.0, 40)).btnTitle(@"确定").btnTitleColor(kColorThemefff).btnBkgColor(kColorThemefb4d56).btnCornerRadius(20).btnAction(self, @selector(clickConfirmButton));
+        UIButton *confirmButton = UIButton.btnFrame(CGRectMake(resetButton.right+30, 10, (kScreenW-60)/2.0, 40)).btnTitle(@"确定").btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnCornerRadius(20).btnAction(self, @selector(clickConfirmButton));
         [_buttonBgView addSubview:resetButton];
         [_buttonBgView addSubview:confirmButton];
     }

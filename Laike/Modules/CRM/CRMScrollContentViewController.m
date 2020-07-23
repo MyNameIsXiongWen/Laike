@@ -227,7 +227,7 @@
         }
     } else {
         model.name = countryCellModel.name;
-        model.color = kColorThemefb4d56;
+        model.color = kColorTheme21a8ff;
         self.conditionDic[model.dataArray.firstObject.key] = countryCellModel.code;
     }
     self.filterBtnView.dataArray = self.filterDataArray;
@@ -249,7 +249,7 @@
         _filterBtnView = [[MainBusinessFilterBtnView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 40)];
         WEAKSELF
         _filterBtnView.didSelectItemBlock = ^(FilterBtnViewCellModel * _Nonnull model) {
-            QHWCountryFilterView *filterView = [[QHWCountryFilterView alloc] initWithFrame:CGRectMake(0, kTopBarHeight+168, kScreenW, MIN(model.dataArray.firstObject.content.count*40, 200))];
+            QHWCountryFilterView *filterView = [[QHWCountryFilterView alloc] initWithFrame:CGRectMake(0, kTopBarHeight+178, kScreenW, MIN(model.dataArray.firstObject.content.count*40, 200))];
             filterView.isTreatment = YES;
             filterView.dataArray = model.dataArray.firstObject.content;
             __weak typeof(model) wModel = model;

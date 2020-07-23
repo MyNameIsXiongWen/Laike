@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, copy) NSString *businessId;
-@property (nonatomic, assign) BOOL isDistribution;
 
 @property (nonatomic, strong) QHWMainBusinessDetailBaseModel *detailModel;
 @property (nonatomic, assign) CGFloat headerViewHeight;

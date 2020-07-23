@@ -168,7 +168,7 @@
 
 - (UIButton *)cancelBtn {
     if (!_cancelBtn) {
-        _cancelBtn = UIButton.btnFrame(CGRectMake(kScreenW-65, kStatusBarHeight+6, 65, 32)).btnTitle(@"取消").btnFont(kFontTheme14).btnTitleColor(kColorThemefff).btnBkgColor(kColorThemefb4d56).btnAction(self, @selector(clickCancelBtn));
+        _cancelBtn = UIButton.btnFrame(CGRectMake(kScreenW-65, kStatusBarHeight+6, 65, 32)).btnTitle(@"取消").btnFont(kFontTheme14).btnTitleColor(kColorThemefff).btnBkgColor(kColorTheme21a8ff).btnAction(self, @selector(clickCancelBtn));
     }
     return _cancelBtn;
 }

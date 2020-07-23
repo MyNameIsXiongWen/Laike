@@ -8,8 +8,8 @@
 
 #import "LiveListViewController.h"
 #import "LiveService.h"
-#import "LiveDetailViewController.h"
 #import "QHWImageViewCell.h"
+#import "CTMediator+ViewController.h"
 
 @interface LiveListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -104,9 +104,7 @@
 }
 
 - (void)pushToDetailVCWithModel:(LiveModel *)model {
-    LiveDetailViewController *detailVC = LiveDetailViewController.new;
-    detailVC.liveId = model.id;
-    [self.navigationController pushViewController:detailVC animated:YES];
+    [CTMediator.sharedInstance CTMediator_viewControllerForLiveDetailWithLiveId:model.id];
 }
 
 #pragma mark ------------UI-------------

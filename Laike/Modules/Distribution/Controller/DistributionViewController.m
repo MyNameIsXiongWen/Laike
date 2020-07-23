@@ -76,7 +76,7 @@
     if (!_tabScrollView) {
         _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom+10, kScreenW, 48)];
         _tabScrollView.itemWidthType = ItemWidthTypeFixedAdaptive;
-        _tabScrollView.itemSelectedColor = kColorThemefb4d56;
+        _tabScrollView.itemSelectedColor = kColorTheme21a8ff;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;

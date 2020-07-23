@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)Action_nativeQSchoolDetailViewController:(NSDictionary *)params;
 
 - (void)Action_nativeLiveViewController:(NSDictionary *)params;
+- (void)Action_nativeLiveDetailViewController:(NSDictionary *)params;
 
 - (void)Action_nativeGalleryViewController:(NSDictionary *)params;
 

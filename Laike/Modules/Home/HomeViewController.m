@@ -104,8 +104,7 @@
 
 - (void)getHomeTopBannerDataRequest {
     dispatch_group_enter(self.group);
-    [self.systemService getBannerRequestWithAdvertPage:109001 Complete:^(id  _Nonnull response) {
-        self.systemService.bannerArray = [NSArray yy_modelArrayWithClass:QHWBannerModel.class json:response[@"data"][@"list4"]];
+    [self.systemService getBannerRequestWithAdvertPage:201001 Complete:^(id  _Nonnull response) {
         dispatch_group_leave(self.group);
     }];
 }
@@ -288,7 +287,7 @@
     if (!_tabScrollView) {
         _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenW, 32)];
         _tabScrollView.itemWidthType = ItemWidthTypeFixedAdaptive;
-        _tabScrollView.itemSelectedColor = kColorThemefb4d56;
+        _tabScrollView.itemSelectedColor = kColorTheme21a8ff;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;

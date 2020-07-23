@@ -34,7 +34,7 @@
         self.scrollAnimate = YES;
         self.itemSelectedColor = kColorThemefff;
         self.itemUnselectedColor = kColorTheme000;
-        self.itemSelectedBackgroundColor = kColorThemefb4d56;
+        self.itemSelectedBackgroundColor = kColorTheme21a8ff;
         self.itemUnselectedBackgroundColor = kColorThemef5f5f5;
         self.textFont = kFontTheme16;
         self.currentIndex = 0;
@@ -132,7 +132,7 @@
 
 - (UIView *)tagIndicatorView {
     if (!_tagIndicatorView) {
-        _tagIndicatorView = [UICreateView initWithFrame:CGRectMake(0, self.height-3, 0, 3) BackgroundColor:kColorThemefb4d56 CornerRadius:1.5];
+        _tagIndicatorView = [UICreateView initWithFrame:CGRectMake(0, self.height-3, 0, 3) BackgroundColor:kColorTheme21a8ff CornerRadius:1.5];
     }
     return _tagIndicatorView;
 }

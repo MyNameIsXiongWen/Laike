@@ -69,7 +69,7 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
-    if (self.isDistribution && UserModel.shareUser.bindStatus == 2) {
+    if (self.detailService.detailModel.distributionStatus == 2 && UserModel.shareUser.bindStatus == 2) {
         [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
         return;
     }
@@ -80,6 +80,11 @@
 - (void)getDetailInfoRequest {
     [self.detailService getMainBusinessDetailInfoRequest:^(BOOL status) {
         if (status) {
+            BOOL isDistribution = self.detailService.detailModel.distributionStatus == 2;
+            self.bottomView.rightAnotherOperationButton.hidden = !isDistribution;
+            self.bottomView.rightOperationButton.width = isDistribution ? 100 : 210;
+            self.bottomView.rightOperationButton.btnTitle(isDistribution ? @"开单助理" : @"微信推广获客").btnFont(isDistribution ? kFontTheme14 : kFontTheme18);
+            
             self.tableHeaderView.businessType = self.businessType;
             self.tableHeaderView.detailModel = self.detailService.detailModel;
             self.tableHeaderView.height = self.detailService.headerViewHeight;
@@ -233,7 +238,7 @@
     QHWBaseModel *baseModel = self.detailService.tableViewDataArray[indexPath.section];
     NSArray *array = (NSArray *)baseModel.data;
     QHWHouseModel *model = array[indexPath.row];
-    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:1 BusinessId:model.id IsDistribution:self.isDistribution];
+    [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:1 BusinessId:model.id];
 }
 
 /*
@@ -300,12 +305,9 @@
 - (MainBusinessDetailBottomView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[MainBusinessDetailBottomView alloc] initWithFrame:CGRectMake(0, kScreenH-kBottomDangerHeight-75, kScreenW, 75)];
-        _bottomView.rightAnotherOperationButton.hidden = !self.isDistribution;
-        _bottomView.rightOperationButton.width = self.isDistribution ? 100 : 210;
-        _bottomView.rightOperationButton.btnTitle(self.isDistribution ? @"开单助理" : @"微信推广获客").btnFont(self.isDistribution ? kFontTheme14 : kFontTheme18);
         WEAKSELF
         _bottomView.rightOperationBlock = ^{
-            if (weakSelf.isDistribution) {
+            if (weakSelf.detailService.detailModel.distributionStatus == 2) {
                 kCallTel(weakSelf.detailService.detailModel.serviceHotline);
             } else {
                 [weakSelf rightNavBtnAction:nil];
@@ -323,7 +325,6 @@
         _detailService = MainBusinessDetailService.new;
         _detailService.businessType = self.businessType;
         _detailService.businessId = self.businessId;
-        _detailService.isDistribution = self.isDistribution;
     }
     return _detailService;
 }

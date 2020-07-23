@@ -158,7 +158,7 @@
 }
 
 - (void)handleHouseDetailCellData:(QHWHouseModel *)houseModel {
-    if (self.isDistribution) {
+    if (houseModel.distributionStatus == 2) {
         NSString *commissionStr = houseModel.commissionRate;
         NSString *ruleStr = houseModel.distributionRules;
         CGFloat commissionHeight = [commissionStr getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)];

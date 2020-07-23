@@ -29,6 +29,7 @@
 #import "AdvisoryDetailViewController.h"
 #import "BookAppointmentViewController.h"
 #import "BindCompanyViewController.h"
+#import "LiveDetailViewController.h"
 
 @implementation Target_ViewController
 
@@ -42,11 +43,9 @@
 - (void)Action_nativeMainBusinessDetailViewController:(NSDictionary *)params {
     NSInteger businessType = [params[@"businessType"] integerValue];
     NSString *businessId = params[@"businessId"];
-    BOOL isDistribution = [params[@"isDistribution"] boolValue];
     MainBusinessDetailViewController *vc = MainBusinessDetailViewController.new;
     vc.businessType = businessType;
     vc.businessId = businessId;
-    vc.isDistribution = isDistribution;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
@@ -120,6 +119,13 @@
 
 - (void)Action_nativeLiveViewController:(NSDictionary *)params {
     LiveListViewController *vc = LiveListViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeLiveDetailViewController:(NSDictionary *)params {
+    NSString *liveId = params[@"liveId"];
+    LiveDetailViewController *vc = LiveDetailViewController.new;
+    vc.liveId = liveId;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

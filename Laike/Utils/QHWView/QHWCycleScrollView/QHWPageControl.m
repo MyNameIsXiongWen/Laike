@@ -44,7 +44,7 @@
         cell.contentView.layer.cornerRadius = 2;
         cell.contentView.layer.masksToBounds = YES;
         if (indexPath.item == self.currentPage) {
-            cell.contentView.backgroundColor = kColorThemefb4d56;
+            cell.contentView.backgroundColor = kColorTheme21a8ff;
         } else {
             cell.contentView.backgroundColor = kColorTheme2a303c;
         }

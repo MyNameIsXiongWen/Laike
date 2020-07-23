@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "来客开机画面.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "来客开机画面@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

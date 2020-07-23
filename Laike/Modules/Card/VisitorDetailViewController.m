@@ -75,7 +75,7 @@
             case 3:
             case 4:
             case 102001:
-                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:model.businessType BusinessId:model.businessId IsDistribution:NO];
+                [CTMediator.sharedInstance CTMediator_viewControllerForMainBusinessDetailWithBusinessType:model.businessType BusinessId:model.businessId];
                 break;
 
             case 18:

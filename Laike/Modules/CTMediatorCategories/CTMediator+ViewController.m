@@ -25,6 +25,7 @@ NSString * const kCTMediatorActionNativeCardViewController = @"nativeCardViewCon
 NSString * const kCTMediatorActionNativeQSchoolViewController = @"nativeQSchoolViewController";
 NSString * const kCTMediatorActionNativeQSchoolDetailViewController = @"nativeQSchoolDetailViewController";
 NSString * const kCTMediatorActionNativeLiveViewController = @"nativeLiveViewController";
+NSString * const kCTMediatorActionNativeLiveDetailViewController = @"nativeLiveDetailViewController";
 NSString * const kCTMediatorActionNativeGalleryViewController = @"nativeGalleryViewController";
 NSString * const kCTMediatorActionNativeRateViewController = @"nativeRateViewController";
 NSString * const kCTMediatorActionNativeAddCustomerViewController = @"nativeAddCustomerViewController";
@@ -48,12 +49,11 @@ NSString * const kCTMediatorActionNativeBindCompanyViewController = @"nativeBind
     }
 }
 
-- (void)CTMediator_viewControllerForMainBusinessDetailWithBusinessType:(NSInteger)businessType BusinessId:(NSString *)businessId IsDistribution:(BOOL)isDistribution {
+- (void)CTMediator_viewControllerForMainBusinessDetailWithBusinessType:(NSInteger)businessType BusinessId:(NSString *)businessId {
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeMainBusinessDetailViewController
                  params:@{@"businessType": @(businessType),
-                          @"businessId": businessId,
-                          @"isDistribution": @(isDistribution)
+                          @"businessId": businessId
                  }
     shouldCacheTarget:NO];
 }
@@ -136,6 +136,13 @@ NSString * const kCTMediatorActionNativeBindCompanyViewController = @"nativeBind
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeLiveViewController
                  params:@{}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForLiveDetailWithLiveId:(NSString *)liveId {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeLiveDetailViewController
+                 params:@{@"liveId": liveId ?: @""}
     shouldCacheTarget:NO];
 }
 

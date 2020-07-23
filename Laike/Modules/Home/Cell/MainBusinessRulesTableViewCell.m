@@ -108,11 +108,11 @@
         _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 30)];
         _tabScrollView.itemWidthType = ItemWidthTypeAdaptive;
         _tabScrollView.hideIndicatorView = NO;
-        _tabScrollView.itemSelectedColor = kColorThemefb4d56;
+        _tabScrollView.itemSelectedColor = kColorTheme21a8ff;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.textFont = kMediumFontTheme12;
+        _tabScrollView.textFont = kMediumFontTheme14;
         _tabScrollView.dataArray = @[@"成交佣金", @"合作规则"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
