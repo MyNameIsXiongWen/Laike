@@ -2535,7 +2535,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "去海外来客";
 				PROVISIONING_PROFILE_SPECIFIER = manager_dev_profile;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e armv7s armv7";
 			};
 			name = Debug;
@@ -2564,7 +2564,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "去海外来客";
 				PROVISIONING_PROFILE_SPECIFIER = manager_dev_profile;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 arm64e armv7s armv7";
 			};
 			name = Release;
