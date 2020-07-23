@@ -8,6 +8,7 @@
 
 #import "QSchoolShareView.h"
 #import "MainBusinessShareView.h"
+#import "QHWQRCode.h"
 
 @interface QSchoolShareView ()
 
@@ -81,7 +82,8 @@
     [self.contentBkgView addSubview:self.courseVlueLabel];
     [self.contentBkgView addSubview:self.typeLabel];
     
-    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-75, self.contentBkgView.bottom+15, 60, 60)).ivImage(kImageMake(@"default_avatar"));
+    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-75, self.contentBkgView.bottom+15, 60, 60));
+    self.miniCodeImgView.image = [QHWQRCode initQRCodeWithString:kAppDownloadURL];
     [self.bkgView addSubview:self.miniCodeImgView];
 //    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
     self.sloganLabel = UILabel.labelFrame(CGRectMake(15, self.miniCodeImgView.bottom-35, self.contentBkgView.width-70, 35)).labelFont(kFontTheme14).labelTitleColor(kColorTheme666).labelText(@"下载去海外来客APP\n开启全球服务之旅").labelNumberOfLines(2).labelTextAlignment(NSTextAlignmentRight);

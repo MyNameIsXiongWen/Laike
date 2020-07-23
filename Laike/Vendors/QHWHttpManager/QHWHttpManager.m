@@ -99,12 +99,11 @@
     success:(void (^)(id))success
     failure:(void (^)(NSError *))failure {
     NSLog(@"\n%@==========%@",URLString,parameters);
-    [self configRequestHttpHeader];
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",kMainUrl,URLString];
     if ([URLString containsString:@"http"]) {
         urlStr = URLString;
     }
-    [self GET:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self GET:urlStr parameters:parameters headers:@{@"token": kTOKEN ?: @""} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self configSuccessResponseResult:responseObject url:nil success:success failure:failure];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self configFailResult:error];
@@ -120,12 +119,11 @@
      success:(void (^)(id))success
      failure:(void (^)(NSError *))failure {
     NSLog(@"\n%@==========%@",URLString,parameters);
-    [self configRequestHttpHeader];
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",kMainUrl,URLString];
     if ([URLString containsString:@"http"]) {
         urlStr = URLString;
     }
-    [self POST:urlStr parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self POST:urlStr parameters:parameters headers:@{@"token": kTOKEN ?: @""} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSHTTPURLResponse *response = (NSHTTPURLResponse *)task.response;
         NSDictionary *dic = response.allHeaderFields;
         if ([dic.allKeys containsObject:@"token"]) {
@@ -138,11 +136,6 @@
             failure(error);
         }
     }];
-}
-
-#pragma mark ------------设置请求头-------------
-- (void)configRequestHttpHeader {
-    [self.requestSerializer setValue:kTOKEN ?: @"" forHTTPHeaderField:@"token"];
 }
 
 - (NSString *)getDeviceId {

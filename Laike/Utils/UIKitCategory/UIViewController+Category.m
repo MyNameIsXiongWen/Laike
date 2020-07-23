@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 //#import <UMMobClick/MobClick.h>
 #import "AppDelegate.h"
-#import <UMAnalytics/MobClick.h>
+//#import <UMAnalytics/MobClick.h>
 
 @implementation UIViewController (Category)
 
@@ -104,7 +104,7 @@
  */
 - (void)QHW_viewWillAppear:(BOOL)animated {
     [self QHW_viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
+//    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 /**
@@ -112,7 +112,7 @@
  */
 -(void)QHW_viewWillDisappear:(BOOL)animated {
     [self QHW_viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
+//    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)QHW_viewDidDisappear:(BOOL)animated {

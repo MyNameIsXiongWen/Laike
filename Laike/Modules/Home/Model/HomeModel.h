@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger bindStatus;
 @property (nonatomic, assign) NSInteger payStatus;
 @property (nonatomic, assign) NSInteger clueCount;
+@property (nonatomic, assign) NSInteger consultCount;
 @property (nonatomic, assign) NSInteger productCount;
 @property (nonatomic, assign) NSInteger shareCount;
 @property (nonatomic, assign) NSInteger distributionCount;

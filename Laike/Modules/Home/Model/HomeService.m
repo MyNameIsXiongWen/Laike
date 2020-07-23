@@ -138,6 +138,7 @@
         user.distributionCount = [responseObject[@"data"][@"distributionCount"] integerValue];
         user.crmCount = [responseObject[@"data"][@"crmCount"] integerValue];
         user.clueCount = [responseObject[@"data"][@"clueCount"] integerValue];
+        user.consultCount = [responseObject[@"data"][@"consultCount"] integerValue];
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -203,11 +204,12 @@
                                                                                     @"title": @"名片数据"}];
         [self.tableViewDataArray addObject:cardDataModel];
     }
-    
+
+    UserModel *user = UserModel.shareUser;
     QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCustomerTableViewCell"
                                                                       Height:140
-                                                                        Data:@[@{@"value": @(self.homeModel.clientData.crmCount), @"title": @"客户"},
-                                                                               @{@"value": @(self.homeModel.clueCount), @"title": @"线索"}]];
+                                                                        Data:@[@{@"value": @(user.crmCount), @"title": @"客户"},
+                                                                               @{@"value": @(user.consultCount), @"title": @"线索"}]];
     [self.tableViewDataArray addObject:crmDataModel];
     
     QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeIconTableViewCell" Height:160 Data:self.iconArray];

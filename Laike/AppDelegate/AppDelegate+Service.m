@@ -12,7 +12,7 @@
 #import <UMShare/UMShare.h>
 #import <UMCommon/UMCommon.h>
 #import <UMCommonLog/UMCommonLogHeaders.h>
-#import <UMAnalytics/MobClick.h>
+//#import <UMAnalytics/MobClick.h>
 #import <UserNotifications/UserNotifications.h>
 #import <WXApi.h>
 
@@ -85,7 +85,7 @@
     //开发者需要显式的调用此函数，日志系统才能工作
 //    [UMCommonLogManager setUpUMCommonLogManager];
 //    [UMConfigure setLogEnabled:YES];
-    [MobClick setCrashReportEnabled:YES];
+//    [MobClick setCrashReportEnabled:YES];
     [UMConfigure initWithAppkey:kUMKey channel:@"App Store"];
     [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
     [self configUSharePlatforms];
@@ -104,7 +104,7 @@
 }
 
 - (void)initWX {
-    [WXApi registerApp:kWechatAppKey universalLink:kHomeIndex];
+    [WXApi registerApp:kWechatAppKey universalLink:kUniversalLink];
 }
 
 - (void)configUSharePlatforms {
@@ -118,6 +118,7 @@
     /* 设置分享到QQ互联的appID
      * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
      */
+     UMSocialGlobal.shareInstance.universalLinkDic = @{@(UMSocialPlatformType_WechatSession): kUniversalLink};
 }
 
 // 设置系统回调 - 支持所有iOS系统

@@ -17,6 +17,7 @@
     [QHWHttpManager.sharedInstance QHW_POST:kHomeReportCount parameters:@{} success:^(id responseObject) {
         self.crmCount = [responseObject[@"data"][@"crmCount"] integerValue];
         self.clueCount = [responseObject[@"data"][@"clueCount"] integerValue];
+        self.consultCount = [responseObject[@"data"][@"consultCount"] integerValue];
         complete();
     } failure:^(NSError *error) {
         complete();

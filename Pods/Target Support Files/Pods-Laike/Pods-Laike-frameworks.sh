@@ -197,10 +197,10 @@ if [ -r "${ARTIFACT_LIST_FILE}" ]; then
 fi
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${PODS_ROOT}/HyphenateLite/iOS_Pods_IMSDK_V3.6.1/HyphenateLite.framework"
+  install_framework "${PODS_ROOT}/HyphenateLite/HyphenateLite.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${PODS_ROOT}/HyphenateLite/iOS_Pods_IMSDK_V3.6.1/HyphenateLite.framework"
+  install_framework "${PODS_ROOT}/HyphenateLite/HyphenateLite.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

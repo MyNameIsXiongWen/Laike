@@ -262,6 +262,7 @@
 		1863953624A32A27007DC26D /* BindCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863953424A32A27007DC26D /* BindCompanyViewController.m */; };
 		1863953724A32A27007DC26D /* BindCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1863953524A32A27007DC26D /* BindCompanyViewController.xib */; };
 		1863953B24A35722007DC26D /* CRMService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863953A24A35722007DC26D /* CRMService.m */; };
+		188F25C124C93BED003F44C3 /* QHWQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 188F25C024C93BED003F44C3 /* QHWQRCode.m */; };
 		A0C3E6E2448D5DA157C22A78 /* libPods-Laike.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F6E7A9DF59133ED574A4FC3 /* libPods-Laike.a */; };
 /* End PBXBuildFile section */
 
@@ -798,6 +799,8 @@
 		1863953524A32A27007DC26D /* BindCompanyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BindCompanyViewController.xib; sourceTree = "<group>"; };
 		1863953924A35722007DC26D /* CRMService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMService.h; sourceTree = "<group>"; };
 		1863953A24A35722007DC26D /* CRMService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMService.m; sourceTree = "<group>"; };
+		188F25BF24C93BEC003F44C3 /* QHWQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWQRCode.h; sourceTree = "<group>"; };
+		188F25C024C93BED003F44C3 /* QHWQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWQRCode.m; sourceTree = "<group>"; };
 		1894D19924C1B3EC0082C26F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		53005641986DE0440E436C60 /* Pods-Laike.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Laike.debug.xcconfig"; path = "Target Support Files/Pods-Laike/Pods-Laike.debug.xcconfig"; sourceTree = "<group>"; };
 		6F6E7A9DF59133ED574A4FC3 /* libPods-Laike.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Laike.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1018,6 +1021,8 @@
 		185EC85424A091BB00DCAB2C /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				188F25BF24C93BEC003F44C3 /* QHWQRCode.h */,
+				188F25C024C93BED003F44C3 /* QHWQRCode.m */,
 				185EC85524A091BC00DCAB2C /* ThirdLogin */,
 				185EC85A24A091BC00DCAB2C /* QHWRefreshManager */,
 				185EC85D24A091BC00DCAB2C /* QHWHttpManager */,
@@ -2235,6 +2240,7 @@
 				185EC81724A08FD700DCAB2C /* AppDelegate.m in Sources */,
 				185EC95B24A091BE00DCAB2C /* QHWTagListModel.m in Sources */,
 				185EC97B24A091BE00DCAB2C /* QHWFilterView.m in Sources */,
+				188F25C124C93BED003F44C3 /* QHWQRCode.m in Sources */,
 				185D44A624ADDDFC00CD3A00 /* CRMDetailHeaderView.m in Sources */,
 				1855D79624B4630F002FF7E2 /* RateShareView.m in Sources */,
 				185E15CF24B33E0300F15A90 /* MyServiceViewController.m in Sources */,

@@ -1,1 +1,1 @@
-../../../Qiniu/QiniuSDK/Common/QNSystem.h
+../../../Qiniu/QiniuSDK/Utils/QNSystem.h

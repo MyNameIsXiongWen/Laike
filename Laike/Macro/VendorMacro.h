@@ -11,6 +11,8 @@
 
 
 #define kAppStoreAppId @"1523403720"
+#define kUniversalLink @"https://qhiwi.com/manager/"//Universal Link
+#define kAppDownloadURL @"https://m.qhiwi.com/site/app/lk"
 
 //微信开放平台
 #define kWechatAppKey @"wx6fcdb76c2ad98bb6"//微信key

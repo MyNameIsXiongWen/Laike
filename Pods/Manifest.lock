@@ -1,45 +1,45 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
   - AvoidCrash (2.5.2)
   - Colours (5.13.0):
     - Colours/ObjC (= 5.13.0)
   - Colours/ObjC (5.13.0)
-  - HyphenateLite (3.6.1)
-  - IQKeyboardManager (6.5.3)
+  - HappyDNS (0.3.17)
+  - HyphenateLite (3.6.9)
+  - IQKeyboardManager (6.5.5)
   - Masonry (1.1.0)
-  - MJRefresh (3.2.0)
-  - Qiniu (7.2.6)
-  - SDWebImage (5.3.1):
-    - SDWebImage/Core (= 5.3.1)
-  - SDWebImage/Core (5.3.1)
+  - MJRefresh (3.4.3)
+  - Qiniu (7.4.2):
+    - HappyDNS (~> 0.3.17)
+  - SDWebImage (5.3.4):
+    - SDWebImage/Core (= 5.3.4)
+  - SDWebImage/Core (5.3.4)
   - SVProgressHUD (2.2.5)
-  - TZImagePickerController (3.2.6)
-  - UMCAnalytics (6.0.5):
-    - UMCCommon
-  - UMCCommon (2.1.1)
-  - UMCCommonLog (1.0.0)
+  - TZImagePickerController (3.4.1)
+  - UMCCommon (7.1.1)
+  - UMCCommonLog (2.0.0)
   - UMCSecurityPlugins (1.0.6)
-  - UMCShare/Core (6.9.6):
+  - UMCShare/Core (6.9.9):
     - UMCCommon
-  - UMCShare/Social/ReducedWeChat (6.9.6):
+  - UMCShare/Social/ReducedWeChat (6.9.9):
     - UMCCommon
     - UMCShare/Core
   - WebViewJavascriptBridge (5.2.0)
-  - WechatOpenSDK (1.8.6)
+  - WechatOpenSDK (1.8.7.1)
   - YYModel (1.0.4)
 
 DEPENDENCIES:
@@ -51,10 +51,9 @@ DEPENDENCIES:
   - Masonry
   - MJRefresh
   - Qiniu
-  - SDWebImage
+  - SDWebImage (~> 5.3.1)
   - SVProgressHUD
   - TZImagePickerController
-  - UMCAnalytics
   - UMCCommon
   - UMCCommonLog
   - UMCSecurityPlugins
@@ -68,6 +67,7 @@ SPEC REPOS:
     - AFNetworking
     - AvoidCrash
     - Colours
+    - HappyDNS
     - HyphenateLite
     - IQKeyboardManager
     - Masonry
@@ -76,7 +76,6 @@ SPEC REPOS:
     - SDWebImage
     - SVProgressHUD
     - TZImagePickerController
-    - UMCAnalytics
     - UMCCommon
     - UMCCommonLog
     - UMCSecurityPlugins
@@ -86,26 +85,26 @@ SPEC REPOS:
     - YYModel
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   AvoidCrash: 28c6916fe19bd2b84126b8dec7cbe61c9a12741d
   Colours: f24220c38f13deac88612667e9b4a7fb96b871d4
-  HyphenateLite: 4f85c9c66ab6571e027671866afb76d3c8f52f12
-  IQKeyboardManager: c2f901164d56807a35788483584d09fa69192e8e
+  HappyDNS: 848ef73e24f2b0e2752064223ce2dc0dd88900ea
+  HyphenateLite: 753cd75b6f9a85fb812c63224955c31c136a7969
+  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
-  Qiniu: 9d1f20dcc348919972b4ee1b1272f9b9d4a7e69e
-  SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
+  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
+  Qiniu: 0e2887592ffb0f23f86b920470d2301933d51f11
+  SDWebImage: 295132e4da61a55c3cfd811a6dabf5d49d427706
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  TZImagePickerController: 3900e8d68428ff3a88817efce82ae9e7d9ffebc9
-  UMCAnalytics: 045be2cd1ec05aa95ad62405a850757f932e2d59
-  UMCCommon: 971f324a5a99c9d662ae040a815e7e3d7ef8b2a8
-  UMCCommonLog: 05a2d5de21858e3d870551562cff405c1366d244
+  TZImagePickerController: 4e7a7b3d314f8a75f11042931dfd9d34c270c7db
+  UMCCommon: f455f92c125342e360d6ad9eafe484945351eeb5
+  UMCCommonLog: 9b7ddde5d14a52fc1986ba5ac3121b8b2f433638
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
-  UMCShare: e0cef55c0fd6051254c8cda1d0630eb578b27bad
+  UMCShare: 52d9ee35f61c51eda3089a7961e1d04ce57b9d6a
   WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
-  WechatOpenSDK: 368ae03b72ee3ea1328c4f11326fbb5d2721d118
+  WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 91b79dd38b197c3eb0fe01e61daccf673e4ab775
+PODFILE CHECKSUM: 471abbacd0796916125a9ad79d8254d49c916c2d
 
 COCOAPODS: 1.9.1

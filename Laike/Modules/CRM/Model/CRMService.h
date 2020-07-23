@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat intentionCountryHeight;
 @property (nonatomic, assign) NSInteger crmCount;
 @property (nonatomic, assign) NSInteger clueCount;
+@property (nonatomic, assign) NSInteger consultCount;
 
 @property (nonatomic, strong) NSArray <FilterCellModel *>*clientSourceList;
 @property (nonatomic, strong) NSArray <FilterCellModel *>*clientLevelList;
