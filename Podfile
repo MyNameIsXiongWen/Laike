@@ -21,7 +21,6 @@ pod 'UMCCommon'
 pod 'UMCSecurityPlugins'
 pod 'UMCCommonLog'
 pod 'UMCShare/Social/ReducedWeChat'
-#pod 'UMCAnalytics'
 
 pod "Qiniu"
 pod 'HyphenateLite'

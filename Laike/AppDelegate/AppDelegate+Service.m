@@ -12,7 +12,7 @@
 #import <UMShare/UMShare.h>
 #import <UMCommon/UMCommon.h>
 #import <UMCommonLog/UMCommonLogHeaders.h>
-//#import <UMAnalytics/MobClick.h>
+#import <UMCommon/MobClick.h>
 #import <UserNotifications/UserNotifications.h>
 #import <WXApi.h>
 
@@ -85,7 +85,7 @@
     //开发者需要显式的调用此函数，日志系统才能工作
 //    [UMCommonLogManager setUpUMCommonLogManager];
 //    [UMConfigure setLogEnabled:YES];
-//    [MobClick setCrashReportEnabled:YES];
+    [MobClick setCrashReportEnabled:YES];
     [UMConfigure initWithAppkey:kUMKey channel:@"App Store"];
     [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
     [self configUSharePlatforms];
