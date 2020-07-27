@@ -418,15 +418,18 @@
 
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
-        _dataArray = @[@{@"logoImage": @"share_wechat",
-                         @"logoLabel": @"微信好友",
-                         @"platformType":@(UMSocialPlatformType_WechatSession)},
-                       @{@"logoImage": @"share_friend",
-                         @"logoLabel": @"朋友圈",
-                         @"platformType":@(UMSocialPlatformType_WechatTimeLine)},
-                       @{@"logoImage": @"share_poster",
-                         @"logoLabel": @"海报分享",
-                         @"platformType":@(1000)}].mutableCopy;
+        _dataArray = NSMutableArray.array;
+        if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession]) {
+            [_dataArray addObject:@{@"logoImage": @"share_wechat",
+                                    @"logoLabel": @"微信好友",
+                                    @"platformType":@(UMSocialPlatformType_WechatSession)}];
+            [_dataArray addObject:@{@"logoImage": @"share_friend",
+                                    @"logoLabel": @"朋友圈",
+                                    @"platformType":@(UMSocialPlatformType_WechatTimeLine)}];
+        }
+        [_dataArray addObject:@{@"logoImage": @"share_poster",
+                                @"logoLabel": @"海报分享",
+                                @"platformType":@(1000)}];
     }
     return _dataArray;
 }

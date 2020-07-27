@@ -10,6 +10,7 @@
 #import "QHWMainBusinessDetailBaseModel.h"
 #import "LiveModel.h"
 #import "QHWShareBottomViewProtocol.h"
+#import <UMShare/UMShare.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

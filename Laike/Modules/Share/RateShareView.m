@@ -83,7 +83,9 @@
             [weakSelf.delegate ShareBottomView_clickBottomBtnWithIndex:index Image:[weakSelf screenShot] TargetView:weakSelf];
         }
     };
-    [self addSubview:self.bottomView];
+    if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession]) {
+        [self addSubview:self.bottomView];
+    }
 }
 
 - (void)setRateArray:(NSArray *)rateArray {
