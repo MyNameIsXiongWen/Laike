@@ -71,6 +71,7 @@
 
 - (void)configCellData:(id)data {
     _activityModel = (QHWActivityModel *)data;
+    _activityModel.businessType = 17;
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(_activityModel.coverPath)] placeholderImage:kPlaceHolderImage_Banner];
     self.nameLabel.text = _activityModel.name;
     self.addressLabel.text = _activityModel.addres;

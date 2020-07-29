@@ -119,7 +119,7 @@
     }
     [QHWHttpManager.sharedInstance QHW_POST:kActivityInfo parameters:params success:^(id responseObject) {
         self.activityDetailModel = [QHWActivityModel yy_modelWithJSON:responseObject[@"data"]];
-        self.activityDetailModel.businessType = 6;//为什么不是17？ 安卓抓包显示的是6.....
+        self.activityDetailModel.businessType = 17;//为什么不是17？ 安卓抓包显示的是6.....
         if (self.activityDetailModel.coverPathList.count > 0) {
             self.activityDetailModel.coverPath = self.activityDetailModel.coverPathList.firstObject[@"path"];
         }

@@ -197,7 +197,7 @@
             title = @"海外医疗";
         }
             break;
-        case 6:
+        case 17:
         {
             QHWActivityModel *activityModel = (QHWActivityModel *)mainBusinessDetailModel;
             displayArray = @[@{@"key": @"活动地点", @"value": activityModel.cityName ?: @""},
