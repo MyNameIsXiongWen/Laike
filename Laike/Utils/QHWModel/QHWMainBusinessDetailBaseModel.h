@@ -28,6 +28,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImage *snapShotImage;
 ///分销状态 1-不是分销；2-分销产品
 @property (nonatomic, assign) NSInteger distributionStatus;
+///佣金比例
+@property (nonatomic, copy) NSString *commissionRate;
+///佣金额度
+@property (nonatomic, copy) NSString *commissionQuota;
+///分销规则
+@property (nonatomic, copy) NSString *distributionRules;
+///分销手册
+@property (nonatomic, copy) NSString *distributionManual;
 
 ///收藏状态：1-未收藏；2-已收藏
 @property (nonatomic, assign) NSInteger collectionStatus;

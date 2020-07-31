@@ -95,6 +95,25 @@
 - (void)handleDetailModelData {
     self.headerViewHeight = 220;
     CGFloat collectionViewHeight=0;
+    if (self.detailModel.distributionStatus == 2) {
+        NSString *commissionStr = self.detailModel.commissionRate ?: @"";
+        NSString *ruleStr = self.detailModel.distributionRules ?: @"";
+        if (commissionStr.length > 0 || ruleStr.length > 0) {
+            CGFloat commissionHeight = [commissionStr getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)];
+            CGFloat ruleHeight = [ruleStr getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)];
+            QHWBaseModel *recommendModel = [[QHWBaseModel alloc] configModelIdentifier:@"MainBusinessRulesTableViewCell"
+                                                                                Height:106+MAX(commissionHeight, ruleHeight)
+                                                                                  Data:@[@[@{@"content": commissionStr, @"height": @(commissionHeight)},@{@"content": ruleStr, @"height": @(ruleHeight)}, self.detailModel]]];
+            recommendModel.headerTitle = @"推荐成交";
+            [self.tableViewDataArray addObject:recommendModel];
+        }
+        
+        if (self.detailModel.distributionManual.length > 0) {
+            QHWBaseModel *fileModel = [[QHWBaseModel alloc] configModelIdentifier:@"MainBusinessFileTableViewCell" Height:75 Data:@[@[self.detailModel.distributionManual]]];
+            fileModel.headerTitle = @"项目资料";
+            [self.tableViewDataArray addObject:fileModel];
+        }
+    }
     switch (self.businessType) {
         case 1:
         {
@@ -158,25 +177,6 @@
 }
 
 - (void)handleHouseDetailCellData:(QHWHouseModel *)houseModel {
-    if (houseModel.distributionStatus == 2) {
-        NSString *commissionStr = houseModel.commissionRate;
-        NSString *ruleStr = houseModel.distributionRules;
-        CGFloat commissionHeight = [commissionStr getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)];
-        CGFloat ruleHeight = [ruleStr getHeightWithFont:kFontTheme13 constrainedToSize:CGSizeMake(kScreenW-30, CGFLOAT_MAX)];
-        QHWBaseModel *recommendModel = [[QHWBaseModel alloc] configModelIdentifier:@"MainBusinessRulesTableViewCell"
-                                                                            Height:106+MAX(commissionHeight, ruleHeight)
-                                                                              Data:@[@[@{@"content": commissionStr ?: @"", @"height": @(commissionHeight)},@{@"content": houseModel.distributionRules ?: @"", @"height": @(ruleHeight)}, houseModel]]];
-        recommendModel.headerTitle = @"推荐成交";
-        [self.tableViewDataArray addObject:recommendModel];
-        
-        if (houseModel.distributionManual.length > 0) {
-            QHWBaseModel *fileModel = [[QHWBaseModel alloc] configModelIdentifier:@"MainBusinessFileTableViewCell" Height:75 Data:@[@[houseModel.distributionManual]]];
-            fileModel.headerTitle = @"项目资料";
-            [self.tableViewDataArray addObject:fileModel];
-        }
-    }
-    
-    
     QHWBaseModel *introModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": houseModel.intro ?: @"", @"identifier": @"ProjectIntro"}]];
     introModel.headerTitle = @"项目简介";
     introModel.footerTitle = @"咨询楼盘更多信息";

@@ -62,15 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///交通描述
 @property (nonatomic, copy) NSString *trafficDescription;
 
-///佣金比例
-@property (nonatomic, copy) NSString *commissionRate;
-///佣金额度
-@property (nonatomic, copy) NSString *commissionQuota;
-///分销规则
-@property (nonatomic, copy) NSString *distributionRules;
-///分销手册
-@property (nonatomic, copy) NSString *distributionManual;
-
 @property (nonatomic, strong) NSArray <QHWHouseModel *>*alikeList;
 
 @property (nonatomic, strong) NSArray *bathroomConfigList;
