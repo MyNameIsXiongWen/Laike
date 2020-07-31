@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *Html2Text;
 @property (nonatomic, strong) NSArray *coverPathList;
+@property (nonatomic, copy) NSString *htmlUrl;
 
 @property (nonatomic, assign) CGFloat titleHeight;
 @property (nonatomic, assign) CGFloat cellHeight;

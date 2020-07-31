@@ -31,9 +31,9 @@
 #define kTreatmentDetailPath(id, userId) kFormat(@"pages/medical/medicalDetail?id=%@&managerId=%@", id, userId)
 #define kActivityDetailPath(id, userId) kFormat(@"pages/activity/activityDetail?id=%@&managerId=%@", id, userId)
 #define kArticleDetailPath(id, userId) kFormat(@"pages/headline/headlineDetail?id=%@&managerId=%@", id, userId)
+#define kContentDetailPath(id, userId) kFormat(@"pages/counselor/managerShareDetail?id=%@&managerId=%@", id, userId)
 #define kConsultantDetailPath(id, userId) kFormat(@"pages/counselor/counselorDetail?id=%@&managerId=%@", id, userId)
 #define kMerchantDetailPath(id, userId) kFormat(@"pages/merchant/merchantDetail?id=%@&managerId=%@", id, userId)
-#define kManagerDetailPath(id, userId) kFormat(@"pages/counselor/managerShareDetail?id=%@&managerId=%@", id, userId)
 #define kLiveDetailPath(id, userId) kFormat(@"pages/video/videoDetail?id=%@&managerId=%@", id, userId)
 
 #endif /* UtilsMacro_h */

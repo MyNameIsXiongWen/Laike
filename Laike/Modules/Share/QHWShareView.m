@@ -350,7 +350,7 @@
         } else if (self.shareType == ShareTypeArticle) {
             sharePath = kArticleDetailPath(self.communityDetailModel.id, userId);
         } else if (self.shareType == ShareTypeContent) {
-            sharePath = kConsultantDetailPath(self.communityDetailModel.subjectData.subjectId, userId);
+            sharePath = kContentDetailPath(self.communityDetailModel.id, userId);
         } else if (self.shareType == ShareTypeConsultant) {
             sharePath = kConsultantDetailPath(self.userModel.id, userId);
         } else if (self.shareType == ShareTypeMerchant) {
