@@ -55,17 +55,13 @@
     if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:NSStringFromClass(self.class)]) {
         return;
     }
-    if (call.outgoing && call.hasEnded) {
+    if (call.outgoing && call.hasEnded && self.crmService.crmModel.clientStatus == 1) {
         if (!self.showCallAlertView) {
             self.showCallAlertView = YES;
             QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-            alert.closeBtn.hidden = NO;
             [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
             alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
             WEAKSELF
-            alert.closeBlock = ^{
-                weakSelf.showCallAlertView = NO;
-            };
             alert.cancelBlock = ^{
                 weakSelf.showCallAlertView = NO;
                 [weakSelf showAlertLabelView];

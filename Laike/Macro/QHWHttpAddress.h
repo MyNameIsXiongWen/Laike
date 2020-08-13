@@ -11,6 +11,7 @@
 
 static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1/";
 //static NSString *const kMainUrl = @"https://api.qhiwi.com/apiv1test/";
+//static NSString *const kMainUrl = @"http://120.78.158.34:8004/";
 
 #pragma mark ------------协议相关-------------
 static NSString *const kServiceProtocol = @"https://m.qhiwi.com/site/app/lk/service.html";
@@ -86,7 +87,7 @@ static NSString *const kCRMEdit = @"client/edit";//crm edit
 static NSString *const kCRMAddTrack = @"client/follow/add";//crm add track
 static NSString *const kCRMGiveUpTrack = @"client/giveUp";//crm giveUp track
 static NSString *const kCRMTrackList = @"client/follow/getList";//crm track list
-static NSString *const kCRMAdvisoryGiveUpTrack = @"action/giveUp";
+static NSString *const kCRMAdvisoryGiveUpTrack = @"clue/action/giveUp";
 
 static NSString *const kClueList = @"clue/getList";//咨询(获客)列表
 static NSString *const kClueActionAllList = @"clue/action/getAllList";//线索模块-行为-客户所有列表

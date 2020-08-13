@@ -68,7 +68,7 @@
     
     self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-90, self.descLabel.bottom+25, 70, 70)).ivCornerRadius(35);
     [self.bkgView addSubview:self.miniCodeImgView];
-    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
+    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivBkgColor(kColorThemefff).ivCornerRadius(16);
     [self.miniCodeImgView addSubview:self.logoImgView];
     
     self.phoneInfoView = [[InfoView alloc] initWithFrame:CGRectMake(20, self.miniCodeImgView.y, self.bkgView.width-130, 20)];

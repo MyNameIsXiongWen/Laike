@@ -73,7 +73,7 @@
     
     self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-85, self.bkgView.height-90, 70, 70)).ivCornerRadius(35);
     [self.bkgView addSubview:self.miniCodeImgView];
-    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
+    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivBkgColor(kColorThemefff).ivCornerRadius(16);
     [self.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
     [self.miniCodeImgView addSubview:self.logoImgView];
         

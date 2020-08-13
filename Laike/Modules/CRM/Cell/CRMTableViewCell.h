@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView *avatarImgView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) QHWTagView *tagView;
+@property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *countLabel;
 @property (nonatomic, strong) UIButton *convertBtn;
 @property (nonatomic, strong) UIButton *contactBtn;

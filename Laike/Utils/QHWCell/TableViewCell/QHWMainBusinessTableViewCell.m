@@ -111,8 +111,8 @@
         case 3:
         {
             QHWMigrationModel *migrationModel = (QHWMigrationModel *)model;
-            self.houseSubTitleLabel.text = kFormat(@"%@万", [NSString formatterWithMoneyValue:migrationModel.serviceFee]);
-            self.houseMoneyLabel.text = kFormat(@"¥ %@万", [NSString formatterWithMoneyValue:migrationModel.investmentQuota]);
+            self.houseSubTitleLabel.text = kFormat(@"服务费：%@万", [NSString formatterWithMoneyValue:migrationModel.serviceFee]);
+            self.houseMoneyLabel.text = kFormat(@"投资额：%@万%@起", [NSString formatterWithMoneyValue:migrationModel.investmentQuota], migrationModel.currencyName);
             [self.tagView setTagWithTagArray:@[migrationModel.dentityTypeName ?: @"", migrationModel.handleCycle ?: @""]];
         }
             break;

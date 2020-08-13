@@ -15,7 +15,7 @@
 #import "PublishRelateProductViewController.h"
 #import <AVKit/AVKit.h>
 
-@interface CommunityPublishViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QHWActionSheetViewDelegate>
+@interface CommunityPublishViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, QHWActionSheetViewDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -209,6 +209,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+    if (textView.text.length > 2000) {
+        textView.text = [textView.text substringToIndex:2000];
+    }
+}
+
 /*
 #pragma mark - Navigation
 
@@ -222,6 +228,7 @@
 - (UITextView *)textView {
     if (!_textView) {
         _textView = UITextView.tvFrame(CGRectMake(15, kTopBarHeight+15, kScreenW-30, 250)).tvFont(kFontTheme16).tvPlaceholder(@"你想对去海外用户说点什么…");
+        _textView.delegate = self;
         [self.view addSubview:_textView];
     }
     return _textView;

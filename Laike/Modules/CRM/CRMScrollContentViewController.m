@@ -68,17 +68,13 @@
     if (self.crmType == 1) {
         return;
     }
-    if (call.outgoing && call.hasEnded) {
+    if (call.outgoing && call.hasEnded && self.selectedCRMModel.clientStatus == 1) {
         if (!self.showCallAlertView) {
             self.showCallAlertView = YES;
             QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-            alert.closeBtn.hidden = NO;
             [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
             alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
             WEAKSELF
-            alert.closeBlock = ^{
-                weakSelf.showCallAlertView = NO;
-            };
             alert.cancelBlock = ^{
                 weakSelf.showCallAlertView = NO;
                 [weakSelf showAlertLabelView];
@@ -168,6 +164,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CRMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(CRMTableViewCell.class)];
     cell.countLabel.hidden = self.crmType == 1;
+    cell.tagView.hidden = self.crmType == 2;
+    cell.timeLabel.hidden = self.crmType == 1;
     CRMModel *model = self.crmService.crmArray[indexPath.row];
     if (model.headPath.length > 0) {
         [cell.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
@@ -175,13 +173,16 @@
         cell.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:model.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
     }
     cell.nameLabel.text = model.realName;
-    if (model.industryNameArray.count == 0) {
-        [cell.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(cell.avatarImgView.mas_top).offset(15);
-        }];
-    }
-    [cell.tagView setTagWithTagArray:model.industryNameArray];
+    
     if (self.crmType == 2) {
+        cell.timeLabel.hidden = model.lastTime.length == 0;
+        if (model.lastTime.length == 0) {
+            [cell.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(cell.avatarImgView.mas_top).offset(15);
+            }];
+        }
+        cell.timeLabel.text = kFormat(@"最近咨询：%@", model.lastTime);
+        
         NSString *countStr = kFormat(@"咨询%ld次", model.actionCount);
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:countStr];
         [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[countStr rangeOfString:kFormat(@"%ld", model.actionCount)]];
@@ -192,6 +193,14 @@
         cell.convertBtn.selected = model.clientStatus == 2;
         cell.convertBtn.userInteractionEnabled = model.clientStatus != 2;
     } else {
+        cell.tagView.hidden = model.industryNameArray.count == 0;
+        if (model.industryNameArray.count == 0) {
+            [cell.nameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(cell.avatarImgView.mas_top).offset(15);
+            }];
+        }
+        [cell.tagView setTagWithTagArray:model.industryNameArray];
+        
         [cell.convertBtn setTitle:@"写跟进" forState:0];
     }
     WEAKSELF

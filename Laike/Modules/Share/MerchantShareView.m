@@ -82,7 +82,7 @@
     [self.bkgView addSubview:self.sloganImgView];
     self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-90, self.consultDataView.bottom+25, 70, 70));
     [self.bkgView addSubview:self.miniCodeImgView];
-    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
+    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivBkgColor(kColorThemefff).ivCornerRadius(16);
     [self.miniCodeImgView addSubview:self.logoImgView];
     
     self.bottomView = [[ShareBottomView alloc] initWithFrame:CGRectMake(0, self.height-100, kScreenW, 100)];

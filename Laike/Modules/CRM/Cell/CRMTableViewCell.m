@@ -38,6 +38,12 @@
             make.height.mas_equalTo(18);
             make.top.equalTo(self.nameLabel.mas_bottom).offset(2);
         }];
+        [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.nameLabel.mas_left);
+            make.right.mas_equalTo(-15);
+            make.height.mas_equalTo(18);
+            make.top.equalTo(self.nameLabel.mas_bottom).offset(2);
+        }];
         [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-15);
             make.height.mas_equalTo(20);
@@ -94,7 +100,7 @@
 
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
-        _nameLabel = UILabel.labelInit().labelFont(kFontTheme16).labelTitleColor(kColorTheme2a303c);
+        _nameLabel = UILabel.labelInit().labelFont(kMediumFontTheme16).labelTitleColor(kColorTheme2a303c);
         [self.contentView addSubview:_nameLabel];
     }
     return _nameLabel;
@@ -115,6 +121,15 @@
         [self.contentView addSubview:_countLabel];
     }
     return _countLabel;
+}
+
+- (UILabel *)timeLabel {
+    if (!_timeLabel) {
+        _timeLabel = UILabel.labelInit().labelFont(kFontTheme12).labelTitleColor(kColorTheme666);
+        _timeLabel.hidden = YES;
+        [self.contentView addSubview:_timeLabel];
+    }
+    return _timeLabel;
 }
 
 - (UIButton *)convertBtn {

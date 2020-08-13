@@ -86,7 +86,7 @@
     self.sloganImgView = UIImageView.ivFrame(CGRectMake(self.miniCodeImgView.left-140, self.miniCodeImgView.y+20, 120, 30)).ivImage(kImageMake(@"share_slogan"));
     [self.bkgView addSubview:self.miniCodeImgView];
     [self.bkgView addSubview:self.sloganImgView];
-    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivCornerRadius(16);
+    self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivBkgColor(kColorThemefff).ivCornerRadius(16);
     [self.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
     [self.miniCodeImgView addSubview:self.logoImgView];
     
