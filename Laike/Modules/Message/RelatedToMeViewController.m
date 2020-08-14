@@ -11,7 +11,6 @@
 #import "QHWGeneralTableViewCell.h"
 #import <HyphenateLite/HyphenateLite.h>
 #import "CTMediator+ViewController.h"
-#import "CommentReplyListViewController.h"
 
 @interface RelatedToMeViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -110,55 +109,16 @@
             break;
             
         case 101002: //提到我的  头条-评论回复，跳转-评论回复详情；
-            {
-                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-                vc.commentId = msgModel.create.subjectId;
-                vc.communityType = 1;
-                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-            }
-            break;
-            
-        case 101004: //提到我的  海外圈-视频-评论回复，跳转-评论回复详情；
-        case 101005: //提到我的  海外圈-图文-评论回复，跳转-评论回复详情；
-            {
-                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-                vc.commentId = msgModel.create.subjectId;
-                vc.communityType = 2;
-                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-            }
-            break;
-            
-        case 102002: //评论我的  海外圈-视频-评论，跳转-海外圈详情；
-        case 102003: //评论我的  海外圈-图文-评论，跳转-海外圈详情；
-            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:2];
+        case 103004: //赞我的  头条-回复，跳转-评论回复详情；
+            [CTMediator.sharedInstance CTMediator_viewControllerForCommentReplyWithCommentId:msgModel.create.subjectId CommunityType:1];
             break;
         
-        case 103003: //赞我的  头条-评论，跳转-头条详情；
-            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:1];
-            break;
+        case 101004: //提到我的  海外圈-视频-评论回复，跳转-评论回复详情；
+        case 101005: //提到我的  海外圈-图文-评论回复，跳转-评论回复详情；
             
-        case 103004: //赞我的  头条-回复，跳转-评论回复详情；
-            {
-                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-                vc.commentId = msgModel.create.subjectId;
-                vc.communityType = 1;
-                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-            }
-            break;
-                
-        case 103006: //赞我的  海外圈-视频-评论，跳转-海外圈详情；
-        case 103007: //赞我的  海外圈-图文-评论，跳转-海外圈详情；
-            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:2];
-            break;
-                
         case 103008: //赞我的  海外圈-视频-评论回复，跳转-评论回复详情；
         case 103009: //赞我的  海外圈-图文-评论回复，跳转-评论回复详情；
-            {
-                CommentReplyListViewController *vc = CommentReplyListViewController.new;
-                vc.commentId = msgModel.create.subjectId;
-                vc.communityType = 2;
-                [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
-            }
+            [CTMediator.sharedInstance CTMediator_viewControllerForCommentReplyWithCommentId:msgModel.create.subjectId CommunityType:2];
             break;
         
         case 104001: //关注我的
@@ -172,14 +132,25 @@
         case 105004: //分享我的  顾问-详情，跳转-顾问详情；
             [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:msgModel.create.subjectId UserType:2 BusinessType:0];
             break;
-                    
+
+        case 103003: //赞我的  头条-评论，跳转-头条详情；
+            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:1];
+            break;
+                            
+        case 102002: //评论我的  海外圈-视频-评论，跳转-海外圈详情；
+        case 102003: //评论我的  海外圈-图文-评论，跳转-海外圈详情；
+                
+        case 103006: //赞我的  海外圈-视频-评论，跳转-海外圈详情；
+        case 103007: //赞我的  海外圈-图文-评论，跳转-海外圈详情；
+
         case 105006: //分享我的  海外圈-视频-评论，跳转-海外圈详情；
         case 105007: //分享我的  海外圈-图文-评论，跳转-海外圈详情；
-            [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:2];
-            break;
                         
         case 106003: //收藏我的  海外圈-视频-评论，跳转-海外圈详情；
         case 106004: //收藏我的  海外圈-图文-评论，跳转-海外圈详情；
+
+        case 103010: //赞我的  海外圈-视频-内容，跳转-海外圈详情；
+        case 103011: //赞我的  海外圈-图文-内容，跳转-海外圈详情；
             [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.create.subjectId CommunityType:2];
             break;
             

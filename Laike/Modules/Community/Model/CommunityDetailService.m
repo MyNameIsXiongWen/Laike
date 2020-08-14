@@ -10,7 +10,7 @@
 
 @implementation CommunityDetailService
 
-- (void)getCommunityDetailRequestWithComplete:(void (^)(void))complete {
+- (void)getCommunityDetailRequestWithComplete:(void (^)(BOOL))complete {
     [QHWHttpLoading showWithMaskTypeBlack];
     NSString *urlStr;
     if (self.communityType == 1) {
@@ -25,9 +25,9 @@
     }
     [QHWHttpManager.sharedInstance QHW_POST:urlStr parameters:params success:^(id responseObject) {
         self.detailModel = [CommunityDetailModel yy_modelWithJSON:responseObject[@"data"]];
-        complete();
+        complete(YES);
     } failure:^(NSError *error) {
-        complete();
+        complete(NO);
     }];
 }
 

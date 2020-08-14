@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *communityId;
 @property (nonatomic, assign) NSInteger communityType;
 @property (nonatomic, strong) CommunityDetailModel *detailModel;
-- (void)getCommunityDetailRequestWithComplete:(void (^)(void))complete;
+- (void)getCommunityDetailRequestWithComplete:(void (^)(BOOL status))complete;
 
 @end
 

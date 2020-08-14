@@ -143,6 +143,8 @@
                     [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.businessId CommunityType:1];
                     break;
 
+                case 18:
+                case 21:
                 case 1821: //海外圈
                     [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.businessId CommunityType:2];
                     break;
@@ -166,6 +168,11 @@
                     
                 case 101002: //发布海外圈
                     [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CommunityPublishViewController").new animated:YES];
+                    break;
+                    
+                case 103010: //海外圈-视频
+                case 103011: //海外圈-图文
+                    [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:msgModel.businessId CommunityType:2];
                     break;
 
                 default:

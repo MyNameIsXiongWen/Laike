@@ -57,7 +57,7 @@
         self.allReplyButton.hidden = commentModel.answerCount == 0;
         [self.allReplyButton setTitle:kFormat(@"%ld条回复 >", commentModel.answerCount) forState:0];
     }
-    self.likeButton.btnImage(kImageMake(commentModel.likeStatus == 2 ? @"big_like_white_orange" : @"big_like_white"));
+    self.likeButton.selected = (commentModel.likeStatus == 2);
     self.likeButton.btnBadgeLabel.text = kFormat(@"%ld", commentModel.likeCount);
 }
 

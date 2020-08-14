@@ -30,6 +30,7 @@
 #import "BookAppointmentViewController.h"
 #import "BindCompanyViewController.h"
 #import "LiveDetailViewController.h"
+#import "CommentReplyListViewController.h"
 
 @implementation Target_ViewController
 
@@ -184,6 +185,15 @@
 
 - (void)Action_nativeBindCompanyViewController:(NSDictionary *)params {
     BindCompanyViewController *vc = BindCompanyViewController.new;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeCommentReplyViewController:(NSDictionary *)params {
+    NSString *commentId = params[@"commentId"];
+    NSInteger communityType = [params[@"communityType"] integerValue];
+    CommentReplyListViewController *vc = CommentReplyListViewController.new;
+    vc.commentId = commentId;
+    vc.communityType = communityType;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

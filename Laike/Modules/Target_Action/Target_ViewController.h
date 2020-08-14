@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeBindCompanyViewController:(NSDictionary *)params;
 
+- (void)Action_nativeCommentReplyViewController:(NSDictionary *)params;
+
 @end
 
 NS_ASSUME_NONNULL_END

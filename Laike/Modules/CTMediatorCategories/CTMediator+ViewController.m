@@ -34,6 +34,7 @@ NSString * const kCTMediatorActionNativeCRMDetailViewController = @"nativeCRMDet
 NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeAdvisoryDetailViewController";
 NSString * const kCTMediatorActionNativeBookAppointmentViewController = @"nativeBookAppointmentViewController";
 NSString * const kCTMediatorActionNativeBindCompanyViewController = @"nativeBindCompanyViewController";
+NSString * const kCTMediatorActionNativeCommentReplyViewController = @"nativeCommentReplyViewController";
 
 @implementation CTMediator (Login)
 
@@ -215,6 +216,14 @@ NSString * const kCTMediatorActionNativeBindCompanyViewController = @"nativeBind
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeBindCompanyViewController
                  params:@{}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForCommentReplyWithCommentId:(NSString *)commentId CommunityType:(NSInteger)communityType {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeCommentReplyViewController
+                 params:@{@"commentId": commentId ?: @"",
+                          @"communityType": @(communityType)}
     shouldCacheTarget:NO];
 }
 

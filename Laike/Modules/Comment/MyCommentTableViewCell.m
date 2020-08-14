@@ -7,7 +7,6 @@
 //
 
 #import "MyCommentTableViewCell.h"
-#import "CommentReplyListViewController.h"
 #import "UserModel.h"
 #import "CTMediator+ViewController.h"
 #import "QHWSystemService.h"
@@ -82,7 +81,7 @@
     [self.avtarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(UserModel.shareUser.headPath)]];
     self.nameLabel.text = UserModel.shareUser.nickname;
     self.timeLabel.text = model.createTime;
-    self.likeButton.btnImage(kImageMake(model.likeStatus == 1 ? @"big_like_white" : @"big_like_white_orange"));
+    self.likeButton.selected = (model.likeStatus == 2);
     self.likeButton.btnBadgeLabel.text = kFormat(@"%ld", model.likesCount);
     self.contentLabel.attributedText = model.titleAttrString;
     self.originalContentLabel.text = model.title ?: @" ";
@@ -96,10 +95,7 @@
     if (self.model.commentStatus == 1) {
         [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:self.model.businessId CommunityType:self.model.businessType];
     } else {
-        CommentReplyListViewController *vc = CommentReplyListViewController.new;
-        vc.commentId = self.model.businessId;
-        vc.communityType = self.model.businessType;
-        [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+        [CTMediator.sharedInstance CTMediator_viewControllerForCommentReplyWithCommentId:self.model.businessId CommunityType:self.model.businessType];
     }
 }
 

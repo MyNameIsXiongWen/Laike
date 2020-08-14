@@ -96,7 +96,10 @@
 
 - (void)getCommunityDetailRequest {
     dispatch_group_enter(self.group);
-    [self.service getCommunityDetailRequestWithComplete:^{
+    [self.service getCommunityDetailRequestWithComplete:^(BOOL status) {
+        if (!status) {
+            return;
+        }
         if (self.communityType == 1) {
             self.kNavigationView.title = @"头条";
             self.articlelHeaderView.titleLabel.text = self.service.detailModel.name;

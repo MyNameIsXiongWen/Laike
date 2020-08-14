@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForBindCompany;
 
+- (void)CTMediator_viewControllerForCommentReplyWithCommentId:(NSString *)commentId CommunityType:(NSInteger)communityType;
+
 @end
 
 NS_ASSUME_NONNULL_END

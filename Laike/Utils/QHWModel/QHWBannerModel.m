@@ -34,6 +34,8 @@
             case 18:
             case 21:
             case 1821: //海外圈
+            case 103010: //海外圈-视频
+            case 103011: //海外圈-图文
                 [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:self.businessId CommunityType:2];
                 break;
             
