@@ -64,7 +64,7 @@
     if (cardModel.headPath.length > 0) {
         [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(cardModel.headPath)]];
     } else {
-        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:cardModel.nickname textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:cardModel.nickname textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff, NSFontAttributeName: kMediumFontTheme18} circular:YES];
     }
     self.nameLabel.text = cardModel.nickname;
 }

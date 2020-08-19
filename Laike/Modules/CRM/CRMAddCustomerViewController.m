@@ -442,11 +442,10 @@
             self.crmModel.clientSourceCode = model.code.integerValue;
         } else if ([self.btnDic[@"identifier"] isEqualToString:@"intentionLevel"]) {
             self.crmModel.intentionLevelCode = model.code.integerValue;
-        } else if ([self.btnDic[@"identifier"] isEqualToString:@"crmLebel"]) {
-            
+        } else if ([self.btnDic[@"identifier"] isEqualToString:@"clientLevel"]) {
+            self.crmModel.clientLevel = model.code.integerValue;
         }
     }
-    
 }
 
 #pragma mark ------------UI-------------

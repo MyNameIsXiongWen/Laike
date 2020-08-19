@@ -83,22 +83,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D65D71D1-50C0-4120-956E-1670098EA151"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Laike/AppDelegate/AppDelegate+Service.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "4E6FCCB5-B63F-4D71-AC3F-C0C6CBFD09FA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -110,6 +94,54 @@
             endingLineNumber = "103"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EAF0775A-CE7D-4026-9A3C-C0AA52DA46E6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Laike/Modules/Target_Action/Target_TZImgPicker.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "-Action_nativeOnlyVideoShowTZImagePickerViewController:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EAF0775A-CE7D-4026-9A3C-C0AA52DA46E6 - 6a5b017cf0ab6721"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[Target_TZImgPicker Action_nativeOnlyVideoShowTZImagePickerViewController:]"
+                  moduleName = "&#x53bb;&#x6d77;&#x5916;&#x6765;&#x5ba2;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/Laike/Laike/Modules/Target_Action/Target_TZImgPicker.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "EAF0775A-CE7D-4026-9A3C-C0AA52DA46E6 - 71a4fcf150476b0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__76-[Target_TZImgPicker Action_nativeOnlyVideoShowTZImagePickerViewController:]_block_invoke"
+                  moduleName = "&#x53bb;&#x6d77;&#x5916;&#x6765;&#x5ba2;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Desktop/Laike/Laike/Modules/Target_Action/Target_TZImgPicker.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "27">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

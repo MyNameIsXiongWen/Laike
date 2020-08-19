@@ -33,8 +33,9 @@
     CGContextFillRect(context, rect);
     
     // text
-    CGSize textSize = [text sizeWithAttributes:textAttributes];
-    [text drawInRect:CGRectMake((size.width - textSize.width) / 2, (size.height - textSize.height) / 2, textSize.width, textSize.height) withAttributes:textAttributes];
+    NSString *textString = text.length > 0 ? [text substringToIndex:1] : @"";
+    CGSize textSize = [textString sizeWithAttributes:textAttributes];
+    [textString drawInRect:CGRectMake((size.width - textSize.width) / 2, (size.height - textSize.height) / 2, textSize.width, textSize.height) withAttributes:textAttributes];
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

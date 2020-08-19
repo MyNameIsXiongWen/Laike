@@ -105,7 +105,7 @@
     if (clientDetailModel.headPath.length > 0) {
         [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(clientDetailModel.headPath)]];
     } else {
-        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:clientDetailModel.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:clientDetailModel.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff, NSFontAttributeName: kMediumFontTheme18} circular:YES];
     }
     self.nameLabel.text = clientDetailModel.realName;
     [self.tagView setTagWithTagArray:@[clientDetailModel.followName ?: @""]];

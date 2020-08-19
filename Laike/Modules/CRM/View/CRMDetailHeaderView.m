@@ -91,7 +91,7 @@
     if (crmModel.headPath.length > 0) {
         [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(crmModel.headPath)]];
     } else {
-        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:crmModel.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} circular:YES];
+        self.avatarImgView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:crmModel.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff, NSFontAttributeName: kMediumFontTheme18} circular:YES];
     }
     self.nameLabel.text = crmModel.realName;
     [self.tagView setTagWithTagArray:crmModel.industryNameArray];

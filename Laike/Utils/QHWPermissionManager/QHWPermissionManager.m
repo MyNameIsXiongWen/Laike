@@ -54,9 +54,11 @@
             if (!granted) {
                 [QHWPermissionManager popAlertViewWithMsg:@"相机权限暂未开启，是否前往开启？"];
             }
-            if (returnBlock) {
-                returnBlock(granted);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (returnBlock) {
+                    returnBlock(granted);
+                }
+            });
         }];
         isOpen = NO;
     } else if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
@@ -81,19 +83,21 @@
         [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
             if (authStatus == PHAuthorizationStatusRestricted || authStatus == PHAuthorizationStatusDenied) {
                 [QHWPermissionManager popAlertViewWithMsg:@"相册权限暂未开启，是否前往开启？"];
-                if (returnBlock) {
-                    returnBlock(NO);
-                }
-            }
-            else {
-                if (returnBlock) {
-                    returnBlock(YES);
-                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (returnBlock) {
+                        returnBlock(NO);
+                    }
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (returnBlock) {
+                        returnBlock(YES);
+                    }
+                });
             }
         }];
         isOpen = NO;
-    }
-    else if (authStatus == PHAuthorizationStatusRestricted || authStatus == PHAuthorizationStatusDenied) {
+    } else if (authStatus == PHAuthorizationStatusRestricted || authStatus == PHAuthorizationStatusDenied) {
         isOpen = NO;
         [QHWPermissionManager popAlertViewWithMsg:@"相册权限暂未开启，是否前往开启？"];
     } else {
@@ -115,9 +119,11 @@
             if (!granted) {
                 [QHWPermissionManager popAlertViewWithMsg:@"麦克风权限暂未开启，是否前往开启？"];
             }
-            if (returnBlock) {
-                returnBlock(granted);
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (returnBlock) {
+                    returnBlock(granted);
+                }
+            });
         }];
         isOpen = NO;
     } else if (permissionStatus == AVAudioSessionRecordPermissionDenied) {
@@ -142,9 +148,11 @@
     if (!isOpen) {
         [QHWPermissionManager popAlertViewWithMsg:@"定位权限暂未开启，是否前往开启？"];
     }
-    if (returnBlock) {
-        returnBlock(isOpen);
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (returnBlock) {
+            returnBlock(isOpen);
+        }
+    });
 }
 
 + (void)popAlertViewWithMsg:(NSString *)message {

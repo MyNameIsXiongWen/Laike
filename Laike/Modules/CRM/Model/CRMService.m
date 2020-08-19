@@ -144,20 +144,27 @@
             [countryArray addObject:@{@"id": model.id}];
         }
     }
-    FilterCellModel *clientLevelModel;
-    for (FilterCellModel *model in self.clientLevelList) {
-        if (model.selected) {
-            clientLevelModel = model;
-            break;
-        }
-    }
-    FilterCellModel *intentionModel;
-    for (FilterCellModel *model in self.intentionLevelList) {
-        if (model.selected) {
-            intentionModel = model;
-            break;
-        }
-    }
+//    FilterCellModel *sourceModel;
+//    for (FilterCellModel *model in self.clientSourceList) {
+//        if (model.selected) {
+//            sourceModel = model;
+//            break;
+//        }
+//    }
+//    FilterCellModel *clientLevelModel;
+//    for (FilterCellModel *model in self.clientLevelList) {
+//        if (model.selected) {
+//            clientLevelModel = model;
+//            break;
+//        }
+//    }
+//    FilterCellModel *intentionModel;
+//    for (FilterCellModel *model in self.intentionLevelList) {
+//        if (model.selected) {
+//            intentionModel = model;
+//            break;
+//        }
+//    }
     
     NSMutableDictionary *params = @{@"realName": self.crmModel.realName ?: @""}.mutableCopy;
     if (self.crmModel.gender) {
@@ -175,29 +182,31 @@
     if (countryArray.count > 0) {
         params[@"countryList"] = countryArray;
     }
-    if (intentionModel) {
-        params[@"intentionLevelCode"] = intentionModel.code;
+//    if (sourceModel) {
+//        params[@"clientSourceCode"] = sourceModel.code;
+//    }
+//    if (intentionModel) {
+//        params[@"intentionLevelCode"] = intentionModel.code;
+//    }
+//    if (clientLevelModel) {
+//        params[@"clientLevel"] = clientLevelModel.code;
+//    }
+    if (self.crmModel.clientSourceCode) {
+        params[@"clientSourceCode"] = @(self.crmModel.clientSourceCode);
     }
-    if (clientLevelModel) {
-        params[@"clientLevel"] = clientLevelModel.code;
+    if (self.crmModel.intentionLevelCode) {
+        params[@"intentionLevelCode"] = @(self.crmModel.intentionLevelCode);
+    }
+    if (self.crmModel.clientLevel) {
+        params[@"clientLevel"] = @(self.crmModel.clientLevel);
     }
     NSString *urlString = kCRMAdd;
     NSString *remiderString = @"添加成功";
     if (self.customerId.length > 0) {
         params[@"id"] = self.customerId;
         urlString = kCRMEdit;
-        remiderString = @"";
+        remiderString = @"完善信息成功";
     } else {
-        FilterCellModel *sourceModel;
-        for (FilterCellModel *model in self.clientSourceList) {
-            if (model.selected) {
-                sourceModel = model;
-                break;
-            }
-        }
-        if (sourceModel) {
-            params[@"clientSourceCode"] = sourceModel.code;
-        }
         params[@"mobileNumber"] = self.crmModel.mobileNumber ?: @"";
     }
     [QHWHttpManager.sharedInstance QHW_POST:urlString parameters:params success:^(id responseObject) {
@@ -334,7 +343,7 @@
     
     BOOL disable = NO;
     BOOL unselectable = NO;
-    if (self.customerId.length > 0) {
+    if (self.customerId.length > 0) {//只有完善信息才有customerId
         disable = YES;
     } else {
         if (self.crmModel.mobileNumber.length > 0) {
@@ -351,16 +360,16 @@
     QHWBaseModel *remarkModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerRemarkCell" Height:165 Data:self.crmModel];
     [self.tableViewDataArray addObject:remarkModel];
     
-    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"* 客户来源", @"mutable": @(NO), @"data": self.clientSourceList, @"model": self.crmModel, @"identifier": @"source", @"unselectable": @(unselectable)}];
+    QHWBaseModel *sourceModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientSourceList] Data:@{@"title": @"* 客户来源", @"mutable": @(NO), @"data": self.clientSourceList ?: @[], @"model": self.crmModel, @"identifier": @"source", @"unselectable": @(unselectable)}];
     [self.tableViewDataArray addObject:sourceModel];
     
-    QHWBaseModel *crmLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientLevelList] Data:@{@"title": @"客户等级", @"mutable": @(NO), @"data": self.clientLevelList, @"model": self.crmModel, @"identifier": @"crmLevel"}];
-    [self.tableViewDataArray addObject:crmLevelModel];
+    QHWBaseModel *clientLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.clientLevelList] Data:@{@"title": @"客户等级", @"mutable": @(NO), @"data": self.clientLevelList ?: @[], @"model": self.crmModel, @"identifier": @"clientLevel"}];
+    [self.tableViewDataArray addObject:clientLevelModel];
     
-    QHWBaseModel *businessModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.industryList] Data:@{@"title": @"意向业务", @"mutable": @(YES), @"data": self.industryList, @"model": self.crmModel, @"identifier": @"business"}];
+    QHWBaseModel *businessModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.industryList] Data:@{@"title": @"意向业务", @"mutable": @(YES), @"data": self.industryList ?: @[], @"model": self.crmModel, @"identifier": @"business"}];
     [self.tableViewDataArray addObject:businessModel];
     
-    QHWBaseModel *intentionLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.intentionLevelList] Data:@{@"title": @"意向等级", @"mutable": @(NO), @"data": self.intentionLevelList, @"model": self.crmModel, @"identifier": @"intentionLevel"}];
+    QHWBaseModel *intentionLevelModel = [[QHWBaseModel alloc] configModelIdentifier:@"AddCustomerSelectionCell" Height:80+[self getHeightFromArray:self.intentionLevelList] Data:@{@"title": @"意向等级", @"mutable": @(NO), @"data": self.intentionLevelList ?: @[], @"model": self.crmModel, @"identifier": @"intentionLevel"}];
     [self.tableViewDataArray addObject:intentionLevelModel];
     
     if (self.customerId.length > 0) {
