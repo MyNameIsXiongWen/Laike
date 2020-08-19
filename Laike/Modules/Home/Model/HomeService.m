@@ -93,9 +93,7 @@
         user.qrCode = self.homeModel.qrCode;
         user.mobileNumber = self.homeModel.mobileNumber;
         user.userCount = self.homeModel.userCount;
-//        user.crmCount = self.homeModel.clientData.crmCount;
-//        user.clueCount = self.homeModel.clueCount;
-//        user.distributionCount = self.homeModel.distributionCount;
+        user.html = self.homeModel.htmlUrl;
         user.bindStatus = self.homeModel.bindStatus;
         user.distributionStatus = self.homeModel.distributionStatus;
         [user keyArchiveUserModel];

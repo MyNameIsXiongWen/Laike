@@ -188,10 +188,12 @@ NSString * const kCTMediatorActionNativeCommentReplyViewController = @"nativeCom
     shouldCacheTarget:NO];
 }
 
-- (void)CTMediator_viewControllerForAdvisoryDetailWithCustomerId:(NSString *)customerId {
+- (void)CTMediator_viewControllerForAdvisoryDetailWithCustomerId:(NSString *)customerId ClueId:(NSString *)clueId {
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeAdvisoryDetailViewController
-                 params:@{@"customerId": customerId ?: @""}
+                 params:@{@"customerId": customerId ?: @"",
+                          @"clueId": clueId ?: @""
+                 }
     shouldCacheTarget:NO];
 }
 

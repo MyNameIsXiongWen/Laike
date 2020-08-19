@@ -55,6 +55,16 @@
  */
 @property(atomic,readwrite, copy)NSDictionary* universalLinkDic;
 
+/**
+ *  设置额外的初始化平台的参数
+ *  @note 目前用于企业微信的配置 corpId为第三方App所属企业的ID agentId 第三方App在企业内部的ID
+ *  @exapmle 比如微信企业平台的额外初始化配置如下
+    [UMSocialGlobal shareInstance].extraInitDic = @{
+        @(UMSocialPlatformType_WechatWork):@{@"corpId":@"ww813cd5c1f46dc9ab",@"agentId":@"1000002"}
+            };
+ */
+@property(atomic,readwrite, copy)NSDictionary* extraInitDic;
+
 
 /**
  *  UMSocial的版本号

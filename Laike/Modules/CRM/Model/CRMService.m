@@ -257,7 +257,7 @@
         return;
     }
     [QHWHttpLoading showWithMaskTypeBlack];
-    [QHWHttpManager.sharedInstance QHW_POST:kCRMAdvisoryGiveUpTrack parameters:@{@"id": self.customerId ?: @""} success:^(id responseObject) {
+    [QHWHttpManager.sharedInstance QHW_POST:kCRMAdvisoryGiveUpTrack parameters:@{@"id": self.clueId ?: @""} success:^(id responseObject) {
         [SVProgressHUD showInfoWithStatus:@"放弃跟进"];
         [NSNotificationCenter.defaultCenter postNotificationName:kNotificationAddCustomerSuccess object:nil];
         for (UIViewController *vc in self.getCurrentMethodCallerVC.navigationController.childViewControllers) {

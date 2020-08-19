@@ -105,4 +105,5 @@ typedef enum{
     EMErrorCallSpeakerFull = 823,            /*! \~chinese 主播个数已达到上限 \~english Conference's max speaker capacity reached */
     EMErrorCallVideoFull = 824,              /*! \~chinese 视频个数已达到上限 \~english Conference's max videos capacity reached */
     EMErrorCallCDNError = 825,               /*! \~chinese cdn推流错误 \~english Cdn push stream error */
+    EMErrorCallDesktopFull = 826,            /*! \~chinese 共享桌面个数已达到上限 \~english Conference's desktop streams capacity reached */
 }EMErrorCode;

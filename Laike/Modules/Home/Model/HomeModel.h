@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *visitHeadPath;
 @property (nonatomic, copy) NSString *visitTip;
 @property (nonatomic, copy) NSString *wechatNo;
+@property (nonatomic, copy) NSString *htmlUrl;
 
 @property (nonatomic, strong) NSArray *countryList;
 @property (nonatomic, strong) NSArray *industryList;

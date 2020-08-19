@@ -167,8 +167,10 @@
 
 - (void)Action_nativeAdvisoryDetailViewController:(NSDictionary *)params {
     NSString *customerId = params[@"customerId"];
+    NSString *clueId = params[@"clueId"];
     AdvisoryDetailViewController *vc = AdvisoryDetailViewController.new;
     vc.customerId = customerId;
+    vc.clueId = clueId;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

@@ -187,6 +187,16 @@ extern NSString *const  UMSPlatformNameVKontakte;
  */
 extern NSString *const  UMSPlatformNameFaceBookMessenger;
 
+/**
+*  WechatWork
+*/
+extern NSString *const  UMSPlatformNameWechatWork;
+
+/**
+*  DouYin
+*/
+extern NSString *const  UMSPlatformNameDouYin;
+
 
 /**
  *  授权，分享，UserProfile等操作的回调
@@ -349,6 +359,9 @@ typedef NS_ENUM(NSInteger,UMSocialPlatformType)
     UMSocialPlatformType_VKontakte          = 33,//vkontakte
     UMSocialPlatformType_FaceBookMessenger  = 34,//FaceBookMessenger
     UMSocialPlatformType_Tim                = 35,// Tencent TIM
+    
+    UMSocialPlatformType_WechatWork         = 36,//企业微信
+    UMSocialPlatformType_DouYin             = 37,//抖音
     
     UMSocialPlatformType_Predefine_end      = 999,
     

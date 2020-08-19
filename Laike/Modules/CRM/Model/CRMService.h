@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) QHWItemPageModel *itemPageModel;
 @property (nonatomic, strong) CRMModel *crmModel;
 @property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, copy) NSString *clueId;
 @property (nonatomic, strong) NSMutableArray <FilterBtnViewCellModel *>*filterDataArray;
 @property (nonatomic, strong) NSMutableArray <CRMModel *>*crmArray;
 @property (nonatomic, strong) NSMutableArray *trackArray;

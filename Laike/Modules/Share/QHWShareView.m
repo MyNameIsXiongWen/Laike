@@ -271,6 +271,7 @@
 
 ///产品分享
 - (UMShareObject *)generateMainBusinessObjectPlatformType:(UMSocialPlatformType)platformType {
+    NSString *userId = UserModel.shareUser.id;
     NSData *imageData;
     NSString *coverPath;
     NSString *name;
@@ -298,12 +299,12 @@
                 coverPath = self.communityDetailModel.filePathList.firstObject[@"path"];
             }
         }
-        name = self.communityDetailModel.title;
+        name = self.communityDetailModel.title.length > 0 ? self.communityDetailModel.title : self.communityDetailModel.content;
         urlPath = self.communityDetailModel.htmlUrl;
     } else if (self.shareType == ShareTypeConsultant) {
         name = kFormat(@"您好！我是%@专属顾问%@，这是我的电子名片", self.userModel.merchantName, self.userModel.realName);
         coverPath = self.userModel.headPath;
-        urlPath = self.userModel.html;
+        urlPath = [NSString stringWithFormat:@"%@%@", self.userModel.html, userId];
     } else if (self.shareType == ShareTypeMerchant) {
         name = self.userModel.merchantName;
         coverPath = self.userModel.merchantHead;
@@ -325,7 +326,6 @@
     imageData = UIImageJPEGRepresentation(img, 0.7);
     if (platformType == UMSocialPlatformType_WechatSession) {
         NSString *sharePath;
-        NSString *userId = UserModel.shareUser.id;
         if (self.shareType == ShareTypeMainBusiness) {
             switch (self.mainBusinessDetailModel.businessType) {
                 case 1:

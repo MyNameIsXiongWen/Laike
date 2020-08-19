@@ -11,6 +11,7 @@
 #import <HyphenateLite/HyphenateLite.h>
 #import "UserModel.h"
 #import "MessageModel.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface MessageViewController () <UITableViewDelegate, UITableViewDataSource, EMChatManagerDelegate>
 
@@ -51,6 +52,15 @@
 
 - (void)messagesDidReceive:(NSArray *)aMessages {
     [self getIMUnreadCount];
+    if (UIApplication.sharedApplication.applicationState == UIApplicationStateBackground) {
+        UNMutableNotificationContent *content = UNMutableNotificationContent.new;
+        content.body = @"您有一条新消息";
+        content.sound = UNNotificationSound.defaultSound;
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"noticeId" content:content trigger:nil];
+        [UNUserNotificationCenter.currentNotificationCenter addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+            
+        }];
+    }
 }
 
 - (void)getIMUnreadCount {

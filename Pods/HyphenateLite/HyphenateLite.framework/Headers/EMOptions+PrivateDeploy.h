@@ -104,4 +104,16 @@
  */
 @property (nonatomic, copy) NSString *rtcUrlDomain;
 
+/*!
+ *  \~chinese
+ *  多人音视频通话质量上报地址
+ *
+ *  enableDnsConfig为NO时生效。只能在[EMClient initializeSDKWithOptions:]中设置，不能在程序运行过程中动态修改
+ *
+ *  \~english
+ *  the url of conference call report
+ *
+ */
+@property (nonatomic, copy) NSString *rtcQoeUpUrl;
+
 @end

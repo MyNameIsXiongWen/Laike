@@ -93,6 +93,7 @@
         _tableView = [UICreateView initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kTopBarHeight) Style:UITableViewStylePlain Object:self];
         _tableView.rowHeight = 60;
         [_tableView registerClass:UITableViewCell.class forCellReuseIdentifier:NSStringFromClass(UITableViewCell.class)];
+        _tableView.tableFooterView = UIView.new;
         [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
             self.homeService.itemPageModel.pagination.currentPage = 1;
             [self getMainData];

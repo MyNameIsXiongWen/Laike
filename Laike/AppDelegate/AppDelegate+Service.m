@@ -92,6 +92,15 @@
 }
 
 - (void)initHXIMWithApplication:(UIApplication *)application Options:(NSDictionary *)launchOptions {
+    [UNUserNotificationCenter.currentNotificationCenter requestAuthorizationWithOptions:UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [application registerForRemoteNotifications];
+            });
+        }
+    }];
+    [[UNUserNotificationCenter currentNotificationCenter] setNotificationCategories:[NSSet set]];
+    
     EMOptions *options = [EMOptions optionsWithAppkey:kHXKey];
 #ifdef DEBUG
     options.apnsCertName = @"manager_dev_apns";
@@ -99,6 +108,7 @@
     options.apnsCertName = @"manager_dis_apns";
 #endif
     options.enableConsoleLog = YES;
+    options.logLevel = EMLogLevelError;
     [EMClient.sharedClient initializeSDKWithOptions:options];
     [UserModel.shareUser hxLogin];
 }
@@ -131,7 +141,7 @@
     return result;
 }
 
-//仅支持iOS9以上系统，iOS8及以下系统不会回调
+//iOS9以上系统
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
     //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
     BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
@@ -152,8 +162,9 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Required - 注册 DeviceToken
-//    [JPUSHService registerDeviceToken:deviceToken];
-    self.deviceToken = deviceToken;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [EMClient.sharedClient bindDeviceToken:deviceToken];
+    });
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -161,7 +172,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-//    [JPUSHService handleRemoteNotification:userInfo];
+    
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
@@ -177,7 +188,7 @@
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
     NSDictionary *userInfo = notification.request.content.userInfo;
     if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-//        [JPUSHService handleRemoteNotification:userInfo];
+        
     }
     [self handleRemoteNotificationWithUserInfo:userInfo HandleBanner:NO];
     completionHandler(UNNotificationPresentationOptionBadge);
@@ -195,7 +206,7 @@
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     NSDictionary *userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-//        [JPUSHService handleRemoteNotification:userInfo];
+
     }
     [self handleRemoteNotificationWithUserInfo:userInfo HandleBanner:YES];
     completionHandler();

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AdvisoryDetailViewController : UIViewController
 
 @property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, copy) NSString *clueId;
 
 @end
 

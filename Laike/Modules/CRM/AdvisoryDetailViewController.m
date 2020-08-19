@@ -79,12 +79,16 @@
 }
 
 - (void)rightNavBtnAction:(UIButton *)sender {
+    NSString *convertCRMString = self.crmService.crmModel.clientStatus == 2 ? @"已转客户" : @"转到客户";
     QHWMoreView *moreView = [[QHWMoreView alloc] initWithFrame:CGRectMake(kScreenW-125, kTopBarHeight, 105, 85)
-                                                     ViewArray:@[@{@"title":@"转到客户", @"identifier":@"convertCRM"},
+                                                     ViewArray:@[@{@"title":convertCRMString, @"identifier":@"convertCRM"},
                                                                  @{@"title":@"放弃跟进", @"identifier":@"giveUpFollowUp"}]];
     WEAKSELF
     moreView.clickBtnBlock = ^(NSString * _Nonnull identifier) {
         if ([identifier isEqualToString:@"convertCRM"]) {
+            if (weakSelf.crmService.crmModel.clientStatus == 2) {
+                return;
+            }
             [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
         } else if ([identifier isEqualToString:@"giveUpFollowUp"]) {
             [weakSelf showAlertLabelView];
@@ -197,6 +201,7 @@
     if (!_crmService) {
         _crmService = CRMService.new;
         _crmService.customerId = self.customerId;
+        _crmService.clueId = self.clueId;
     }
     return _crmService;
 }

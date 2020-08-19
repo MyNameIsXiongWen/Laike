@@ -134,6 +134,7 @@ static dispatch_once_t onceToken;
         NSString *pwd2 = pwd1.uppercaseString.md5Str;
         [EMClient.sharedClient loginWithUsername:account password:pwd2 completion:^(NSString *aUsername, EMError *aError) {
             if (!aError) {
+                [EMClient.sharedClient setApnsNickname:user.realName];
                 [NSNotificationCenter.defaultCenter postNotificationName:kNotificationHXLoginSuccess object:nil];
                 NSLog(@"登录成功");
             } else {

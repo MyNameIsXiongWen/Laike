@@ -223,7 +223,7 @@
     if (self.crmType == 1) {
         [CTMediator.sharedInstance CTMediator_viewControllerForCRMDetailWithCustomerId:model.id];
     } else {
-        [CTMediator.sharedInstance CTMediator_viewControllerForAdvisoryDetailWithCustomerId:model.userId];
+        [CTMediator.sharedInstance CTMediator_viewControllerForAdvisoryDetailWithCustomerId:model.userId ClueId:model.id];
     }
 }
 

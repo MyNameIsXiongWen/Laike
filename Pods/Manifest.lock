@@ -19,23 +19,23 @@ PODS:
     - Colours/ObjC (= 5.13.0)
   - Colours/ObjC (5.13.0)
   - HappyDNS (0.3.17)
-  - HyphenateLite (3.6.9)
-  - IQKeyboardManager (6.5.5)
+  - HyphenateLite (3.7.0)
+  - IQKeyboardManager (6.5.6)
   - Masonry (1.1.0)
-  - MJRefresh (3.4.3)
-  - Qiniu (7.4.2):
+  - MJRefresh (3.5.0)
+  - Qiniu (7.4.3):
     - HappyDNS (~> 0.3.17)
   - SDWebImage (5.3.4):
     - SDWebImage/Core (= 5.3.4)
   - SDWebImage/Core (5.3.4)
   - SVProgressHUD (2.2.5)
-  - TZImagePickerController (3.4.1)
+  - TZImagePickerController (3.4.2)
   - UMCCommon (7.1.1)
   - UMCCommonLog (2.0.0)
   - UMCSecurityPlugins (1.0.6)
-  - UMCShare/Core (6.9.9):
+  - UMCShare/Core (6.9.10):
     - UMCCommon
-  - UMCShare/Social/ReducedWeChat (6.9.9):
+  - UMCShare/Social/ReducedWeChat (6.9.10):
     - UMCCommon
     - UMCShare/Core
   - WebViewJavascriptBridge (5.2.0)
@@ -89,22 +89,22 @@ SPEC CHECKSUMS:
   AvoidCrash: 28c6916fe19bd2b84126b8dec7cbe61c9a12741d
   Colours: f24220c38f13deac88612667e9b4a7fb96b871d4
   HappyDNS: 848ef73e24f2b0e2752064223ce2dc0dd88900ea
-  HyphenateLite: 753cd75b6f9a85fb812c63224955c31c136a7969
-  IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
+  HyphenateLite: 87ed77d360dd383e3046230c44360e233fa732e5
+  IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
-  Qiniu: 0e2887592ffb0f23f86b920470d2301933d51f11
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  Qiniu: 81bbc90dc6c387ea32a244f9070bc7cf08638ab5
   SDWebImage: 295132e4da61a55c3cfd811a6dabf5d49d427706
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  TZImagePickerController: 4e7a7b3d314f8a75f11042931dfd9d34c270c7db
+  TZImagePickerController: cc0b74d5f01ab4cddcc24dcdfc3c7d68e6261056
   UMCCommon: f455f92c125342e360d6ad9eafe484945351eeb5
   UMCCommonLog: 9b7ddde5d14a52fc1986ba5ac3121b8b2f433638
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
-  UMCShare: 52d9ee35f61c51eda3089a7961e1d04ce57b9d6a
+  UMCShare: a4a95fbdd61ecce5b6751d8c9ed9b519e80fcbc9
   WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
   WechatOpenSDK: 6a4d1436c15b3b5fe2a0bd383f3046010186da44
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 471abbacd0796916125a9ad79d8254d49c916c2d
+PODFILE CHECKSUM: 922ebd2860fd7d32030b35d4c1a5de9be0527909
 
 COCOAPODS: 1.9.1
