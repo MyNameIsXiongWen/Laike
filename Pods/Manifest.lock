@@ -23,7 +23,7 @@ PODS:
   - IQKeyboardManager (6.5.6)
   - Masonry (1.1.0)
   - MJRefresh (3.5.0)
-  - Qiniu (7.4.3):
+  - Qiniu (7.4.4):
     - HappyDNS (~> 0.3.17)
   - SDWebImage (5.3.4):
     - SDWebImage/Core (= 5.3.4)
@@ -93,7 +93,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  Qiniu: 81bbc90dc6c387ea32a244f9070bc7cf08638ab5
+  Qiniu: 529d25de615c6ad1cb587f9d165a160d98e9fac9
   SDWebImage: 295132e4da61a55c3cfd811a6dabf5d49d427706
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TZImagePickerController: cc0b74d5f01ab4cddcc24dcdfc3c7d68e6261056

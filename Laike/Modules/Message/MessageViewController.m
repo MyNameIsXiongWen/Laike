@@ -13,9 +13,8 @@
 #import "MessageModel.h"
 #import <UserNotifications/UserNotifications.h>
 
-@interface MessageViewController () <UITableViewDelegate, UITableViewDataSource, EMChatManagerDelegate>
+@interface MessageViewController () <UITableViewDelegate, UITableViewDataSource, EMChatManagerDelegate, EMClientDelegate>
 
-@property (nonatomic, strong) SearchView *searchView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataArray;
 
@@ -35,8 +34,8 @@
     self.kNavigationView.titleLabel.textColor = kColorThemefff;
     self.kNavigationView.backgroundColor = kColorTheme21a8ff;
     self.kNavigationView.leftBtn.hidden = YES;
-//    [self.view addSubview:self.searchView];
     [EMClient.sharedClient.chatManager addDelegate:self delegateQueue:nil];
+    [EMClient.sharedClient addDelegate:self delegateQueue:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(loginSuccess) name:kNotificationHXLoginSuccess object:nil];
 }
 
@@ -48,6 +47,14 @@
 
 - (void)loginSuccess {
     [self getIMUnreadCount];
+}
+
+/*!
+ *  当前登录账号在其它设备登录时会接收到该回调
+ */
+- (void)userAccountDidLoginFromOtherDevice {
+    [SVProgressHUD showInfoWithStatus:@"您的账号已在另一端登录"];
+    [UserModel logout];
 }
 
 - (void)messagesDidReceive:(NSArray *)aMessages {
@@ -120,17 +127,6 @@
 }
 */
 #pragma mark ------------UI-------------
-- (SearchView *)searchView {
-    if (!_searchView) {
-        _searchView = [[SearchView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, 54)];
-        WEAKSELF
-        _searchView.tapBlock = ^{
-            [weakSelf.navigationController pushViewController:NSClassFromString(@"MessageSearchViewController").new animated:YES];
-        };
-    }
-    return _searchView;
-}
-
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [UICreateView initWithFrame:CGRectMake(0, kTopBarHeight, kScreenW, kScreenH-kBottomBarHeight-kTopBarHeight) Style:UITableViewStylePlain Object:self];
@@ -157,34 +153,6 @@
         _dataArray = @[msgModel1, msgModel2];
     }
     return _dataArray;
-}
-
-@end
-
-@implementation SearchView
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        self.backgroundColor = kColorThemef5f5f5;
-        self.userInteractionEnabled = YES;
-        UIView *searchBgView = [UICreateView initWithFrame:CGRectMake(15, 12, self.width-30, 30) BackgroundColor:kColorThemefff CornerRadius:15];
-        [self addSubview:searchBgView];
-        
-        UIImageView *searchImg = UIImageView.ivFrame(CGRectMake(10, 7, 16, 16)).ivImage(kImageMake(@"global_search"));
-        [searchBgView addSubview:searchImg];
-
-        UILabel *label = UILabel.labelFrame(CGRectMake(50, 0, searchBgView.width-65, 30)).labelText(@"试试搜索顾问名称、手机号、公司名称").labelFont(kFontTheme14).labelTitleColor(kColorThemec8c8c8);
-        [searchBgView addSubview:label];
-        
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickSearchView)]];
-    }
-    return self;
-}
-
-- (void)clickSearchView {
-    if (self.tapBlock) {
-        self.tapBlock();
-    }
 }
 
 @end

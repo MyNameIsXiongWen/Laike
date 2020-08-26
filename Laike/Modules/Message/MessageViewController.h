@@ -14,10 +14,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface SearchView : UIView
-
-@property (nonatomic, copy) void (^ tapBlock)(void);
-
-@end
-
 NS_ASSUME_NONNULL_END
