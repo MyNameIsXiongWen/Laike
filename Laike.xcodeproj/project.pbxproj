@@ -183,7 +183,6 @@
 		185EC9CA24A096B600DCAB2C /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC9C024A096B500DCAB2C /* MessageTableViewCell.m */; };
 		185EC9CB24A096B600DCAB2C /* RelatedToMeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC9C124A096B500DCAB2C /* RelatedToMeTableViewCell.m */; };
 		185EC9CC24A096B600DCAB2C /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC9C224A096B500DCAB2C /* MessageModel.m */; };
-		185EC9CD24A096B600DCAB2C /* MessageSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC9C624A096B600DCAB2C /* MessageSearchViewController.m */; };
 		185EC9CE24A096B600DCAB2C /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC9C724A096B600DCAB2C /* MessageViewController.m */; };
 		185EC9CF24A096B600DCAB2C /* RelatedToMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC9C824A096B600DCAB2C /* RelatedToMeViewController.m */; };
 		185EC9D224A09A8000DCAB2C /* HomeScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EC9D024A09A8000DCAB2C /* HomeScrollContentViewController.m */; };
@@ -644,9 +643,7 @@
 		185EC9C124A096B500DCAB2C /* RelatedToMeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedToMeTableViewCell.m; sourceTree = "<group>"; };
 		185EC9C224A096B500DCAB2C /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		185EC9C324A096B500DCAB2C /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
-		185EC9C424A096B500DCAB2C /* MessageSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSearchViewController.h; sourceTree = "<group>"; };
 		185EC9C524A096B600DCAB2C /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
-		185EC9C624A096B600DCAB2C /* MessageSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSearchViewController.m; sourceTree = "<group>"; };
 		185EC9C724A096B600DCAB2C /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		185EC9C824A096B600DCAB2C /* RelatedToMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedToMeViewController.m; sourceTree = "<group>"; };
 		185EC9D024A09A8000DCAB2C /* HomeScrollContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScrollContentViewController.m; sourceTree = "<group>"; };
@@ -1123,12 +1120,10 @@
 			children = (
 				185EC9C524A096B600DCAB2C /* MessageViewController.h */,
 				185EC9C724A096B600DCAB2C /* MessageViewController.m */,
-				185EC9C424A096B500DCAB2C /* MessageSearchViewController.h */,
-				185EC9C624A096B600DCAB2C /* MessageSearchViewController.m */,
-				185EC9BA24A096B400DCAB2C /* RelatedToMeViewController.h */,
-				185EC9C824A096B600DCAB2C /* RelatedToMeViewController.m */,
 				185EC9BC24A096B400DCAB2C /* SystemMessageViewController.h */,
 				185EC9BB24A096B400DCAB2C /* SystemMessageViewController.m */,
+				185EC9BA24A096B400DCAB2C /* RelatedToMeViewController.h */,
+				185EC9C824A096B600DCAB2C /* RelatedToMeViewController.m */,
 				185CC98C24B991460004A20E /* OfficialMsgViewController.h */,
 				185CC98D24B991460004A20E /* OfficialMsgViewController.m */,
 				185EC9BD24A096B500DCAB2C /* Cell */,
@@ -2128,7 +2123,6 @@
 				185E156524AF2D8600F15A90 /* SelectCountryView.m in Sources */,
 				185FDF1224A733130043FF36 /* CommunityPublishService.m in Sources */,
 				185CC98E24B991460004A20E /* OfficialMsgViewController.m in Sources */,
-				185EC9CD24A096B600DCAB2C /* MessageSearchViewController.m in Sources */,
 				185EC96F24A091BE00DCAB2C /* QHWPhotoBrowser.m in Sources */,
 				185E15B024B0830000F15A90 /* GalleryScrollContentViewController.m in Sources */,
 				185EC96724A091BE00DCAB2C /* QHWStudyModel.m in Sources */,
