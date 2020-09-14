@@ -8,6 +8,7 @@
 
 #import "DistributionViewController.h"
 #import "HomeScrollContentViewController.h"
+#import "DistributionScrollContentViewController.h"
 #import "CRMTopOperationView.h"
 #import "QHWTabScrollView.h"
 #import "QHWPageContentView.h"
@@ -65,7 +66,7 @@
                                           @"identifier": @"customerProcess"},
                                         @{@"logo": @"distribution_bookAppointment",
                                           @"title": @"报备客户",
-                                          @"subTitle": @"客户盘活 高拥结算",
+                                          @"subTitle": @"客户盘活 高佣结算",
                                           @"identifier": @"bookAppointment"}
         ];
     }
@@ -94,10 +95,14 @@
     if (!_pageContentView) {
         NSMutableArray *contentVCs = [NSMutableArray array];
         NSArray *identifierArray = @[@"house", @"migration", @"student", @"study", @"treatment"];
+        NSArray *typeArray = @[@(1), @(3), @(4), @(2), @(102001)];
         for (int i=0; i<identifierArray.count; i++) {
-            HomeScrollContentViewController *vc = [[HomeScrollContentViewController alloc] init];
+//            HomeScrollContentViewController *vc = [[HomeScrollContentViewController alloc] init];
+//            vc.identifier = identifierArray[i];
+//            vc.pageType = 2;
+            DistributionScrollContentViewController *vc = DistributionScrollContentViewController.new;
             vc.identifier = identifierArray[i];
-            vc.pageType = 2;
+            vc.businessType = [typeArray[i] integerValue];
             [contentVCs addObject:vc];
         }
         _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];
