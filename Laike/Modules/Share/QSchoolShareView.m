@@ -9,6 +9,7 @@
 #import "QSchoolShareView.h"
 #import "MainBusinessShareView.h"
 #import "QHWQRCode.h"
+#import "UserModel.h"
 
 @interface QSchoolShareView ()
 
@@ -59,7 +60,9 @@
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
     
+    UserModel *user = UserModel.shareUser;
     self.avatarImgView = UIImageView.ivFrame(CGRectMake(15, 15, 50, 50)).ivCornerRadius(25).ivBorderColor(kColorTheme2a303c);
+    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(user.headPath)]];
     self.nameImgView = UIImageView.ivFrame(CGRectMake(self.avatarImgView.right-15, 25, 200, 30)).ivImage(kImageMake(@"share_school"));
     [self.bkgView addSubview:self.avatarImgView];
     [self.bkgView addSubview:self.nameImgView];
@@ -128,7 +131,7 @@
 
 - (void)setSchoolModel:(QHWSchoolModel *)schoolModel {
     _schoolModel = schoolModel;
-    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(schoolModel.headPath)]];
+//    [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(schoolModel.headPath)]];
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(schoolModel.coverPath)]];
     self.titleLabel.text = schoolModel.title;
     self.teacherLabel.text = kFormat(@"主讲导师：%@", schoolModel.name);

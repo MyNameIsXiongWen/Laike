@@ -75,6 +75,12 @@
 #define kPlaceHolderImage_Rectangle [UIImage imageNamed:@"rectangle_placeholder"]
 #define kPlaceHolderImage_Square [UIImage imageNamed:@"square_placeholder"]
 #define kPlaceHolderImage_Banner [UIImage imageNamed:@"default_noImage_scheme"]
-#define kPlaceHolderImage_Avatar [UIImage imageNamed:@"default_avatar"]
+#define kPlaceHolderImage_Avatar [UIImage imageNamed:@"AppIcon"]
+
+#pragma mark ------------IM缓存路径-------------
+#define TIMChat_Image_Path [NSHomeDirectory() stringByAppendingString:@"/Documents/com_qhw_data/image/"]
+#define TIMChat_Video_Path [NSHomeDirectory() stringByAppendingString:@"/Documents/com_qhw_data/video/"]
+#define TIMChat_Voice_Path [NSHomeDirectory() stringByAppendingString:@"/Documents/com_qhw_data/voice/"]
+#define TIMChat_Location_Path [NSHomeDirectory() stringByAppendingString:@"/Documents/com_qhw_data/location/"]
 
 #endif /* AppMacro_h */

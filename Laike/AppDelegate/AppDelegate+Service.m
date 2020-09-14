@@ -221,6 +221,23 @@
     }
 }
 
+- (void)enterBackground:(UIApplication *)application {
+    [EMClient.sharedClient applicationDidEnterBackground:application];
+    __block UIBackgroundTaskIdentifier bgTaskID;
+    bgTaskID = [application beginBackgroundTaskWithExpirationHandler:^ {
+        //不管有没有完成，结束 background_task 任务
+        [application endBackgroundTask: bgTaskID];
+        bgTaskID = UIBackgroundTaskInvalid;
+    }];
+    UserModel *user = UserModel.shareUser;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = user.unreadMsgCount;
+}
+
+- (void)becomeActive:(UIApplication *)application {
+    [EMClient.sharedClient applicationWillEnterForeground:application];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
     
 }

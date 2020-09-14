@@ -85,6 +85,7 @@
 - (NSString *)formatterTime;
 ///获取当前时间
 + (NSString *)getCurrentTime;
++ (NSString *)getMsgTimeByDate:(NSDate *)date;
 //根据网络图片url获取图片高度
 - (void)getImageHeightWithWidth:(CGFloat)width Complete:(void (^)(CGFloat height))complete;
 //date转换成周几

@@ -47,7 +47,7 @@
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-48-200) Style:UITableViewStylePlain Object:self];
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-48-200-50-kBottomDangerHeight) Style:UITableViewStylePlain Object:self];
     [self.tableView registerClass:LiveCommentListCell.class forCellReuseIdentifier:NSStringFromClass(LiveCommentListCell.class)];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.bottomView];

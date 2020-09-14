@@ -29,15 +29,17 @@
             make.centerY.equalTo(self.contentView.mas_centerY);
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.logoImgView.mas_right).offset(20);
+            make.left.equalTo(self.logoImgView.mas_right).offset(15);
             make.top.equalTo(self.logoImgView.mas_top);
         }];
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-15);
+            make.left.equalTo(self.nameLabel.mas_right).offset(15);
             make.top.equalTo(self.nameLabel.mas_top).offset(3);
         }];
         [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.nameLabel.mas_left);
+            make.right.mas_equalTo(-15);
             make.bottom.equalTo(self.logoImgView.mas_bottom);
         }];
         [self.ringImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,7 +83,7 @@
 
 - (UIImageView *)ringImgView {
     if (!_ringImgView) {
-        _ringImgView = UIImageView.ivInit().ivImage(kImageMake(@"new_dynamic"));
+        _ringImgView = UIImageView.ivInit();
         _ringImgView.hidden = YES;
         [self.contentView addSubview:_ringImgView];
     }
@@ -99,7 +101,7 @@
 
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
-        _nameLabel = UILabel.labelInit().labelFont(kFontTheme15).labelTitleColor(kColorTheme000);
+        _nameLabel = UILabel.labelInit().labelFont(kFontTheme16).labelTitleColor(kColorTheme000);
         [self.contentView addSubview:_nameLabel];
     }
     return _nameLabel;
@@ -107,7 +109,7 @@
 
 - (UILabel *)contentLabel {
     if (!_contentLabel) {
-        _contentLabel = UILabel.labelInit().labelFont(kFontTheme12).labelTitleColor(kColorTheme999);
+        _contentLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme999);
         [self.contentView addSubview:_contentLabel];
     }
     return _contentLabel;
@@ -116,6 +118,7 @@
 - (UILabel *)timeLabel {
     if (!_timeLabel) {
         _timeLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme444).labelTextAlignment(NSTextAlignmentRight);
+        [_timeLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [self.contentView addSubview:_timeLabel];
     }
     return _timeLabel;

@@ -322,6 +322,33 @@
     [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
     return [formatter stringFromDate:NSDate.date];
 }
+
++ (NSString *)getMsgTimeByDate:(NSDate *)date {
+    NSCalendar *calendar = [NSString.new currentCalendar];
+    NSUInteger unitFlags = NSCalendarUnitYear| NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute;
+    NSDateComponents *dateCmp = [calendar components:unitFlags fromDate:date];
+    NSDateComponents *nowCmp = [calendar components:unitFlags fromDate:NSDate.date];
+    
+    NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+    [dateFmt setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+    if ([dateCmp day] == [nowCmp day]) { // 今天
+        dateFmt.dateFormat = @"HH:mm";
+    } else if ((nowCmp.day-dateCmp.day)==1) { // 昨天
+        dateFmt.dateFormat = @"昨天 HH:mm";
+    } else if ([dateCmp year] == [nowCmp year]) { // 今年
+        dateFmt.dateFormat = @"MM-dd HH:mm";
+    } else {
+        dateFmt.dateFormat = @"yyyy-MM-dd";
+    }
+    return [dateFmt stringFromDate:date];
+}
+- (NSCalendar *)currentCalendar {
+    if ([NSCalendar respondsToSelector:@selector(calendarWithIdentifier:)]) {
+        return [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    }
+    return [NSCalendar currentCalendar];
+}
+
 ///string to pinyin
 -(NSString *)transformToPinyin
 {

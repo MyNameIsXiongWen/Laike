@@ -9,6 +9,7 @@
 #import "QHWPhotoBrowser.h"
 #import "QHWPhotoBrowserCollectionViewCell.h"
 #import "QHWImageModel.h"
+#import <HyphenateLite/HyphenateLite.h>
 
 @interface QHWPhotoBrowser () <UIScrollViewDelegate, UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -72,7 +73,16 @@
     } else if ([object isKindOfClass:UIImage.class]) {
         UIImage *image = (UIImage *)object;
         cell.imgView.image = image;
-    } else {
+    } else if ([object isKindOfClass:EMMessage.class]) {
+            EMMessage *message = (EMMessage *)object;
+            EMImageMessageBody *imgBody = (EMImageMessageBody *)message.body;
+            UIImage *img = [UIImage imageWithContentsOfFile:imgBody.localPath];
+            if (img) {
+                cell.imgView.image = img;
+            } else {
+                [cell.imgView sd_setImageWithURL:[NSURL URLWithString:imgBody.remotePath]];
+            }
+        } else {
         NSString *imgSrc = (NSString *)object;
         imgSrc = kFormat(@"%@?x-oss-process=image/resize,l_3000", imgSrc);
         [cell.imgView sd_setImageWithURL:[NSURL URLWithString:imgSrc] placeholderImage:kPlaceHolderImage_Banner];

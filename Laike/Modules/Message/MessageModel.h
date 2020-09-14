@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MessageModel : NSObject
 
 /*000000-行业号消息 (对应之前 type=1),标题、封面图、点击跳转-htmlUrl
-100000-系统消息-系统通知，标题，文本内容-msg，点击详情-查看内容更多详情
+100000-官方推荐
 101001-系统消息-提到我的，攻略-评论回复，id评论唯一标识，跳转-评论回复详情；
 101002-系统消息-提到我的，头条-评论回复，id评论唯一标识，跳转-评论回复详情；
 101003-系统消息-提到我的，问答-提问回复，id回答唯一标识，跳转-回答详情；
@@ -45,9 +45,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *createTime;
 @property (nonatomic, strong) MessageUserModel *create;
 @property (nonatomic, strong) MessageUserModel *from;
-@property (nonatomic, assign) int unreadMsgCount;
 @property (nonatomic, strong) EMConversation *conversation;
 @property (nonatomic, strong) EMMessage *message;
+
+@property (nonatomic, copy) NSString *sender;
+@property (nonatomic, copy) NSString *msgTime;
+@property (nonatomic, assign) long long msgTimeStamp;
+@property (nonatomic, assign) NSInteger unreadMsgCount;
 
 @property (nonatomic, assign) NSInteger businessType;
 @property (nonatomic, copy) NSString *businessId;

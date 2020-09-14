@@ -60,6 +60,11 @@
     return _typeName;
 }
 
+- (NSString *)msgTime {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.msgTimeStamp/1000];
+    return [NSString getMsgTimeByDate:date];
+}
+
 @end
 
 @implementation MessageUserModel

@@ -20,8 +20,13 @@ static NSString *const kNotificationBookAppointmentSuccess = @"kNotificationBook
 static NSString *const kNotificationLikeSuccess = @"kNotificationLikeSuccess";//评论详情页点赞成功
 static NSString *const kNotificationAddCommentSuccess = @"kNotificationAddCommentSuccess";//新增评论成功
 
-static NSString *const kNotificationHXLoginSuccess = @"kNotificationHXLoginSuccess";//环信登录成功
-static NSString *const kNotificationNewMsg = @"kNotificationNewMsg";//新消息
 static NSString *const kNotificationReloadRichText = @"kNotificationReloadRichText";//富文本刷新cell高度
+
+
+#pragma mark ------------IM-------------
+static NSString *const kNotificationHXLoginSuccess = @"kNotificationHXLoginSuccess";//环信登录成功
+static NSString *const kNotificationNewMsg = @"NotificationNewMsg";//新消息
+static NSString *const kNotificationCommonWordSendMSg = @"NotificationCommonWordSendMSg";//常用语编辑页直接发送
+static NSString *const kNotificationAddCommonWord = @"NotificationAddCommonWord";//复制消息到常用语
 
 #endif /* NotificationMacro_h */

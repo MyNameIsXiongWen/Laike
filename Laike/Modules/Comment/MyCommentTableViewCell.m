@@ -79,7 +79,7 @@
 - (void)setModel:(MyCommentModel *)model {
     _model = model;
     [self.avtarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(UserModel.shareUser.headPath)]];
-    self.nameLabel.text = UserModel.shareUser.nickname;
+    self.nameLabel.text = UserModel.shareUser.realName;
     self.timeLabel.text = model.createTime;
     self.likeButton.selected = (model.likeStatus == 2);
     self.likeButton.btnBadgeLabel.text = kFormat(@"%ld", model.likesCount);

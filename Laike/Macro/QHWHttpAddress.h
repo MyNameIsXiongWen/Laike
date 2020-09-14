@@ -159,5 +159,6 @@ static NSString *const kActionCollect = @"action/collection/clikCollection";//�
 static NSString *const kActionLike = @"action/like/clickLike";//点赞
 static NSString *const kActionConcern = @"concern/clickConcern";//关注
 
+static NSString *const kIMAuthorizeRequest = @"chat/authorize/request";//授权请求
 
 #endif /* QHWHttpAddress_h */

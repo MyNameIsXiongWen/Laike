@@ -44,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)initWX;
 
+- (void)enterBackground:(UIApplication *)application;
+- (void)becomeActive:(UIApplication *)application;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -32,8 +32,7 @@
 }
 
 - (void)newMsgCountShow:(NSNotification *)notification {
-    NSInteger msgCount = [notification.object integerValue];
-    UserModel.shareUser.unreadMsgCount = msgCount;
+    NSInteger msgCount = UserModel.shareUser.unreadMsgCount;
     NSString *countStr;
     if (msgCount > 99) {
         countStr = @"99+";

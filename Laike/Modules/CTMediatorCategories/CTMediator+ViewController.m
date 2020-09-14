@@ -76,7 +76,7 @@ NSString * const kCTMediatorActionNativeCommentReplyViewController = @"nativeCom
 - (void)CTMediator_viewControllerForUserDetailWithUserId:(NSString *)userId UserType:(NSInteger)userType BusinessType:(NSInteger)businessType {
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeUserDetailViewController
-                 params:@{@"userId": userId,
+                 params:@{@"userId": userId ?: @"",
                           @"userType": @(userType),
                           @"businessType": @(businessType)}
     shouldCacheTarget:NO];
