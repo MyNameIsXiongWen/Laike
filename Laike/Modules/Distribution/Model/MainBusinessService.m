@@ -178,7 +178,7 @@
                     }
                 }
                 if (tempModel) {
-                    if ([filterModel.key isEqualToString:@"serviceFeeCode"] || [filterModel.key isEqualToString:@"investmentCode"] || [filterModel.key isEqualToString:@"professionalCode"]) {
+                    if ([filterModel.key isEqualToString:@"serviceFeeCode"] || [filterModel.key isEqualToString:@"investmentCode"] || [filterModel.key isEqualToString:@"professionalCode"] || [filterModel.key isEqualToString:@"areaCode"] || [filterModel.key isEqualToString:@"deliveryTimeCode"]) {
                         self.conditionDic[filterModel.key] = tempModel.code;
                     } else {
                         self.conditionDic[filterModel.key] = tempModel.id ?: tempModel.code;
@@ -270,30 +270,22 @@
                                                                                            MutableSelected:NO]]
                                                                     Color:kColorTheme2a303c]];
         
-        for (NSDictionary *moreDic in dic[@"moreList"]) {
-            NSMutableArray *tempFilterArray = NSMutableArray.array;
-            for (NSDictionary *tempItemDic in moreDic[@"itemList"]) {
-                [tempFilterArray addObject:[FilterCellModel modelWithName:tempItemDic[@"name"] Code:tempItemDic[@"key"]]];
-            }
-            if ([moreDic[@"key"] isEqualToString:@"areaCode"]) {
-                [targetArray addObject:[FilterBtnViewCellModel modelWithName:@"面积"
-                                                                         Img:@"global_down"
-                                                                   DataArray:@[[QHWFilterModel modelWithTitle:moreDic[@"title"]
-                                                                                                          Key:moreDic[@"key"]
-                                                                                                      Content:tempFilterArray
-                                                                                              MutableSelected:NO]]
-                                                                       Color:kColorTheme2a303c]];
-            }
-            if ([moreDic[@"key"] isEqualToString:@"deliveryTimeCode"]) {
-                [targetArray addObject:[FilterBtnViewCellModel modelWithName:@"交房时间"
-                                                                         Img:@"global_down"
-                                                                   DataArray:@[[QHWFilterModel modelWithTitle:moreDic[@"title"]
-                                                                                                          Key:moreDic[@"key"]
-                                                                                                      Content:tempFilterArray
-                                                                                              MutableSelected:NO]]
-                                                                       Color:kColorTheme2a303c]];
-            }
-        }
+        NSArray *tempAreaFilterArray = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:dic[@"areaList"]];
+        [targetArray addObject:[FilterBtnViewCellModel modelWithName:@"面积"
+                                                                 Img:@"global_down"
+                                                           DataArray:@[[QHWFilterModel modelWithTitle:@"房屋面积"
+                                                                                                  Key:@"areaCode"
+                                                                                              Content:tempAreaFilterArray
+                                                                                      MutableSelected:NO]]
+                                                               Color:kColorTheme2a303c]];
+        NSArray *tempTimeFilterArray = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:dic[@"deliveryTimeList"]];
+        [targetArray addObject:[FilterBtnViewCellModel modelWithName:@"交房时间"
+                                                                 Img:@"global_down"
+                                                           DataArray:@[[QHWFilterModel modelWithTitle:@"交房时间"
+                                                                                                  Key:@"deliveryTimeCode"
+                                                                                              Content:tempTimeFilterArray
+                                                                                      MutableSelected:NO]]
+                                                               Color:kColorTheme2a303c]];
     } else if (self.businessType == 2) {
         NSArray *tempSchemeFilterArray = [NSArray yy_modelArrayWithClass:FilterCellModel.class json:dic[@"studyThemeList"]];
         [targetArray addObject:[FilterBtnViewCellModel modelWithName:@"游学主题"

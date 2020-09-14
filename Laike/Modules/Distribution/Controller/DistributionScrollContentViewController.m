@@ -42,12 +42,11 @@
     [self.tableView registerClass:MainBusinessTypeHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(MainBusinessTypeHeaderView.class)];
     [self.view addSubview:self.tableView];
     [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
-        self.service.itemPageModel.pagination.currentPage = 1;
-        [self getMainData];
+        [self getListDataWithFirstPage];
     }];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
         self.service.itemPageModel.pagination.currentPage++;
-        [self getMainData];
+        [self getMainBusinessListDataRequest];
     }];
 }
 
