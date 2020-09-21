@@ -28,6 +28,7 @@
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"分销";
     self.kNavigationView.leftBtn.hidden = YES;
+    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_search") forState:0];
     [self.view addSubview:self.topOperationView];
     [self.view addSubview:self.tabScrollView];
     [self.view addSubview:self.pageContentView];
@@ -37,6 +38,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)rightNavBtnAction:(UIButton *)sender {
+    [self.navigationController pushViewController:NSClassFromString(@"DistributionSearchViewController").new animated:YES];
 }
 
 #pragma mark ------------QHWPageContentViewDelegate-------------

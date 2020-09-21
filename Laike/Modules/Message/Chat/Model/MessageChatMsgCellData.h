@@ -48,12 +48,6 @@ typedef NS_ENUM(NSUInteger, TMsgStatus) {
 @property (nonatomic, assign) BOOL isDownloadingSnapshot;
 @property (nonatomic, assign) BOOL isDownloadingVideo;
 
-///是否是业务消息
-@property (nonatomic, assign) BOOL message_attr_is_subject;
-///是否是授权消息
-@property (nonatomic, assign) BOOL message_attr_is_authorize;
-///授权消息状态  0 等待 1 同意 2 拒绝
-@property (nonatomic, assign) NSInteger message_attr_authorize_status;
 
 ///整个cell高度
 - (CGFloat)cellHeight;

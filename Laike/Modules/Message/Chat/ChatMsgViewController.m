@@ -126,15 +126,6 @@ static NSInteger const MsgCount = 50;
             if (elem.type == EMMessageBodyTypeImage) {
                 [self.allImgSrcArray addObject:cellData.innerMessage];
             }
-            else if (elem.type == EMMessageBodyTypeCustom) {
-                EMCustomMessageBody *customElem = (EMCustomMessageBody *)elem;
-                NSDictionary *dictionary = customElem.ext;
-                if (dictionary) {
-                    if ([dictionary[@"type"] isEqualToString:@"images"]) {
-                        [self.allImgSrcArray addObject:dictionary[@"data"]];
-                    }
-                }
-            }
         }
     }
 }
@@ -183,19 +174,21 @@ static NSInteger const MsgCount = 50;
             NSDictionary *ext = message.ext;
             NSString *messageId = ext[@"message_attr_authorize_from_message_id"];
             for (ChatMsgModel *tempMsgModel in self.msgArray) {
-                MessageChatMsgCellData *tempData = (MessageChatMsgCellData *)tempMsgModel.data;
-                EMMessage *tempEMMsg = tempData.innerMessage;
-                NSMutableDictionary *tempExt = tempEMMsg.ext.mutableCopy;
-                if ([messageId isEqualToString:tempEMMsg.messageId]) {
-                    tempExt[@"message_attr_authorize_status"] = ext[@"message_attr_authorize_status"];
-                    tempExt[@"message_attr_authorize_phone"] = ext[@"message_attr_authorize_phone"];
-                    tempEMMsg.ext = tempExt.copy;
-                    [EMClient.sharedClient.chatManager updateMessage:tempEMMsg completion:^(EMMessage *aMessage, EMError *aError) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self.tableView reloadData];
-                        });
-                    }];
-                    break;
+                if ([tempMsgModel.data isKindOfClass:MessageChatMsgCellData.class]) {
+                    MessageChatMsgCellData *tempData = (MessageChatMsgCellData *)tempMsgModel.data;
+                    EMMessage *tempEMMsg = tempData.innerMessage;
+                    NSMutableDictionary *tempExt = tempEMMsg.ext.mutableCopy;
+                    if ([messageId isEqualToString:tempEMMsg.messageId]) {
+                        tempExt[@"message_attr_authorize_status"] = ext[@"message_attr_authorize_status"];
+                        tempExt[@"message_attr_authorize_phone"] = ext[@"message_attr_authorize_phone"];
+                        tempEMMsg.ext = tempExt.copy;
+                        [EMClient.sharedClient.chatManager updateMessage:tempEMMsg completion:^(EMMessage *aMessage, EMError *aError) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.tableView reloadData];
+                            });
+                        }];
+                        break;
+                    }
                 }
             }
         }
@@ -364,6 +357,19 @@ static NSInteger const MsgCount = 50;
 - (void)onSelectMessage:(MessageChatTableViewCell *)cell {
     EMMessageBody *elem = cell.messageData.innerMessage.body;
     switch (elem.type) {
+        case EMMessageBodyTypeText:
+        {
+            NSDictionary *dictionary = cell.messageData.innerMessage.ext;
+            if ([dictionary isKindOfClass:NSDictionary.class]) {
+                if ([dictionary[@"message_attr_is_subject"] boolValue]) { //业务消息
+                    [self selectMainBusiness:dictionary];
+                }
+                if ([dictionary[@"message_attr_is_authorize"] boolValue]) { //授权消息
+                }
+            }
+        }
+            break;
+            
         case EMMessageBodyTypeImage:
             [self selectImage:cell.messageData.innerMessage];
             break;
@@ -392,20 +398,6 @@ static NSInteger const MsgCount = 50;
             } else {
                 [cell playVoiceMessage];
                 self.currentVoiceCell = cell;
-            }
-        }
-            break;
-            
-        case EMMessageBodyTypeCustom:
-        {
-            EMCustomMessageBody *customElem = (EMCustomMessageBody *)elem;
-            NSDictionary *dictionary = customElem.ext;
-            if ([dictionary isKindOfClass:NSDictionary.class]) {
-                if ([dictionary[@"message_attr_is_subject"] boolValue]) { //业务消息
-                    [self selectMainBusiness:dictionary];
-                }
-                if ([dictionary[@"message_attr_is_authorize"] boolValue]) { //授权消息
-                }
             }
         }
             break;

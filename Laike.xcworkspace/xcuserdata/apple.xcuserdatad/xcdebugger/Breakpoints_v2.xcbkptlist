@@ -67,22 +67,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F88CFF72-8531-498C-BA79-02AC3D3FC269"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Laike/AppDelegate/AppDelegate+Service.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "-application:didReceiveRemoteNotification:fetchCompletionHandler:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "EAF0775A-CE7D-4026-9A3C-C0AA52DA46E6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -96,7 +80,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "EAF0775A-CE7D-4026-9A3C-C0AA52DA46E6 - 6a5b017cf0ab6721"
+                  uuid = "EAF0775A-CE7D-4026-9A3C-C0AA52DA46E6 - df7054c218d37d49"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -108,10 +92,10 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
                   endingLineNumber = "40"
-                  offsetFromSymbolStart = "76">
+                  offsetFromSymbolStart = "56">
                </Location>
                <Location
-                  uuid = "EAF0775A-CE7D-4026-9A3C-C0AA52DA46E6 - 71a4fcf150476b0"
+                  uuid = "EAF0775A-CE7D-4026-9A3C-C0AA52DA46E6 - b2311a71fd7c6cbf"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -123,41 +107,9 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "41"
                   endingLineNumber = "41"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "28">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F26DECB0-1B81-40CA-8B03-3A1562246A82"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Laike/Modules/Message/Chat/ChatInputViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
-            landmarkName = "-authActionRequestComplete:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7EA90E42-F965-4DE4-89A3-1DA46C5130E4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Laike/Modules/Message/Chat/ChatInputViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "-authActionRequestComplete:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

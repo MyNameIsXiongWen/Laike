@@ -49,12 +49,13 @@
             //授权消息状态  0 等待 1 同意 2 拒绝
             NSInteger authStatus = [dictionary[@"message_attr_authorize_status"] integerValue];
             NSString *phone = dictionary[@"message_attr_authorize_phone"];
-            self.authStatusLabel.hidden = authStatus != 0;
             self.contentLabel.text = kFormat(@"为了方便联络，系统会把您的手机号%@展示给我，其他顾问看不到，信息已经加密", phone);
             if (authStatus == 1) {
                 self.authStatusLabel.text = @"对方已同意";
             } else if (authStatus == 2) {
                 self.authStatusLabel.text = @"对方已拒绝";
+            } else if (authStatus == 0) {
+                self.authStatusLabel.text = @"等待对方授权";
             }
         }
     }

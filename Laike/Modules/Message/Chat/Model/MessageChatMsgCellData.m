@@ -42,6 +42,19 @@
             resultSize = CGSizeMake(label.width+25, label.height+20);
             label = nil;
             
+            NSDictionary *ext = self.innerMessage.ext;
+            if ([ext isKindOfClass:NSDictionary.class]) {
+                if ([ext[@"message_attr_is_subject"] boolValue]) { //业务消息
+                    self.cellReuseIdentifier = @"MessageChatBusinessTableViewCell";
+                    EMCustomMsgModel *msgModel = [EMCustomMsgModel yy_modelWithDictionary:ext];
+                    resultSize = CGSizeMake(225+5, msgModel.msgHeight);
+                }
+                if ([ext[@"message_attr_is_authorize"] boolValue]) { //授权消息
+                    self.cellReuseIdentifier = @"MessageChatPhoneTableViewCell";
+                    resultSize = CGSizeMake(225+5, 155);
+                }
+            }
+            
 //            CGRect rect = [self.richTextAttribute boundingRectWithSize:CGSizeMake(205, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
 //            resultSize = CGSizeMake(rect.size.width+25, rect.size.height+20);
         }

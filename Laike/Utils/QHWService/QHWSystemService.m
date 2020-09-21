@@ -169,8 +169,31 @@
 }
 
 - (void)getSearchContentDataRequestWithBusinessPage:(NSInteger)businessPage Content:(NSString *)content Complete:(void (^)(void))complete {
-    [QHWHttpManager.sharedInstance QHW_POST:kSystemSearchContentData parameters:@{@"industryId": @(businessPage), @"name": content} success:^(id responseObject) {
+//    [QHWHttpManager.sharedInstance QHW_POST:kSystemSearchContentData parameters:@{@"industryId": @(businessPage), @"name": content} success:^(id responseObject) {
+//        self.searchResultArray = [NSArray yy_modelArrayWithClass:SearchContentModel.class json:responseObject[@"data"][@"list"]];
+//        complete();
+//    } failure:^(NSError *error) {
+//        complete();
+//    }];
+    
+    NSString *modelStr = @"";
+    if (businessPage == 1) {
+        modelStr = @"QHWHouseModel";
+    } else {
+        modelStr = @"QHWMigrationModel";
+    }
+    NSDictionary *params = @{@"businessType": @(businessPage),
+                             @"name": content,
+                             @"currentPage": @(self.itemPageModel.pagination.currentPage),
+                             @"pageSize": @(1000)};
+    [QHWHttpManager.sharedInstance QHW_POST:kDistributionList parameters:params success:^(id responseObject) {
         self.searchResultArray = [NSArray yy_modelArrayWithClass:SearchContentModel.class json:responseObject[@"data"][@"list"]];
+//        NSArray *tempArray = [NSArray yy_modelArrayWithClass:NSClassFromString(modelStr) json:self.itemPageModel.list];
+//        for (QHWMainBusinessDetailBaseModel *tempModel in tempArray) {
+//            tempModel.businessType = businessPage;
+//            QHWBaseModel *baseModel = [[QHWBaseModel alloc] configModelIdentifier:@"QHWMainBusinessTableViewCell" Height:140 Data:@[tempModel, @(2)]];
+//            [self.tableViewDataArray addObject:baseModel];
+//        }
         complete();
     } failure:^(NSError *error) {
         complete();

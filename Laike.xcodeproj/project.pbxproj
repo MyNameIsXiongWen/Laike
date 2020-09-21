@@ -45,6 +45,9 @@
 		1855D79624B4630F002FF7E2 /* RateShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79524B4630F002FF7E2 /* RateShareView.m */; };
 		1855D79924B59DAF002FF7E2 /* CommunityArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79824B59DAF002FF7E2 /* CommunityArticleViewController.m */; };
 		1855D79C24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855D79B24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.m */; };
+		1855EFDF2511E47E00D6635E /* DistributionSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855EFDE2511E47E00D6635E /* DistributionSearchViewController.m */; };
+		1855EFE22511E50D00D6635E /* CRMSearchTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855EFE12511E50D00D6635E /* CRMSearchTopView.m */; };
+		1855EFE52511E70B00D6635E /* SearchTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855EFE32511E70B00D6635E /* SearchTopView.m */; };
 		185A62F524A988DD00E7E75D /* QSchoolCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */; };
 		185A62F624A988DD00E7E75D /* QSchoolDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */; };
 		185A62F924A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185A62F824A98D1C00E7E75D /* QSchoolDetailOrganizerTableViewCell.m */; };
@@ -394,6 +397,12 @@
 		1855D79824B59DAF002FF7E2 /* CommunityArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityArticleViewController.m; sourceTree = "<group>"; };
 		1855D79A24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommunityArticleScrollContentViewController.h; sourceTree = "<group>"; };
 		1855D79B24B5A244002FF7E2 /* CommunityArticleScrollContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommunityArticleScrollContentViewController.m; sourceTree = "<group>"; };
+		1855EFDD2511E47E00D6635E /* DistributionSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributionSearchViewController.h; sourceTree = "<group>"; };
+		1855EFDE2511E47E00D6635E /* DistributionSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionSearchViewController.m; sourceTree = "<group>"; };
+		1855EFE02511E50D00D6635E /* CRMSearchTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMSearchTopView.h; sourceTree = "<group>"; };
+		1855EFE12511E50D00D6635E /* CRMSearchTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMSearchTopView.m; sourceTree = "<group>"; };
+		1855EFE32511E70B00D6635E /* SearchTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTopView.m; sourceTree = "<group>"; };
+		1855EFE42511E70B00D6635E /* SearchTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTopView.h; sourceTree = "<group>"; };
 		185A62F124A988DD00E7E75D /* QSchoolCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolCommentViewController.m; sourceTree = "<group>"; };
 		185A62F224A988DD00E7E75D /* QSchoolCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSchoolCommentViewController.h; sourceTree = "<group>"; };
 		185A62F324A988DD00E7E75D /* QSchoolDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSchoolDetailViewController.m; sourceTree = "<group>"; };
@@ -1084,6 +1093,8 @@
 				185EC9B524A0966A00DCAB2C /* DistributionViewController.m */,
 				1800D91E250F6B9500D2D931 /* DistributionScrollContentViewController.h */,
 				1800D91F250F6B9500D2D931 /* DistributionScrollContentViewController.m */,
+				1855EFDD2511E47E00D6635E /* DistributionSearchViewController.h */,
+				1855EFDE2511E47E00D6635E /* DistributionSearchViewController.m */,
 				185D449624AD735400CD3A00 /* BookAppointmentViewController.h */,
 				185D449724AD735400CD3A00 /* BookAppointmentViewController.m */,
 				185E157624B031E700F15A90 /* RelateProductViewController.h */,
@@ -1103,6 +1114,8 @@
 			children = (
 				185E15C824B31DD000F15A90 /* DistributionClientDetailHeaderView.h */,
 				185E15C924B31DD000F15A90 /* DistributionClientDetailHeaderView.m */,
+				1855EFE42511E70B00D6635E /* SearchTopView.h */,
+				1855EFE32511E70B00D6635E /* SearchTopView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2091,6 +2104,8 @@
 				185E156A24B01E7800F15A90 /* AdvisoryDetailHeaderView.m */,
 				185CC98724B6B7310004A20E /* SearchContentLayout.h */,
 				185CC98624B6B7310004A20E /* SearchContentLayout.m */,
+				1855EFE02511E50D00D6635E /* CRMSearchTopView.h */,
+				1855EFE12511E50D00D6635E /* CRMSearchTopView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2350,6 +2365,7 @@
 				185E156824B01E5800F15A90 /* AdvisoryDetailViewController.m in Sources */,
 				185E15C224B2F82400F15A90 /* GalleryShareView.m in Sources */,
 				185E15BF24B2CB4E00F15A90 /* PDFDetailViewController.m in Sources */,
+				1855EFDF2511E47E00D6635E /* DistributionSearchViewController.m in Sources */,
 				185EC9A724A091BE00DCAB2C /* UILabel+Category.m in Sources */,
 				185E157524B0283000F15A90 /* DistributionClientScrollContentViewController.m in Sources */,
 				185E15C724B319E000F15A90 /* DistributionClientDetailViewController.m in Sources */,
@@ -2380,6 +2396,7 @@
 				185EC99E24A091BE00DCAB2C /* QHWSystemService.m in Sources */,
 				185E156F24B027F400F15A90 /* DistributionService.m in Sources */,
 				185EC98D24A091BE00DCAB2C /* QHWSchoolCollectionViewCell.m in Sources */,
+				1855EFE22511E50D00D6635E /* CRMSearchTopView.m in Sources */,
 				185FDF7624A750930043FF36 /* GalleryService.m in Sources */,
 				185112422508C2B300F958A1 /* ChatMsgModel.m in Sources */,
 				185EC97C24A091BE00DCAB2C /* QHWFiltHeaderView.m in Sources */,
@@ -2578,6 +2595,7 @@
 				185EC95924A091BE00DCAB2C /* QHWBaseModel.m in Sources */,
 				185D44AA24ADDE1B00CD3A00 /* CRMDetailScrollContentViewController.m in Sources */,
 				185E15B324B0830C00F15A90 /* GalleryGenerateScrollContentViewController.m in Sources */,
+				1855EFE52511E70B00D6635E /* SearchTopView.m in Sources */,
 				185E159B24B0575F00F15A90 /* CommunityContentShareView.m in Sources */,
 				185E159824B0575F00F15A90 /* CommunityArticleShareView.m in Sources */,
 				185FDEED24A7305D0043FF36 /* ActivityViewController.m in Sources */,
@@ -2785,7 +2803,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Laike/来客.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.3;
 				DEVELOPMENT_TEAM = 6RWP9GSXML;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2806,7 +2824,7 @@
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "去海外来客";
@@ -2825,7 +2843,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Laike/来客.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.3;
 				DEVELOPMENT_TEAM = 6RWP9GSXML;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2846,7 +2864,7 @@
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "去海外来客";

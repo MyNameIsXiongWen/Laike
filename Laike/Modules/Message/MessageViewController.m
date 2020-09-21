@@ -92,6 +92,7 @@
 }
 
 - (void)getIMConversationList {
+//    return;
     [self.dataArray removeObjectsInRange:NSMakeRange(2, self.dataArray.count-2)];
     NSArray *conversationArray = [EMClient.sharedClient.chatManager getAllConversations];
     for (EMConversation *conversation in conversationArray) {
@@ -201,41 +202,6 @@
                 cell.contentLabel.text = @"[视频]";
                 break;
                 
-            case EMMessageBodyTypeCustom:
-            {
-                EMCustomMessageBody *customBody = (EMCustomMessageBody *)body;
-                NSDictionary *dictionary = customBody.ext;
-                if ([dictionary isKindOfClass:NSDictionary.class]) {
-                    if ([dictionary[@"message_attr_is_subject"] boolValue]) { //业务消息
-                        switch ([dictionary[@"message_attr_subject_id"] integerValue]) {
-                            case 1:
-                                cell.contentLabel.text = @"[房产]";
-                                break;
-                            case 2:
-                                cell.contentLabel.text = @"[游学]";
-                                break;
-                            case 3:
-                                cell.contentLabel.text = @"[移民]";
-                                break;
-                            case 4:
-                                cell.contentLabel.text = @"[留学]";
-                                break;
-                            case 102001:
-                                cell.contentLabel.text = @"[医疗]";
-                                break;
-                                
-                            default:
-                                cell.contentLabel.text = @"[产品]";
-                                break;
-                        }
-                    }
-                    if ([dictionary[@"message_attr_is_authorize"] boolValue]) { //授权消息
-                        cell.contentLabel.text = @"[授权]";
-                    }
-                }
-            }
-                break;
-                
             default:
                 break;
         }
@@ -308,19 +274,15 @@
     }
 }
 
-- (NSMutableArray *)sortedByTime {
-    NSMutableArray *array = (NSMutableArray *)[self.dataArray sortedArrayUsingComparator:^NSComparisonResult(MessageModel*  _Nonnull obj1, MessageModel*  _Nonnull obj2) {
+- (void)sortedByTime {
+    self.dataArray = [self.dataArray sortedArrayUsingComparator:^NSComparisonResult(MessageModel*  _Nonnull obj1, MessageModel*  _Nonnull obj2) {
         if (obj1.msgTimeStamp > 0 && obj2.msgTimeStamp > 0) {
-//            NSDate *date1 = [NSDate dateWithTimeIntervalSince1970:obj1.msgTimeStamp/1000];
-//            NSDate *date2 = [NSDate dateWithTimeIntervalSince1970:obj2.msgTimeStamp/1000];
-//            return [date2 compare:date1];
-            if (obj1.msgTimeStamp < obj2.msgTimeStamp) {
-                return NSOrderedDescending;
-            }
+            NSDate *date1 = [NSDate dateWithTimeIntervalSince1970:obj1.msgTimeStamp/1000];
+            NSDate *date2 = [NSDate dateWithTimeIntervalSince1970:obj2.msgTimeStamp/1000];
+            return [date2 compare:date1];
         }
-        return NSOrderedAscending;
-    }];
-    return array;
+        return NSOrderedSame;
+    }].mutableCopy;
 }
 
 /*

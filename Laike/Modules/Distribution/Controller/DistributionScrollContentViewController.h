@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface MainBusinessTypeHeaderView : UITableViewHeaderFooterView
+@interface DistributionFilterHeaderView : UITableViewHeaderFooterView
 
 @property (nonatomic, strong) MainBusinessFilterBtnView *filterBtnView;
 

@@ -46,8 +46,7 @@
     if (!data.isSelf) {
         _contentBkgView.x = 5;
     }
-    EMCustomMessageBody *customElem = (EMCustomMessageBody *)data.innerMessage.body;
-    NSDictionary *dictionary = customElem.ext;
+    NSDictionary *dictionary = data.innerMessage.ext;
     if (dictionary) {
         EMCustomMsgModel *msgModel = [EMCustomMsgModel yy_modelWithJSON:dictionary];
         self.schemeNameLabel.height = msgModel.contentHeight;

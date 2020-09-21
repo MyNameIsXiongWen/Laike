@@ -50,16 +50,6 @@
         }
     }
     return;
-    //web端多了一个images（他们图片TIMImageElem发不了）
-    if ([imgElem isKindOfClass:EMCustomMessageBody.class]) {
-        EMCustomMessageBody *customElem = (EMCustomMessageBody *)imgElem;
-        NSDictionary *dictionary = customElem.ext;
-        if (dictionary) {
-            NSString *imgUrl = dictionary[@"data"];
-            [self.imgView sd_setImageWithURL:[NSURL URLWithString:imgUrl]];
-        }
-        return;
-    }
     BOOL isExist = NO;
     NSString *path = [self getImagePathisExist:&isExist];
     if (isExist) {

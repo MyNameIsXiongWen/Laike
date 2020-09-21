@@ -231,8 +231,8 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
                                       @"message_attr_authorize_id": idString ?: @"",
                                       @"message_attr_authorize_phone": phone ?: @""
                 };
-                EMCustomMessageBody *body = [[EMCustomMessageBody alloc] initWithEvent:@"authorize" ext:ext];
-                [self sendMessageWithElem:body Identifier:@"MessageChatPhoneTableViewCell"];
+                EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"[授权...]"];
+                [self sendMessageWithElem:body Identifier:@"MessageChatPhoneTableViewCell" ExtraInfo:ext];
             }
         }];
     }
@@ -353,7 +353,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     EMVoiceMessageBody *elem = [[EMVoiceMessageBody alloc] initWithLocalPath:path displayName:@"语音"];
     elem.duration = duration;
 //    elem.dataSize = length;
-    [self sendMessageWithElem:elem Identifier:@"MessageChatVoiceTableViewCell"];
+    [self sendMessageWithElem:elem Identifier:@"MessageChatVoiceTableViewCell" ExtraInfo:nil];
 }
 
 #pragma mark ------------ChatGifViewDelegate-------------
@@ -520,7 +520,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     path = [path stringByAppendingString:imageP];
     [fileManager createFileAtPath:path contents:data attributes:nil];
     EMImageMessageBody *elem = [[EMImageMessageBody alloc] initWithData:data displayName:[ChatFileHelper genImageName:nil]];
-    [self sendMessageWithElem:elem Identifier:@"MessageChatImageTableViewCell"];
+    [self sendMessageWithElem:elem Identifier:@"MessageChatImageTableViewCell" ExtraInfo:nil];
 }
 
 - (void)sendVideoMessage:(NSURL *)url {
@@ -562,7 +562,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 //        videoElem.video = TIMVideo.new;
 //        videoElem.video.duration = duration;
 //        videoElem.video.type = resultUrl.pathExtension;
-        [self sendMessageWithElem:videoElem Identifier:@"MessageChatVideoTableViewCell"];
+        [self sendMessageWithElem:videoElem Identifier:@"MessageChatVideoTableViewCell" ExtraInfo:nil];
     }];
 }
 
@@ -641,17 +641,18 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
      }];
     
     EMTextMessageBody *elem = [[EMTextMessageBody alloc] initWithText:attStr];
-    [self sendMessageWithElem:elem Identifier:@"MessageChatTextTableViewCell"];
+    [self sendMessageWithElem:elem Identifier:@"MessageChatTextTableViewCell" ExtraInfo:nil];
 }
 
 - (void)sendProductWithMainBusinessModel:(QHWMainBusinessDetailBaseModel *)model {
-    NSString *subContent = @"", *btmInfo = @"";
+    NSString *subContent = @"", *btmInfo = @"", *product = @"";
     switch (model.businessType) {
         case 1:
         {
             QHWHouseModel *houseModel = (QHWHouseModel *)model;
             subContent = kFormat(@"%@-%@㎡ | 首付 %@%%", [NSString formatterWithValue:houseModel.areaMin], [NSString formatterWithValue:houseModel.areaMax], [NSString formatterWithValue:houseModel.firstPaymentRate]);
             btmInfo = kFormat(@"¥ %@万起", [NSString formatterWithMoneyValue:houseModel.totalPrice]);
+            product = @"[房产]";
         }
             break;
         case 2:
@@ -659,6 +660,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
             QHWStudyModel *studyModel = (QHWStudyModel *)model;
             subContent = kFormat(@"游学主题%@ | 行程天数%@ | 费用价格%@", studyModel.studyThemeList.firstObject[@"name"], kFormat(@"%ld天", (long)studyModel.tripCycle), kFormat(@"¥%@万", [NSString formatterWithMoneyValue:studyModel.serviceFee]));
             btmInfo = kFormat(@"¥%@万", [NSString formatterWithMoneyValue:studyModel.serviceFee]);
+            product = @"[游学]";
         }
             break;
         case 3:
@@ -666,6 +668,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
             QHWMigrationModel *migrationModel = (QHWMigrationModel *)model;
             subContent = kFormat(@"身份类型%@ | 办理周期%@ | 办理费用%@", migrationModel.dentityTypeList.firstObject[@"name"], migrationModel.handleCycle, kFormat(@"¥%@万", [NSString formatterWithMoneyValue:migrationModel.serviceFee]));
             btmInfo = kFormat(@"¥%@万", [NSString formatterWithMoneyValue:migrationModel.serviceFee]);
+            product = @"[移民]";
         }
             break;
         case 4:
@@ -677,6 +680,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
                 NSDictionary *dic3 = studentModel.groupList[2];
                 subContent = kFormat(@"%@%@ | %@%@ | %@%@", dic1[@"key"], dic1[@"value"], dic2[@"key"], dic2[@"value"], dic3[@"key"], dic3[@"value"]);
     //            btmInfo = kFormat(@"¥ %@万起", [NSString formatterWithMoneyValue:houseModel.totalPrice]);
+                product = @"[留学]";
             }
         }
             break;
@@ -685,6 +689,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
             QHWTreatmentModel *treatmentModel = (QHWTreatmentModel *)model;
             subContent = kFormat(@"目标国家%@ | 价格%@", treatmentModel.countryName, kFormat(@"¥%@万", [NSString formatterWithMoneyValue:treatmentModel.serviceFee]));
             btmInfo = kFormat(@"¥%@万", [NSString formatterWithMoneyValue:treatmentModel.serviceFee]);
+            product = @"[医疗]";
         }
             break;
             
@@ -699,20 +704,19 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
                           @"message_attr_subject_sub_content": subContent,
                           @"message_attr_subject_bottom": btmInfo
     };
-    EMCustomMessageBody *elem = [[EMCustomMessageBody alloc] initWithEvent:@"product" ext:ext];
-    [self sendMessageWithElem:elem Identifier:@"MessageChatBusinessTableViewCell"];
+    EMTextMessageBody *elem = [[EMTextMessageBody alloc] initWithText:product];
+    [self sendMessageWithElem:elem Identifier:@"MessageChatBusinessTableViewCell" ExtraInfo:ext];
 }
 
 //发送所有类型消息
-- (void)sendMessageWithElem:(EMMessageBody *)elem Identifier:(NSString *)identifier {
+- (void)sendMessageWithElem:(EMMessageBody *)elem Identifier:(NSString *)identifier ExtraInfo:(nullable NSDictionary *)info {
     NSMutableDictionary *ext = @{@"nickname_from": UserModel.shareUser.realName ?: @"",
                                  @"avatar_from": UserModel.shareUser.headPath ?: @"",
                                  @"nickname_to": self.receiverNickName ?: @"",
                                  @"avatar_to": self.receiverHeadPath ?: @""}.mutableCopy;
-    if (elem.type == EMMessageBodyTypeCustom) {
-        EMCustomMessageBody *body = (EMCustomMessageBody *)elem;
-        if ([body.ext isKindOfClass:NSDictionary.class]) {
-            [ext addEntriesFromDictionary:body.ext];
+    if (elem.type == EMMessageBodyTypeText) {
+        if (info) {
+            [ext addEntriesFromDictionary:info];
         }
     }
     EMMessage *msg = [[EMMessage alloc] initWithConversationID:self.conversation.conversationId from:EMClient.sharedClient.currentUsername to:self.conversation.conversationId body:elem ext:ext];

@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 
 #define JsGetMobileNumber @"getMobileNumber"
+#define JsIsApp @"isApp"
 @interface QHWH5ViewController () <WKNavigationDelegate, WKScriptMessageHandler, WKUIDelegate>
 
 @property (nonatomic, strong) WKWebView *webView;
@@ -34,10 +35,17 @@
     [self.bridge registerHandler:JsGetMobileNumber handler:^(id data, WVJBResponseCallback responseCallback) {
         responseCallback([self jsGetMobileNumber]);
     }];
+    [self.bridge registerHandler:JsIsApp handler:^(id data, WVJBResponseCallback responseCallback) {
+        responseCallback([NSNumber numberWithBool:[self jsIsApp]]);
+    }];
 }
 
 - (NSString *)jsGetMobileNumber {
     return UserModel.shareUser.mobileNumber;
+}
+
+- (BOOL)jsIsApp {
+    return YES;
 }
 
 #pragma mark ------------WKNavigationDelegate-------------

@@ -18,7 +18,7 @@
 @interface DistributionScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
 
 //@property (nonatomic, strong) HomeService *service;
-@property (nonatomic, strong) MainBusinessTypeHeaderView *mainBusinessTypeHeaderView;//headerview
+@property (nonatomic, strong) DistributionFilterHeaderView *filterHeaderView;//headerview
 
 @property (nonatomic, strong) MainBusinessService *service;
 @property (nonatomic, strong) QHWSystemService *bannerService;
@@ -39,7 +39,7 @@
 - (void)addTableView {
     CGFloat height = kScreenH-kBottomBarHeight-kTopBarHeight-138;
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, height) Style:UITableViewStylePlain Object:self];
-    [self.tableView registerClass:MainBusinessTypeHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(MainBusinessTypeHeaderView.class)];
+    [self.tableView registerClass:DistributionFilterHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(DistributionFilterHeaderView.class)];
     [self.view addSubview:self.tableView];
     [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
         [self getListDataWithFirstPage];
@@ -134,13 +134,13 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (self.service.filterArray.count > 0) {
-        self.mainBusinessTypeHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(MainBusinessTypeHeaderView.class)];
-        self.mainBusinessTypeHeaderView.filterBtnView.dataArray = self.service.filterArray;
+        self.filterHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(DistributionFilterHeaderView.class)];
+        self.filterHeaderView.filterBtnView.dataArray = self.service.filterArray;
         WEAKSELF
-        self.mainBusinessTypeHeaderView.filterBtnView.didSelectItemBlock = ^(FilterBtnViewCellModel * _Nonnull model) {
+        self.filterHeaderView.filterBtnView.didSelectItemBlock = ^(FilterBtnViewCellModel * _Nonnull model) {
             [weakSelf handleTypeHeaderViewDidSelectItemWithModel:model];
         };
-        return self.mainBusinessTypeHeaderView;
+        return self.filterHeaderView;
     }
     return UIView.new;
 }
@@ -155,7 +155,7 @@
         filterView.isTreatment = [self.identifier isEqualToString:@"treatment"];
         filterView.dataArray = model.dataArray.firstObject.content;
         filterView.didSelectedBlock = ^(FilterCellModel * _Nonnull countryCellModel, FilterCellModel * _Nonnull cityCellModel) {
-            wModel.color = kColorThemefb4d56;
+            wModel.color = kColorTheme21a8ff;
             if (cityCellModel.code.length == 0) {
                 wModel.name = countryCellModel.name;
                 if ([weakSelf.service.conditionDic.allKeys containsObject:cityCellModel.valueStr]) {
@@ -165,6 +165,9 @@
                     if ([weakSelf.service.conditionDic.allKeys containsObject:countryCellModel.valueStr]) {
                         [weakSelf.service.conditionDic removeObjectForKey:countryCellModel.valueStr];
                     }
+                    if ([weakSelf.service.conditionDic.allKeys containsObject:@"countryId"]) {
+                        [weakSelf.service.conditionDic removeObjectForKey:@"countryId"];
+                    }
                 } else {
                     weakSelf.service.conditionDic[countryCellModel.valueStr] = countryCellModel.code;
                 }
@@ -173,7 +176,7 @@
                 weakSelf.service.conditionDic[cityCellModel.valueStr] = cityCellModel.code;
                 weakSelf.service.conditionDic[countryCellModel.valueStr] = countryCellModel.code;
             }
-            weakSelf.mainBusinessTypeHeaderView.filterBtnView.dataArray = weakSelf.service.filterArray;
+            weakSelf.filterHeaderView.filterBtnView.dataArray = weakSelf.service.filterArray;
             [weakSelf getListDataWithFirstPage];
         };
         [filterView show];
@@ -188,7 +191,7 @@
         filterView.clickResetBlock = ^{
             wModel.name = wModel.btnTitleName;
             wModel.color = kColorTheme2a303c;
-            weakSelf.mainBusinessTypeHeaderView.filterBtnView.dataArray = weakSelf.service.filterArray;
+            weakSelf.filterHeaderView.filterBtnView.dataArray = weakSelf.service.filterArray;
             [weakSelf getListDataWithFirstPage];
         };
         filterView.clickConfirmBlock = ^{
@@ -207,8 +210,8 @@
                     }
                 }
                 wModel.name = btnTitle;
-                wModel.color = kColorThemefb4d56;
-                weakSelf.mainBusinessTypeHeaderView.filterBtnView.dataArray = weakSelf.service.filterArray;
+                wModel.color = kColorTheme21a8ff;
+                weakSelf.filterHeaderView.filterBtnView.dataArray = weakSelf.service.filterArray;
             }
             [weakSelf getListDataWithFirstPage];
         };
@@ -248,7 +251,7 @@
 
 @end
 
-@implementation MainBusinessTypeHeaderView
+@implementation DistributionFilterHeaderView
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithReuseIdentifier:reuseIdentifier]) {
