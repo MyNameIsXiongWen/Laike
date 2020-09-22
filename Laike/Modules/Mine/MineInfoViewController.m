@@ -76,21 +76,32 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *cellDic = self.dataArray[indexPath.row];
     NSString *identifier = cellDic[@"identifier"];
-    if ([identifier isEqualToString:@"headPath"]) {
-        [CTMediator.sharedInstance CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:1 ResultBlk:^(NSArray<UIImage *> * _Nonnull photos) {
-            if (photos.count > 0) {
-                QHWImageModel *model = QHWImageModel.new;
-                model.image = photos.firstObject;
-                [self uploadImageRequest:@[model].mutableCopy];
-            }
-        }];
-    } else if ([identifier isEqualToString:@"gender"]) {
-        NSArray *array = @[@"女士", @"先生"];
+    if ([identifier isEqualToString:@"headPath"] || [identifier isEqualToString:@"gender"]) {
+//        [CTMediator.sharedInstance CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:1 ResultBlk:^(NSArray<UIImage *> * _Nonnull photos) {
+//            if (photos.count > 0) {
+//                QHWImageModel *model = QHWImageModel.new;
+//                model.image = photos.firstObject;
+//                [self uploadImageRequest:@[model].mutableCopy];
+//            }
+//        }];
+        NSArray *array;
+        if ([identifier isEqualToString:@"headPath"]) {
+            array = @[@"拍摄", @"从相册选择"];
+        } else if ([identifier isEqualToString:@"gender"]) {
+            array = @[@"女士", @"先生"];
+        }
         QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*(array.count+1)+7) title:@""];
         sheetView.dataArray = array;
         sheetView.sheetDelegate = self;
         sheetView.identifier = identifier;
         [sheetView show];
+//    } else if ([identifier isEqualToString:@"gender"]) {
+//        NSArray *array = @[@"女士", @"先生"];
+//        QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*(array.count+1)+7) title:@""];
+//        sheetView.dataArray = array;
+//        sheetView.sheetDelegate = self;
+//        sheetView.identifier = identifier;
+//        [sheetView show];
     } else {
         MineUpdateNameViewController *updateVC = MineUpdateNameViewController.new;
         updateVC.identifier = identifier;
@@ -120,7 +131,27 @@
 
 #pragma mark ------------QHWActionSheetViewDelegate-------------
 - (void)actionSheetViewSelectedIndex:(NSInteger)index WithActionSheetView:(QHWActionSheetView *)actionsheetView {
-    if ([actionsheetView.identifier isEqualToString:@"gender"]) {
+    if ([actionsheetView.identifier isEqualToString:@"headPath"]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.modalPresentationStyle = UIModalPresentationFullScreen;
+        if (index == 0) {
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [QHWPermissionManager openCaptureDeviceService:^(BOOL isOpen) {
+                if (isOpen) {
+                    [self presentViewController:picker animated:YES completion:nil];
+                }
+            }];
+        } else {
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [QHWPermissionManager openAlbumService:^(BOOL isOpen) {
+                if (isOpen) {
+                    [self presentViewController:picker animated:YES completion:nil];
+                }
+            }];
+        }
+    } else if ([actionsheetView.identifier isEqualToString:@"gender"]) {
         [self updateUserInfoWithKey:@"gender" Value:@(index == 0 ? 2 : 1)];
     }
 }

@@ -520,7 +520,6 @@
 		185EC81F24A08FD700DCAB2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		185EC82124A08FD800DCAB2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		185EC82424A08FD800DCAB2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		185EC82624A08FD800DCAB2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		185EC82724A08FD800DCAB2C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		185EC82D24A08FD800DCAB2C /* LaikeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LaikeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		185EC83124A08FD800DCAB2C /* LaikeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaikeTests.m; sourceTree = "<group>"; };
@@ -1243,7 +1242,6 @@
 				185EC81E24A08FD700DCAB2C /* Main.storyboard */,
 				185EC82124A08FD800DCAB2C /* Assets.xcassets */,
 				185EC82324A08FD800DCAB2C /* LaunchScreen.storyboard */,
-				185EC82624A08FD800DCAB2C /* Info.plist */,
 				185EC82724A08FD800DCAB2C /* main.m */,
 				1851128B2508D06200F958A1 /* Emoji.plist */,
 			);
