@@ -110,10 +110,10 @@ static NSInteger const CodeCountTime = 60;
 
 - (void)textFieldValueChanged:(UITextField *)textField {
     if (textField.tag == 111) {
-        if (textField.text.length > 11) {
-            textField.text = [textField.text substringToIndex:11];
-            return;
-        }
+//        if (textField.text.length > 11) {
+//            textField.text = [textField.text substringToIndex:11];
+//            return;
+//        }
     } else if (textField.tag == 222) {
         if (textField.text.length > 6) {
             textField.text = [textField.text substringToIndex:6];

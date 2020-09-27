@@ -8,7 +8,6 @@
 
 #import "DistributionScrollContentViewController.h"
 #import "QHWBaseCellProtocol.h"
-#import "HomeService.h"
 #import "MainBusinessService.h"
 #import "QHWSystemService.h"
 #import "CTMediator+ViewController.h"
@@ -37,13 +36,13 @@
 }
 
 - (void)addTableView {
-    CGFloat height = kScreenH-kBottomBarHeight-kTopBarHeight-138;
+    CGFloat height = kScreenH-kBottomBarHeight-kTopBarHeight-32;
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, height) Style:UITableViewStylePlain Object:self];
     [self.tableView registerClass:DistributionFilterHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(DistributionFilterHeaderView.class)];
     [self.view addSubview:self.tableView];
-    [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
-        [self getListDataWithFirstPage];
-    }];
+//    [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
+//        [self getListDataWithFirstPage];
+//    }];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
         self.service.itemPageModel.pagination.currentPage++;
         [self getMainBusinessListDataRequest];
@@ -222,6 +221,28 @@
 - (void)getListDataWithFirstPage {
     self.service.itemPageModel.pagination.currentPage = 1;
     [self getMainBusinessListDataRequest];
+}
+
+#pragma mark ------------UIScrollView-------------
+//判断屏幕触碰状态
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    NSLog(@"接触屏幕");
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    NSLog(@"离开屏幕");
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!self.vcCanScroll) {
+        scrollView.contentOffset = CGPointZero;
+    }
+    NSLog(@"subScroll======%f", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y <= 0) {
+        self.vcCanScroll = NO;
+        scrollView.contentOffset = CGPointZero;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DistributionSwipeLeaveTop" object:nil];//到顶通知父视图改变状态
+    }
 }
 
 /*

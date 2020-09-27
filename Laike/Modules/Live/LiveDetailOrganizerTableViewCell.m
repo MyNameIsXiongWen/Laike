@@ -110,7 +110,7 @@
     if (!_attentionButton) {
         _attentionButton = UIButton.btnInit().btnTitle(@"+ 关注").btnSelectedTitle(@"已关注").btnTitleColor(kColorThemefff).btnBkgColor(kColorThemefb4d56).btnFont(kFontTheme11).btnCornerRadius(10);
         [_attentionButton addTarget:self action:@selector(attentionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_attentionButton];
+        [self.contentView addSubview:_attentionButton];
     }
     return _attentionButton;
 }

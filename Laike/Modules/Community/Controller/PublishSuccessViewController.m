@@ -28,7 +28,7 @@
 
 - (void)leftNavBtnAction:(UIButton *)sender {
     for (UIViewController *vc in self.navigationController.childViewControllers) {
-        if ([NSStringFromClass(vc.class) isEqualToString:@"CommunityViewController"]) {
+        if ([NSStringFromClass(vc.class) isEqualToString:@"CommunityContentViewController"]) {
             [self.getCurrentMethodCallerVC.navigationController popToViewController:vc animated:YES];
             break;
         }

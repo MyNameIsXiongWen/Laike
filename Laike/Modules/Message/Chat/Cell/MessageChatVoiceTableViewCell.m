@@ -54,20 +54,24 @@
     UIImage *voiceImg;
     NSArray *animationImgs;
     if (data.innerMessage.direction == EMMessageDirectionSend) {
-        voiceImg = kImageMake(@"sender_voice");
+        voiceImg = kImageMake(@"sender_voice_play_1");
         animationImgs = @[kImageMake(@"sender_voice_play_1"),
                           kImageMake(@"sender_voice_play_2"),
-                          kImageMake(@"sender_voice_play_3")];
+                          kImageMake(@"sender_voice_play_3"),
+                          kImageMake(@"sender_voice_play_4"),
+                          kImageMake(@"sender_voice_play_5")];
         self.durationLabel.textAlignment = NSTextAlignmentRight;
         self.durationLabel.x = 0;
         self.imgView.x = self.durationLabel.right+5;
         self.bubbleImgView.image = [[UIImage imageNamed:@"chat_bubble_self_text"] resizableImageWithCapInsets:UIEdgeInsetsMake(24, 5, 5, 12) resizingMode:UIImageResizingModeStretch];
     }
     else {
-        voiceImg = kImageMake(@"receiver_voice");
+        voiceImg = kImageMake(@"receiver_voice_play_1");
         animationImgs = @[kImageMake(@"receiver_voice_play_1"),
                           kImageMake(@"receiver_voice_play_2"),
-                          kImageMake(@"receiver_voice_play_3")];
+                          kImageMake(@"receiver_voice_play_3"),
+                          kImageMake(@"receiver_voice_play_4"),
+                          kImageMake(@"receiver_voice_play_5")];
         self.durationLabel.textAlignment = NSTextAlignmentLeft;
         self.imgView.x = 15;
         self.durationLabel.x = self.imgView.right + 5;
@@ -189,7 +193,7 @@
 #pragma mark ------------UI-------------
 - (UIImageView *)imgView {
     if (!_imgView) {
-        _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7.5, 20, 20)];
+        _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 26, 15)];
         _imgView.contentMode = UIViewContentModeScaleAspectFill;
         _imgView.animationDuration = 1;
     }
@@ -198,7 +202,7 @@
 
 - (UILabel *)durationLabel {
     if (!_durationLabel) {
-        _durationLabel = [UICreateView initWithFrame:CGRectZero Text:@"" Font:kFontTheme12 TextColor:kColorTheme666 BackgroundColor:UIColor.clearColor];
+        _durationLabel = UILabel.labelInit().labelFont(kFontTheme12).labelTitleColor(kColorTheme666);
     }
     return _durationLabel;
 }

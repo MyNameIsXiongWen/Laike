@@ -13,6 +13,7 @@
 #import "ChatFileHelper.h"
 #import "ChatEmojiUtil.h"
 
+#define BtnHeight 50
 @interface ChatInputBar () <UITextViewDelegate, AVAudioRecorderDelegate>
 
 @property (nonatomic, strong) ChatRecordView *recordView;
@@ -56,7 +57,7 @@
     _moreButton = UIButton.btnInit().btnImage(kImageMake(@"chat_add")).btnAction(self, @selector(clickMoreBtn:));
     [self addSubview:_moreButton];
     
-    _recordButton = UIButton.btnInit().btnTitle(@"按住说话").btnTitleColor(kColorTheme2a303c).btnFont(kFontTheme14).btnBkgColor(kColorThemef5f5f5).btnCornerRadius(5);
+    _recordButton = UIButton.btnInit().btnTitle(@"按住说话").btnTitleColor(kColorTheme666).btnFont(kFontTheme14).btnBkgColor(kColorThemefff).btnCornerRadius(20).btnBorderColor(kColorThemeeee);
     [_recordButton addTarget:self action:@selector(recordBtnDown:) forControlEvents:UIControlEventTouchDown];
     [_recordButton addTarget:self action:@selector(recordBtnUp:) forControlEvents:UIControlEventTouchUpInside];
     [_recordButton addTarget:self action:@selector(recordBtnCancel:) forControlEvents:UIControlEventTouchUpOutside | UIControlEventTouchCancel];
@@ -66,31 +67,24 @@
     [self addSubview:_recordButton];
     
     _inputTextView = [[ChatResponderTextView alloc] init];
-    _inputTextView.backgroundColor = kColorThemef5f5f5;
-    _inputTextView.textColor = kColorTheme2a303c;
+    _inputTextView.tvTextColor(kColorTheme2a303c).tvFont(kFontTheme14).tvPlaceholder(@"输入聊天内容...");
     _inputTextView.delegate = self;
-    [_inputTextView setFont:kFontTheme14];
-    [_inputTextView.layer setMasksToBounds:YES];
-    [_inputTextView.layer setCornerRadius:5];
     [_inputTextView setReturnKeyType:UIReturnKeySend];
-    UILabel *label = UILabel.labelFrame(CGRectMake(0, 0, 200, 20)).labelText(@"  点击输入").labelFont(kFontTheme14).labelTitleColor(kColorFromHexString(@"bfbfbf"));
-    [_inputTextView addSubview:label];
-    _inputTextView.contentInset = UIEdgeInsetsMake(4, 7, 0, 0);
-    [_inputTextView setValue:label forKey:@"_placeholderLabel"];
+    _inputTextView.contentInset = UIEdgeInsetsMake(4, 0, 0, 0);
     [self addSubview:_inputTextView];
 }
 
 - (void)defaultLayout {
-    CGFloat buttonWidth = 35;
-    CGFloat buttonHeight = 35;
-    CGFloat buttonOriginY = (60-35)/2.0;
-    _micButton.frame = CGRectMake(15, buttonOriginY, buttonWidth, buttonHeight);
+    CGFloat buttonWidth = BtnHeight;
+    CGFloat buttonHeight = BtnHeight;
+    CGFloat buttonOriginY = (60-BtnHeight)/2.0;
+    _micButton.frame = CGRectMake(5, buttonOriginY, buttonWidth, buttonHeight);
     _keyboardButton.frame = _micButton.frame;
-    _moreButton.frame = CGRectMake(kScreenW - buttonWidth - 15, buttonOriginY, buttonWidth, buttonHeight);
+    _moreButton.frame = CGRectMake(kScreenW - buttonWidth - 5, buttonOriginY, buttonWidth, buttonHeight);
     _faceButton.frame = CGRectMake(_moreButton.left - buttonWidth, buttonOriginY, buttonWidth, buttonHeight);
     
-    CGFloat beginX = _micButton.right + 5;
-    CGFloat endX = _faceButton.left - 5;
+    CGFloat beginX = _micButton.right;
+    CGFloat endX = _faceButton.left;
     _recordButton.frame = CGRectMake(beginX, 10, endX - beginX, 40);
     _inputTextView.frame = _recordButton.frame;
 }
@@ -99,7 +93,7 @@
     CGFloat offset = height - self.height;
     self.height = height;
     
-    CGFloat originY = (60-35)/2.0;
+    CGFloat originY = (60-BtnHeight)/2.0;
     
     _faceButton.y = originY;
     _moreButton.y = originY;
@@ -166,14 +160,14 @@
         [self.window addSubview:self.recordView];
         self.recordStartTime = [NSDate date];
         [self.recordView setStatus:Record_Status_Recording];
-        self.recordButton.backgroundColor = [UIColor lightGrayColor];
+        self.recordButton.backgroundColor = kColorThemef5f5f5;
         [self.recordButton setTitle:@"松开结束" forState:UIControlStateNormal];
         [self startRecord];
     }];
 }
 
 - (void)recordBtnUp:(UIButton *)sender {
-    _recordButton.backgroundColor = kColorThemef5f5f5;
+    _recordButton.backgroundColor = kColorThemefff;
     [_recordButton setTitle:@"按住说话" forState:UIControlStateNormal];
     NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:_recordStartTime];
     if(interval < 1 || interval > 60){
@@ -200,7 +194,7 @@
 
 - (void)recordBtnCancel:(UIButton *)sender {
     [_recordView removeFromSuperview];
-    _recordButton.backgroundColor = kColorThemef5f5f5;
+    _recordButton.backgroundColor = kColorThemefff;
     [_recordButton setTitle:@"按住说话" forState:UIControlStateNormal];
     [self cancelRecord];
 }

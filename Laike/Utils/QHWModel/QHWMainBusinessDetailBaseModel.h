@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "QHWConsultantModel.h"
 #import "QHWBottomUserModel.h"
+#import "BrandModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray <QHWActivityModel *>*activityList;
 @property (nonatomic, strong) NSArray *bannerList;
 @property (nonatomic, strong) QHWBottomUserModel *bottomData;
+@property (nonatomic, strong) BrandModel *brandInfo;
 
 @property (nonatomic, assign) CGFloat mainBusinessCellHeight;
 @property (nonatomic, assign) BOOL selected;

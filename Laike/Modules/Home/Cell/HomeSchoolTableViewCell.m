@@ -34,7 +34,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self addSubview:self.headerView];
+        [self.contentView addSubview:self.headerView];
     }
     return self;
 }
@@ -147,7 +147,7 @@
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = UILabel.labelInit().labelFont(kMediumFontTheme16).labelTitleColor(kColorTheme2a303c).labelNumberOfLines(2);
+        _titleLabel = UILabel.labelInit().labelFont(kFontTheme16).labelTitleColor(kColorTheme2a303c).labelNumberOfLines(2);
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;

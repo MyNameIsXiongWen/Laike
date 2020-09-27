@@ -6,11 +6,11 @@
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "QHWShadowTableViewCell.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomePopularityInfoTableViewCell : QHWShadowTableViewCell 
+@interface HomePopularityInfoTableViewCell : UITableViewCell
 
 @end
 

@@ -302,21 +302,21 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.titleLabel = UILabel.labelFrame(CGRectMake(20, 0, 80, 60)).labelText(@"   性别").labelTitleColor(kColorTheme000).labelFont(kFontTheme16);
-        [self addSubview:self.titleLabel];
+        [self.contentView addSubview:self.titleLabel];
         
         self.maleBtn = UIButton.btnFrame(CGRectMake(self.titleLabel.right + 10, 10, 60, 40)).btnTitle(@"先生").btnFont(kFontTheme16).btnTitleColor(kColorTheme999).btnAction(self, @selector(clickBtn:));
         self.maleBtn.tag = 1;
         self.maleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self.maleBtn setTitleColor:kColorTheme21a8ff forState:UIControlStateSelected];
-        [self addSubview:self.maleBtn];
+        [self.contentView addSubview:self.maleBtn];
         
         self.femaleBtn = UIButton.btnFrame(CGRectMake(self.maleBtn.right + 10, 10, 60, 40)).btnTitle(@"女士").btnFont(kFontTheme16).btnTitleColor(kColorTheme999).btnAction(self, @selector(clickBtn:));
         self.femaleBtn.tag = 2;
         self.femaleBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self.femaleBtn setTitleColor:kColorTheme21a8ff forState:UIControlStateSelected];
-        [self addSubview:self.femaleBtn];
+        [self.contentView addSubview:self.femaleBtn];
         
-        [self addSubview:UIView.viewFrame(CGRectMake(0, 59.0, self.width, 0.5)).bkgColor(kColorThemeeee)];
+        [self.contentView addSubview:UIView.viewFrame(CGRectMake(0, 59.0, self.width, 0.5)).bkgColor(kColorThemeeee)];
     }
     return self;
 }

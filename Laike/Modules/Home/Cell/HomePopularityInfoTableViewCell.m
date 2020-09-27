@@ -12,6 +12,7 @@
 
 @interface HomePopularityInfoTableViewCell () <UICollectionViewDelegate, UICollectionViewDataSource, QHWBaseCellProtocol>
 
+@property (nonatomic, strong) UIView *bkgView;
 @property (nonatomic, strong) QHWTableSectionHeaderView *headerView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *dataArray;
@@ -33,8 +34,9 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.contentView.backgroundColor = self.backgroundColor = UIColor.clearColor;
-        [self.shadowView addSubview:self.headerView];
+        self.bkgView = UIView.viewFrame(CGRectMake(10, 0, kScreenW-20, 165)).borderColor(kColorThemeeee).cornerRadius(10);
+        [self.contentView addSubview:self.bkgView];
+        [self.bkgView addSubview:self.headerView];
     }
     return self;
 }
@@ -65,8 +67,11 @@
 #pragma mark ------------UI-------------
 - (QHWTableSectionHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 55)];
-        _headerView.titleLabel.text = @"人气王";
+        _headerView = [[QHWTableSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-20, 55)];
+        NSString *title = @"人气王（30天内数据）";
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
+        [attr addAttributes:@{NSFontAttributeName: kFontTheme14, NSForegroundColorAttributeName: kColorTheme999} range:NSMakeRange(3, 8)];
+        _headerView.titleLabel.attributedText = attr;
         _headerView.moreBtn.hidden = NO;
         _headerView.moreBtn.userInteractionEnabled = NO;
     }
@@ -78,14 +83,14 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = CGFLOAT_MIN;
         layout.minimumInteritemSpacing = CGFLOAT_MIN;
-        layout.sectionInset = UIEdgeInsetsZero;
-        layout.itemSize = CGSizeMake((kScreenW-30)/3, 80);
+        layout.sectionInset = UIEdgeInsetsMake(15, 0, 15, 0);
+        layout.itemSize = CGSizeMake((kScreenW-40)/3, 80);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
-        _collectionView = [UICreateView initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-30, 80) Layout:layout Object:self];
+        _collectionView = [UICreateView initWithFrame:CGRectMake(0, self.headerView.bottom, kScreenW-20, 110) Layout:layout Object:self];
         _collectionView.userInteractionEnabled = NO;
         [_collectionView registerClass:HomePopularitySubCollectionViewCell.class forCellWithReuseIdentifier:NSStringFromClass(HomePopularitySubCollectionViewCell.class)];
-        [self.shadowView addSubview:_collectionView];
+        [self.bkgView addSubview:_collectionView];
     }
     return _collectionView;
 }
@@ -122,7 +127,7 @@
 #pragma mark ------------UI-------------
 - (UIImageView *)consultantImgView {
     if (!_consultantImgView) {
-        _consultantImgView = UIImageView.ivInit().ivCornerRadius(20).ivMode(UIViewContentModeScaleAspectFit);
+        _consultantImgView = UIImageView.ivInit().ivCornerRadius(20);
         [self.contentView addSubview:_consultantImgView];
     }
     return _consultantImgView;

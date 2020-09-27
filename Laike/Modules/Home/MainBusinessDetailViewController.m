@@ -225,6 +225,15 @@
     }
 }
 
+- (void)clickBrandTableViewCell:(NSDictionary *)params {
+    NSIndexPath *indexPath = params[@"indexPath"];
+    QHWBaseModel *baseModel = self.detailService.tableViewDataArray[indexPath.section];
+    NSArray *array = (NSArray *)baseModel.data;
+    NSArray *dataArray = (NSArray *)array[indexPath.row];
+    BrandModel *model = (BrandModel *)dataArray.firstObject;
+    [CTMediator.sharedInstance CTMediator_viewControllerForBrandDetailWithBrandId:model.id];
+}
+
 - (void)clickConsultantTableCell:(NSDictionary *)params {
     NSIndexPath *indexPath = params[@"indexPath"];
     QHWBaseModel *baseModel = self.detailService.tableViewDataArray[indexPath.section];
@@ -308,7 +317,8 @@
         WEAKSELF
         _bottomView.rightOperationBlock = ^{
             if (weakSelf.detailService.detailModel.distributionStatus == 2) {
-                kCallTel(weakSelf.detailService.detailModel.serviceHotline);
+//                kCallTel(weakSelf.detailService.detailModel.serviceHotline);
+                [CTMediator.sharedInstance CTMediator_viewControllerForChatWithConversationId:kHXCustomerServiceId ReceiverNickName:kHXCustomerServiceName ReceiverHeadPath:kHXCustomerServiceHead];
             } else {
                 [weakSelf rightNavBtnAction:nil];
             }

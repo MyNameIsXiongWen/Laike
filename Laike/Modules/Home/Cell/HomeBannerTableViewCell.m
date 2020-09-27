@@ -21,15 +21,21 @@
     // Configure the view for the selected state
 }
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self.contentView addSubview:self.bannerView];
+    }
+    return self;
+}
+
 - (void)configCellData:(id)data {
     self.bannerView.imgArray = (NSArray *)data;
 }
 
 - (QHWCycleScrollView *)bannerView {
     if (!_bannerView) {
-        _bannerView = [[QHWCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW-30, 110)];
+        _bannerView = [[QHWCycleScrollView alloc] initWithFrame:CGRectMake(10, 0, kScreenW-20, 110)];
         _bannerView.imgCornerRadius = 10;
-        [self.shadowView addSubview:_bannerView];
     }
     return _bannerView;
 }

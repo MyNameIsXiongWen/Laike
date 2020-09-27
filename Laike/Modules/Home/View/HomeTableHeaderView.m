@@ -9,10 +9,12 @@
 #import "HomeTableHeaderView.h"
 #import "CTMediator+ViewController.h"
 #import "UserModel.h"
+#import "SearchBkgView.h"
+#import "AppDelegate.h"
 
 @interface HomeTableHeaderView () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UIImageView *bkgView;
+@property (nonatomic, strong) SearchBkgView *searchBkgView;
 @property (nonatomic, strong) UserInfoView *userInfoView;
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -31,7 +33,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.backgroundColor = UIColor.whiteColor;
-        [self addSubview:self.bkgView];
+        [self addSubview:self.searchBkgView];
         [self addSubview:self.tableView];
     }
     return self;
@@ -42,10 +44,10 @@
     for (QHWBaseModel *baseModel in self.service.tableViewDataArray) {
         [_tableView registerClass:NSClassFromString(baseModel.identifier) forCellReuseIdentifier:baseModel.identifier];
     }
-    self.userInfoView.nameLabel.text = service.homeModel.realName;
-    self.userInfoView.companyLabel.text = service.homeModel.companyName;
-    [self.userInfoView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(service.homeModel.headPath)]];
-    self.tableView.height = service.headerViewTableHeight-165;
+//    self.userInfoView.nameLabel.text = service.homeModel.realName;
+//    self.userInfoView.companyLabel.text = service.homeModel.companyName;
+//    [self.userInfoView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(service.homeModel.headPath)]];
+    self.tableView.height = service.headerViewTableHeight-10-32-15;
     [self.tableView reloadData];
 }
 
@@ -75,6 +77,11 @@
     [CTMediator.sharedInstance performTarget:self action:kFormat(@"click%@", model.identifier) params:nil];
 }
 
+- (void)clickHomeDynamicTableViewCell {
+    AppDelegate *delegate = (AppDelegate *)UIApplication.sharedApplication.delegate;
+    delegate.tabBarVC.selectedIndex = 2;
+}
+
 - (void)clickHomePopularityInfoTableViewCell {
     [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"RankViewController").new animated:YES];
 }
@@ -96,12 +103,18 @@
 }
 
 #pragma mark ------------UI-------------
-- (UIView *)bkgView {
-    if (!_bkgView) {
-        _bkgView = UIImageView.ivFrame(CGRectMake(0, 0, kScreenW, 190));
-        [_bkgView addSubview:UIImageView.ivFrame(_bkgView.bounds).ivImage(kImageMake(@"mine_bkg"))];
+- (SearchBkgView *)searchBkgView {
+    if (!_searchBkgView) {
+        _searchBkgView = [[SearchBkgView alloc] initWithFrame:CGRectMake(0, 10, kScreenW, 32)];
+        _searchBkgView.searchBgView.borderColor(kColorTheme21a8ff);
+        _searchBkgView.placeholderLabel.text = @"输入市场热门商品";
+        _searchBkgView.searchBtn.hidden = NO;
+        WEAKSELF
+        _searchBkgView.clickSearchBkgBlock = ^{
+            [weakSelf.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"DistributionSearchViewController").new animated:YES];
+        };
     }
-    return _bkgView;
+    return _searchBkgView;
 }
 
 - (UserInfoView *)userInfoView {
@@ -114,12 +127,12 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [UICreateView initWithFrame:CGRectMake(0, 165, kScreenW, 0) Style:UITableViewStylePlain Object:self];
+        _tableView = [UICreateView initWithFrame:CGRectMake(0, self.searchBkgView.bottom+15, kScreenW, 0) Style:UITableViewStylePlain Object:self];
         _tableView.backgroundColor = UIColor.clearColor;
         _tableView.scrollEnabled = NO;
         
-        UIView *footerView = UIView.viewFrame(CGRectMake(0, 0, kScreenW, 30));
-        [footerView addSubview:UILabel.labelFrame(CGRectMake(15, 8, 200, 22)).labelFont(kMediumFontTheme24).labelTitleColor(kColorTheme2a303c).labelText(@"推广获客")];
+        UIView *footerView = UIView.viewFrame(CGRectMake(0, 0, kScreenW, 50));
+        [footerView addSubview:UILabel.labelFrame(CGRectMake(15, 0, 200, 45)).labelFont(kMediumFontTheme24).labelTitleColor(kColorTheme2a303c).labelText(@"推广获客")];
         _tableView.tableFooterView = footerView;
         
         [self addSubview:_tableView];

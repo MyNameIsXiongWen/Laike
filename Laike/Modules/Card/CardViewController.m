@@ -53,15 +53,15 @@
 */
 - (CRMTopOperationView *)topOperationView {
     if (!_topOperationView) {
-        _topOperationView = [[CRMTopOperationView alloc] initWithFrame:CGRectMake(10, kTopBarHeight+10, kScreenW-20, 70)];
-        _topOperationView.dataArray = @[@{@"logo": @"home_article",
-                                          @"title": @"分享获客",
-                                          @"subTitle": @"发布海外圈 免费获客",
-                                          @"identifier": @"shareArticle"},
-                                        @{@"logo": @"home_card",
-                                          @"title": @"递名片",
-                                          @"subTitle": @"私域流量 精准获客",
-                                          @"identifier": @"sendCard"}
+        _topOperationView = [[CRMTopOperationView alloc] initWithFrame:CGRectMake(0, kTopBarHeight+15, kScreenW, 70)];
+        _topOperationView.dataArray = @[[TopOperationModel initialWithLogo:@"home_community_content"
+                                                                     Title:@"分享获客"
+                                                                  SubTitle:@"发布海外圈 免费获客"
+                                                                Identifier:@"shareArticle"],
+                                        [TopOperationModel initialWithLogo:@"home_card"
+                                                                     Title:@"递名片"
+                                                                  SubTitle:@"私域流量 精准获客"
+                                                                Identifier:@"home_card"]
         ];
     }
     return _topOperationView;
@@ -69,7 +69,7 @@
 
 - (QHWTabScrollView *)tabScrollView {
     if (!_tabScrollView) {
-        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom+10, kScreenW, 48)];
+        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom+15, kScreenW, 48)];
         _tabScrollView.itemWidthType = ItemWidthTypeFixed;
         _tabScrollView.hideIndicatorView = NO;
         _tabScrollView.tagIndicatorColor = kColorTheme21a8ff;

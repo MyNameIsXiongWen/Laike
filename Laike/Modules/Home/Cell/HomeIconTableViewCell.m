@@ -72,8 +72,8 @@
     }
 }
 
-- (void)click_home_news {
-    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CommunityArticleViewController").new animated:YES];
+- (void)click_home_product {
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"CompanyProductViewController").new animated:YES];
 }
 
 - (void)click_home_activity {
@@ -92,11 +92,11 @@
     [CTMediator.sharedInstance CTMediator_viewControllerForLive];
 }
 
-- (void)click_home_screen {
+- (void)click_home_gallery {
     [CTMediator.sharedInstance CTMediator_viewControllerForGallery];
 }
 
-- (void)click_home_article {
+- (void)click_home_community_content {
     [CTMediator.sharedInstance CTMediator_viewControllerForCommunity];
 }
 

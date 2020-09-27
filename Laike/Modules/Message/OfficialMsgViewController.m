@@ -46,15 +46,11 @@
 - (void)getIMUnreadCount {
     NSArray *conversationArray = [EMClient.sharedClient.chatManager getAllConversations];
     if (conversationArray.count > 0) {
-        NSInteger count = 0;
-        NSInteger officialCount = 0;
         for (EMConversation *conversation in conversationArray) {
-            count += conversation.unreadMessagesCount;
             EMMessage *msg = conversation.latestMessage;
             if (msg.ext) {
                 MessageModel *msgModel = [MessageModel yy_modelWithDictionary:msg.ext];
                 if (msgModel.type == 100000) {
-                    officialCount += conversation.unreadMessagesCount;
                     self.currentConversation = conversation;
                     [self.dataArray removeAllObjects];
                     [conversation loadMessagesStartFromId:nil count:1000 searchDirection:EMMessageSearchDirectionUp completion:^(NSArray *aMessages, EMError *aError) {
@@ -74,8 +70,6 @@
                 }
             }
         }
-        UserModel.shareUser.officialUnreadMsgCount = officialCount;
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewMsg object:@(count)];
     } else {
         [self.tableView reloadData];
         [self.tableView showNodataView:self.dataArray.count == 0 offsetY:0 button:nil];

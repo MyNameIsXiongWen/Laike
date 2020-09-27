@@ -13,7 +13,7 @@
 #import "MainBusinessDetailViewController.h"
 #import "ActivityViewController.h"
 #import "ActivityDetailViewController.h"
-#import "CommunityViewController.h"
+#import "CommunityContentViewController.h"
 #import "CommunityDetailViewController.h"
 #import "QHWH5ViewController.h"
 #import "IntervalCRMViewController.h"
@@ -31,6 +31,9 @@
 #import "BindCompanyViewController.h"
 #import "LiveDetailViewController.h"
 #import "CommentReplyListViewController.h"
+#import "ChatViewController.h"
+#import "BrandDetailViewController.h"
+#import "VisitorDetailViewController.h"
 
 @implementation Target_ViewController
 
@@ -73,8 +76,8 @@
 //    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)Action_nativeCommunityViewController:(NSDictionary *)params {
-    CommunityViewController *vc = CommunityViewController.new;
+- (void)Action_nativeCommunityContentViewController:(NSDictionary *)params {
+    CommunityContentViewController *vc = CommunityContentViewController.new;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 
@@ -196,6 +199,47 @@
     CommentReplyListViewController *vc = CommentReplyListViewController.new;
     vc.commentId = commentId;
     vc.communityType = communityType;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeChatViewController:(NSDictionary *)params {
+    NSString *conversationId = params[@"conversationId"];
+    NSString *receiverNickName = params[@"receiverNickName"];
+    NSString *receiverHeadPath = params[@"receiverHeadPath"];
+    
+    ChatViewController *chatVC;
+    BOOL existChatVC = NO;
+    for (UIViewController *vc in self.getCurrentMethodCallerVC.navigationController.viewControllers) {
+        if ([NSStringFromClass(vc.class) isEqualToString:@"ChatViewController"]) {
+            chatVC = (ChatViewController *)vc;
+            existChatVC = YES;
+            break;
+        }
+    }
+    if (!existChatVC) {
+        chatVC = ChatViewController.new;
+    }
+    chatVC.conversation = [EMClient.sharedClient.chatManager getConversation:conversationId type:EMConversationTypeChat createIfNotExist:YES];
+    chatVC.receiverNickName = receiverNickName;
+    chatVC.receiverHeadPath = receiverHeadPath;
+    if (existChatVC) {
+        [self.getCurrentMethodCallerVC.navigationController popToViewController:chatVC animated:YES];
+    } else {
+        [self.getCurrentMethodCallerVC.navigationController pushViewController:chatVC animated:YES];
+    }
+}
+
+- (void)Action_nativeBrandDetailViewController:(NSDictionary *)params {
+    NSString *brandId = params[@"brandId"];
+    BrandDetailViewController *vc = BrandDetailViewController.new;
+    vc.brandId = brandId;
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)Action_nativeVisitorDetailViewController:(NSDictionary *)params {
+    NSString *visitorId = params[@"visitorId"];
+    VisitorDetailViewController *vc = VisitorDetailViewController.new;
+    vc.userId = visitorId;
     [self.getCurrentMethodCallerVC.navigationController pushViewController:vc animated:YES];
 }
 

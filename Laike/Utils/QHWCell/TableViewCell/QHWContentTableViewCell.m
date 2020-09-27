@@ -208,7 +208,7 @@
 - (UIImageView *)tagImgView {
     if (!_tagImgView) {
         _tagImgView = UIImageView.ivInit().ivBkgColor(kColorThemefff).ivCornerRadius(7.5).ivImage(kImageMake(@"v_expert"));
-        [self addSubview:_tagImgView];
+        [self.contentView addSubview:_tagImgView];
     }
     return _tagImgView;
 }

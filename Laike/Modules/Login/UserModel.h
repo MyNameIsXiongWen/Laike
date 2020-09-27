@@ -79,6 +79,12 @@ NS_ASSUME_NONNULL_BEGIN
 ///点赞数量
 @property (nonatomic, assign) NSInteger likeCount;
 @property (nonatomic, assign) NSInteger visitCount;
+///邀请人数
+@property (nonatomic, assign) NSInteger inviteCount;
+///总邀请人数
+@property (nonatomic, assign) NSInteger inviteTotalCount;
+///激活人数
+@property (nonatomic, assign) NSInteger actionCount;
 ///关注数量
 @property (nonatomic, assign) NSInteger concernCount;
 ///咨询数量

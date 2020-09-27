@@ -10,18 +10,30 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TopOperationModel;
 @interface CRMTopOperationView : UIView
 
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) NSArray <TopOperationModel *>*dataArray;
 
 @end
 
-@interface OperationCollectionSubView : UIView
+@interface OperationCollectionSubView : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *logoImgView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *subTitleLabel;
-@property (nonatomic, strong) NSDictionary *dataDic;
+@property (nonatomic, strong) TopOperationModel *model;
+
+@end
+
+@interface TopOperationModel : NSObject
+
+@property (nonatomic, copy) NSString *logo;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *subTitle;
+@property (nonatomic, copy) NSString *identifier;
+
++ (instancetype)initialWithLogo:(NSString *)logo Title:(NSString *)title SubTitle:(NSString *)subTitle Identifier:(NSString *)identifier;
 
 @end
 

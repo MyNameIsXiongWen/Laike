@@ -122,7 +122,8 @@
             break;
         
         case 104001: //关注我的
-            [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:msgModel.create.subjectId UserType:msgModel.create.subject BusinessType:0];
+//            [CTMediator.sharedInstance CTMediator_viewControllerForUserDetailWithUserId:msgModel.create.subjectId UserType:msgModel.create.subject BusinessType:0];
+            [CTMediator.sharedInstance CTMediator_viewControllerForVisitorDetailWithVisitorId:msgModel.create.subjectId];
             break;
             
         case 105003: //分享我的  用户-详情，跳转-用户详情；

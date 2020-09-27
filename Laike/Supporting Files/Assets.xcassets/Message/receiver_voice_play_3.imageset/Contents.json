@@ -5,12 +5,11 @@
       "scale" : "1x"
     },
     {
-      "filename" : "receiver_voice_play_3@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "receiver_voice_play_3@3x.png",
+      "filename" : "tt_voice_node_other_playing003@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

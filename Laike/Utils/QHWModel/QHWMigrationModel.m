@@ -14,7 +14,8 @@
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{@"consultantList": QHWConsultantModel.class,
              @"activityList": QHWActivityModel.class,
-             @"bottomData": QHWBottomUserModel.class
+             @"bottomData": QHWBottomUserModel.class,
+             @"brandInfo": BrandModel.class
              };
 }
 

@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [self setupVieweakSelf];
+//    [self setupVieweakSelf];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commonWordSendMsgNotification:) name:kNotificationCommonWordSendMSg object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCommonWordNotification:) name:kNotificationAddCommonWord object:nil];
 }
@@ -68,13 +68,22 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
+- (void)setConversation:(EMConversation *)conversation {
+    _conversation = conversation;
+    [self setupVieweakSelf];
+}
+
 - (void)setupVieweakSelf {
     self.view.backgroundColor = UIColor.whiteColor;
     _status = Input_Status_Input;
-    _topView = [[ChatInputBarTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 40)];
-    _topView.delegate = self;
-    [self.view addSubview:_topView];
-    _inputBar = [[ChatInputBar alloc] initWithFrame:CGRectMake(0, 40, kScreenW, 60)];
+    if ([self.conversation.conversationId isEqualToString:kHXCustomerServiceId]) {
+        _inputBar = [[ChatInputBar alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 60)];
+    } else {
+        _topView = [[ChatInputBarTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 40)];
+        _topView.delegate = self;
+        [self.view addSubview:_topView];
+        _inputBar = [[ChatInputBar alloc] initWithFrame:CGRectMake(0, 40, kScreenW, 60)];
+    }
     _inputBar.delegate = self;
     [self.view addSubview:_inputBar];
     self.msgService = ChatMsgService.new;

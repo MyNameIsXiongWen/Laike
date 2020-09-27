@@ -15,7 +15,8 @@
     return @{@"consultantList": QHWConsultantModel.class,
              @"activityList": QHWActivityModel.class,
              @"likeList": QHWSchoolModel.class,
-             @"bottomData": QHWBottomUserModel.class
+             @"bottomData": QHWBottomUserModel.class,
+             @"brandInfo": BrandModel.class
              };
 }
 

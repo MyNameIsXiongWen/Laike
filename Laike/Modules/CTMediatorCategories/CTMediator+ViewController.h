@@ -56,6 +56,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)CTMediator_viewControllerForCommentReplyWithCommentId:(NSString *)commentId CommunityType:(NSInteger)communityType;
 
+- (void)CTMediator_viewControllerForChatWithConversationId:(NSString *)conversationId ReceiverNickName:(NSString *)receiverNickName ReceiverHeadPath:(NSString *)receiverHeadPath;
+
+- (void)CTMediator_viewControllerForBrandDetailWithBrandId:(NSString *)brandId;
+
+- (void)CTMediator_viewControllerForVisitorDetailWithVisitorId:(NSString *)visitorId;
+
 @end
 
 NS_ASSUME_NONNULL_END

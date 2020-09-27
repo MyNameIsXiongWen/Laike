@@ -129,7 +129,8 @@
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;
         _tabScrollView.itemSelectedBackgroundColor = kColorThemefff;
         _tabScrollView.itemUnselectedBackgroundColor = kColorThemefff;
-        _tabScrollView.dataArray = @[@"介绍", @"评论"];
+//        _tabScrollView.dataArray = @[@"介绍", @"评论"];
+        _tabScrollView.dataArray = @[@"介绍"];
         WEAKSELF
         _tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.pageContentView.contentViewCurrentIndex = index;
@@ -149,9 +150,9 @@
         };
         [contentVCs addObject:organizerVC];
         
-        QSchoolCommentViewController *commentVC = QSchoolCommentViewController.new;
-        commentVC.schoolModel = self.service.schoolModel;
-        [contentVCs addObject:commentVC];
+//        QSchoolCommentViewController *commentVC = QSchoolCommentViewController.new;
+//        commentVC.schoolModel = self.service.schoolModel;
+//        [contentVCs addObject:commentVC];
         _pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, self.tabScrollView.bottom, kScreenW, kScreenH-self.tabScrollView.bottom) childVCs:contentVCs parentVC:self delegate:self];
     }
     return _pageContentView;

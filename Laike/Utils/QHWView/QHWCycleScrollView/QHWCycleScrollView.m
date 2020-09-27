@@ -85,7 +85,8 @@
             targeIndex = 0;
         }
         //设置图片默认位置
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:targeIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+//        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:targeIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+        [self.collectionView setContentOffset:CGPointMake(targeIndex*(self.itemSpace+self.itemWidth), 0) animated:NO];
         _oldPoint = self.collectionView.contentOffset.x;
     }
 }
@@ -146,7 +147,8 @@
             currentPage += _dragDirection;
         }
         if (currentPage < _totalItems) {
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentPage inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+//            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentPage inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+            [self.collectionView setContentOffset:CGPointMake(currentPage*(self.itemSpace+self.itemWidth), 0) animated:YES];
             self.lastpage = currentPage;
             _dragDirection = 0;
         }
@@ -254,11 +256,13 @@
     if(index >= self.totalItems) {//滑到最后则调到中间
         if(self.infiniteLoop) {
             index = self.totalItems * 0.5;
-            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+//            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+            [self.collectionView setContentOffset:CGPointMake(index*(self.itemSpace+self.itemWidth), 0) animated:YES];
         }
         return;
     }
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    [self.collectionView setContentOffset:CGPointMake(index*(self.itemSpace+self.itemWidth), 0) animated:YES];
 }
 
 #pragma mark ------------setter or getter-------------
@@ -315,7 +319,8 @@
 - (void)setSelectIndex:(NSInteger)selectIndex {
     _selectIndex = selectIndex;
     
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:selectIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+//    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:selectIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+    [self.collectionView setContentOffset:CGPointMake(selectIndex*(self.itemSpace+self.itemWidth), 0) animated:YES];
 }
 
 - (void)setPageControlLabel:(BOOL)pageControlLabel {

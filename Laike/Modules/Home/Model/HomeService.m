@@ -183,32 +183,37 @@
 
 - (void)handleHomeData {
     [self.tableViewDataArray removeAllObjects];
-    if (self.consultantArray.count > 0) {
-        QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];
-        [self.tableViewDataArray addObject:userDataModel];
-    }
-
     if (self.bannerArray.count > 0) {
         QHWBaseModel *bannerModel = QHWBaseModel.new;
         [bannerModel configModelIdentifier:@"HomeBannerTableViewCell" Height:130 Data:self.bannerArray];
         [self.tableViewDataArray addObject:bannerModel];
     }
     
-    if (self.reportArray.count > 0) {
-        QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCardTableViewCell"
-                                                                           Height:175
-                                                                             Data:@{@"data": self.reportArray,
-                                                                                    @"tip": self.homeModel.visitTip ?: @"",
-                                                                                    @"title": @"名片数据"}];
-        [self.tableViewDataArray addObject:cardDataModel];
+    QHWBaseModel *dynamicModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeDynamicTableViewCell" Height:70 Data:@{
+        @"tip": self.homeModel.visitTip ?: @"",
+        @"headpath": self.homeModel.visitHeadPath ?: @""}];
+    [self.tableViewDataArray addObject:dynamicModel];
+    
+    if (self.consultantArray.count > 0) {
+        QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];
+        [self.tableViewDataArray addObject:userDataModel];
     }
 
-    UserModel *user = UserModel.shareUser;
-    QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCustomerTableViewCell"
-                                                                      Height:140
-                                                                        Data:@[@{@"value": @(user.crmCount), @"title": @"客户"},
-                                                                               @{@"value": @(user.clueCount), @"title": @"线索"}]];
-    [self.tableViewDataArray addObject:crmDataModel];
+//    if (self.reportArray.count > 0) {
+//        QHWBaseModel *cardDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCardTableViewCell"
+//                                                                           Height:175
+//                                                                             Data:@{@"data": self.reportArray,
+//                                                                                    @"tip": self.homeModel.visitTip ?: @"",
+//                                                                                    @"title": @"名片数据"}];
+//        [self.tableViewDataArray addObject:cardDataModel];
+//    }
+
+//    UserModel *user = UserModel.shareUser;
+//    QHWBaseModel *crmDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeCustomerTableViewCell"
+//                                                                      Height:140
+//                                                                        Data:@[@{@"value": @(user.crmCount), @"title": @"客户"},
+//                                                                               @{@"value": @(user.clueCount), @"title": @"线索"}]];
+//    [self.tableViewDataArray addObject:crmDataModel];
     
     QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeIconTableViewCell" Height:160 Data:self.iconArray];
     [self.tableViewDataArray addObject:iconDataModel];
@@ -218,7 +223,7 @@
         [self.tableViewDataArray addObject:schoolDataModel];
     }
     
-    self.headerViewTableHeight = 190-25 + 30;
+    self.headerViewTableHeight = 10+32+15 + 50;
     for (QHWBaseModel *baseModel in self.tableViewDataArray) {
         self.headerViewTableHeight += baseModel.height;
     }
@@ -235,8 +240,8 @@
 - (NSMutableArray *)iconArray {
     if (!_iconArray) {
         _iconArray = NSMutableArray.array;
-        NSArray *nameArray = @[@"获客资讯", @"活动召集", @"直播邀约", @"霸屏神器", @"海外圈", @"递名片", @"算汇率", @"Q大学"];
-        NSArray *iconArray = @[@"home_news", @"home_activity", @"home_live", @"home_screen", @"home_article", @"home_card", @"home_rate", @"home_school"];
+        NSArray *nameArray = @[@"公司产品", @"递名片", @"海外圈", @"霸屏神器", @"活动召集", @"直播邀约", @"算汇率", @"Q大学"];
+        NSArray *iconArray = @[@"home_product", @"home_card", @"home_community_content", @"home_gallery", @"home_activity", @"home_live", @"home_rate", @"home_school"];
         [nameArray enumerateObjectsUsingBlock:^(NSString *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             QHWBannerModel *model = QHWBannerModel.new;
             model.name = obj;

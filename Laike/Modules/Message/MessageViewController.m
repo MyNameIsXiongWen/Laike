@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.kNavigationView.title = @"消息";
+    self.kNavigationView.title = @"微聊";
     self.kNavigationView.titleLabel.textColor = kColorThemefff;
     self.kNavigationView.backgroundColor = kColorTheme21a8ff;
     self.kNavigationView.leftBtn.hidden = YES;
@@ -63,21 +63,24 @@
 - (void)messagesDidReceive:(NSArray *)aMessages {
     [self getIMUnreadCount];
     for (EMMessage *message in aMessages) {
-        EMConversation *conversation = [EMClient.sharedClient.chatManager getConversation:message.conversationId type:EMConversationTypeChat createIfNotExist:YES];
-        MessageModel *model = MessageModel.new;
-        model.conversation = conversation;
-        model.message = message;
-        model.msgTimeStamp = message.timestamp;
-        model.unreadMsgCount = 1;
-        for (MessageModel *msgModel in self.dataArray) {
-            //如果已知列表存在新消息会话人，那么删除旧的，插入新的
-            if ([msgModel.conversation.conversationId isEqualToString:message.conversationId]) {
-                model.unreadMsgCount = msgModel.unreadMsgCount+1;
-                [self.dataArray removeObject:msgModel];
-                break;
+        MessageModel *msgModel = [MessageModel yy_modelWithDictionary:message.ext];
+        if (message && msgModel.type == 0) {//排除系统消息和官方推荐
+            EMConversation *conversation = [EMClient.sharedClient.chatManager getConversation:message.conversationId type:EMConversationTypeChat createIfNotExist:YES];
+            MessageModel *model = MessageModel.new;
+            model.conversation = conversation;
+            model.message = message;
+            model.msgTimeStamp = message.timestamp;
+            model.unreadMsgCount = 1;
+            for (MessageModel *msgModel in self.dataArray) {
+                //如果已知列表存在新消息会话人，那么删除旧的，插入新的
+                if ([msgModel.conversation.conversationId isEqualToString:message.conversationId]) {
+                    model.unreadMsgCount = msgModel.unreadMsgCount+1;
+                    [self.dataArray removeObject:msgModel];
+                    break;
+                }
             }
+            [self.dataArray insertObject:model atIndex:2];
         }
-        [self.dataArray insertObject:model atIndex:2];
     }
     [self.tableView reloadData];
     if (UIApplication.sharedApplication.applicationState == UIApplicationStateBackground) {
@@ -91,16 +94,41 @@
     }
 }
 
+//收到Cmd消息
+- (void)cmdMessagesDidReceive:(NSArray *)aCmdMessages {
+    for (EMMessage *message in aCmdMessages) {
+        EMCmdMessageBody *body = (EMCmdMessageBody *)message.body;
+        NSLog(@"收到的action是 -- %@",body.action);
+        if ([body.action isEqualToString:@"authorize_cmd_msg"]) {
+            NSDictionary *ext = message.ext;
+            NSString *messageId = ext[@"message_attr_authorize_from_message_id"];
+            EMMessage *targetMsg = [EMClient.sharedClient.chatManager getMessageWithMessageId:messageId];
+            NSMutableDictionary *tempExt = targetMsg.ext.mutableCopy;
+            //授权消息状态  0 等待 1 同意 2 拒绝
+            tempExt[@"message_attr_authorize_status"] = ext[@"message_attr_authorize_status"];
+            if ([ext[@"message_attr_authorize_status"] integerValue] == 1) {
+                tempExt[@"message_attr_authorize_phone"] = ext[@"message_attr_authorize_phone"];
+            }
+            targetMsg.ext = tempExt.copy;
+            [EMClient.sharedClient.chatManager updateMessage:targetMsg completion:^(EMMessage *aMessage, EMError *aError) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }];
+        }
+    }
+}
+
 - (void)getIMConversationList {
 //    return;
     [self.dataArray removeObjectsInRange:NSMakeRange(2, self.dataArray.count-2)];
     NSArray *conversationArray = [EMClient.sharedClient.chatManager getAllConversations];
     for (EMConversation *conversation in conversationArray) {
-        MessageModel *model = MessageModel.new;
-        model.conversation = conversation;
         EMMessage *message = conversation.latestMessage;
         MessageModel *msgModel = [MessageModel yy_modelWithDictionary:message.ext];
         if (message && msgModel.type == 0) {//排除系统消息和官方推荐
+            MessageModel *model = MessageModel.new;
+            model.conversation = conversation;
             model.message = message;
             model.msgTimeStamp = message.timestamp;
             if (message.direction == EMMessageDirectionSend) {

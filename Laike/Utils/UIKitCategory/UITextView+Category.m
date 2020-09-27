@@ -10,6 +10,12 @@
 
 @implementation UITextView (Category)
 
++ (UITextView * _Nonnull (^)(void))tvInit {
+    return  ^() {
+        return UITextView.new;
+    };
+}
+
 + (UITextView * _Nonnull (^)(CGRect))tvFrame {
     return ^(CGRect tvFrame) {
         return [[UITextView alloc] initWithFrame:tvFrame];
@@ -19,6 +25,13 @@
 - (UITextView * _Nonnull (^)(NSString * _Nonnull))tvText {
     return ^(NSString *tvText) {
         self.text = tvText;
+        return self;
+    };
+}
+
+- (UITextView *(^)(UIColor *))tvBkgColor {
+    return ^(UIColor *tvBkgColor) {
+        self.backgroundColor = tvBkgColor;
         return self;
     };
 }

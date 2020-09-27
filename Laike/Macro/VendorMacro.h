@@ -24,5 +24,8 @@
 
 //环信
 #define kHXKey @"1133190930046414#qhiwi"
+#define kHXCustomerServiceId @"ad4726bc96344527b3c37e6526a99d71"
+#define kHXCustomerServiceName @"去海外小客服"
+#define kHXCustomerServiceHead @"http://file.qhiwi.com/merchant/img/consultant/1584669495350999991"
 
 #endif /* VendorMacro_h */

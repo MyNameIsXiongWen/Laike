@@ -37,6 +37,14 @@
     };
 }
 
+- (UIView *(^)(UIColor *))borderColor {
+    return ^(UIColor *borderColor) {
+        self.layer.borderColor = borderColor.CGColor;
+        self.layer.borderWidth = 0.5;
+        return self;
+    };
+}
+
 - (void)showNodataView:(BOOL)show offsetY:(CGFloat)offsetY button:(UIButton *)button{
     for (UIView *vvv in self.subviews) {
         if ([vvv isKindOfClass:NoDataView.class]) {

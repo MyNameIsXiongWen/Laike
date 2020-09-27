@@ -25,7 +25,8 @@
                                     @"HouseDetailConfigTableViewCell",
                                     @"QHWHouseTableViewCell",
                                     @"MainBusinessFileTableViewCell",
-                                    @"MainBusinessRulesTableViewCell"];
+                                    @"MainBusinessRulesTableViewCell",
+                                    @"BrandTableViewCell"];
     }
     return self;
 }
@@ -94,7 +95,12 @@
 
 - (void)handleDetailModelData {
     self.headerViewHeight = 220;
-    CGFloat collectionViewHeight=0;
+    self.detailModel.brandInfo = BrandModel.new;
+    if (self.detailModel.brandInfo) {
+        QHWBaseModel *brandModel = [[QHWBaseModel alloc] configModelIdentifier:@"BrandTableViewCell" Height:95 Data:@[@[self.detailModel.brandInfo, @(NO)]]];
+        brandModel.headerTitle = @"品牌方";
+        [self.tableViewDataArray addObject:brandModel];
+    }
     if (self.detailModel.distributionStatus == 2) {
         NSString *commissionStr = self.detailModel.commissionRate ?: @"";
         NSString *ruleStr = self.detailModel.distributionRules ?: @"";
@@ -114,6 +120,7 @@
             [self.tableViewDataArray addObject:fileModel];
         }
     }
+    CGFloat collectionViewHeight=0;
     switch (self.businessType) {
         case 1:
         {

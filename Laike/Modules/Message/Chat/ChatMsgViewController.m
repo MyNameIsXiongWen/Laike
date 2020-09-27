@@ -37,7 +37,6 @@ static NSInteger const MsgCount = 50;
     // Do any additional setup after loading the view.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewController)];
     [self.view addGestureRecognizer:tap];
-    [self.view addSubview:self.tableView];
     
     [EMClient.sharedClient.chatManager addDelegate:self delegateQueue:nil];
     _msgArray = NSMutableArray.array;
@@ -173,24 +172,37 @@ static NSInteger const MsgCount = 50;
         if ([body.action isEqualToString:@"authorize_cmd_msg"]) {
             NSDictionary *ext = message.ext;
             NSString *messageId = ext[@"message_attr_authorize_from_message_id"];
-            for (ChatMsgModel *tempMsgModel in self.msgArray) {
-                if ([tempMsgModel.data isKindOfClass:MessageChatMsgCellData.class]) {
-                    MessageChatMsgCellData *tempData = (MessageChatMsgCellData *)tempMsgModel.data;
-                    EMMessage *tempEMMsg = tempData.innerMessage;
-                    NSMutableDictionary *tempExt = tempEMMsg.ext.mutableCopy;
-                    if ([messageId isEqualToString:tempEMMsg.messageId]) {
-                        tempExt[@"message_attr_authorize_status"] = ext[@"message_attr_authorize_status"];
-                        tempExt[@"message_attr_authorize_phone"] = ext[@"message_attr_authorize_phone"];
-                        tempEMMsg.ext = tempExt.copy;
-                        [EMClient.sharedClient.chatManager updateMessage:tempEMMsg completion:^(EMMessage *aMessage, EMError *aError) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self.tableView reloadData];
-                            });
-                        }];
-                        break;
-                    }
-                }
+            EMMessage *targetMsg = [EMClient.sharedClient.chatManager getMessageWithMessageId:messageId];
+            NSMutableDictionary *tempExt = targetMsg.ext.mutableCopy;
+            tempExt[@"message_attr_authorize_status"] = ext[@"message_attr_authorize_status"];
+            if ([ext[@"message_attr_authorize_status"] integerValue] == 1) {
+                tempExt[@"message_attr_authorize_phone"] = ext[@"message_attr_authorize_phone"];
             }
+            targetMsg.ext = tempExt.copy;
+            [EMClient.sharedClient.chatManager updateMessage:targetMsg completion:^(EMMessage *aMessage, EMError *aError) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }];
+            
+//            for (ChatMsgModel *tempMsgModel in self.msgArray) {
+//                if ([tempMsgModel.data isKindOfClass:MessageChatMsgCellData.class]) {
+//                    MessageChatMsgCellData *tempData = (MessageChatMsgCellData *)tempMsgModel.data;
+//                    EMMessage *tempEMMsg = tempData.innerMessage;
+//                    NSMutableDictionary *tempExt = tempEMMsg.ext.mutableCopy;
+//                    if ([messageId isEqualToString:tempEMMsg.messageId]) {
+//                        tempExt[@"message_attr_authorize_status"] = ext[@"message_attr_authorize_status"];
+//                        tempExt[@"message_attr_authorize_phone"] = ext[@"message_attr_authorize_phone"];
+//                        tempEMMsg.ext = tempExt.copy;
+//                        [EMClient.sharedClient.chatManager updateMessage:tempEMMsg completion:^(EMMessage *aMessage, EMError *aError) {
+//                            dispatch_async(dispatch_get_main_queue(), ^{
+//                                [self.tableView reloadData];
+//                            });
+//                        }];
+//                        break;
+//                    }
+//                }
+//            }
         }
     }
 }
@@ -427,14 +439,7 @@ static NSInteger const MsgCount = 50;
 - (void)onSelectMessageAvatar:(MessageChatTableViewCell *)cell {
     MessageChatMsgCellData *msgData = cell.messageData;
     if (!msgData.isSelf) {
-//        NSArray *array;
-//        if (msgData.avatarUrl.relativeString.length > 0) {
-//            array = @[msgData.avatarUrl.relativeString];
-//        } else {
-//            array = @[kImageMake(@"")];
-//        }
-//        QHWPhotoBrowser *browser = [[QHWPhotoBrowser alloc]initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH) ImgArray:array.mutableCopy CurrentIndex:0];
-//        [browser show];
+        [CTMediator.sharedInstance CTMediator_viewControllerForVisitorDetailWithVisitorId:self.conversation.conversationId];
     }
 }
 
@@ -477,6 +482,9 @@ static NSInteger const MsgCount = 50;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-100-kBottomDangerHeight-kTopBarHeight) Style:UITableViewStylePlain Object:self];
+        if ([self.conversation.conversationId isEqualToString:kHXCustomerServiceId]) {
+            _tableView.height = kScreenH-60-kBottomDangerHeight-kTopBarHeight;
+        }
         _tableView.backgroundColor = kColorThemef5f5f5;
         for (NSString *cell in self.tableViewCellArray) {
             [_tableView registerClass:NSClassFromString(cell) forCellReuseIdentifier:cell];
@@ -484,6 +492,7 @@ static NSInteger const MsgCount = 50;
         [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
             [self getNewMessage];
         }];
+        [self.view addSubview:_tableView];
     }
     return _tableView;
 }

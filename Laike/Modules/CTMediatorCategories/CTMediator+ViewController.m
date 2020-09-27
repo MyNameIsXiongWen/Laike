@@ -15,7 +15,7 @@ NSString * const kCTMediatorActionNativeActivityViewController = @"nativeActivit
 NSString * const kCTMediatorActionNativeActivityDetailViewController = @"nativeActivityDetailViewController";
 NSString * const kCTMediatorActionNativeMainBusinessDetailViewController = @"nativeMainBusinessDetailViewController";
 NSString * const kCTMediatorActionNativeUserDetailViewController = @"nativeUserDetailViewController";
-NSString * const kCTMediatorActionNativeCommunityViewController = @"nativeCommunityViewController";
+NSString * const kCTMediatorActionNativeCommunityContentViewController = @"nativeCommunityContentViewController";
 NSString * const kCTMediatorActionNativeCommunityDetailViewController = @"nativeCommunityDetailViewController";
 
 NSString * const kCTMediatorActionNativeLoginViewController = @"nativeLoginViewController";
@@ -35,6 +35,9 @@ NSString * const kCTMediatorActionNativeAdvisoryDetailViewController = @"nativeA
 NSString * const kCTMediatorActionNativeBookAppointmentViewController = @"nativeBookAppointmentViewController";
 NSString * const kCTMediatorActionNativeBindCompanyViewController = @"nativeBindCompanyViewController";
 NSString * const kCTMediatorActionNativeCommentReplyViewController = @"nativeCommentReplyViewController";
+NSString * const kCTMediatorActionNativeChatViewController = @"nativeChatViewController";
+NSString * const kCTMediatorActionNativeBrandDetailViewController = @"nativeBrandDetailViewController";
+NSString * const kCTMediatorActionNativeVisitorDetailViewController = @"nativeVisitorDetailViewController";
 
 @implementation CTMediator (Login)
 
@@ -84,7 +87,7 @@ NSString * const kCTMediatorActionNativeCommentReplyViewController = @"nativeCom
 
 - (void)CTMediator_viewControllerForCommunity {
     [self performTarget:kCTMediatorTargetViewController
-                 action:kCTMediatorActionNativeCommunityViewController
+                 action:kCTMediatorActionNativeCommunityContentViewController
                  params:@{}
     shouldCacheTarget:NO];
 }
@@ -226,6 +229,30 @@ NSString * const kCTMediatorActionNativeCommentReplyViewController = @"nativeCom
                  action:kCTMediatorActionNativeCommentReplyViewController
                  params:@{@"commentId": commentId ?: @"",
                           @"communityType": @(communityType)}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForChatWithConversationId:(NSString *)conversationId ReceiverNickName:(NSString *)receiverNickName ReceiverHeadPath:(NSString *)receiverHeadPath {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeChatViewController
+                 params:@{@"conversationId": conversationId ?: @"",
+                          @"receiverNickName": receiverNickName ?: @"",
+                          @"receiverHeadPath": receiverHeadPath ?: @""
+                 }
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForBrandDetailWithBrandId:(NSString *)brandId {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeBrandDetailViewController
+                 params:@{@"brandId": brandId ?: @""}
+    shouldCacheTarget:NO];
+}
+
+- (void)CTMediator_viewControllerForVisitorDetailWithVisitorId:(NSString *)visitorId {
+    [self performTarget:kCTMediatorTargetViewController
+                 action:kCTMediatorActionNativeVisitorDetailViewController
+                 params:@{@"visitorId": visitorId ?: @""}
     shouldCacheTarget:NO];
 }
 

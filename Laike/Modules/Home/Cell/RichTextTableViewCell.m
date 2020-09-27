@@ -94,7 +94,7 @@
         _wkWebView.scrollView.showsVerticalScrollIndicator = NO;
         _wkWebView.navigationDelegate = self;
         _wkWebView.userInteractionEnabled = NO;
-        [self addSubview:_wkWebView];
+        [self.contentView addSubview:_wkWebView];
     }
     return _wkWebView;
 }

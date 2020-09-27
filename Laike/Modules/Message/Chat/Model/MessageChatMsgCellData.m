@@ -92,7 +92,7 @@
         {//语音
             self.cellReuseIdentifier = @"MessageChatVoiceTableViewCell";
             EMVoiceMessageBody *soundElem = (EMVoiceMessageBody *)body;
-            CGFloat bubbleWidth = 60 + soundElem.duration / 60.0 * 140;
+            CGFloat bubbleWidth = 65 + soundElem.duration / 60.0 * 140;
             if(bubbleWidth > 200){
                 bubbleWidth = 200;
             }

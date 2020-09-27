@@ -9,7 +9,7 @@
 #import "HomeViewController.h"
 #import "HomeTableHeaderView.h"
 #import "QHWBaseSubContentTableViewCell.h"
-#import "HomeScrollContentViewController.h"
+#import "HomeArticleScrollContentViewController.h"
 #import "HomeService.h"
 #import "QHWSystemService.h"
 #import "QSchoolService.h"
@@ -62,7 +62,7 @@
     [self getHomeTopBannerDataRequest];
     dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
         if (self.contentCell && self.contentCell.viewControllers.count > 0) {
-            HomeScrollContentViewController *vc = self.contentCell.viewControllers[self.contentCell.pageContentView.contentViewCurrentIndex];
+            HomeArticleScrollContentViewController *vc = self.contentCell.viewControllers[self.contentCell.pageContentView.contentViewCurrentIndex];
             [vc getMainData];
         }
         self.homeService.consultantArray = self.systemService.consultantArray;
@@ -173,17 +173,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     _contentCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(QHWBaseSubContentTableViewCell.class)];
-    NSArray *identifierArray = @[@"house", @"migration", @"student", @"study", @"treatment"];
+    NSArray *statusArray = @[@(1), @(3), @(4), @(2), @(102001)];
     if (_contentCell.viewControllers.count == 0) {
         NSMutableArray *contentVCs = [NSMutableArray array];
-        for (int i=0; i<identifierArray.count; i++) {
-            HomeScrollContentViewController *vc = [[HomeScrollContentViewController alloc] init];
-            vc.identifier = identifierArray[i];
-            vc.pageType = 1;
+        for (int i=0; i<statusArray.count; i++) {
+            HomeArticleScrollContentViewController *vc = [[HomeArticleScrollContentViewController alloc] init];
+            vc.businessType = [statusArray[i] integerValue];
             [contentVCs addObject:vc];
         }
         _contentCell.viewControllers = contentVCs;
-        _contentCell.pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kBottomBarHeight-kStatusBarHeight-32) childVCs:contentVCs parentVC:self delegate:self];
+        _contentCell.pageContentView = [[QHWPageContentView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kStatusBarHeight-kBottomBarHeight-32) childVCs:contentVCs parentVC:self delegate:self];
         [_contentCell.contentView addSubview:_contentCell.pageContentView];
     }
     return _contentCell;
@@ -228,11 +227,11 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, 0, kScreenW, kScreenH-kBottomBarHeight) Style:UITableViewStylePlain Object:self];
+        _tableView = [UICreateView initWithRecognizeSimultaneouslyFrame:CGRectMake(0, kStatusBarHeight, kScreenW, kScreenH-kStatusBarHeight-kBottomBarHeight) Style:UITableViewStylePlain Object:self];
         _tableView.scrollsToTop = NO;
         _tableView.tableHeaderView = self.homeTableHeaderView;
-        _tableView.rowHeight = kScreenH-kBottomBarHeight-kStatusBarHeight-32;
-        _tableView.sectionHeaderHeight = kStatusBarHeight+32;
+        _tableView.rowHeight = kScreenH-kStatusBarHeight-kBottomBarHeight-32;
+        _tableView.sectionHeaderHeight = 32;
         [_tableView registerClass:QHWBaseSubContentTableViewCell.class forCellReuseIdentifier:NSStringFromClass(QHWBaseSubContentTableViewCell.class)];
         [_tableView registerClass:HomeCommunityTypeHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(HomeCommunityTypeHeaderView.class)];
         [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
@@ -293,7 +292,7 @@
 
 - (QHWTabScrollView *)tabScrollView {
     if (!_tabScrollView) {
-        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenW, 32)];
+        _tabScrollView = [[QHWTabScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 32)];
         _tabScrollView.itemWidthType = ItemWidthTypeFixedAdaptive;
         _tabScrollView.itemSelectedColor = kColorTheme21a8ff;
         _tabScrollView.itemUnselectedColor = kColorTheme2a303c;

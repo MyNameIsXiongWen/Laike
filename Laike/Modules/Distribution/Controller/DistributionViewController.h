@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QHWTabScrollView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DistributionViewController : UIViewController
+
+@end
+
+@interface DistributionTypeHeaderView : UITableViewHeaderFooterView
+
+@property (nonatomic, strong) QHWTabScrollView *tabScrollView;
 
 @end
 

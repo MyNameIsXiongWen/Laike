@@ -33,10 +33,10 @@
         [SVProgressHUD showInfoWithStatus:@"请输入手机号"];
         return;
     }
-    if (![phone isValidatePhone]) {
-        [SVProgressHUD showInfoWithStatus:@"手机号格式错误"];
-        return;
-    }
+//    if (![phone isValidatePhone]) {
+//        [SVProgressHUD showInfoWithStatus:@"手机号格式错误"];
+//        return;
+//    }
     self.phone = phone;
     NSMutableDictionary *params = @{@"mobileNumber": phone, @"type": @"401", @"verifyType": self.verifyType ?: @""}.mutableCopy;
     if (self.imageCode.length > 0 && self.uuid.length > 0) {

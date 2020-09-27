@@ -29,15 +29,16 @@
 }
 
 - (void)addTableView {
-    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-90-48) Style:UITableViewStylePlain Object:self];
+//    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-100-48) Style:UITableViewStylePlain Object:self];
+    self.tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-kTopBarHeight-32-kBottomBarHeight) Style:UITableViewStylePlain Object:self];
     self.tableView.rowHeight = 80;
     [self.tableView registerClass:QHWGeneralTableViewCell.class forCellReuseIdentifier:NSStringFromClass(QHWGeneralTableViewCell.class)];
     [self.tableView registerClass:VisitorTableViewCell.class forCellReuseIdentifier:NSStringFromClass(VisitorTableViewCell.class)];
     [self.tableView registerClass:RelatedToMeTableViewCell.class forCellReuseIdentifier:NSStringFromClass(RelatedToMeTableViewCell.class)];
-    [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
-        self.cardService.itemPageModel.pagination.currentPage = 1;
-        [self getMainData];
-    }];
+//    [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
+//        self.cardService.itemPageModel.pagination.currentPage = 1;
+//        [self getMainData];
+//    }];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
         self.cardService.itemPageModel.pagination.currentPage++;
         [self getMainData];
@@ -79,6 +80,28 @@
     } else if (self.cardType == 2) {
 //        CardModel *model = (CardModel *)self.cardService.tableViewDataArray[indexPath.row].data;
 //        [CTMediator.sharedInstance CTMediator_viewControllerForCommunityDetailWithCommunityId:model.businessId CommunityType:2];
+    }
+}
+
+#pragma mark ------------UIScrollView-------------
+//判断屏幕触碰状态
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    NSLog(@"接触屏幕");
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    NSLog(@"离开屏幕");
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!self.vcCanScroll) {
+        scrollView.contentOffset = CGPointZero;
+    }
+    NSLog(@"subScroll======%f", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y <= 0) {
+        self.vcCanScroll = NO;
+        scrollView.contentOffset = CGPointZero;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CRMSwipeLeaveTop" object:nil];//到顶通知父视图改变状态
     }
 }
 
@@ -138,7 +161,11 @@
 
 - (void)configCellData:(id)data {
     CardModel *model = (CardModel *)data;
-    [self.leftImageView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+    if (model.headPath.length > 0) {
+        [self.leftImageView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.headPath)]];
+    } else {
+        self.leftImageView.image = [UIImage imageWithColor:kColorThemefff size:CGSizeMake(50, 50) text:model.realName textAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff, NSFontAttributeName: kMediumFontTheme18} circular:YES];
+    }
     self.titleLabel.text = model.nickname;
     if (model.cardType == 1) {
         self.subTitleLabel.text = model.lastTime;

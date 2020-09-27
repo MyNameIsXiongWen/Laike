@@ -112,15 +112,15 @@
 }
 
 - (void)addTableView {
-    CGFloat headerHeight = self.crmType == 1 ? 40 : 0;
-    CGFloat tableHeight = self.interval ? (kScreenH-kTopBarHeight-138-headerHeight) : (kScreenH-kTopBarHeight-138-headerHeight-kBottomBarHeight);
+    CGFloat headerHeight = self.crmType == 1 ? 40 : 0;//筛选view高度
+    CGFloat tableHeight = self.interval ? (kScreenH-kTopBarHeight-32-headerHeight) : (kScreenH-kTopBarHeight-295-headerHeight-kBottomBarHeight);
     self.tableView = [UICreateView initWithFrame:CGRectMake(0, headerHeight, kScreenW, tableHeight) Style:UITableViewStylePlain Object:self];
     self.tableView.rowHeight = 120;
     [self.tableView registerClass:CRMTableViewCell.class forCellReuseIdentifier:NSStringFromClass(CRMTableViewCell.class)];
-    [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
-        self.crmService.itemPageModel.pagination.currentPage = 1;
-        [self getMainData];
-    }];
+//    [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:self.tableView RefreshBlock:^{
+//        self.crmService.itemPageModel.pagination.currentPage = 1;
+//        [self getMainData];
+//    }];
     [QHWRefreshManager.sharedInstance normalFooterWithScrollView:self.tableView RefreshBlock:^{
         self.crmService.itemPageModel.pagination.currentPage++;
         [self getMainData];
@@ -241,6 +241,28 @@
     }
     self.filterBtnView.dataArray = self.filterDataArray;
     [self getListDataWithFirstPage];
+}
+
+#pragma mark ------------UIScrollView-------------
+//判断屏幕触碰状态
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    NSLog(@"接触屏幕");
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    NSLog(@"离开屏幕");
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (!self.vcCanScroll) {
+        scrollView.contentOffset = CGPointZero;
+    }
+    NSLog(@"subScroll======%f", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y <= 0) {
+        self.vcCanScroll = NO;
+        scrollView.contentOffset = CGPointZero;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CRMSwipeLeaveTop" object:nil];//到顶通知父视图改变状态
+    }
 }
 
 /*

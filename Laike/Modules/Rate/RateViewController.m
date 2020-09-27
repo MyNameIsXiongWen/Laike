@@ -26,7 +26,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"汇率转换";
-    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
+//    [self.kNavigationView.rightBtn setImage:kImageMake(@"global_share") forState:0];
+    [self.kNavigationView.rightBtn setTitle:@"转发" forState:0];
     [self.view addSubview:self.moneyView];
     [self.view addSubview:self.keyboardView];
     [self.view addSubview:UIView.viewFrame(CGRectMake(10, self.moneyView.bottom, kScreenW-20, 0.5)).bkgColor(kColorThemeeee)];

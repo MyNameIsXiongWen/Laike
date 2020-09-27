@@ -6,12 +6,12 @@
 //  Copyright © 2020 xiaobu. All rights reserved.
 //
 
-#import "QHWShadowTableViewCell.h"
+#import <UIKit/UIKit.h>
 #import "QHWCycleScrollView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeBannerTableViewCell : QHWShadowTableViewCell <QHWBaseCellProtocol>
+@interface HomeBannerTableViewCell : UITableViewCell <QHWBaseCellProtocol>
 
 @property (nonatomic, strong) QHWCycleScrollView *bannerView;
 

@@ -162,7 +162,7 @@
 - (UIButton *)shareBtn {
     if (!_shareBtn) {
         _shareBtn = UIButton.btnInit().btnCornerRadius(11).btnTitle(@" 微信推广").btnFont(kFontTheme11).btnTitleColor(kColorTheme444).btnImage(kImageMake(@"wechat_share")).btnBorderColor(kColorTheme444).btnAction(self, @selector(clickShareBtn));
-        [self addSubview:_shareBtn];
+        [self.contentView addSubview:_shareBtn];
     }
     return _shareBtn;
 }

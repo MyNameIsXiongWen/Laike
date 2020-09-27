@@ -59,7 +59,7 @@
 -(void)addChildViewControllers {
     NSArray *controllers = @[@"HomeViewController", @"MessageViewController", @"CRMViewController", @"DistributionViewController", @"MineViewController"];
     NSArray *icon = @[@"tabbar_home", @"tabbar_message", @"", @"tabbar_community", @"tabbar_mine"];
-    NSArray *titleArray = @[@"首页", @"消息", @"客户", @"分销", @"我的"];
+    NSArray *titleArray = @[@"首页", @"微聊", @"客户", @"分销", @"我的"];
     for (int i = 0; i < controllers.count; i++) {
         id vc = [NSClassFromString(controllers[i]) new];
         QHWNavigationController *navC = [[QHWNavigationController alloc] initWithRootViewController:vc];
@@ -77,13 +77,13 @@
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-    QHWNavigationController *navC = (QHWNavigationController *)viewController;
-    if ([NSStringFromClass(navC.topViewController.class) isEqualToString:@"CRMViewController"]) {
-        if (UserModel.shareUser.bindStatus == 2) {
-            [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
-            return NO;
-        }
-    }
+//    QHWNavigationController *navC = (QHWNavigationController *)viewController;
+//    if ([NSStringFromClass(navC.topViewController.class) isEqualToString:@"CRMViewController"]) {
+//        if (UserModel.shareUser.bindStatus == 2) {
+//            [CTMediator.sharedInstance CTMediator_viewControllerForBindCompany];
+//            return NO;
+//        }
+//    }
     return YES;
 }
 

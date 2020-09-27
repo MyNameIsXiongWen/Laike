@@ -128,7 +128,11 @@
 - (ChatInputViewController *)inputController {
     if (!_inputController) {
         _inputController = [[ChatInputViewController alloc] init];
-        _inputController.view.frame = CGRectMake(0, kScreenH-100-kBottomDangerHeight, kScreenW, 100+kBottomDangerHeight);
+        if ([self.conversation.conversationId isEqualToString:kHXCustomerServiceId]) {
+            _inputController.view.frame = CGRectMake(0, kScreenH-60-kBottomDangerHeight, kScreenW, 60+kBottomDangerHeight);
+        } else {
+            _inputController.view.frame = CGRectMake(0, kScreenH-100-kBottomDangerHeight, kScreenW, 100+kBottomDangerHeight);
+        }
         _inputController.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
         _inputController.delegate = self;
         _inputController.conversation = self.conversation;

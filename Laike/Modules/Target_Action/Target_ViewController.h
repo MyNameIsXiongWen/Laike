@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)Action_nativeUserDetailViewController:(NSDictionary *)params;
 
-- (void)Action_nativeCommunityViewController:(NSDictionary *)params;
+- (void)Action_nativeCommunityContentViewController:(NSDictionary *)params;
 - (void)Action_nativeCommunityDetailViewController:(NSDictionary *)params;
 
 - (void)Action_nativeH5ViewController:(NSDictionary *)params;
@@ -54,6 +54,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)Action_nativeBindCompanyViewController:(NSDictionary *)params;
 
 - (void)Action_nativeCommentReplyViewController:(NSDictionary *)params;
+
+- (void)Action_nativeChatViewController:(NSDictionary *)params;
+
+- (void)Action_nativeBrandDetailViewController:(NSDictionary *)params;
+
+- (void)Action_nativeVisitorDetailViewController:(NSDictionary *)params;
 
 @end
 
