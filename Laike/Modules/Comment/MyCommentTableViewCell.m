@@ -168,9 +168,7 @@
 
 - (UILabel *)originalContentLabel {
     if (!_originalContentLabel) {
-        _originalContentLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme666).labelNumberOfLines(0);
-        _originalContentLabel.userInteractionEnabled = YES;
-        [_originalContentLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOriginalContentLabel)]];
+        _originalContentLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme666).labelNumberOfLines(0).labelAction(self, @selector(tapOriginalContentLabel));
         [self.originalContentView addSubview:_originalContentLabel];
     }
     return _originalContentLabel;

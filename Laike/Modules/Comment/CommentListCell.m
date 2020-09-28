@@ -98,9 +98,7 @@
 #pragma mark -----------UI-----------
 - (UIImageView *)avtarImgView {
     if (!_avtarImgView) {
-        _avtarImgView = UIImageView.ivInit().ivCornerRadius(15);
-        _avtarImgView.userInteractionEnabled = YES;
-        [_avtarImgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAvatar)]];
+        _avtarImgView = UIImageView.ivInit().ivCornerRadius(15).ivAction(self, @selector(clickAvatar));
         [self.contentView addSubview:_avtarImgView];
     }
     return _avtarImgView;
@@ -126,9 +124,7 @@
 
 - (UILabel *)contentLabel {
     if (!_contentLabel) {
-        _contentLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme6d7278).labelTextAlignment(0);
-        _contentLabel.userInteractionEnabled = YES;
-        [_contentLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(replyComment)]];
+        _contentLabel = UILabel.labelInit().labelFont(kFontTheme14).labelTitleColor(kColorTheme6d7278).labelTextAlignment(0).labelAction(self, @selector(replyComment));
         [self.contentView addSubview:_contentLabel];
     }
     return _contentLabel;

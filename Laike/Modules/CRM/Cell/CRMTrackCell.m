@@ -111,9 +111,7 @@
 
 - (UIView *)contentLabelView {
     if (!_contentLabelView) {
-        _contentLabelView = UIView.viewInit();
-        _contentLabelView.userInteractionEnabled = YES;
-        [_contentLabelView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickContentLabel)]];
+        _contentLabelView = UIView.viewInit().viewAction(self, @selector(clickContentLabel));
         [self.contentView addSubview:_contentLabelView];
     }
     return _contentLabelView;

@@ -19,5 +19,6 @@
 - (UIImageView *(^)(NSString *ivImageUrl))ivImageUrl;
 - (UIImageView *(^)(CGFloat ivCornerRadius))ivCornerRadius;
 - (UIImageView *(^)(UIColor *tfBorderColor))ivBorderColor;
+- (UIImageView *(^)(id target, SEL ivSEL))ivAction;
 
 @end

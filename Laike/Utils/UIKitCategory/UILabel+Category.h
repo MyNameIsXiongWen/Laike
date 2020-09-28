@@ -21,6 +21,7 @@
 - (UILabel *(^)(BOOL labelCopyEnable))labelCopyEnable;
 - (UILabel *(^)(UIColor *tfBorderColor))labelBorderColor;
 - (UILabel *(^)(CGFloat tfCornerRadius))labelCornerRadius;
+- (UILabel *(^)(id target, SEL labelSEL))labelAction;
 //- (UILabel *(^)(BOOL labelCopyEnable, id target, SEL longPressAction))labelCopyEnable;
 
 + (CGFloat)calculateHeightWithString:(NSString*)string lineSpace:(NSInteger)lineSpace paragraphSpace:(NSInteger)paragraphSpace font:(UIFont*)font size:(CGSize)size label:(UILabel*)label;

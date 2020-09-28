@@ -76,4 +76,12 @@
     };
 }
 
+- (UIImageView *(^)(id, SEL))ivAction {
+    return ^(id target, SEL ivSEL) {
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:target action:ivSEL]];
+        return self;
+    };
+}
+
 @end

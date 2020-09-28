@@ -57,9 +57,7 @@
 #pragma mark ------------UI-------------
 - (UIView *)commentView {
     if (!_commentView) {
-        _commentView = [UICreateView initWithFrame:CGRectMake(15, 10, kScreenW-150, 30) BackgroundColor:kColorThemef5f5f5 CornerRadius:15];
-        _commentView.userInteractionEnabled = YES;
-        [_commentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCommentView)]];
+        _commentView = UIView.viewFrame(CGRectMake(15, 10, kScreenW-150, 30)).bkgColor(kColorThemef5f5f5).cornerRadius(15).viewAction(self, @selector(clickCommentView));
         UILabel *label = [UICreateView initWithFrame:CGRectMake(15, 5, 100, 20) Text:@"写评论" Font:kFontTheme14 TextColor:kColorThemea4abb3 BackgroundColor:UIColor.clearColor];
         [_commentView addSubview:label];
     }

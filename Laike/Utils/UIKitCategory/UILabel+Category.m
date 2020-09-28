@@ -98,6 +98,14 @@
     };
 }
 
+- (UILabel *(^)(id, SEL))labelAction {
+    return ^(id target, SEL labelSEL) {
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:target action:labelSEL]];
+        return self;
+    };
+}
+
 - (void)longPressGes:(UILongPressGestureRecognizer *)recognizer {
     UIMenuController *menu = [UIMenuController sharedMenuController];
     if (!menu.isMenuVisible) {

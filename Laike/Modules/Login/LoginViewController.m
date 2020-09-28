@@ -43,8 +43,7 @@ static NSInteger const CodeCountTime = 60;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView)]];
-    self.view.backgroundColor = UIColor.whiteColor;
+    self.view.viewAction(self, @selector(tapView)).bkgColor(kColorThemefff);
     
     self.kNavigationView.title = @"注册登录";
     [self.kNavigationView.leftBtn setImage:nil forState:0];
@@ -201,18 +200,14 @@ static NSInteger const CodeCountTime = 60;
 
 - (UILabel *)userProtocolLabel {
     if (!_userProtocolLabel) {
-        _userProtocolLabel = UILabel.labelFrame(CGRectMake(15, self.tipLabel.bottom+10, 75, 17)).labelText(@"《服务协议》").labelFont(kFontTheme12).labelTitleColor(kColorTheme5c98f8);
-        _userProtocolLabel.userInteractionEnabled = YES;
-        [_userProtocolLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapUserProtocol)]];
+        _userProtocolLabel = UILabel.labelFrame(CGRectMake(15, self.tipLabel.bottom+10, 75, 17)).labelText(@"《服务协议》").labelFont(kFontTheme12).labelTitleColor(kColorTheme5c98f8).labelAction(self, @selector(tapUserProtocol));
     }
     return _userProtocolLabel;
 }
 
 - (UILabel *)userPrivacyLabel {
     if (!_userPrivacyLabel) {
-        _userPrivacyLabel = UILabel.labelFrame(CGRectMake(_userProtocolLabel.right+5, _userProtocolLabel.y, 75, 17)).labelText(@"《隐私协议》").labelFont(kFontTheme12).labelTitleColor(kColorTheme5c98f8);
-        _userPrivacyLabel.userInteractionEnabled = YES;
-        [_userPrivacyLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPrivacyProtocol)]];
+        _userPrivacyLabel = UILabel.labelFrame(CGRectMake(_userProtocolLabel.right+5, _userProtocolLabel.y, 75, 17)).labelText(@"《隐私协议》").labelFont(kFontTheme12).labelTitleColor(kColorTheme5c98f8).labelAction(self, @selector(tapPrivacyProtocol));
     }
     return _userPrivacyLabel;
 }

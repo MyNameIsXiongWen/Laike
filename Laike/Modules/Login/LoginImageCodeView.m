@@ -66,9 +66,7 @@
 
 - (UIImageView *)codeImgView {
     if (!_codeImgView) {
-        _codeImgView = UIImageView.ivFrame(CGRectMake(15, 15, self.width-30, 100)).ivMode(UIViewContentModeScaleAspectFit);
-        _codeImgView.userInteractionEnabled = YES;
-        [_codeImgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCodeImgView)]];
+        _codeImgView = UIImageView.ivFrame(CGRectMake(15, 15, self.width-30, 100)).ivMode(UIViewContentModeScaleAspectFit).ivAction(self, @selector(tapCodeImgView));
     }
     return _codeImgView;
 }

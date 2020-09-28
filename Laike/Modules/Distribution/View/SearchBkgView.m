@@ -20,8 +20,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.userInteractionEnabled = YES;
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSearchView)]];
+        self.viewAction(self, @selector(tapSearchView));
+
         _searchBgView = UIView.viewFrame(CGRectMake(13, 0, self.width-26, 32)).borderColor(kColorThemeeee).cornerRadius(16);
         [self addSubview:_searchBgView];
         

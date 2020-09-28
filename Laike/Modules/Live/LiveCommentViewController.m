@@ -189,9 +189,7 @@
 #pragma mark -----------UI-----------
 - (UIImageView *)avtarImgView {
     if (!_avtarImgView) {
-        _avtarImgView = UIImageView.ivInit().ivCornerRadius(15);
-        _avtarImgView.userInteractionEnabled = YES;
-        [_avtarImgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAvatar)]];
+        _avtarImgView = UIImageView.ivInit().ivCornerRadius(15).ivAction(self, @selector(clickAvatar));
         [self.contentView addSubview:_avtarImgView];
     }
     return _avtarImgView;

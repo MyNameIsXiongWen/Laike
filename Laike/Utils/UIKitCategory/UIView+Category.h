@@ -15,6 +15,7 @@
 - (UIView *(^)(CGFloat cornerRadius))cornerRadius;
 - (UIView *(^)(UIColor *bkgColor))bkgColor;
 - (UIView *(^)(UIColor *borderColor))borderColor;
+- (UIView *(^)(id target, SEL viewSEL))viewAction;
 
 - (void)showNodataView:(BOOL)show offsetY:(CGFloat)offsetY button:(UIButton *)button;
 - (void)showNodataView:(BOOL)show offsetY:(CGFloat)offsetY Text:(NSString *)text;

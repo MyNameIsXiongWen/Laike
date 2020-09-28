@@ -31,17 +31,21 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
+        UIView *bkgView = UIView.viewFrame(CGRectMake(0, 0, kScreenW, 45)).viewAction(self, @selector(clickMore));
+        [self addSubview:bkgView];
+        
         self.titleLabel = UILabel.labelFrame(CGRectMake(10, 5, 70, 40)).labelFont(kMediumFontTheme16).labelTitleColor(kColorTheme000).labelText(@"推荐品牌");
         [self.titleLabel sizeToFit];
         self.titleLabel.height = 40;
         self.descLabel = UILabel.labelFrame(CGRectMake(self.titleLabel.right+10, 5, 200, 40)).labelFont(kFontTheme14).labelTitleColor(kColorTheme999).labelText(@"精选全球优质品牌");
         [self.descLabel sizeToFit];
         self.descLabel.height = 40;
-        self.rightArrowBtn = UIButton.btnFrame(CGRectMake(self.descLabel.right+10, 5, kScreenW-self.descLabel.right-20, 40)).btnAction(self, @selector(clickMore)).btnImage(kImageMake(@"arrow_right_gray"));
+        self.rightArrowBtn = UIButton.btnFrame(CGRectMake(self.descLabel.right+10, 5, kScreenW-self.descLabel.right-20, 40)).btnImage(kImageMake(@"arrow_right_gray"));
         self.rightArrowBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [self addSubview:self.titleLabel];
-        [self addSubview:self.descLabel];
-        [self addSubview:self.rightArrowBtn];
+        self.rightArrowBtn.userInteractionEnabled = NO;
+        [bkgView addSubview:self.titleLabel];
+        [bkgView addSubview:self.descLabel];
+        [bkgView addSubview:self.rightArrowBtn];
     }
     return self;
 }

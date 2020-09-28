@@ -89,8 +89,7 @@
 - (UserInfoView *)userInfoView {
     if (!_userInfoView) {
         _userInfoView = [[UserInfoView alloc] initWithFrame:CGRectMake(0, 60, kScreenW, 70)];
-        _userInfoView.avatarImgView.userInteractionEnabled = YES;
-        [_userInfoView.avatarImgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickUserInfoView)]];
+        _userInfoView.viewAction(self, @selector(clickUserInfoView));
         [self addSubview:_userInfoView];
     }
     return _userInfoView;

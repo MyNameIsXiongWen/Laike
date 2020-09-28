@@ -49,16 +49,13 @@
         self.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         self.popType = PopTypeBottom;
         [self configUI];
-        self.userInteractionEnabled = YES;
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
+        self.viewAction(self, @selector(dismiss));
     }
     return self;
 }
 
 - (void)configUI {
-    self.bkgView = UIView.viewFrame(CGRectMake(10, 0, kScreenW-20, 530)).bkgColor(kColorThemefff);
-    self.bkgView.userInteractionEnabled = YES;
-    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
+    self.bkgView = UIView.viewFrame(CGRectMake(10, 0, kScreenW-20, 530)).bkgColor(kColorThemefff).viewAction(self, @selector(dismiss));
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
     
@@ -276,10 +273,8 @@
         rightBtnView.logoLabel.text = @"朋友圈";
         rightBtnView.tag = 2;
         
-        leftBtnView.userInteractionEnabled = YES;
-        [leftBtnView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBtnView:)]];
-        rightBtnView.userInteractionEnabled = YES;
-        [rightBtnView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBtnView:)]];
+        leftBtnView.viewAction(self, @selector(clickBtnView:));
+        rightBtnView.viewAction(self, @selector(clickBtnView:));
         [self addSubview:leftBtnView];
         [self addSubview:rightBtnView];
     }

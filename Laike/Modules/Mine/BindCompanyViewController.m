@@ -29,7 +29,7 @@ static NSString *const ServiceHotLine = @"400-877-1008";
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:remindString];
     [attr addAttributes:@{NSForegroundColorAttributeName: kColorTheme21a8ff} range:[remindString rangeOfString:ServiceHotLine]];
     self.remindLabel.attributedText = attr;
-    [self.remindLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:ServiceHotLine action:@selector(clickServiceHotLine)]];
+    self.remindLabel.labelAction(self, @selector(clickServiceHotLine));
     
 //    self.nameTextField.text = @"w19092319";
     [self.nameTextField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];

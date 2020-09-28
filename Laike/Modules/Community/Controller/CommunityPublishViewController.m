@@ -262,8 +262,7 @@
         _businessIndustryView = [[IndustryView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 40)];
         _businessIndustryView.leftLabel.text = @"关联业务";
         _businessIndustryView.industryLabel.text = @"请选择关联业务";
-        _businessIndustryView.userInteractionEnabled = YES;
-        [_businessIndustryView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBusinessIndustryView)]];
+        _businessIndustryView.viewAction(self, @selector(clickBusinessIndustryView));
     }
     return _businessIndustryView;
 }
@@ -273,8 +272,7 @@
         _productIndustryView = [[IndustryView alloc] initWithFrame:CGRectMake(0, self.businessIndustryView.bottom, kScreenW, 40)];
         _productIndustryView.leftLabel.text = @"关联产品";
         _productIndustryView.industryLabel.text = @"请选择关联产品";
-        _productIndustryView.userInteractionEnabled = YES;
-        [_productIndustryView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickProductIndustryView)]];
+        _productIndustryView.viewAction(self, @selector(clickProductIndustryView));
     }
     return _productIndustryView;
 }

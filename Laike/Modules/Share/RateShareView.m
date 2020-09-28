@@ -40,8 +40,7 @@
         self.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         self.popType = PopTypeBottom;
         [self configUI];
-        self.userInteractionEnabled = YES;
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
+        self.viewAction(self, @selector(dismiss));
     }
     return self;
 }
@@ -51,9 +50,7 @@
     self.scrollView.contentSize = CGSizeMake(self.scrollView.width, 170+450+110);
     [self addSubview:self.scrollView];
     
-    self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, self.scrollView.contentSize.height)).bkgColor(kColorThemefb4d56);
-    self.bkgView.userInteractionEnabled = YES;
-    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
+    self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, self.scrollView.contentSize.height)).bkgColor(kColorThemefb4d56).viewAction(self, @selector(dismiss));
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self.scrollView addSubview:self.bkgView];
     

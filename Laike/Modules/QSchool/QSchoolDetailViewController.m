@@ -173,9 +173,7 @@
     if (self == [super initWithFrame:frame]) {
         self.coverImgView = UIImageView.ivFrame(self.bounds);
         [self addSubview:self.coverImgView];
-        self.titleLabel = UILabel.labelFrame(CGRectMake((self.width-100)/2.0, (self.height-40)/2.0, 100, 40)).labelText(@"点击查看详情").labelTitleColor(kColorThemefff).labelBkgColor([UIColor colorWithWhite:0 alpha:0.3]).labelFont(kFontTheme14).labelTextAlignment(NSTextAlignmentCenter);
-        self.titleLabel.userInteractionEnabled = YES;
-        [self.titleLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickPDFView)]];
+        self.titleLabel = UILabel.labelFrame(CGRectMake((self.width-100)/2.0, (self.height-40)/2.0, 100, 40)).labelText(@"点击查看详情").labelTitleColor(kColorThemefff).labelBkgColor([UIColor colorWithWhite:0 alpha:0.3]).labelFont(kFontTheme14).labelTextAlignment(NSTextAlignmentCenter).labelAction(self, @selector(clickPDFView));
         [self addSubview:self.titleLabel];
     }
     return self;

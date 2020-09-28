@@ -36,8 +36,7 @@
         
         [self addSubview:UIView.viewFrame(CGRectMake(0, 59.0, self.width, 0.5)).bkgColor(kColorThemeeee)];
         
-        self.userInteractionEnabled = YES;
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSelfView)]];
+        self.viewAction(self, @selector(tapSelfView));
     }
     return self;
 }

@@ -97,9 +97,7 @@
 
 - (UILabel *)addLabel {
     if (!_addLabel) {
-        _addLabel = [UICreateView initWithFrame:CGRectMake(self.addBtn.right, self.tableView.bottom, kScreenW-110, 40) Text:@"新增常用语（0/20）" Font:kFontTheme14 TextColor:kColorThemefb4d56 BackgroundColor:UIColor.whiteColor];
-        _addLabel.userInteractionEnabled = YES;
-        [_addLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAddBtn)]];
+        _addLabel = UILabel.labelFrame(CGRectMake(self.addBtn.right, self.tableView.bottom, kScreenW-110, 40)).labelText(@"新增常用语（0/20）").labelFont(kFontTheme14).labelTitleColor(kColorThemefb4d56).labelAction(self, @selector(clickAddBtn));;
     }
     return _addLabel;
 }

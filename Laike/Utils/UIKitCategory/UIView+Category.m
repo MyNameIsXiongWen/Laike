@@ -45,6 +45,14 @@
     };
 }
 
+- (UIView *(^)(id, SEL))viewAction {
+    return ^(id target, SEL viewSEL) {
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:target action:viewSEL]];
+        return self;
+    };
+}
+
 - (void)showNodataView:(BOOL)show offsetY:(CGFloat)offsetY button:(UIButton *)button{
     for (UIView *vvv in self.subviews) {
         if ([vvv isKindOfClass:NoDataView.class]) {

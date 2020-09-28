@@ -584,9 +584,7 @@
 #pragma mark ------------UI------------
 - (UIImageView *)logoImgView {
     if (!_logoImgView) {
-        _logoImgView = UIImageView.ivInit().ivCornerRadius(25);
-        _logoImgView.userInteractionEnabled = YES;
-        [_logoImgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickStoreLogo)]];
+        _logoImgView = UIImageView.ivInit().ivCornerRadius(25).ivAction(self, @selector(clickStoreLogo));
         [self addSubview:_logoImgView];
     }
     return _logoImgView;

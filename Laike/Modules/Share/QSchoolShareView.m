@@ -47,16 +47,13 @@
         self.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
         self.popType = PopTypeBottom;
         [self configUI];
-        self.userInteractionEnabled = YES;
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
+        self.viewAction(self, @selector(dismiss));
     }
     return self;
 }
 
 - (void)configUI {
-    self.bkgView = UIView.viewFrame(CGRectMake(10, 0, kScreenW-20, 530)).bkgColor(kColorThemefff);
-    self.bkgView.userInteractionEnabled = YES;
-    [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
+    self.bkgView = UIView.viewFrame(CGRectMake(10, 0, kScreenW-20, 530)).bkgColor(kColorThemefff).viewAction(self, @selector(dismiss));
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
     [self addSubview:self.bkgView];
     

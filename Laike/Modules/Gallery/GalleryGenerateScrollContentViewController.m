@@ -56,8 +56,7 @@
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(20, 10, kScreenW-40, (kScreenH-kTopBarHeight-48) * 2 / 3)];
-        _scrollView.userInteractionEnabled = YES;
-        [_scrollView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickAddBtn)]];
+        _scrollView.viewAction(self, @selector(clickAddBtn));
         
         UIView *line1 = UIView.viewFrame(CGRectMake(_scrollView.width/4.0, _scrollView.height/2.0, _scrollView.width/2.0, 1)).bkgColor(kColorThemea4abb3);
         UIView *line2 = UIView.viewFrame(CGRectMake(_scrollView.width/2.0, _scrollView.height/4.0, 1, _scrollView.height/2.0)).bkgColor(kColorThemea4abb3);

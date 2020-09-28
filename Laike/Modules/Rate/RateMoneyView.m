@@ -187,12 +187,10 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.userInteractionEnabled = YES;
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSubView)]];
+        self.viewAction(self, @selector(tapSubView));
         
         self.currencyView = [[CurrencyView alloc] initWithFrame:CGRectMake(10, 0, 150, 40)];
-        self.currencyView.userInteractionEnabled = YES;
-        [self.currencyView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapCurrencyView)]];
+        self.currencyView.viewAction(self, @selector(tapCurrencyView));
         [self addSubview:self.currencyView];
         
         self.moneyLabel = UILabel.labelFrame(CGRectMake(self.currencyView.right + 10, 0, self.width-30-self.currencyView.width, 40)).labelFont(kMediumFontTheme18).labelTitleColor(kColorTheme2a303c).labelTextAlignment(NSTextAlignmentRight);

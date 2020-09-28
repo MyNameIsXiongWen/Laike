@@ -171,8 +171,7 @@
 - (UIView *)commentView {
     if (!_commentView) {
         _commentView = [UICreateView initWithFrame:CGRectMake(15, 5, kScreenW-30, 40) BackgroundColor:kColorThemef5f5f5 CornerRadius:20];
-        _commentView.userInteractionEnabled = YES;
-        [_commentView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCommentView)]];
+        _commentView.viewAction(self, @selector(clickCommentView));
         UILabel *label = [UICreateView initWithFrame:CGRectMake(15, 0, 100, 40) Text:@"写评论" Font:kFontTheme14 TextColor:kColorThemea4abb3 BackgroundColor:UIColor.clearColor];
         [_commentView addSubview:label];
     }
