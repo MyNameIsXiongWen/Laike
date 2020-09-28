@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class CustomerData;
 @interface UserModel : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *id;
@@ -40,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *wechatNo;
 @property (nonatomic, copy) NSString *companyName;
 @property (nonatomic, copy) NSString *hideNumber;
+@property (nonatomic, strong) CustomerData *customerData;
 
 
 ///客户来源：1-网路客；2-自拓客；3-渠道客；4-其它
@@ -136,6 +138,14 @@ NS_ASSUME_NONNULL_BEGIN
  @return UserModel
  */
 + (UserModel *)keyUnarchiveUserModel;
+
+@end
+
+@interface CustomerData : NSObject <NSCoding>
+
+@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *headPath;
 
 @end
 

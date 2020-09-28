@@ -95,9 +95,8 @@
 
 - (void)handleDetailModelData {
     self.headerViewHeight = 220;
-    self.detailModel.brandInfo = BrandModel.new;
-    if (self.detailModel.brandInfo) {
-        QHWBaseModel *brandModel = [[QHWBaseModel alloc] configModelIdentifier:@"BrandTableViewCell" Height:95 Data:@[@[self.detailModel.brandInfo, @(NO)]]];
+    if (self.detailModel.brandData) {
+        QHWBaseModel *brandModel = [[QHWBaseModel alloc] configModelIdentifier:@"BrandTableViewCell" Height:95 Data:@[@[self.detailModel.brandData, @(NO)]]];
         brandModel.headerTitle = @"品牌方";
         [self.tableViewDataArray addObject:brandModel];
     }
@@ -184,7 +183,7 @@
 }
 
 - (void)handleHouseDetailCellData:(QHWHouseModel *)houseModel {
-    QHWBaseModel *introModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": houseModel.intro ?: @"", @"identifier": @"ProjectIntro"}]];
+    QHWBaseModel *introModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": houseModel.intro ?: @"", @"identifier": @"ProjectIntro"}]];
     introModel.headerTitle = @"项目简介";
     introModel.footerTitle = @"咨询楼盘更多信息";
     [self.tableViewDataArray addObject:introModel];
@@ -241,73 +240,73 @@
     tripDetailModel.footerTitle = @"获取行程单";
     [self.tableViewDataArray addObject:tripDetailModel];
     
-    QHWBaseModel *feeModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": studyModel.costDescribe ?: @"", @"identifier": @"FeeDescribe"}]];
+    QHWBaseModel *feeModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": studyModel.costDescribe ?: @"", @"identifier": @"FeeDescribe"}]];
     feeModel.headerTitle = @"费用说明";
     feeModel.footerTitle = @"获取优惠折扣";
     [self.tableViewDataArray addObject:feeModel];
     
-    QHWBaseModel *tripPlanModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": studyModel.tripReady ?: @"", @"identifier": @"TripPlan"}]];
+    QHWBaseModel *tripPlanModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": studyModel.tripReady ?: @"", @"identifier": @"TripPlan"}]];
     tripPlanModel.headerTitle = @"行前准备";
     tripPlanModel.footerTitle = @"获取准备手册";
     [self.tableViewDataArray addObject:tripPlanModel];
     
-    QHWBaseModel *questionModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": studyModel.commonProblem ?: @"", @"identifier": @"StudyQuestion"}]];
+    QHWBaseModel *questionModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": studyModel.commonProblem ?: @"", @"identifier": @"StudyQuestion"}]];
     questionModel.headerTitle = @"常见问题";
     questionModel.footerTitle = @"我要提问";
     [self.tableViewDataArray addObject:questionModel];
 }
 
 - (void)handleMigrationDetailCellData:(QHWMigrationModel *)migrationModel {
-    QHWBaseModel *introModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": migrationModel.projectDescribe ?: @"", @"identifier": @"ProjectIntro"}]];
+    QHWBaseModel *introModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": migrationModel.projectDescribe ?: @"", @"identifier": @"ProjectIntro"}]];
     introModel.headerTitle = @"项目简介";
     introModel.footerTitle = @"咨询项目更多信息";
     [self.tableViewDataArray addObject:introModel];
     
-    QHWBaseModel *projectFeatureModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": migrationModel.projectFeature ?: @"", @"identifier": @"ProjectFeature"}]];
+    QHWBaseModel *projectFeatureModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": migrationModel.projectFeature ?: @"", @"identifier": @"ProjectFeature"}]];
     projectFeatureModel.headerTitle = @"项目优势";
     projectFeatureModel.footerTitle = @"咨询更多优势";
     [self.tableViewDataArray addObject:projectFeatureModel];
     
-    QHWBaseModel *applyConditionModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": migrationModel.applyCondition ?: @"", @"identifier": @"ApplyCondition"}]];
+    QHWBaseModel *applyConditionModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": migrationModel.applyCondition ?: @"", @"identifier": @"ApplyCondition"}]];
     applyConditionModel.headerTitle = @"申请条件";
     applyConditionModel.footerTitle = @"咨询是否满足条件";
     [self.tableViewDataArray addObject:applyConditionModel];
     
-    QHWBaseModel *applyProcessModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": migrationModel.applyProcess ?: @"", @"identifier": @"ApplyProcess"}]];
+    QHWBaseModel *applyProcessModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": migrationModel.applyProcess ?: @"", @"identifier": @"ApplyProcess"}]];
     applyProcessModel.headerTitle = @"申请流程";
     [self.tableViewDataArray addObject:applyProcessModel];
     
-    QHWBaseModel *feeModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": migrationModel.costDescribe ?: @"", @"identifier": @"Fee"}]];
+    QHWBaseModel *feeModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": migrationModel.costDescribe ?: @"", @"identifier": @"Fee"}]];
     feeModel.headerTitle = @"费用详情";
     feeModel.footerTitle = @"获取减免优惠";
     [self.tableViewDataArray addObject:feeModel];
     
-    QHWBaseModel *companyFeatureModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": migrationModel.companyFeature ?: @"", @"identifier": @"CompanyFeature"}]];
+    QHWBaseModel *companyFeatureModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": migrationModel.companyFeature ?: @"", @"identifier": @"CompanyFeature"}]];
     companyFeatureModel.headerTitle = @"公司优势";
     [self.tableViewDataArray addObject:companyFeatureModel];
 }
 
 - (void)handleStudentDetailCellData:(QHWStudentModel *)studentModel {
-    QHWBaseModel *serviceIntroModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": studentModel.serviceContent ?: @"", @"identifier": @"ServiceIntro"}]];
+    QHWBaseModel *serviceIntroModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": studentModel.serviceContent ?: @"", @"identifier": @"ServiceIntro"}]];
     serviceIntroModel.headerTitle = @"服务介绍";
     serviceIntroModel.footerTitle = @"查询更多信息";
     [self.tableViewDataArray addObject:serviceIntroModel];
     
-    QHWBaseModel *feeDetailModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": studentModel.costDescribe ?: @"", @"identifier": @"FeeDetail"}]];
+    QHWBaseModel *feeDetailModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": studentModel.costDescribe ?: @"", @"identifier": @"FeeDetail"}]];
     feeDetailModel.headerTitle = @"费用明细";
     feeDetailModel.footerTitle = @"获取优惠折扣";
     [self.tableViewDataArray addObject:feeDetailModel];
     
-    QHWBaseModel *serviceCaseModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": studentModel.successCase ?: @"", @"identifier": @"ServiceCase"}]];
+    QHWBaseModel *serviceCaseModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": studentModel.successCase ?: @"", @"identifier": @"ServiceCase"}]];
     serviceCaseModel.headerTitle = @"服务案例";
     serviceCaseModel.footerTitle = @"获取案例资料";
     [self.tableViewDataArray addObject:serviceCaseModel];
     
-    QHWBaseModel *serviceProcessModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": studentModel.serviceProcess ?: @"", @"identifier": @"ServiceProcess"}]];
+    QHWBaseModel *serviceProcessModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": studentModel.serviceProcess ?: @"", @"identifier": @"ServiceProcess"}]];
     serviceProcessModel.headerTitle = @"服务流程";
     [self.tableViewDataArray addObject:serviceProcessModel];
     
-    QHWBaseModel *questionModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": studentModel.commonProblem ?: @"", @"identifier": @"StudentQuestion"}]];
+    QHWBaseModel *questionModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": studentModel.commonProblem ?: @"", @"identifier": @"StudentQuestion"}]];
     questionModel.headerTitle = @"常见问题";
     questionModel.footerTitle = @"我要提问";
     [self.tableViewDataArray addObject:questionModel];
@@ -318,11 +317,11 @@
     consultantModel.headerTitle = @"医疗顾问";
     [self.tableViewDataArray addObject:consultantModel];
     
-    QHWBaseModel *goodsContentModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": treatmentModel.goodsContent ?: @"", @"identifier": @"GoodsContent"}]];
+    QHWBaseModel *goodsContentModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": treatmentModel.goodsContent ?: @"", @"identifier": @"GoodsContent"}]];
     goodsContentModel.headerTitle = @"商品内容";
     [self.tableViewDataArray addObject:goodsContentModel];
     
-    QHWBaseModel *successCaseModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@[@{@"data": treatmentModel.successCase ?: @"", @"identifier": @"SuccessCase"}]];
+    QHWBaseModel *successCaseModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@[@{@"data": treatmentModel.successCase ?: @"", @"identifier": @"SuccessCase"}]];
     successCaseModel.headerTitle = @"成功案例";
     [self.tableViewDataArray addObject:successCaseModel];
 }

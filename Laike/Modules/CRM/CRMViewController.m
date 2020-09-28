@@ -71,6 +71,9 @@
 
 - (void)getMainData {
     [self.crmService getHomeReportCountDataWithComplete:^{
+        if ([self.tableView.mj_header isRefreshing]) {
+            [self.tableView.mj_header endRefreshing];
+        }
         NSInteger index = self.crmTypeHeaderView.tabScrollView.currentIndex;
         self.crmTypeHeaderView.tabScrollView.dataArray = @[kFormat(@"访客（%ld）", (long)UserModel.shareUser.visitCount), kFormat(@"线索（%ld）", self.crmService.clueCount), kFormat(@"客户（%ld）", self.crmService.crmCount)];
         [self.crmTypeHeaderView.tabScrollView scrollToIndex:index];

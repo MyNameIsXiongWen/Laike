@@ -34,7 +34,6 @@
     IQKeyboardManager.sharedManager.enable = YES;
     IQKeyboardManager.sharedManager.shouldResignOnTouchOutside = YES;
     [kUserDefault removeObjectForKey:kConstConsultantId];
-    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
 
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kConstFirstIn]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kConstFirstIn];
@@ -56,6 +55,8 @@
     [UITableView appearance].estimatedSectionHeaderHeight = 0;
     [UITableView appearance].estimatedSectionFooterHeight = 0;
     [UITableViewCell appearance].selectionStyle = UITableViewCellSelectionStyleNone;
+    UIApplication.sharedApplication.statusBarStyle = UIStatusBarStyleDefault;
+    UIButton.appearance.exclusiveTouch = YES;
 }
 
 - (void)initSVProgress {

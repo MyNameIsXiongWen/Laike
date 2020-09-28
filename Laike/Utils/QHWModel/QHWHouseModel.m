@@ -16,7 +16,7 @@
              @"activityList": QHWActivityModel.class,
              @"alikeList": QHWHouseModel.class,
              @"bottomData": QHWBottomUserModel.class,
-             @"brandInfo": BrandModel.class
+             @"brandData": BrandModel.class
              };
 }
 

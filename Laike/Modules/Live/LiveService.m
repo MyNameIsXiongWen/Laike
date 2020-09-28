@@ -54,10 +54,10 @@
     guestModel.headerTitle = @"主讲嘉宾";
     [self.tableViewDataArray addObject:guestModel];
     
-    QHWBaseModel *descModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@{@"data": self.liveDetailModel.mainDescribe ?: @"", @"identifier": @"DescRichTextTableViewCell"}];
+    QHWBaseModel *descModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@{@"data": self.liveDetailModel.mainDescribe ?: @"", @"identifier": @"DescRichTextTableViewCell"}];
     [self.tableViewDataArray addObject:descModel];
     
-    QHWBaseModel *contentModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@{@"data": self.liveDetailModel.content ?: @"", @"identifier": @"ViedoRichTextTableViewCell"}];
+    QHWBaseModel *contentModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@{@"data": self.liveDetailModel.content ?: @"", @"identifier": @"ViedoRichTextTableViewCell"}];
     contentModel.headerTitle = @"视频内容";
     [self.tableViewDataArray addObject:contentModel];
 }

@@ -215,7 +215,7 @@
 //                                                                               @{@"value": @(user.clueCount), @"title": @"线索"}]];
 //    [self.tableViewDataArray addObject:crmDataModel];
     
-    QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeIconTableViewCell" Height:160 Data:self.iconArray];
+    QHWBaseModel *iconDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeIconTableViewCell" Height:170 Data:self.iconArray];
     [self.tableViewDataArray addObject:iconDataModel];
     
     if (self.schoolArray.count > 0) {

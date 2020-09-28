@@ -119,8 +119,8 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.minimumLineSpacing = 10;
         layout.minimumInteritemSpacing = CGFLOAT_MIN;
-        layout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
-        layout.itemSize = CGSizeMake((kScreenW-30)/4, 55);
+        layout.itemSize = CGSizeMake(kScreenW/4, 65);
+        layout.sectionInset = UIEdgeInsetsMake(20, 0, 10, 0);
         
         _collectionView = [UICreateView initWithFrame:CGRectZero Layout:layout Object:self];
         _collectionView.scrollEnabled = NO;
@@ -136,10 +136,10 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
-        self.btnImgView = UIImageView.ivFrame(CGRectMake(((kScreenW-30)/4-30)/2, 0, 30, 30));
+        self.btnImgView = UIImageView.ivFrame(CGRectMake((kScreenW/4-40)/2, 0, 40, 40));
         [self.contentView addSubview:self.btnImgView];
         
-        self.btnTitleLabel = UILabel.labelFrame(CGRectMake(0, self.btnImgView.bottom+8, self.width, 17)).labelFont(kFontTheme14).labelTitleColor(kColorTheme000).labelTextAlignment(NSTextAlignmentCenter);
+        self.btnTitleLabel = UILabel.labelFrame(CGRectMake(0, self.btnImgView.bottom+8, kScreenW/4, 17)).labelFont(kFontTheme14).labelTitleColor(kColorTheme000).labelTextAlignment(NSTextAlignmentCenter);
         [self.contentView addSubview:self.btnTitleLabel];
     }
     return self;

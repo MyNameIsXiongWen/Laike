@@ -136,7 +136,7 @@
     organizerModel.headerTitle = @"主办方";
     [self.tableViewDataArray addObject:organizerModel];
     
-    QHWBaseModel *contentModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:100 Data:@{@"data": self.activityDetailModel.activityContent ?: @"", @"identifier": @"ActivityRichTextTableViewCell"}];
+    QHWBaseModel *contentModel = [[QHWBaseModel alloc] configModelIdentifier:@"RichTextTableViewCell" Height:0 Data:@{@"data": self.activityDetailModel.activityContent ?: @"", @"identifier": @"ActivityRichTextTableViewCell"}];
     contentModel.headerTitle = @"活动内容";
     [self.tableViewDataArray addObject:contentModel];
 }

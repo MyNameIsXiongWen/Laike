@@ -57,7 +57,6 @@
 - (BrandView *)brandView {
     if (!_brandView) {
         _brandView = [[BrandView alloc] initWithFrame:CGRectMake(0, self.topOperationView.bottom, kScreenW, 110)];
-        _brandView.dataArray = @[@"", @"", @""];
     }
     return _brandView;
 }

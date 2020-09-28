@@ -73,7 +73,7 @@
         
         [self addChildViewController:navC];
     }
-//    self.selectedIndex = 1;
+    self.selectedIndex = 3;
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {

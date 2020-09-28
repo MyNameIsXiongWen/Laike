@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class QHWMainBusinessDetailBaseModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BrandModel : NSObject
@@ -16,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *brandName;
 @property (nonatomic, copy) NSString *brandLogo;
-@property (nonatomic, copy) NSString *brandIntro;
-@property (nonatomic, strong) NSArray *brandTag;
-@property (nonatomic, strong) NSArray <QHWMainBusinessDetailBaseModel *>*productList;
+@property (nonatomic, copy) NSString *brandInfo;
+@property (nonatomic, copy) NSString *createTime;
+@property (nonatomic, strong) NSArray *labelList;
 
 @end
 

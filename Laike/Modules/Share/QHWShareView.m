@@ -205,7 +205,7 @@
         }
         return;
     } else if (self.shareType == ShareTypeRate) {
-        self.rateShareView = [[RateShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 650)];
+        self.rateShareView = [[RateShareView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, MIN(kScreenH, 170+450+110+120))];
         self.rateShareView.rateArray = self.rateArray;
         self.rateShareView.delegate = self;
         [self.rateShareView show];

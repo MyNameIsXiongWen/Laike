@@ -16,7 +16,9 @@ static dispatch_once_t onceToken;
 @implementation UserModel
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"consultantList": QHWConsultantModel.class};
+    return @{@"consultantList": QHWConsultantModel.class,
+             @"customerData": CustomerData.class
+    };
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -181,6 +183,43 @@ static dispatch_once_t onceToken;
             return @"未设置";
             break;
     }
+}
+
+@end
+
+@implementation CustomerData
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    unsigned int outCount, i;
+    objc_property_t *properties = class_copyPropertyList(self.class, &outCount);
+    for (i=0; i<outCount; i++) {
+        objc_property_t property = properties[i];
+        const char *char_name = property_getName(property);
+        NSString *propertyName = [NSString stringWithUTF8String:char_name];
+        id propertyValue = [self valueForKey:propertyName];
+        if (propertyValue) {
+            [aCoder encodeObject:propertyValue forKey:propertyName];
+        }
+    }
+    free(properties);
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self == [super init]) {
+        unsigned int outCount, i;
+        objc_property_t *properties = class_copyPropertyList(self.class, &outCount);
+        for (i=0; i<outCount; i++) {
+            objc_property_t property = properties[i];
+            const char *char_name = property_getName(property);
+            NSString *propertyName = [NSString stringWithUTF8String:char_name];
+            id propertyValue = [aDecoder decodeObjectForKey:propertyName];
+            if (propertyValue) {
+                [self setValue:propertyValue forKey:propertyName];
+            }
+        }
+        free(properties);
+    }
+    return self;
 }
 
 @end

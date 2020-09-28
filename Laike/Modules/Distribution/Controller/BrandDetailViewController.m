@@ -10,6 +10,7 @@
 #import "BrandService.h"
 #import "CTMediator+ViewController.h"
 #import "QHWMainBusinessDetailBaseModel.h"
+#import "MainBusinessDetailViewController.h"
 
 @interface BrandDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -34,6 +35,9 @@
 
 - (void)getBrandDetailRequest {
     [self.service getBrandDetailRequestComplete:^{
+        [self.tableView reloadData];
+    }];
+    [self.service getBrandProductListRequestComplete:^{
         [self.tableView reloadData];
     }];
 }
@@ -87,7 +91,23 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 55;
+    QHWBaseModel *baseModel = self.service.tableViewDataArray[section];
+    return baseModel.headerTitle ? 55 : CGFLOAT_MIN;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    QHWBaseModel *baseModel = self.service.tableViewDataArray[section];
+    if (baseModel.headerTitle) {
+        MainBusinessDetailSectionHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(MainBusinessDetailSectionHeaderView.class)];
+        headerView.titleLabel.text = baseModel.headerTitle;
+        headerView.moreBtn.hidden = !baseModel.showMoreBtn;
+        return headerView;
+    }
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,6 +141,8 @@
         for (NSString *cellIdentifier in self.service.tableViewCellArray) {
             [_tableView registerClass:NSClassFromString(cellIdentifier) forCellReuseIdentifier:cellIdentifier];
         }
+        [_tableView registerClass:MainBusinessDetailSectionHeaderView.class forHeaderFooterViewReuseIdentifier:NSStringFromClass(MainBusinessDetailSectionHeaderView.class)];
+        [self.view addSubview:_tableView];
     }
     return _tableView;
 }

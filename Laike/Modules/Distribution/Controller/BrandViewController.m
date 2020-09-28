@@ -14,7 +14,6 @@
 @interface BrandViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) BrandService *service;
 
 @end
@@ -30,6 +29,8 @@
 
 - (void)getBrandListRequest {
     [self.service getBrandListRequestComplete:^{
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         [self.tableView reloadData];
         [self.tableView showNodataView:self.service.tableViewDataArray.count == 0 offsetY:0 button:nil];
         [QHWRefreshManager.sharedInstance endRefreshWithScrollView:self.tableView PageModel:self.service.itemPageModel];
@@ -48,7 +49,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    BrandModel *model = self.dataArray[indexPath.row];
+    BrandModel *model = (BrandModel *)self.service.tableViewDataArray[indexPath.row];
     [CTMediator.sharedInstance CTMediator_viewControllerForBrandDetailWithBrandId:model.id];
 }
 
@@ -74,6 +75,7 @@
             self.service.itemPageModel.pagination.currentPage++;
             [self getBrandListRequest];
         }];
+        [self.view addSubview:_tableView];
     }
     return _tableView;
 }

@@ -73,7 +73,7 @@
 
 - (void)click_service {
 //    [self.navigationController pushViewController:NSClassFromString(@"MyServiceViewController").new animated:YES];
-    [CTMediator.sharedInstance CTMediator_viewControllerForChatWithConversationId:kHXCustomerServiceId ReceiverNickName:kHXCustomerServiceName ReceiverHeadPath:kHXCustomerServiceHead];
+    [CTMediator.sharedInstance CTMediator_viewControllerForChatWithConversationId:nil ReceiverNickName:nil ReceiverHeadPath:nil];
 }
 
 - (void)click_feedback {

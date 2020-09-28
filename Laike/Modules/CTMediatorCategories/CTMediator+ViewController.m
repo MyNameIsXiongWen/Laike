@@ -233,12 +233,12 @@ NSString * const kCTMediatorActionNativeVisitorDetailViewController = @"nativeVi
 }
 
 - (void)CTMediator_viewControllerForChatWithConversationId:(NSString *)conversationId ReceiverNickName:(NSString *)receiverNickName ReceiverHeadPath:(NSString *)receiverHeadPath {
+    UserModel *user = UserModel.shareUser;
     [self performTarget:kCTMediatorTargetViewController
                  action:kCTMediatorActionNativeChatViewController
-                 params:@{@"conversationId": conversationId ?: @"",
-                          @"receiverNickName": receiverNickName ?: @"",
-                          @"receiverHeadPath": receiverHeadPath ?: @""
-                 }
+                 params:@{@"conversationId": conversationId ?: user.customerData.id ?: kHXCustomerServiceId,
+                          @"receiverNickName": receiverNickName ?: user.customerData.name ?: kHXCustomerServiceName,
+                          @"receiverHeadPath": receiverHeadPath ?: user.customerData.headPath ?: kHXCustomerServiceHead}
     shouldCacheTarget:NO];
 }
 

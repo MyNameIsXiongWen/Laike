@@ -10,6 +10,7 @@
 #import "DistributionScrollContentViewController.h"
 #import "DistributionTableHeaderView.h"
 #import "QHWBaseSubContentTableViewCell.h"
+#import "BrandService.h"
 
 @interface DistributionViewController () <UITableViewDelegate, UITableViewDataSource, QHWPageContentViewDelegate>
 
@@ -19,6 +20,8 @@
 
 @property (nonatomic, strong) QHWBaseSubContentTableViewCell *contentCell;
 @property (nonatomic, assign) BOOL canScroll;
+
+@property (nonatomic, strong) BrandService *service;
 
 @end
 
@@ -41,6 +44,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void)getMainData {
+    [self.service getBrandListRequestComplete:^{
+        [self.tableView.mj_header endRefreshing];
+        self.distributionTableHeaderView.brandView.dataArray = self.service.tableViewDataArray;
+    }];
 }
 
 #pragma mark ------------UIScrollView-------------
@@ -168,6 +178,13 @@
         _distributionTableHeaderView = [[DistributionTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 260)];
     }
     return _distributionTableHeaderView;
+}
+
+- (BrandService *)service {
+    if (!_service) {
+        _service = BrandService.new;
+    }
+    return _service;
 }
 
 @end

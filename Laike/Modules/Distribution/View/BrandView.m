@@ -7,6 +7,8 @@
 //
 
 #import "BrandView.h"
+#import "BrandModel.h"
+#import "CTMediator+ViewController.h"
 
 @interface BrandView ()
 
@@ -64,12 +66,14 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BrandCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(BrandCollectionViewCell.class) forIndexPath:indexPath];
-//    cell.model = self.dataArray[indexPath.row];
+    BrandModel *model = self.dataArray[indexPath.row];
+    [cell.logoImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(model.brandLogo)]];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    BrandModel *model = self.dataArray[indexPath.row];
+    [CTMediator.sharedInstance CTMediator_viewControllerForBrandDetailWithBrandId:model.id];
 }
 
 - (UICollectionView *)collectionView {
@@ -93,7 +97,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self == [super initWithFrame:frame]) {
         self.contentView.borderColor(kColorThemeeee).cornerRadius(10);
-        self.logoImgView = UIImageView.ivFrame(CGRectMake(3, 5, 124, 55));
+        self.logoImgView = UIImageView.ivFrame(self.bounds);
         [self.contentView addSubview:self.logoImgView];
     }
     return self;

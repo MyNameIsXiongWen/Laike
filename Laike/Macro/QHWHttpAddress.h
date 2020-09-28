@@ -102,6 +102,10 @@ static NSString *const kFansList = @"fans/getMyList";//粉丝列表
 static NSString *const kGalleryList = @"gallery/getList";//图库列表
 static NSString *const kGalleryFilter = @"gallery/getVariable";//图库选项
 
+static NSString *const kBrandList = @"brand/getList";//品牌列表
+static NSString *const kBrandInfo = @"brand/getInfo";//品牌详情
+static NSString *const kBrandProductList = @"brand/getProductList";//品牌产品列表
+
 static NSString *const kHomeBanner = @"advert/home/getInfo";//首页广告位
 static NSString *const kHomeWindowBanner = @"advert/window/getInfo";//首页弹框广告位
 

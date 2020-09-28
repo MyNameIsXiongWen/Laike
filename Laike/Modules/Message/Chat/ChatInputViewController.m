@@ -76,7 +76,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 - (void)setupVieweakSelf {
     self.view.backgroundColor = UIColor.whiteColor;
     _status = Input_Status_Input;
-    if ([self.conversation.conversationId isEqualToString:kHXCustomerServiceId]) {
+    if ([self.conversation.conversationId isEqualToString:UserModel.shareUser.customerData.id]) {
         _inputBar = [[ChatInputBar alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 60)];
     } else {
         _topView = [[ChatInputBarTopView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, 40)];

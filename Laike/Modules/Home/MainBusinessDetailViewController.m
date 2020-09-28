@@ -318,7 +318,7 @@
         _bottomView.rightOperationBlock = ^{
             if (weakSelf.detailService.detailModel.distributionStatus == 2) {
 //                kCallTel(weakSelf.detailService.detailModel.serviceHotline);
-                [CTMediator.sharedInstance CTMediator_viewControllerForChatWithConversationId:kHXCustomerServiceId ReceiverNickName:kHXCustomerServiceName ReceiverHeadPath:kHXCustomerServiceHead];
+                [CTMediator.sharedInstance CTMediator_viewControllerForChatWithConversationId:nil ReceiverNickName:nil ReceiverHeadPath:nil];
             } else {
                 [weakSelf rightNavBtnAction:nil];
             }
@@ -346,6 +346,8 @@
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithReuseIdentifier:reuseIdentifier];
     if (self) {
+        self.contentView.backgroundColor = kColorThemefff;
+        
         UIView *boldLine = UIView.viewFrame(CGRectMake(0, 0, kScreenW, 10)).bkgColor(kColorThemef5f5f5);
         [self.contentView addSubview:boldLine];
         

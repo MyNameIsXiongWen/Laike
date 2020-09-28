@@ -13,6 +13,7 @@
 
 @interface RateShareView ()
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *bkgView;
 @property (nonatomic, strong) UIImageView *avatarImgView;
 @property (nonatomic, strong) UIImageView *miniCodeImgView;
@@ -46,30 +47,38 @@
 }
 
 - (void)configUI {
-    self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, 530)).bkgColor(kColorThemefff);
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenW, MIN(kScreenH-120-kStatusBarHeight, 170+450+110))];
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.width, 170+450+110);
+    [self addSubview:self.scrollView];
+    
+    self.bkgView = UIView.viewFrame(CGRectMake(40, 0, kScreenW-80, self.scrollView.contentSize.height)).bkgColor(kColorThemefb4d56);
     self.bkgView.userInteractionEnabled = YES;
     [self.bkgView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)]];
     [self.bkgView addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressBkgView:)]];
-    [self addSubview:self.bkgView];
-        
-    CGFloat rateViewHeight = 410;
-    
-    NSString *time = kFormat(@"%@ 今日汇率", [NSString getCurrentTime]);
-    UILabel *label = UILabel.labelFrame(CGRectMake(10, rateViewHeight, self.bkgView.width-20, 17)).labelText(time).labelTitleColor(kColorThemea4abb3).labelFont(kFontTheme12).labelTextAlignment(NSTextAlignmentRight);
-    [self.bkgView addSubview:label];
+    [self.scrollView addSubview:self.bkgView];
     
     UserModel *userModel = UserModel.shareUser;
-    self.avatarImgView = UIImageView.ivFrame(CGRectMake(10, rateViewHeight+25, 40, 40)).ivCornerRadius(20);
+    self.avatarImgView = UIImageView.ivFrame(CGRectMake(30, 20, 60, 60)).ivCornerRadius(30);
     [self.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(userModel.headPath)]];
-    self.nameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+10, self.avatarImgView.top, self.bkgView.width-20-140, 20)).labelFont(kMediumFontTheme18).labelTitleColor(kColorTheme2a303c).labelText(userModel.realName);
-    self.phoneLabel = UILabel.labelFrame(CGRectMake(self.nameLabel.left, self.nameLabel.bottom+10, self.nameLabel.width, 17)).labelFont(kFontTheme12).labelTitleColor(kColorTheme2a303c).labelText(userModel.mobileNumber);
-    self.sloganLabel = UILabel.labelFrame(CGRectMake(10, self.avatarImgView.bottom+20, self.bkgView.width-20, 15)).labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelText(kFormat(@"去海外全球美好生活找%@", userModel.realName));
+    self.nameLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.right+20, self.avatarImgView.top, self.bkgView.width-130, self.avatarImgView.height)).labelFont(kMediumFontTheme20).labelTitleColor(kColorThemefff).labelText(userModel.realName);
+//    self.phoneLabel = UILabel.labelFrame(CGRectMake(self.nameLabel.left, self.nameLabel.bottom+10, self.nameLabel.width, 17)).labelFont(kFontTheme12).labelTitleColor(kColorTheme2a303c).labelText(userModel.mobileNumber);
     [self.bkgView addSubview:self.avatarImgView];
     [self.bkgView addSubview:self.nameLabel];
-    [self.bkgView addSubview:self.phoneLabel];
+//    [self.bkgView addSubview:self.phoneLabel];
+    
+    
+    UILabel *label1 = UILabel.labelFrame(CGRectMake(self.avatarImgView.left, self.avatarImgView.bottom+20, self.bkgView.width-60, 23)).labelText(@"EXCHANGE RATE").labelTitleColor(kColorThemefff).labelFont([UIFont fontWithName:@"Arial-BoldItalicMT" size:20]);
+    [self.bkgView addSubview:label1];
+    NSString *time = kFormat(@"今 日 汇 率 %@", [NSString getCurrentTime]);
+    UILabel *label2 = UILabel.labelFrame(CGRectMake(self.avatarImgView.left, label1.bottom, label1.width, 23)).labelText(time).labelTitleColor(kColorThemefff).labelFont([UIFont italicSystemFontOfSize:16]);
+    [self.bkgView addSubview:label2];
+    
+    UIView *line = UIView.viewFrame(CGRectMake(self.avatarImgView.left, label2.bottom+25+450+10, 20, 5)).bkgColor(kColorThemefff);
+    self.sloganLabel = UILabel.labelFrame(CGRectMake(self.avatarImgView.left, line.bottom+7, self.bkgView.width-20, 20)).labelFont(kFontTheme13).labelTitleColor(kColorThemefff).labelText(@"参考中国银行现钞卖出价格");
+    [self.bkgView addSubview:line];
     [self.bkgView addSubview:self.sloganLabel];
     
-    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-80, self.avatarImgView.y, 70, 70)).ivCornerRadius(35);
+    self.miniCodeImgView = UIImageView.ivFrame(CGRectMake(self.bkgView.width-95, self.sloganLabel.y, 70, 70)).ivCornerRadius(35).ivBkgColor(kColorThemefff);
     [self.miniCodeImgView sd_setImageWithURL:[NSURL URLWithString:kMiniCodePath(userModel.qrCode)]];
     [self.bkgView addSubview:self.miniCodeImgView];
     self.logoImgView = UIImageView.ivFrame(CGRectMake(19, 19, 32, 32)).ivBkgColor(kColorThemefff).ivCornerRadius(16);
@@ -92,17 +101,19 @@
     _rateArray = rateArray;
     CGFloat width = (kScreenW-80-80)/2.0;
     __block NSArray *imgArray = @[@"country_meiguo", @"country_riben", @"country_aozhou", @"country_yingguo", @"country_xinxilan", @"country_taiguo", @"country_oumeng", @"country_jianada"];
+    UIView *tempView = UIView.viewFrame(CGRectMake(0, 170, kScreenW-80, 450)).bkgColor(kColorThemefff);
+    [self.bkgView addSubview:tempView];
     [rateArray enumerateObjectsUsingBlock:^(RateModel *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx > 0 && idx < 9) {
-            UIView *countryView = UIView.viewFrame(CGRectMake((idx-1) % 2 == 0 ? 40 : (40+width), 10 + (idx-1) / 2 * 100, width, 100));
+            UIView *countryView = UIView.viewFrame(CGRectMake((idx-1) % 2 == 0 ? 40 : (40+width), 10 + (idx-1) / 2 * 110, width, 110));
             UIImageView *imgView = UIImageView.ivFrame(CGRectMake((width-50)/2, 0, 50, 50)).ivImage(kImageMake(imgArray[idx-1])).ivCornerRadius(25).ivBkgColor(kColorThemef5f5f5).ivBorderColor(kColorThemeeee);
-            UILabel *nameLabel = UILabel.labelFrame(CGRectMake(0, imgView.bottom, width, 25)).labelText(obj.currencyName).labelFont(kFontTheme13).labelTitleColor(kColorThemea4abb3).labelTextAlignment(NSTextAlignmentCenter);
+            UILabel *nameLabel = UILabel.labelFrame(CGRectMake(0, imgView.bottom, width, 25)).labelText(obj.currencyName).labelFont(kFontTheme13).labelTitleColor(kColorTheme2a303c).labelTextAlignment(NSTextAlignmentCenter);
             NSString *rateStr = [NSString formatterWithValue:1.0/obj.rate.doubleValue];
             UILabel *rateLabel = UILabel.labelFrame(CGRectMake(0, nameLabel.bottom, width, 20)).labelText(rateStr).labelFont(kMediumFontTheme14).labelTitleColor(kColorThemefb4d56).labelTextAlignment(NSTextAlignmentCenter);
             [countryView addSubview:imgView];
             [countryView addSubview:nameLabel];
             [countryView addSubview:rateLabel];
-            [self.bkgView addSubview:countryView];
+            [tempView addSubview:countryView];
         }
     }];
 }
