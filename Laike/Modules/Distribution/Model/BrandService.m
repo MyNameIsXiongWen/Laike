@@ -49,7 +49,29 @@
 - (void)getBrandProductListRequestComplete:(void (^)(void))complete {
     [QHWHttpLoading show];
     [QHWHttpManager.sharedInstance QHW_POST:kBrandProductList parameters:@{@"id": self.brandId ?: @""} success:^(id responseObject) {
-        self.productList = [NSArray yy_modelArrayWithClass:QHWMainBusinessDetailBaseModel.class json:responseObject[@"data"][@"list"]];
+        NSMutableArray *tempArray = NSMutableArray.array;
+        for (NSDictionary *dic in responseObject[@"data"][@"list"]) {
+            NSString *modelString = @"";
+            switch ([dic[@"businessType"] integerValue]) {
+                case 1:
+                    modelString = @"QHWHouseModel";
+                    break;
+                case 2:
+                    modelString = @"QHWStudyModel";
+                    break;
+                case 3:
+                    modelString = @"QHWMigrationModel";
+                    break;
+                case 4:
+                    modelString = @"QHWStudentModel";
+                    break;
+                default:
+                    modelString = @"QHWTreatmentModel";
+                    break;
+            }
+            [tempArray addObject:[NSClassFromString(modelString) yy_modelWithDictionary:dic]];
+        }
+        self.productList = tempArray;
         if (self.productList.count > 0) {
             QHWBaseModel *productModel = [[QHWBaseModel alloc] configModelIdentifier:@"QHWMainBusinessTableViewCell" Height:140 Data:self.productList];
             productModel.headerTitle = @"主推产品";

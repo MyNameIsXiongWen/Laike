@@ -253,6 +253,15 @@
         [self addSubview:line];
         self.popType = PopTypeBottom;
         [self addBezierPathByRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight CornerSize:CGSizeMake(10, 10)];
+        
+        NSArray *subviews = self.datePicker.subviews.firstObject.subviews;
+        if (subviews.count > 0) {
+            UIView *coloms = subviews.firstObject;
+            if (@available(iOS 14.0, *)) {
+                self.datePicker.x = (self.width-coloms.width)/2.0;
+                self.datePicker.y = 45+(self.height-45-coloms.height)/2.0;
+            }
+        }
     }
     return self;
 }
@@ -294,6 +303,10 @@
         _datePicker.maximumDate = NSDate.date;
         [_datePicker setLocale:[NSLocale localeWithLocaleIdentifier:@"zh"]];
         [_datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
+        if (@available(iOS 14.0, *)) {
+            _datePicker.preferredDatePickerStyle = UIDatePickerStyleWheels;
+            
+        }
     }
     return _datePicker;
 }

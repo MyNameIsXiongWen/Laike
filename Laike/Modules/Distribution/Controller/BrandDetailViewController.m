@@ -86,7 +86,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QHWBaseModel *model = self.service.tableViewDataArray[indexPath.section];
     UITableViewCell<QHWBaseCellProtocol> *cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
-    [cell configCellData:model.data[indexPath.row]];
+    if ([model.identifier isEqualToString:@"QHWMainBusinessTableViewCell"]) {
+        [cell configCellData:@[model.data[indexPath.row], @(2)]];
+    } else {
+        [cell configCellData:model.data[indexPath.row]];
+    }
     return cell;
 }
 

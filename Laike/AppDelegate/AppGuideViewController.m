@@ -105,9 +105,9 @@
 - (NSMutableArray *)imageArray {
     if (!_imageArray) {
         if (kStatusBarHeight > 20) {
-            _imageArray = @[@"appGuide_xsmax1", @"appGuide_xsmax2", @"appGuide_xsmax3", @"appGuide_xsmax4", @"appGuide_xsmax5"].mutableCopy;
+            _imageArray = @[@"appGuide_xsmax1", @"appGuide_xsmax2", @"appGuide_xsmax3", @"appGuide_xsmax4", @"appGuide_xsmax5", @"appGuide_xsmax6"].mutableCopy;
         } else {
-            _imageArray = @[@"appGuide_8p1", @"appGuide_8p2", @"appGuide_8p3", @"appGuide_8p4", @"appGuide_8p5"].mutableCopy;
+            _imageArray = @[@"appGuide_8p1", @"appGuide_8p2", @"appGuide_8p3", @"appGuide_8p4", @"appGuide_8p5", @"appGuide_8p6"].mutableCopy;
         }
     }
     return _imageArray;

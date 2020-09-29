@@ -482,7 +482,7 @@ static NSInteger const MsgCount = 50;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [UICreateView initWithFrame:CGRectMake(0, 0, kScreenW, kScreenH-100-kBottomDangerHeight-kTopBarHeight) Style:UITableViewStylePlain Object:self];
-        if ([self.conversation.conversationId isEqualToString:UserModel.shareUser.customerData.id]) {
+        if ([self.conversation.conversationId isEqualToString:(UserModel.shareUser.customerData.id ?: kHXCustomerServiceId)]) {
             _tableView.height = kScreenH-60-kBottomDangerHeight-kTopBarHeight;
         }
         _tableView.backgroundColor = kColorThemef5f5f5;

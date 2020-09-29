@@ -130,6 +130,9 @@
 }
 
 - (void)getCommentListRequest {
+    if (self.communityType == 1) {
+        return;
+    }
     dispatch_group_enter(self.group);
     [self.commentService getCommentListRequestComplete:^{
         dispatch_group_leave(self.group);
