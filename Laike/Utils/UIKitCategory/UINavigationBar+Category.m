@@ -17,22 +17,6 @@
         [self method_exchange:@selector(layoutSubviews) with:@selector(customlayoutSubviews)];
     });
 }
-+ (void)method_exchange:(SEL)oldMethod with:(SEL)newMethod{
-    Class class = [self class];
-    SEL originalSelector = oldMethod;
-    SEL swizzledSelector = newMethod;
-    
-    Method originalMethod = class_getInstanceMethod(class, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-    
-    BOOL success = class_addMethod(class, originalSelector,method_getImplementation(swizzledMethod),method_getTypeEncoding(swizzledMethod));
-    if (success) {
-        class_replaceMethod(class, swizzledSelector,method_getImplementation(originalMethod),method_getTypeEncoding(originalMethod));
-    }
-    else {
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
-}
 
 - (void)customlayoutSubviews {
     [self customlayoutSubviews];

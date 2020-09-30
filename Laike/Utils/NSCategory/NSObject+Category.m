@@ -16,6 +16,40 @@
 //    return model;
 //}
 
+/**
+ 在NSObject的load方法中交换方法内容。
+ 先走load方法再走viewdidload
+ */
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self method_exchange:@selector(forwardingTargetForSelector:) with:@selector(QHW_forwardingTargetForSelector:)];
+    });
+}
+
+/**
+ 交换方法，将IMP部分交换
+ 
+ @param oldMethod 旧方法
+ @param newMethod 新方法
+ */
++ (void)method_exchange:(SEL)oldMethod with:(SEL)newMethod{
+    Class class = [self class];
+    SEL originalSelector = oldMethod;
+    SEL swizzledSelector = newMethod;
+    
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
+    
+    BOOL success = class_addMethod(class, originalSelector,method_getImplementation(swizzledMethod),method_getTypeEncoding(swizzledMethod));
+    if (success) {
+        class_replaceMethod(class, swizzledSelector,method_getImplementation(originalMethod),method_getTypeEncoding(originalMethod));
+    }
+    else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
+}
+
 //model转化为字典
 - (NSDictionary *)convertToDictionary {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -140,6 +174,41 @@
     }
     free(properties);
     return existCurrentProperty;
+}
+
+- (id)QHW_forwardingTargetForSelector:(SEL)aSelector {
+    if (class_respondsToSelector(self.class, @selector(forwardInvocation:))) {
+        IMP impIfNSObject = class_getMethodImplementation(NSObject.class, @selector(forwardInvocation:));
+        IMP imp = class_getMethodImplementation(self.class, @selector(forwardInvocation:));
+        if (impIfNSObject != imp) {
+            return nil;
+        }
+    }
+#ifdef DEBUG
+    return nil;
+#else
+    QHWUnrecognizedSelectorObject *selectorObject = QHWUnrecognizedSelectorObject.new;
+    selectorObject.objc = self;
+    return selectorObject;
+#endif
+}
+
+@end
+
+@implementation QHWUnrecognizedSelectorObject
+
++ (BOOL)resolveInstanceMethod:(SEL)sel {
+    class_addMethod([self class], sel, (IMP)testMethod, "v@:");
+    return YES;
+}
+
+void testMethod(id obj, SEL _cmd) {
+    NSLog(@"resolveInstanceMethod");
+}
+
++ (BOOL)resolveClassMethod:(SEL)sel {
+    class_addMethod([self class], sel, (IMP)testMethod, "v@:");
+    return YES;
 }
 
 @end

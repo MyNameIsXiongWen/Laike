@@ -17,6 +17,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIViewController *)getCurrentMethodCallerVC;
 ///判断当前类是否包含某个字段
 - (BOOL)containsProperty:(NSString *)identifier;
+/**
+ 交换方法，将IMP部分交换
+ 
+ @param oldMethod 旧方法
+ @param newMethod 新方法
+ */
++ (void)method_exchange:(SEL)oldMethod with:(SEL)newMethod;
+
+@end
+
+@interface QHWUnrecognizedSelectorObject : NSObject
+
+@property (nonatomic, weak) NSObject *objc;
 
 @end
 

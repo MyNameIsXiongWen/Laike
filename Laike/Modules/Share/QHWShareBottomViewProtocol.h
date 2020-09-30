@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "QHWPopView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol QHWShareBottomViewProtocol <NSObject>
 
-- (void)ShareBottomView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image TargetView:(QHWPopView *)targetView;
+- (void)ShareBottomView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image;
 
 @end
 

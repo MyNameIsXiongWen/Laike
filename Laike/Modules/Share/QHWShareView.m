@@ -385,9 +385,8 @@
 }
 
 #pragma mark ------------ShareViewDelegate-------------
-- (void)ShareBottomView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image TargetView:(nonnull QHWPopView *)targetView {
+- (void)ShareBottomView_clickBottomBtnWithIndex:(NSInteger)index Image:(UIImage *)image {
     [self dismiss];
-    [targetView dismiss];
     [self getShareContentWithPlatformType:index Poster:image];
 }
 
