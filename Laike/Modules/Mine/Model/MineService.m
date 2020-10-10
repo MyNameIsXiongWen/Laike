@@ -15,6 +15,7 @@
         UserModel *user = UserModel.shareUser;
         NSDictionary *dic = @{@"merchantName": user.merchantName ?: @"",
                               @"merchantInfo": user.merchantInfo ?: @"",
+                              @"merchantHead": user.merchantHead ?: @"",
                               @"qrCode": user.qrCode ?: @"",
                               @"mobileNumber": user.mobileNumber ?: @"",
                               @"userCount": @(user.userCount),
