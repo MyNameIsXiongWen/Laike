@@ -23,6 +23,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.contentView.backgroundColor = kColorThemefff;
         [self.logoImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.size.mas_equalTo(CGSizeMake(50, 50));
