@@ -21,6 +21,7 @@
 #import "CTMediator+ViewController.h"
 
 #import <HyphenateLite/HyphenateLite.h>
+#import "WalletService.h"
 
 @interface AppDelegate ()
 
@@ -34,6 +35,8 @@
     IQKeyboardManager.sharedManager.enable = YES;
     IQKeyboardManager.sharedManager.shouldResignOnTouchOutside = YES;
     [kUserDefault removeObjectForKey:kConstConsultantId];
+//    [kUserDefault removeObjectForKey:@"SignIn"];
+    [self getWalletInfoRequest];
 
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kConstFirstIn]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kConstFirstIn];
@@ -232,6 +235,7 @@
     }];
     UserModel *user = UserModel.shareUser;
     [UIApplication sharedApplication].applicationIconBadgeNumber = user.unreadMsgCount;
+    [self getWalletInfoRequest];
 }
 
 - (void)becomeActive:(UIApplication *)application {
@@ -241,6 +245,12 @@
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
     
+}
+
+- (void)getWalletInfoRequest {
+    [WalletService.new getWalletInfoRequestWithComplete:^(NSDictionary * _Nullable dataDic) {
+
+    }];
 }
 
 @end

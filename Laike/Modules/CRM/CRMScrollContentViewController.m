@@ -12,7 +12,6 @@
 #import "MainBusinessFilterBtnView.h"
 #import "QHWCountryFilterView.h"
 #import "CTMediator+ViewController.h"
-//#import <CallKit/CallKit.h>
 #import "QHWLabelAlertView.h"
 
 @interface CRMScrollContentViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -20,7 +19,6 @@
 @property (nonatomic, strong) MainBusinessFilterBtnView *filterBtnView;
 @property (nonatomic, strong) CRMService *crmService;
 @property (nonatomic, strong) NSMutableDictionary *conditionDic;
-//@property (nonatomic, strong) CXCallObserver *callObserve;
 @property (nonatomic, strong) CRMModel *selectedCRMModel;
 @property (nonatomic, assign) BOOL showCallAlertView;
 
@@ -38,61 +36,32 @@
     // Do any additional setup after loading the view.
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationBindSuccess object:nil];
-//    if (self.crmType == 2) {
-//        self.callObserve = CXCallObserver.new;
-//        [self.callObserve setDelegate:self queue:nil];
-//    }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.crmType == 2 && self.selectedIndex == 1) {
-        self.callObserve = CXCallObserver.new;
-        [self.callObserve setDelegate:self queue:nil];
-    } else {
-        [self.callObserve setDelegate:nil queue:nil];
-        self.callObserve = nil;
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.callObserve setDelegate:nil queue:nil];
-    self.callObserve = nil;
-}
-
-- (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
-    if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) containsString:@"CRMViewController"]) {
-        return;
-    }
-    if (self.crmType == 1) {
-        return;
-    }
-    if (call.outgoing && call.hasEnded && self.selectedCRMModel.clientStatus == 1) {
-        if (!self.showCallAlertView) {
-            self.showCallAlertView = YES;
-            QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-            [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
-            alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
-            WEAKSELF
-            alert.cancelBlock = ^{
-                weakSelf.showCallAlertView = NO;
-                [weakSelf showAlertLabelView];
-            };
-            alert.confirmBlock = ^{
-                weakSelf.showCallAlertView = NO;
-                [alert dismiss];
-                if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
-                    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.selectedCRMModel.realName MobilePhone:weakSelf.selectedCRMModel.mobileNumber];
-                }
-            };
-            [alert show];
-        }
+- (void)showCallFeedbackView {
+    if (!self.showCallAlertView) {
+        self.showCallAlertView = YES;
+        QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+        [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
+        alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
+        WEAKSELF
+        alert.cancelBlock = ^{
+            weakSelf.showCallAlertView = NO;
+            [weakSelf showAlertLabelView];
+        };
+        alert.confirmBlock = ^{
+            weakSelf.showCallAlertView = NO;
+            [alert dismiss];
+            if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
+                [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.selectedCRMModel.realName MobilePhone:weakSelf.selectedCRMModel.mobileNumber];
+            }
+        };
+        [alert show];
     }
 }
 
 - (void)showAlertLabelView {
-    QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+    __block QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
     [alert configWithTitle:@"放弃跟进" cancleText:@"取消" confirmText:@"确认放弃"];
     alert.contentString = @"放弃跟进，您的客户将会转回到公司公客";
     WEAKSELF
@@ -207,6 +176,9 @@
     cell.clickContactBlock = ^{
         weakSelf.selectedCRMModel = model;
         kCallTel(model.mobileNumber);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf showCallFeedbackView];
+        });
     };
     cell.clickConvertBlock = ^{
         if (weakSelf.crmType == 1) {

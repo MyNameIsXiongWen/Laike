@@ -81,11 +81,24 @@
         self.nameLabel = UILabel.labelInit().labelTitleColor(kColorTheme9399a5).labelFont(kFontTheme12).labelTextAlignment(NSTextAlignmentCenter);
         [self.contentView addSubview:self.nameLabel];
         
+        self.imgView = UIImageView.ivInit();
+        [self.contentView addSubview:self.imgView];
+        
         [self.countLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.mas_equalTo(0);
+//            make.top.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            make.centerX.equalTo(self.contentView.mas_centerX);
         }];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.mas_equalTo(0);
+//            make.left.right.bottom.mas_equalTo(0);
+            make.bottom.mas_equalTo(0);
+            make.centerX.equalTo(self.contentView.mas_centerX);
+        }];
+        [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.countLabel.mas_right);
+            make.width.mas_equalTo(7);
+            make.height.mas_offset(15);
+            make.centerY.equalTo(self.countLabel.mas_centerY);
         }];
     }
     return self;

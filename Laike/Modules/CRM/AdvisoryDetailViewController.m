@@ -13,15 +13,13 @@
 #import "CTMediator+ViewController.h"
 #import "CRMTrackCell.h"
 #import "QHWLabelAlertView.h"
-#import <CallKit/CallKit.h>
 
-@interface AdvisoryDetailViewController () <UITableViewDelegate, UITableViewDataSource, CXCallObserverDelegate>
+@interface AdvisoryDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AdvisoryDetailHeaderView *tableHeaderView;
 @property (nonatomic, strong) AdvisoryDetailBottomView *btmView;
 @property (nonatomic, strong) CRMService *crmService;
-@property (nonatomic, strong) CXCallObserver *callObserve;
 @property (nonatomic, assign) BOOL showCallAlertView;
 
 @end
@@ -38,43 +36,12 @@
     self.kNavigationView.title = @"获客详情";
     [self.kNavigationView.rightBtn setImage:kImageMake(@"global_more") forState:0];
     [self.view addSubview:self.btmView];
-    self.callObserve = CXCallObserver.new;
-    [self.callObserve setDelegate:self queue:dispatch_get_main_queue()];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
 }
 
 - (void)willMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         [NSNotificationCenter.defaultCenter removeObserver:self];
-        [self.callObserve setDelegate:nil queue:nil];
-        self.callObserve = nil;
-    }
-}
-
-- (void)callObserver:(CXCallObserver *)callObserver callChanged:(CXCall *)call {
-    if (![NSStringFromClass(self.getCurrentMethodCallerVC.class) isEqualToString:NSStringFromClass(self.class)]) {
-        return;
-    }
-    if (call.outgoing && call.hasEnded && self.crmService.crmModel.clientStatus == 1) {
-        if (!self.showCallAlertView) {
-            self.showCallAlertView = YES;
-            QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
-            [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
-            alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
-            WEAKSELF
-            alert.cancelBlock = ^{
-                weakSelf.showCallAlertView = NO;
-                [weakSelf showAlertLabelView];
-            };
-            alert.confirmBlock = ^{
-                weakSelf.showCallAlertView = NO;
-                [alert dismiss];
-                if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
-                    [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
-                }
-            };
-            [alert show];
-        }
     }
 }
 
@@ -95,6 +62,28 @@
         }
     };
     [moreView show];
+}
+
+- (void)showCallFeedbackView {
+    if (!self.showCallAlertView) {
+        self.showCallAlertView = YES;
+        QHWLabelAlertView *alert = [[QHWLabelAlertView alloc] initWithFrame:CGRectZero];
+        [alert configWithTitle:@"通话反馈" cancleText:@"放弃跟进" confirmText:@"转到客户"];
+        alert.contentString = @"您联系的客户是否可以继续跟进，建议多次联系，可增加成交机会";
+        WEAKSELF
+        alert.cancelBlock = ^{
+            weakSelf.showCallAlertView = NO;
+            [weakSelf showAlertLabelView];
+        };
+        alert.confirmBlock = ^{
+            weakSelf.showCallAlertView = NO;
+            [alert dismiss];
+            if (![NSStringFromClass(weakSelf.getCurrentMethodCallerVC.class) isEqualToString:@"CRMAddCustomerViewController"]) {
+                [CTMediator.sharedInstance CTMediator_viewControllerForAddCustomerWithCustomerId:@"" RealName:weakSelf.crmService.crmModel.realName MobilePhone:weakSelf.crmService.crmModel.mobileNumber];
+            }
+        };
+        [alert show];
+    }
 }
 
 - (void)showAlertLabelView {
@@ -192,6 +181,9 @@
         };
         _btmView.clickRightBtnBlock = ^{
             kCallTel(weakSelf.crmService.crmModel.mobileNumber);
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf showCallFeedbackView];
+            });
         };
     }
     return _btmView;

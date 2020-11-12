@@ -8,19 +8,16 @@
 
 #import "QHWBaseScrollContentViewController.h"
 #import "FilterBtnViewCellModel.h"
-#import <CallKit/CallKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CRMScrollContentViewController : QHWBaseScrollContentViewController <CXCallObserverDelegate>
+@interface CRMScrollContentViewController : QHWBaseScrollContentViewController
 
 /// 客户类型 1:客户  2:获客（咨询）
 @property (nonatomic, assign) NSInteger crmType;
-@property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, strong) NSMutableArray <FilterBtnViewCellModel *>*filterDataArray;
 
 @property (nonatomic, assign) BOOL interval;
-@property (nonatomic, strong, nullable) CXCallObserver *callObserve;
 
 @end
 

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showPhoneRequestWithStaffIMAccount:(NSString *)staffIMAccount;
 ///发送自定义消息
 - (void)sendMsgRequestWithType:(NSString *)type StaffIMAccount:(NSString *)staffIMAccount;
+- (void)addRecordRequestWithParams:(NSDictionary *)params;
 
 @end
 

@@ -33,6 +33,12 @@
         self.backgroundColor = UIColor.whiteColor;
         [self addSubview:self.bkgView];
         [self addSubview:self.userInfoView];
+        self.tableViewDataArray = @[[[QHWBaseModel alloc] configModelIdentifier:@"MineDataTableViewCell"
+                                                                         Height:100
+                                                                           Data:@[@{@"title": @"今日收益", @"value": @"0.00"},
+                                                                                  @{@"title": @"总收益", @"value": @"0.00"},
+                                                                                  @{@"title": @"可提现", @"value": @"0.00"}]]];
+        
         [self addSubview:self.tableView];
     }
     return self;
@@ -45,14 +51,19 @@
     self.userInfoView.companyLabel.text = userModel.companyName;
     [self.userInfoView.avatarImgView sd_setImageWithURL:[NSURL URLWithString:kFilePath(userModel.headPath)]];
     
-    [_tableView registerClass:NSClassFromString(@"MineDataTableViewCell") forCellReuseIdentifier:@"MineDataTableViewCell"];
-    self.tableViewDataArray = @[[[QHWBaseModel alloc] configModelIdentifier:@"MineDataTableViewCell"
-                                                                     Height:100
-                                                                       Data:@[@{@"title": @"访问", @"value": @(userModel.visitCount)},
-                                                                              @{@"title": @"线索", @"value": @(userModel.clueCount)},
-                                                                              @{@"title": @"客户", @"value": @(userModel.crmCount)},
-                                                                              @{@"title": @"报备客户", @"value": @(userModel.distributionCount)}]]];
-    
+//    [self.tableView registerClass:NSClassFromString(@"MineDataTableViewCell") forCellReuseIdentifier:@"MineDataTableViewCell"];
+//    self.tableViewDataArray = @[[[QHWBaseModel alloc] configModelIdentifier:@"MineDataTableViewCell"
+//                                                                     Height:100
+//                                                                       Data:@[@{@"title": @"访问", @"value": @(userModel.visitCount)},
+//                                                                              @{@"title": @"线索", @"value": @(userModel.clueCount)},
+//                                                                              @{@"title": @"客户", @"value": @(userModel.crmCount)},
+//                                                                              @{@"title": @"报备客户", @"value": @(userModel.distributionCount)}]]];
+//    [self.tableView reloadData];
+}
+
+- (void)setUserDataArray:(NSArray *)userDataArray {
+    QHWBaseModel *baseModel = self.tableViewDataArray.firstObject;
+    baseModel.data = userDataArray;
     [self.tableView reloadData];
 }
 
@@ -62,7 +73,7 @@
 
 #pragma mark ------------UITableViewDelegate-------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return self.tableViewDataArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,6 +86,10 @@
     UITableViewCell <QHWBaseCellProtocol>*cell = [tableView dequeueReusableCellWithIdentifier:model.identifier];
     [cell configCellData:model.data];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.getCurrentMethodCallerVC.navigationController pushViewController:NSClassFromString(@"WalletViewController").new animated:YES];
 }
 
 #pragma mark ------------UI-------------
@@ -100,6 +115,7 @@
         _tableView = [UICreateView initWithFrame:CGRectMake(0, 165, kScreenW, 100) Style:UITableViewStylePlain Object:self];
         _tableView.backgroundColor = UIColor.clearColor;
         _tableView.scrollEnabled = NO;
+        [_tableView registerClass:NSClassFromString(@"MineDataTableViewCell") forCellReuseIdentifier:@"MineDataTableViewCell"];
         [self addSubview:_tableView];
     }
     return _tableView;

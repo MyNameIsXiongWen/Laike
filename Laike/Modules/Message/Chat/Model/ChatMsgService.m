@@ -40,4 +40,12 @@
 //    }];
 }
 
+- (void)addRecordRequestWithParams:(NSDictionary *)params {
+    [QHWHttpManager.sharedInstance QHW_POST:kIMAddRecord parameters:params success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 @end

@@ -10,6 +10,8 @@
 		1800D920250F6B9500D2D931 /* DistributionScrollContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1800D91F250F6B9500D2D931 /* DistributionScrollContentViewController.m */; };
 		1800D923250F6C4400D2D931 /* MainBusinessService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1800D922250F6C4400D2D931 /* MainBusinessService.m */; };
 		1800D926250F6F0800D2D931 /* MainBusinessCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1800D924250F6F0700D2D931 /* MainBusinessCountryModel.m */; };
+		1836779425514F5500293802 /* WithdrawAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1836779225514F5500293802 /* WithdrawAccountViewController.m */; };
+		1836779525514F5500293802 /* WithdrawAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1836779325514F5500293802 /* WithdrawAccountViewController.xib */; };
 		185112322508C2B300F958A1 /* ChatInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185111FD2508C2B300F958A1 /* ChatInputViewController.m */; };
 		185112332508C2B300F958A1 /* ChatMsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185111FE2508C2B300F958A1 /* ChatMsgViewController.m */; };
 		185112342508C2B300F958A1 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185111FF2508C2B300F958A1 /* ChatViewController.m */; };
@@ -49,6 +51,7 @@
 		1855EFDF2511E47E00D6635E /* DistributionSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855EFDE2511E47E00D6635E /* DistributionSearchViewController.m */; };
 		1855EFE22511E50D00D6635E /* CRMSearchTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855EFE12511E50D00D6635E /* CRMSearchTopView.m */; };
 		1855EFE52511E70B00D6635E /* SearchTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1855EFE32511E70B00D6635E /* SearchTopView.m */; };
+		18571DDA255BD9310034FEB5 /* SigninView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18571DD9255BD9310034FEB5 /* SigninView.m */; };
 		18573A0D251D84FC00AA1326 /* BrandService.m in Sources */ = {isa = PBXBuildFile; fileRef = 18573A0C251D84FC00AA1326 /* BrandService.m */; };
 		18573A14251D890900AA1326 /* BrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18573A13251D890900AA1326 /* BrandTableViewCell.m */; };
 		18573A1A251D9C3500AA1326 /* HomeDynamicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18573A19251D9C3500AA1326 /* HomeDynamicTableViewCell.m */; };
@@ -302,8 +305,13 @@
 		1863953624A32A27007DC26D /* BindCompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863953424A32A27007DC26D /* BindCompanyViewController.m */; };
 		1863953724A32A27007DC26D /* BindCompanyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1863953524A32A27007DC26D /* BindCompanyViewController.xib */; };
 		1863953B24A35722007DC26D /* CRMService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1863953A24A35722007DC26D /* CRMService.m */; };
+		18771A242553E20C00B51759 /* WalletService.m in Sources */ = {isa = PBXBuildFile; fileRef = 18771A232553E20C00B51759 /* WalletService.m */; };
+		18771A2A2553E23000B51759 /* WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18771A292553E23000B51759 /* WalletModel.m */; };
 		187833CF25207DA7000E20AC /* DistributionTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187833CE25207DA7000E20AC /* DistributionTableHeaderView.m */; };
 		188F25C124C93BED003F44C3 /* QHWQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 188F25C024C93BED003F44C3 /* QHWQRCode.m */; };
+		1897EE5125514183003B0079 /* WalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1897EE5025514183003B0079 /* WalletViewController.m */; };
+		1897EE5E25514902003B0079 /* WithdrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1897EE5C25514902003B0079 /* WithdrawViewController.m */; };
+		1897EE5F25514902003B0079 /* WithdrawViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1897EE5D25514902003B0079 /* WithdrawViewController.xib */; };
 		18CF2710251C386C00889574 /* BrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CF270F251C386C00889574 /* BrandView.m */; };
 		18CF2725251C8E5100889574 /* BrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CF2724251C8E5100889574 /* BrandViewController.m */; };
 		18CF272B251C935900889574 /* BrandDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CF272A251C935900889574 /* BrandDetailViewController.m */; };
@@ -335,6 +343,9 @@
 		1800D922250F6C4400D2D931 /* MainBusinessService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessService.m; sourceTree = "<group>"; };
 		1800D924250F6F0700D2D931 /* MainBusinessCountryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainBusinessCountryModel.m; sourceTree = "<group>"; };
 		1800D925250F6F0800D2D931 /* MainBusinessCountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainBusinessCountryModel.h; sourceTree = "<group>"; };
+		1836779125514F5500293802 /* WithdrawAccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawAccountViewController.h; sourceTree = "<group>"; };
+		1836779225514F5500293802 /* WithdrawAccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawAccountViewController.m; sourceTree = "<group>"; };
+		1836779325514F5500293802 /* WithdrawAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawAccountViewController.xib; sourceTree = "<group>"; };
 		185111FD2508C2B300F958A1 /* ChatInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatInputViewController.m; sourceTree = "<group>"; };
 		185111FE2508C2B300F958A1 /* ChatMsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMsgViewController.m; sourceTree = "<group>"; };
 		185111FF2508C2B300F958A1 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
@@ -414,6 +425,8 @@
 		1855EFE12511E50D00D6635E /* CRMSearchTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMSearchTopView.m; sourceTree = "<group>"; };
 		1855EFE32511E70B00D6635E /* SearchTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTopView.m; sourceTree = "<group>"; };
 		1855EFE42511E70B00D6635E /* SearchTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTopView.h; sourceTree = "<group>"; };
+		18571DD8255BD9310034FEB5 /* SigninView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SigninView.h; sourceTree = "<group>"; };
+		18571DD9255BD9310034FEB5 /* SigninView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SigninView.m; sourceTree = "<group>"; };
 		18573A0B251D84FC00AA1326 /* BrandService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandService.h; sourceTree = "<group>"; };
 		18573A0C251D84FC00AA1326 /* BrandService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandService.m; sourceTree = "<group>"; };
 		18573A12251D890900AA1326 /* BrandTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandTableViewCell.h; sourceTree = "<group>"; };
@@ -924,11 +937,20 @@
 		1863953524A32A27007DC26D /* BindCompanyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BindCompanyViewController.xib; sourceTree = "<group>"; };
 		1863953924A35722007DC26D /* CRMService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMService.h; sourceTree = "<group>"; };
 		1863953A24A35722007DC26D /* CRMService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMService.m; sourceTree = "<group>"; };
+		18771A222553E20C00B51759 /* WalletService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletService.h; sourceTree = "<group>"; };
+		18771A232553E20C00B51759 /* WalletService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletService.m; sourceTree = "<group>"; };
+		18771A282553E23000B51759 /* WalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletModel.h; sourceTree = "<group>"; };
+		18771A292553E23000B51759 /* WalletModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletModel.m; sourceTree = "<group>"; };
 		187833CD25207DA7000E20AC /* DistributionTableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DistributionTableHeaderView.h; sourceTree = "<group>"; };
 		187833CE25207DA7000E20AC /* DistributionTableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DistributionTableHeaderView.m; sourceTree = "<group>"; };
 		188F25BF24C93BEC003F44C3 /* QHWQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHWQRCode.h; sourceTree = "<group>"; };
 		188F25C024C93BED003F44C3 /* QHWQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHWQRCode.m; sourceTree = "<group>"; };
 		1894D19924C1B3EC0082C26F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		1897EE4F25514183003B0079 /* WalletViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalletViewController.h; sourceTree = "<group>"; };
+		1897EE5025514183003B0079 /* WalletViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WalletViewController.m; sourceTree = "<group>"; };
+		1897EE5B25514902003B0079 /* WithdrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WithdrawViewController.h; sourceTree = "<group>"; };
+		1897EE5C25514902003B0079 /* WithdrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WithdrawViewController.m; sourceTree = "<group>"; };
+		1897EE5D25514902003B0079 /* WithdrawViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WithdrawViewController.xib; sourceTree = "<group>"; };
 		18CF270E251C386C00889574 /* BrandView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandView.h; sourceTree = "<group>"; };
 		18CF270F251C386C00889574 /* BrandView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrandView.m; sourceTree = "<group>"; };
 		18CF2723251C8E5100889574 /* BrandViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrandViewController.h; sourceTree = "<group>"; };
@@ -1108,6 +1130,8 @@
 			children = (
 				185D448B24AC973400CD3A00 /* MineTableHeaderView.h */,
 				185D448C24AC973400CD3A00 /* MineTableHeaderView.m */,
+				18571DD8255BD9310034FEB5 /* SigninView.h */,
+				18571DD9255BD9310034FEB5 /* SigninView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1373,6 +1397,7 @@
 				185EC9B024A0963700DCAB2C /* Distribution */,
 				185EC86D24A091BC00DCAB2C /* Message */,
 				185EC87524A091BC00DCAB2C /* Mine */,
+				1897EE4E2551415F003B0079 /* Wallet */,
 				185EC87624A091BC00DCAB2C /* Login */,
 			);
 			path = Modules;
@@ -1448,8 +1473,6 @@
 		185EC87524A091BC00DCAB2C /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				185D448E24AC9C2A00CD3A00 /* Cell */,
-				185D448A24AC971E00CD3A00 /* View */,
 				185EC9B124A0965B00DCAB2C /* MineViewController.h */,
 				185EC9B224A0965B00DCAB2C /* MineViewController.m */,
 				186394F224A1AF19007DC26D /* MineInfoViewController.h */,
@@ -1466,6 +1489,8 @@
 				1863952E24A32A0A007DC26D /* CancelBindCompanyViewController.h */,
 				1863952F24A32A0A007DC26D /* CancelBindCompanyViewController.m */,
 				1863953024A32A0A007DC26D /* CancelBindCompanyViewController.xib */,
+				185D448E24AC9C2A00CD3A00 /* Cell */,
+				185D448A24AC971E00CD3A00 /* View */,
 				186394F724A1AFD0007DC26D /* Model */,
 			);
 			path = Mine;
@@ -2185,6 +2210,33 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		18771A212553E1F300B51759 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18771A222553E20C00B51759 /* WalletService.h */,
+				18771A232553E20C00B51759 /* WalletService.m */,
+				18771A282553E23000B51759 /* WalletModel.h */,
+				18771A292553E23000B51759 /* WalletModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1897EE4E2551415F003B0079 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				1897EE4F25514183003B0079 /* WalletViewController.h */,
+				1897EE5025514183003B0079 /* WalletViewController.m */,
+				1897EE5B25514902003B0079 /* WithdrawViewController.h */,
+				1897EE5C25514902003B0079 /* WithdrawViewController.m */,
+				1897EE5D25514902003B0079 /* WithdrawViewController.xib */,
+				1836779125514F5500293802 /* WithdrawAccountViewController.h */,
+				1836779225514F5500293802 /* WithdrawAccountViewController.m */,
+				1836779325514F5500293802 /* WithdrawAccountViewController.xib */,
+				18771A212553E1F300B51759 /* Model */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
 		4154AEE8FC1B968292B63C38 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2313,7 +2365,9 @@
 				1863953724A32A27007DC26D /* BindCompanyViewController.xib in Resources */,
 				185EC82524A08FD800DCAB2C /* LaunchScreen.storyboard in Resources */,
 				185E155E24AEC81500F15A90 /* CRMBtnCollectionViewCell.xib in Resources */,
+				1897EE5F25514902003B0079 /* WithdrawViewController.xib in Resources */,
 				185EC82224A08FD800DCAB2C /* Assets.xcassets in Resources */,
+				1836779525514F5500293802 /* WithdrawAccountViewController.xib in Resources */,
 				185EC82024A08FD700DCAB2C /* Main.storyboard in Resources */,
 				1863953224A32A0A007DC26D /* CancelBindCompanyViewController.xib in Resources */,
 				185EC97024A091BE00DCAB2C /* QHWPhotoBrowserCollectionViewCell.xib in Resources */,
@@ -2429,6 +2483,7 @@
 				185CC98B24B729780004A20E /* QSchoolShareView.m in Sources */,
 				185EC96824A091BE00DCAB2C /* QHWCommunityContentModel.m in Sources */,
 				185EC96A24A091BE00DCAB2C /* UITabBar+Push.m in Sources */,
+				18771A242553E20C00B51759 /* WalletService.m in Sources */,
 				185EC9CA24A096B600DCAB2C /* MessageTableViewCell.m in Sources */,
 				185E156524AF2D8600F15A90 /* SelectCountryView.m in Sources */,
 				185112882508C60E00F958A1 /* wav.mm in Sources */,
@@ -2534,6 +2589,7 @@
 				185FDF0C24A733130043FF36 /* CommunityDetailViewController.m in Sources */,
 				185EC95C24A091BE00DCAB2C /* QHWCommunityArticleModel.m in Sources */,
 				187833CF25207DA7000E20AC /* DistributionTableHeaderView.m in Sources */,
+				18571DDA255BD9310034FEB5 /* SigninView.m in Sources */,
 				185CC98824B6B7310004A20E /* SearchContentLayout.m in Sources */,
 				186394ED24A1A60E007DC26D /* RankViewController.m in Sources */,
 				1851123F2508C2B300F958A1 /* LZFaceModel.m in Sources */,
@@ -2609,6 +2665,7 @@
 				185EC94724A091BE00DCAB2C /* Target_Publish.m in Sources */,
 				185EC94524A091BE00DCAB2C /* QHWHttpLoading.m in Sources */,
 				185EC9A324A091BE00DCAB2C /* UIImage+Category.m in Sources */,
+				1897EE5125514183003B0079 /* WalletViewController.m in Sources */,
 				185EC9A224A091BE00DCAB2C /* UICreateView.m in Sources */,
 				185EC9F224A0AF9A00DCAB2C /* UserDataView.m in Sources */,
 				185EC98124A091BE00DCAB2C /* QHWActionSheetView.m in Sources */,
@@ -2642,6 +2699,7 @@
 				185112352508C2B300F958A1 /* MessageChatImageTableViewCell.m in Sources */,
 				185E158724B0526300F15A90 /* HouseDetailConfigTableViewCell.m in Sources */,
 				185EC97124A091BE00DCAB2C /* QHWTabScrollView.m in Sources */,
+				1897EE5E25514902003B0079 /* WithdrawViewController.m in Sources */,
 				185EC94924A091BE00DCAB2C /* Target_ViewController.m in Sources */,
 				185E15A124B071C700F15A90 /* VistorDetailHeaderView.m in Sources */,
 				185112892508C60E00F958A1 /* amrFileCodec.mm in Sources */,
@@ -2663,6 +2721,7 @@
 				185EC99A24A091BE00DCAB2C /* QHWBaseSubContentTableViewCell.m in Sources */,
 				185EC98224A091BE00DCAB2C /* QHWCycleScrollViewFlowLayout.m in Sources */,
 				185EC96124A091BE00DCAB2C /* QHWConsultantModel.m in Sources */,
+				18771A2A2553E23000B51759 /* WalletModel.m in Sources */,
 				185112442508C2B300F958A1 /* ChatMoreView.m in Sources */,
 				185EC95324A091BE00DCAB2C /* NSDictionary+Category.m in Sources */,
 				185EC95D24A091BE00DCAB2C /* QHWShareModel.m in Sources */,
@@ -2688,6 +2747,7 @@
 				1851123A2508C2B300F958A1 /* MessageChatTableViewCell.m in Sources */,
 				18573A0D251D84FC00AA1326 /* BrandService.m in Sources */,
 				185FDED324A71CC40043FF36 /* QSchoolViewController.m in Sources */,
+				1836779425514F5500293802 /* WithdrawAccountViewController.m in Sources */,
 				186394F024A1A6D6007DC26D /* RankScrollContentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2863,7 +2923,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Laike/来客.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 6RWP9GSXML;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2882,7 +2942,7 @@
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "去海外来客";
@@ -2901,7 +2961,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Laike/来客.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.0;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 6RWP9GSXML;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2920,7 +2980,7 @@
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.2;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "去海外来客";

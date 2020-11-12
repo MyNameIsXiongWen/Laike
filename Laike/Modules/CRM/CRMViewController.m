@@ -168,7 +168,6 @@
         WEAKSELF
         self.crmTypeHeaderView.tabScrollView.clickTagBlock = ^(NSInteger index) {
             weakSelf.contentCell.pageContentView.contentViewCurrentIndex = index;
-            [weakSelf configCRMContentVCCallObserveWithIndex:index];
         };
     }
     return self.crmTypeHeaderView;
@@ -182,21 +181,6 @@
 - (void)QHWContentViewDidEndDecelerating:(QHWPageContentView *)contentView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex {
     self.tableView.scrollEnabled = YES;
     [self.crmTypeHeaderView.tabScrollView scrollToIndex:endIndex];
-    [self configCRMContentVCCallObserveWithIndex:endIndex];
-}
-
-- (void)configCRMContentVCCallObserveWithIndex:(NSInteger)index {
-    CRMScrollContentViewController *vc0 = (CRMScrollContentViewController *)self.contentCell.pageContentView.childsVCs[1];
-    vc0.selectedIndex = index;
-    CRMScrollContentViewController *vc1 = (CRMScrollContentViewController *)self.contentCell.pageContentView.childsVCs[2];
-    vc1.selectedIndex = index;
-    if (index == 1) {
-        vc1.callObserve = CXCallObserver.new;
-        [vc1.callObserve setDelegate:vc1 queue:nil];
-    } else {
-        [vc1.callObserve setDelegate:nil queue:nil];
-        vc1.callObserve = nil;
-    }
 }
 
 /*

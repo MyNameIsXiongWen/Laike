@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MineTableHeaderView : UIView
 
 @property (nonatomic, strong) UserModel *userModel;
+@property (nonatomic, strong) NSArray *userDataArray;
 
 @end
 

@@ -106,6 +106,14 @@ static NSString *const kBrandList = @"brand/getList";//品牌列表
 static NSString *const kBrandInfo = @"brand/getInfo";//品牌详情
 static NSString *const kBrandProductList = @"brand/getProductList";//品牌产品列表
 
+
+static NSString *const kWalletInfo = @"account/getInfo";//钱包信息
+static NSString *const kWalletList = @"account/bill/getList";//提现列表
+static NSString *const kWalletBindAlipay = @"account/payment/bindAlipay";//绑定支付宝
+static NSString *const kWalletWithdraw = @"account/payment/cashOut";//提现
+
+static NSString *const kUserSignin = @"account/checkStatus";//签到
+
 static NSString *const kHomeBanner = @"advert/home/getInfo";//首页广告位
 static NSString *const kHomeWindowBanner = @"advert/window/getInfo";//首页弹框广告位
 
@@ -164,5 +172,6 @@ static NSString *const kActionLike = @"action/like/clickLike";//点赞
 static NSString *const kActionConcern = @"concern/clickConcern";//关注
 
 static NSString *const kIMAuthorizeRequest = @"chat/authorize/request";//授权请求
+static NSString *const kIMAddRecord = @"comChat/record/add";//添加记录
 
 #endif /* QHWHttpAddress_h */

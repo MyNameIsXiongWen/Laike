@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *countLabel;
 @property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UIImageView *imgView;
 
 @end
 

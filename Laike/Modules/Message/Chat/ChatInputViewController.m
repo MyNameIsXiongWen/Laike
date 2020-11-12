@@ -738,6 +738,16 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     if(self.delegate && [self.delegate respondsToSelector:@selector(inputController:didSendMessage:)]) {
         [self.delegate inputController:self didSendMessage:data];
     }
+    
+    NSInteger type = 101001;
+    if ([self.conversation.conversationId isEqualToString:UserModel.shareUser.customerData.id]) {
+        type = 104001;
+    }
+    NSMutableDictionary *params = @{@"createSubjectType": @(104001),
+                                    @"createSubjectId": UserModel.shareUser.id ?: @"",
+                                    @"targetSubjectType": @(type),
+                                    @"targetSubjectId": self.conversation.conversationId ?: @""}.mutableCopy;
+    [self.msgService addRecordRequestWithParams:params];
 }
 
 #pragma mark ------------UI-------------

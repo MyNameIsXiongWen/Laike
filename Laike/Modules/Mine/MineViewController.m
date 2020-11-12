@@ -10,15 +10,19 @@
 #import "MineTableHeaderView.h"
 #import "QHWGeneralTableViewCell.h"
 #import "MineService.h"
+#import "WalletService.h"
 #import "CTMediator+ViewController.h"
 #import "CancelBindCompanyViewController.h"
+#import "SigninView.h"
 
 @interface MineViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) MineTableHeaderView *tableHeaderView;
+@property (nonatomic, strong) UIImageView *signinImageView;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (nonatomic, strong) MineService *service;
+@property (nonatomic, strong) WalletService *walletService;
 
 @end
 
@@ -32,6 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.signinImageView];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMineInfoRequest) name:kNotificationBindSuccess object:nil];
 }
 
@@ -40,11 +45,33 @@
     self.navigationController.navigationBar.hidden = YES;
     self.kNavigationView.hidden = YES;
     [self getMineInfoRequest];
+    [self getWalletInfoRequest];
 }
 
 - (void)getMineInfoRequest {
     [self.service getMineInfoRequestComplete:^{
         self.tableHeaderView.userModel = self.service.userModel;
+    }];
+}
+
+- (void)getWalletInfoRequest {
+    [self.walletService getWalletInfoRequestWithComplete:^(NSDictionary * _Nullable dataDic) {
+        if (dataDic) {
+            self.tableHeaderView.userDataArray = @[@{@"title": @"今日收益", @"value": kFormat(@"%.2f", [dataDic[@"dayMoney"] floatValue]/100.0)},
+                                                   @{@"title": @"总收益", @"value": kFormat(@"%.2f", [dataDic[@"totalMoney"] floatValue]/100.0)},
+                                                   @{@"title": @"可提现", @"value": kFormat(@"%.2f", [dataDic[@"balance"] floatValue]/100.0)}];
+            NSInteger status = [dataDic[@"checkStatus"] integerValue];//签到状态：1-未签到；2-已签到
+            self.signinImageView.hidden = status == 2;
+        }
+    }];
+}
+
+- (void)clickSignin {
+    [self.walletService signinRequestWithComplete:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self getWalletInfoRequest];
+        });
+        self.signinImageView.hidden = YES;
     }];
 }
 
@@ -119,6 +146,14 @@
     return _tableHeaderView;
 }
 
+- (UIImageView *)signinImageView {
+    if (!_signinImageView) {
+        _signinImageView = UIImageView.ivFrame(CGRectMake(kScreenW-100, kScreenH-kBottomBarHeight-150, 100, 80)).ivImage(kImageMake(@"signin")).ivAction(self, @selector(clickSignin));
+        _signinImageView.hidden = YES;
+    }
+    return _signinImageView;
+}
+
 - (NSArray *)dataArray {
     if (!_dataArray) {
         _dataArray = @[@{@"image": @"mine_customize", @"identifier": @"school", @"name": @"我的大学"},
@@ -134,6 +169,13 @@
         _service = MineService.new;
     }
     return _service;
+}
+
+- (WalletService *)walletService {
+    if (!_walletService) {
+        _walletService = WalletService.new;
+    }
+    return _walletService;
 }
 
 @end

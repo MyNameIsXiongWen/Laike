@@ -114,6 +114,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImage *snapShotImage;
 @property (nonatomic, assign) NSInteger businessType;
 
+
+@property (nonatomic, strong) NSDictionary *walletInfo;
+///签到状态：1-未签到；2-已签到
+@property (nonatomic, assign) NSInteger checkStatus;
+///总收益（单位分，默认0）
+@property (nonatomic, copy) NSString *totalMoney;
+///今日收益（单位分，默认0
+@property (nonatomic, copy) NSString *dayMoney;
+///账户余额（单位分，默认0
+@property (nonatomic, copy) NSString *balance;
+///已提现（单位分，默认0）
+@property (nonatomic, copy) NSString *cashOut;
+///支付宝数据
+@property (nonatomic, strong) NSDictionary *alipayData;
+
 /**
  单例
  @return UserModel
