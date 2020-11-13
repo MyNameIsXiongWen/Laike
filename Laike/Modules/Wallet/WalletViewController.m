@@ -23,7 +23,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.kNavigationView.title = @"我的钱包";
+    self.kNavigationView.rightBtn.frame = CGRectMake(kScreenW-90, kStatusBarHeight, 70, 44);
+    self.kNavigationView.rightBtn.btnTitle(@"赚钱规则").btnFont(kFontTheme14);
     [self.view addSubview:self.tableView];
+}
+
+- (void)rightNavBtnAction:(UIButton *)sender {
+    RuleView *ruleView = [[RuleView alloc] initWithFrame:CGRectMake(40, (kScreenH-370)/2, kScreenW-80, 370)];
+    [ruleView show];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -257,6 +264,46 @@
         [self.contentView addSubview:_line];
     }
     return _line;
+}
+
+@end
+
+@implementation RuleView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self == [super initWithFrame:frame]) {
+        self.popType = PopTypeCenter;
+        UIButton *closeBtn = UIButton.btnFrame(CGRectMake(self.width-30, 10, 20, 20)).btnImage(kImageMake(@"publish_close")).btnAction(self, @selector(closeBtnAction));
+        [self addSubview:closeBtn];
+        
+        UILabel *label1 = UILabel.labelFrame(CGRectMake(0, 40, self.width, 25)).labelText(@"赚钱规则").labelTextAlignment(NSTextAlignmentCenter).labelFont(kFontTheme20).labelTitleColor(kColorTheme666);
+        [self addSubview:label1];
+        
+        UILabel *label2 = UILabel.labelFrame(CGRectMake(15, label1.bottom+20, self.width-30, 20)).labelText(@"1：注册即得30元").labelFont(kFontTheme15).labelTitleColor(kColorTheme999);
+        [self addSubview:label2];
+        
+        UILabel *label3 = UILabel.labelFrame(CGRectMake(15, label2.bottom, self.width-30, 55)).labelText(@"2：转发产品、海外圈、获客软文、名片、活动召集、直播邀约页面，每1个用户阅读，得0.1元").labelFont(kFontTheme15).labelTitleColor(kColorTheme999).labelNumberOfLines(0);
+        [label3 sizeToFit];
+        [self addSubview:label3];
+        
+        UILabel *label4 = UILabel.labelFrame(CGRectMake(15, label3.bottom, self.width-30, 20)).labelText(@"3：每天签到1次，得0.2元").labelFont(kFontTheme15).labelTitleColor(kColorTheme999);
+        [self addSubview:label4];
+        
+        UILabel *label5 = UILabel.labelFrame(CGRectMake(15, label4.bottom, self.width-30, 20)).labelText(@"4：分销成交可得万元佣金").labelFont(kFontTheme15).labelTitleColor(kColorTheme999);
+        [self addSubview:label5];
+        
+        UILabel *label6 = UILabel.labelFrame(CGRectMake(15, label5.bottom, self.width-30, 20)).labelText(@"5：提现规则：50或50的整数倍").labelFont(kFontTheme15).labelTitleColor(kColorTheme999);
+        [self addSubview:label6];
+    }
+    return self;
+}
+
+- (void)closeBtnAction {
+    [self dismiss];
+}
+
+- (void)popView_cancel {
+    
 }
 
 @end

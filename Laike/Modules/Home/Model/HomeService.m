@@ -189,10 +189,12 @@
         [self.tableViewDataArray addObject:bannerModel];
     }
     
-    QHWBaseModel *dynamicModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeDynamicTableViewCell" Height:70 Data:@{
-        @"tip": self.homeModel.visitTip ?: @"",
-        @"headpath": self.homeModel.visitHeadPath ?: @""}];
-    [self.tableViewDataArray addObject:dynamicModel];
+    if (self.homeModel.visitTip.length > 0) {
+        QHWBaseModel *dynamicModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomeDynamicTableViewCell" Height:70 Data:@{
+            @"tip": self.homeModel.visitTip ?: @"",
+            @"headpath": self.homeModel.visitHeadPath ?: @""}];
+        [self.tableViewDataArray addObject:dynamicModel];
+    }
     
     if (self.consultantArray.count > 0) {
         QHWBaseModel *userDataModel = [[QHWBaseModel alloc] configModelIdentifier:@"HomePopularityInfoTableViewCell" Height:165 Data:self.consultantArray];

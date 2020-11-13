@@ -43,6 +43,10 @@
     return self;
 }
 
+- (void)popView_cancel {
+    
+}
+
 - (void)closeBtnAction {
     [self dismiss];
 }

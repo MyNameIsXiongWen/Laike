@@ -25,7 +25,6 @@
         UserModel.shareUser.checkStatus = [responseObject[@"data"][@"checkStatus"] integerValue];
         complete(responseObject[@"data"]);
         
-        
         NSInteger status = [responseObject[@"data"][@"checkStatus"] integerValue];//签到状态：1-未签到；2-已签到
         if (status == 1) {
             if (![NSString.getCurrentTime isEqualToString:[kUserDefault objectForKey:@"SignIn"]]) {
