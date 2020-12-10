@@ -22,6 +22,7 @@ static NSString *const kNotificationAddCommentSuccess = @"kNotificationAddCommen
 
 static NSString *const kNotificationReloadRichText = @"kNotificationReloadRichText";//富文本刷新cell高度
 
+static NSString *const kNotificationBecomeActive = @"kNotificationBecomeActive";//回到前台
 
 #pragma mark ------------IM-------------
 static NSString *const kNotificationHXLoginSuccess = @"kNotificationHXLoginSuccess";//环信登录成功

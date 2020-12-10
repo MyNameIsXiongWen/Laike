@@ -117,6 +117,14 @@
         _tableView.rowHeight = 60;
         [_tableView registerClass:UITableViewCell.class forCellReuseIdentifier:NSStringFromClass(UITableViewCell.class)];
         _tableView.tableFooterView = UIView.new;
+        [QHWRefreshManager.sharedInstance normalHeaderWithScrollView:_tableView RefreshBlock:^{
+            self.homeService.itemPageModel.pagination.currentPage = 1;
+            [self getMainData];
+        }];
+        [QHWRefreshManager.sharedInstance normalFooterWithScrollView:_tableView RefreshBlock:^{
+            self.homeService.itemPageModel.pagination.currentPage++;
+            [self getMainData];
+        }];
         [self.view addSubview:_tableView];
     }
     return _tableView;

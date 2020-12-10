@@ -13,7 +13,6 @@
 #import "WalletService.h"
 #import "CTMediator+ViewController.h"
 #import "CancelBindCompanyViewController.h"
-#import "SigninView.h"
 
 @interface MineViewController () <UITableViewDelegate, UITableViewDataSource>
 

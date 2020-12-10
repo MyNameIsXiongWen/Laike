@@ -13,6 +13,7 @@
 #import "HomeService.h"
 #import "QHWSystemService.h"
 #import "QSchoolService.h"
+#import "WalletService.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, QHWPageContentViewDelegate, HomeTableHeaderViewDelegate>
 
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) QHWSystemService *systemService;
 @property (nonatomic, strong) QSchoolService *schoolService;
 @property (nonatomic, strong) dispatch_group_t group;
+@property (nonatomic, strong) WalletService *walletService;
 
 @end
 
@@ -35,6 +37,7 @@
     [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationAddCustomerSuccess object:nil];
     [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationBookAppointmentSuccess object:nil];
     [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationBindSuccess object:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self name:kNotificationBecomeActive object:nil];
     [NSNotificationCenter.defaultCenter removeObserver:self name:@"HomeSwipeLeaveTop" object:nil];
 }
 
@@ -46,6 +49,8 @@
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationAddCustomerSuccess object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getDistributionData) name:kNotificationBookAppointmentSuccess object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getMainData) name:kNotificationBindSuccess object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(getWalletInfoRequest) name:kNotificationBecomeActive object:nil];
+    [self getWalletInfoRequest];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -113,6 +118,13 @@
 
 - (void)getDistributionData {
     [self.homeService getHomeReportCountDataRequestWithComplete:^{
+        
+    }];
+}
+
+- (void)getWalletInfoRequest {
+    self.walletService = WalletService.new;
+    [self.walletService getWalletInfoRequestWithComplete:^(NSDictionary * _Nullable dataDic) {
         
     }];
 }
