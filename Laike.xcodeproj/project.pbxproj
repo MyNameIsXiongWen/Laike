@@ -2942,7 +2942,7 @@
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "去海外来客";
@@ -2980,7 +2980,7 @@
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/Laike/Vendors/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qhiwi.manager;
 				PRODUCT_NAME = "去海外来客";

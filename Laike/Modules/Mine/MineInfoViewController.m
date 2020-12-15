@@ -77,13 +77,6 @@
     NSDictionary *cellDic = self.dataArray[indexPath.row];
     NSString *identifier = cellDic[@"identifier"];
     if ([identifier isEqualToString:@"headPath"] || [identifier isEqualToString:@"gender"]) {
-//        [CTMediator.sharedInstance CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:1 ResultBlk:^(NSArray<UIImage *> * _Nonnull photos) {
-//            if (photos.count > 0) {
-//                QHWImageModel *model = QHWImageModel.new;
-//                model.image = photos.firstObject;
-//                [self uploadImageRequest:@[model].mutableCopy];
-//            }
-//        }];
         NSArray *array;
         if ([identifier isEqualToString:@"headPath"]) {
             array = @[@"拍摄", @"从相册选择"];
@@ -95,13 +88,6 @@
         sheetView.sheetDelegate = self;
         sheetView.identifier = identifier;
         [sheetView show];
-//    } else if ([identifier isEqualToString:@"gender"]) {
-//        NSArray *array = @[@"女士", @"先生"];
-//        QHWActionSheetView *sheetView = [[QHWActionSheetView alloc] initWithFrame:CGRectMake(0, kScreenH, kScreenW, 44*(array.count+1)+7) title:@""];
-//        sheetView.dataArray = array;
-//        sheetView.sheetDelegate = self;
-//        sheetView.identifier = identifier;
-//        [sheetView show];
     } else {
         MineUpdateNameViewController *updateVC = MineUpdateNameViewController.new;
         updateVC.identifier = identifier;
@@ -132,11 +118,11 @@
 #pragma mark ------------QHWActionSheetViewDelegate-------------
 - (void)actionSheetViewSelectedIndex:(NSInteger)index WithActionSheetView:(QHWActionSheetView *)actionsheetView {
     if ([actionsheetView.identifier isEqualToString:@"headPath"]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
-        picker.delegate = self;
-        picker.allowsEditing = YES;
-        picker.modalPresentationStyle = UIModalPresentationFullScreen;
         if (index == 0) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.modalPresentationStyle = UIModalPresentationFullScreen;
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
             [QHWPermissionManager openCaptureDeviceService:^(BOOL isOpen) {
                 if (isOpen) {
@@ -144,10 +130,17 @@
                 }
             }];
         } else {
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             [QHWPermissionManager openAlbumService:^(BOOL isOpen) {
                 if (isOpen) {
-                    [self presentViewController:picker animated:YES completion:nil];
+//                    [self presentViewController:picker animated:YES completion:nil];
+                    [CTMediator.sharedInstance CTMediator_showTZImagePickerOnlyPhotoWithMaxCount:1 ResultBlk:^(NSArray<UIImage *> * _Nonnull photos) {
+                        if (photos.count > 0) {
+                            QHWImageModel *model = QHWImageModel.new;
+                            model.image = photos.firstObject;
+                            [self uploadImageRequest:@[model].mutableCopy];
+                        }
+                    }];
                 }
             }];
         }
