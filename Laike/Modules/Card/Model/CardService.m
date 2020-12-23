@@ -54,6 +54,26 @@
             [self.tableViewDataArray removeAllObjects];
         }
         [self.tableViewDataArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CardModel.class json:self.itemPageModel.list]];
+        for (CardModel *model in self.tableViewDataArray) {
+            NSString *str = model.yy_modelToJSONString;
+            str = [str stringByReplacingOccurrencesOfString:@"\\\\" withString:@"\\"];
+            
+            NSError *serializationError = nil;
+            NSData *tempData = [str dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:tempData options:NSJSONReadingMutableContainers error:&serializationError];
+            if (!dic && tempData.length > 0) {
+                NSString *lastStr = [model.title substringFromIndex:model.title.length-9];
+                str = [str stringByReplacingOccurrencesOfString:lastStr withString:@""];
+                
+                tempData = [str dataUsingEncoding:NSUTF8StringEncoding];
+                dic = [NSJSONSerialization JSONObjectWithData:tempData options:NSJSONReadingMutableContainers error:&serializationError];
+                NSString *titleStr = dic[@"title"];
+                model.title = kFormat(@"%@%@", titleStr, lastStr);
+            } else {
+                model.title = dic[@"title"];
+            }
+            model.businessHeight = 10 + 20 + 10 + 10 + MAX(20, [model.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-80, CGFLOAT_MAX)]);
+        }
         complete();
     } failure:^(NSError *error) {
         complete();
@@ -72,11 +92,11 @@
 
 @implementation CardModel
 
-- (CGFloat)businessHeight {
-    if (!_businessHeight) {
-        _businessHeight = 10 + 20 + 10 + 10 + MAX(20, [self.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-80, CGFLOAT_MAX)]);
-    }
-    return _businessHeight;
-}
+//- (CGFloat)businessHeight {
+//    if (!_businessHeight) {
+//        _businessHeight = 10 + 20 + 10 + 10 + MAX(20, [self.title getHeightWithFont:kFontTheme14 constrainedToSize:CGSizeMake(kScreenW-80, CGFLOAT_MAX)]);
+//    }
+//    return _businessHeight;
+//}
 
 @end

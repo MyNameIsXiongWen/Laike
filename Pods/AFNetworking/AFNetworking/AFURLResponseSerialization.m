@@ -253,6 +253,12 @@ id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingOptions 
     NSError *serializationError = nil;
     
     id responseObject = [NSJSONSerialization JSONObjectWithData:data options:self.readingOptions error:&serializationError];
+    if (!responseObject) {
+        NSString *tempDataStr = [NSString stringWithUTF8String:data.bytes];
+        tempDataStr = [tempDataStr stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+        NSData *tempData = [tempDataStr dataUsingEncoding:NSUTF8StringEncoding];
+        responseObject = [NSJSONSerialization JSONObjectWithData:tempData options:self.readingOptions error:&serializationError];
+    }
 
     if (!responseObject)
     {
