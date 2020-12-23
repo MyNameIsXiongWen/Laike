@@ -55,6 +55,15 @@
         }
         [self.tableViewDataArray addObjectsFromArray:[NSArray yy_modelArrayWithClass:CardModel.class json:self.itemPageModel.list]];
         for (CardModel *model in self.tableViewDataArray) {
+            /*title末尾表情被截取的情况下，接口会报错，所以接口做了处理（AFURLResponseSerialization.m256行）
+             if (!responseObject) {
+                 NSString *tempDataStr = [NSString stringWithUTF8String:data.bytes];
+                 tempDataStr = [tempDataStr stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+                 NSData *tempData = [tempDataStr dataUsingEncoding:NSUTF8StringEncoding];
+                 responseObject = [NSJSONSerialization JSONObjectWithData:tempData options:self.readingOptions error:&serializationError];
+             }
+             在这边重新对数据处理下
+             */
             NSString *str = model.yy_modelToJSONString;
             str = [str stringByReplacingOccurrencesOfString:@"\\\\" withString:@"\\"];
             
